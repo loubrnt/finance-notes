@@ -1,0 +1,265 @@
+\documentclass{article}
+
+% --- GESTION DES MARGES DE PAGE ---
+\usepackage[a4paper, top=2.5cm, bottom=2.5cm, left=3cm, right=3cm]{geometry}
+
+% --- PRÉAMBULE STANDARD ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[french]{babel}
+\usepackage{parskip} % NOUVEAU : Supprime l'indentation et ajoute espace inter-paragraphe
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{graphicx} % Requis pour inclure des images
+\usepackage{amssymb} % Pour les symboles mathématiques comme \subseteq
+\usepackage{sectsty} % Pour le style des sections
+\usepackage{etoolbox} % Pour les conditions
+\usepackage[dvipsnames]{xcolor}
+\usepackage{pgfplots} % Le package principal pour les graphiques
+\usepackage{enumitem}
+\usepackage{diagbox}
+
+\setlist[itemize,1]{label=$\cdot$}
+
+\usetikzlibrary{
+    matrix, 
+    patterns.meta,
+    calc,
+    positioning,
+    decorations.pathreplacing,
+    trees,
+    backgrounds
+}
+
+% Redéfinir le symbole pour le premier niveau de la liste
+\renewcommand{\labelitemi}{$\cdot$}
+\renewcommand{\labelitemii}{$\circ$}
+\renewcommand{\labelitemiii}{$\ast$}
+
+% Styles de hachures (inchangés)
+\tikzset{
+  red_hatch/.style={
+    pattern={Lines[angle=45, line width=0.8pt, distance=4pt]}, 
+    pattern color=red
+  },
+  blue_hatch/.style={
+    pattern={Lines[angle=-45, line width=0.8pt, distance=4pt]}, 
+    pattern color=blue
+  },
+  purple_hatch/.style={
+    pattern={Lines[angle=45, line width=0.8pt, distance=4pt]}, 
+    pattern color=red,
+    postaction={
+      pattern={Lines[angle=-45, line width=0.8pt, distance=4pt]}, 
+      pattern color=blue
+    }
+  }
+}
+
+% --- BIBLIOTHÈQUES TCOLORBOX ---
+\tcbuselibrary{listings, skins, breakable}
+
+% --- GESTION DES LIENS HYPERTEXTE ---
+\usepackage[colorlinks=true, linkcolor=black, urlcolor=blue]{hyperref}
+
+% --- SOULIGNER LES TITRES ET SOUS-TITRES ---
+\sectionfont{\underline}
+\subsectionfont{\underline}
+\subsubsectionfont{\underline}
+
+% --- PAGE DE GARDE AMÉLIORÉE ---
+\makeatletter
+\renewcommand{\maketitle}{%
+\begin{titlepage}
+\centering
+\vspace*{\stretch{1.5}}
+{\Huge \bfseries Mes Notes de Lecture\par}
+\vspace{0.4cm}
+\rule{0.8\linewidth}{0.4pt}
+\vspace{1cm}
+\vspace*{\stretch{2.5}}
+\end{titlepage}
+}
+\makeatother
+
+% ==================================================================
+% --- MODIFIÉ : DÉFINITION DES COULEURS STYLE VS CODE (LIGHT) ---
+% ==================================================================
+\definecolor{vscodeBlue}{HTML}{569CD6}
+\definecolor{vscodeOrange}{HTML}{CE9178}
+\definecolor{vscodeGreen}{HTML}{6A9955}
+\definecolor{vscodePurple}{HTML}{C586C0}
+\definecolor{vscodeGray}{HTML}{9B9B9B}
+\definecolor{codeBackground}{HTML}{F8F8F8} % Fond gris très clair
+\definecolor{codeText}{HTML}{242424}       % Texte principal (presque noir)
+\definecolor{codeGray}{HTML}{A0A0A0}       % Numéros de ligne (gris moyen)
+
+% ==================================================================
+% --- MODIFIÉ : CONFIGURATION DU STYLE LISTINGS (LIGHT) ---
+% ==================================================================
+\lstdefinestyle{vscode}{
+    language=Python,
+    backgroundcolor=\color{codeBackground},     % Utilise le nouveau fond F8F8F8
+    basicstyle=\ttfamily\small\color{codeText}, % Texte principal noir
+    keywordstyle=\color{vscodeBlue},
+    stringstyle=\color{vscodeOrange},
+    commentstyle=\color{vscodeGreen},
+    numberstyle=\tiny\color{codeGray},         % Numéros de ligne en gris
+    otherkeywords={self, True, False, None},
+    keywordstyle=[2]\color{vscodePurple},
+    showstringspaces=false,
+    breaklines=true,
+    frame=none,
+    tabsize=4
+}
+
+% --- STYLE DE L'OUTPUT ---
+\lstdefinestyle{outputstyle}{
+    basicstyle=\ttfamily\small\color{codeText}, % Texte principal noir
+    breaklines=true,
+    frame=none
+}
+
+% ==================================================================
+% --- MODIFIÉ : DÉFINITION DES CELLULES DE CODE ET OUTPUT (LIGHT) ---
+% ==================================================================
+% Elles utilisent maintenant le même style "sidebar" que les autres boîtes.
+
+\newtcblisting{codecell}{
+  skin=enhanced, % Pour la bordure latérale
+  arc=0mm,       % Coins carrés
+  boxrule=0pt,   % Pas de cadre
+  colback=codeBackground, % Fond clair (F8F8F8)
+  borderline west={2pt}{0pt}{vscodeBlue}, % Barre latérale bleue
+  fonttitle=\bfseries\color{vscodeBlue}, % Titre en bleu
+  listing only,
+  listing options={style=vscode, basicstyle=\ttfamily\footnotesize\color{codeText}}, % TEXTE NOIR
+  left=3mm, right=3mm, top=2mm, bottom=2mm, % Padding (identique à sidebarstyle)
+  boxsep=0mm, % (identique à sidebarstyle)
+  breakable  % (identique à sidebarstyle)
+}
+\newtcblisting{outputcell}{
+  skin=enhanced, % Pour la bordure latérale
+  arc=0mm,       % Coins carrés
+  boxrule=0pt,   % Pas de cadre
+  colback=black!5, % Fond gris très clair (Output)
+  borderline west={2pt}{0pt}{corrColor}, % Barre latérale grise
+  fonttitle=\bfseries\color{corrColor}, % Titre en gris
+  listing only,
+  listing options={style=outputstyle, basicstyle=\ttfamily\footnotesize\color{codeText}}, % TEXTE NOIR
+  left=3mm, right=3mm, top=2mm, bottom=2mm, % Padding (identique à sidebarstyle)
+  boxsep=0mm, % (identique à sidebarstyle)
+  breakable  % (identique à sidebarstyle)
+}
+
+% --- DÉFINITION DES COULEURS POUR DÉF/THÉO/PREUVE/INTUITION/EXEMPLE ---
+\definecolor{defColor}{HTML}{1b1f3a}       % Bleu nuit pour les définitions
+\definecolor{theoColor}{HTML}{53354a}      % Violet aubergine pour les théorèmes
+\definecolor{proofColor}{HTML}{a64942}     % Rouge brique pour les preuves
+\definecolor{intuitionColor}{HTML}{16A085} % Turquoise pour l'intuition
+\definecolor{exampleColor}{HTML}{4a6982}   % Bleu ardoise pour les exemples
+\definecolor{exoColor}{HTML}{1E8449}       % Vert
+\definecolor{corrColor}{HTML}{7F8C8D}      % Gris
+\definecolor{remarqueColor}{HTML}{D35400} 
+
+% ==================================================================
+% --- DÉFINITION DU STYLE DE BASE (MARGES RÉDUITES) ---
+% ==================================================================
+
+% --- STYLE "ORGANIQUE" AVEC BARRE LATÉRALE (Pour TOUTES les boîtes) ---
+\tcbset{
+    sidebarstyle/.style={
+        skin=enhanced, % Nécessaire pour les bordures partielles
+        arc=0mm,       % Coins carrés
+        boxrule=0pt,   % Pas de cadre
+        colback=white, % Fond blanc
+        colframe=white,
+        coltitle=white,
+        fontupper=\color{black},
+        left=3mm, right=3mm, top=2mm, bottom=2mm, % Padding interne réduit
+        boxsep=0mm, % TRÈS IMPORTANT
+        breakable
+    }
+}
+
+% ==================================================================
+% --- DÉFINITION DE TOUTES LES CELLULES (TEXTE) ---
+% ==================================================================
+
+% --- CELLULES "SIDEBAR" (Pour le contenu théorique) ---
+\newtcolorbox{definitionbox}[1][]{
+  sidebarstyle,
+  borderline west={2pt}{0pt}{defColor}, % Barre latérale gauche
+  fonttitle=\bfseries\color{defColor},  % Titre en couleur (sans fond)
+  title=Définition\ifstrempty{#1}{}{ : #1}
+}
+\newtcolorbox{theorembox}[1][]{
+  sidebarstyle,
+  borderline west={2pt}{0pt}{theoColor},
+  fonttitle=\bfseries\color{theoColor},
+  title=Théorème\ifstrempty{#1}{}{ : #1}
+}
+\newtcolorbox{proofbox}[1][]{
+  sidebarstyle,
+  borderline west={2pt}{0pt}{proofColor},
+  fonttitle=\bfseries\color{proofColor},
+  title=Preuve\ifstrempty{#1}{}{ : #1}
+}
+\newtcolorbox{intuitionbox}[1][]{
+  sidebarstyle,
+  borderline west={2pt}{0pt}{intuitionColor},
+  fonttitle=\bfseries\color{intuitionColor},
+  title=Intuition\ifstrempty{#1}{}{ : #1}
+}
+\newtcolorbox{remarquebox}[1][]{
+  sidebarstyle,
+  borderline west={2pt}{0pt}{remarqueColor},
+  fonttitle=\bfseries\color{remarqueColor},
+  title=Remarque\ifstrempty{#1}{}{ : #1}
+}
+
+
+% --- CELLULES "SIDEBAR" (Pour les applications) ---
+\newtcolorbox{examplebox}[1][]{
+  sidebarstyle,
+  borderline west={2pt}{0pt}{exampleColor},
+  fonttitle=\bfseries\color{exampleColor},
+  title=Exemple\ifstrempty{#1}{}{ : #1}
+}
+\newtcolorbox{exercicebox}[1][]{
+    sidebarstyle,
+    borderline west={2pt}{0pt}{corrColor},
+    fonttitle=\bfseries\color{corrColor},
+    title=#1 % <-- On utilise directement l'argument fourni
+}
+\newtcolorbox{correctionbox}[1][]{
+    sidebarstyle,
+    borderline west={2pt}{0pt}{exoColor},
+    fonttitle=\bfseries\color{exoColor},
+    title=#1
+}
+
+
+% =============================================
+% --- CORPS DU DOCUMENT ---
+% =============================================
+\begin{document}
+
+\maketitle
+
+\newpage
+\phantomsection
+\addcontentsline{toc}{section}{Sommaire}
+\tableofcontents 
+\newpage
+
+\input{sections/section1.tex}
+
+
+\input{sections/test.tex}
+
+
+\end{document}
