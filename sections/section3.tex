@@ -1,0 +1,206 @@
+\newpage
+
+\section{Les propriétés des options sur actions}
+
+\subsection{Les facteurs influençant le prix des options}
+
+Il existe six facteurs fondamentaux qui influencent le prix des options sur actions :
+\begin{enumerate}
+    \item Le cours actuel de l'action ($S_0$)
+    \item Le prix d'exercice ($K$)
+    \item Le temps restant jusqu'à l'échéance ($T$)
+    \item La volatilité du cours de l'action ($\sigma$)
+    \item Le taux d'intérêt sans risque ($r$)
+    \item Les dividendes prévus durant la vie de l'option
+\end{enumerate}
+
+Le tableau suivant résume l'effet de l'\textbf{augmentation} d'une seule variable (toutes choses égales par ailleurs) sur le prix des options de type européen :
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Variable (si augmentation)} & \textbf{Call Européen} & \textbf{Put Européen} \\
+\hline
+Cours actuel de l'action ($S_0$) & $+$ & $-$ \\
+\hline
+Prix d'exercice ($K$) & $-$ & $+$ \\
+\hline
+Temps jusqu'à l'échéance ($T$) & $?$ & $?$ \\
+\hline
+Volatilité ($\sigma$) & $+$ & $+$ \\
+\hline
+Taux d'intérêt sans risque ($r$) & $+$ & $-$ \\
+\hline
+Dividendes & $-$ & $+$ \\
+\hline
+\end{tabular}
+
+\begin{remarquebox}[Légende]
+\begin{itemize}
+    \item $+$ : Signifie que le prix de l'option augmente.
+    \item $-$ : Signifie que le prix de l'option diminue.
+    \item $?$ : L'effet est incertain (dépend de la relation entre le prix spot et le strike).
+\end{itemize}
+\end{remarquebox}
+
+\begin{intuitionbox}[Impact du taux sans risque]
+L'effet des taux d'intérêt sur le prix de l'option est déterminé par la façon dont ils influencent la valeur actuelle du paiement futur (le prix d'exercice $K$) et le coût d'opportunité différé de la transaction.
+
+\begin{itemize}
+    \item \textbf{Pour un Call :} L'acheteur a le droit d'acheter (payer $K$) plus tard. Une hausse des taux réduit la valeur actuelle de cette dette future ($Ke^{-rT}$). Payer "moins cher" en valeur actuelle est un avantage $\to$ \textbf{Le prix du Call augmente}.
+    \item \textbf{Pour un Put :} L'acheteur a le droit de vendre (recevoir $K$) plus tard. Une hausse des taux réduit la valeur actuelle de cette rentrée d'argent future. C'est un désavantage $\to$ \textbf{Le prix du Put diminue}.
+\end{itemize}
+\end{intuitionbox}
+
+\subsection{Synthèse de l'Impact des Taux d'Intérêt ($r$)}
+
+L'effet des taux d'intérêt sur le prix d'une option est déterminé par la façon dont ils influencent la valeur actuelle du paiement futur (le prix d'exercice $K$) et le coût d'opportunité de différer une transaction.
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|p{0.25\linewidth}|p{0.32\linewidth}|p{0.32\linewidth}|}
+\hline
+\textbf{Caractéristique} & \textbf{Option d'Achat (Call)} $\nearrow$ & \textbf{Option de Vente (Put)} $\searrow$ \\
+\hline
+\textbf{Droit Acquis} & Droit d'\textbf{Acheter} à $K$ dans le futur. & Droit de \textbf{Vendre} à $K$ dans le futur. \\
+\hline
+\textbf{Nature de $K$} & Coût futur (paiement à faire). & Gain futur (paiement à recevoir). \\
+\hline
+\multicolumn{3}{|c|}{\textbf{Si $r$ augmente}} \\
+\hline
+\textbf{Impact sur $K$ Actualisé} & La valeur actuelle du coût $K$ diminue (actualisation plus forte). & La valeur actuelle du gain $K$ diminue (actualisation plus forte). \\
+\hline
+\textbf{Coût d'Opportunité} & Avantage de garder son argent et le placer au taux élevé $r$. & Inconvénient d'attendre pour recevoir $K$ (perte de rendement). \\
+\hline
+\textbf{Conclusion} & Prix du Call ($C$) \textbf{augmente}. & Prix du Put ($P$) \textbf{diminue}. \\
+\hline
+\end{tabular}
+
+\begin{intuitionbox}[Le Principe de Base]
+La clé est de considérer l'option comme un instrument qui vous permet de différer un flux de trésorerie (le prix d'exercice $K$) jusqu'à la date d'échéance ($T$).
+
+\begin{itemize}
+    \item \textbf{Différer un Coût (Call) :} Plus les taux d'intérêt sont élevés, plus il est intéressant de retarder un paiement (le $K$ du call), car l'argent que vous gardez entre-temps vous rapporte plus. Cet avantage augmente le prix du call.
+    \item \textbf{Différer un Gain (Put) :} Plus les taux d'intérêt sont élevés, plus il est coûteux de retarder la réception d'un gain (le $K$ du put), car vous perdez le rendement élevé que vous auriez pu obtenir en plaçant cet argent immédiatement. Ce désavantage diminue le prix du put.
+\end{itemize}
+
+L'effet est toujours le même : les taux d'intérêt élevés sont un \textbf{avantage} pour celui qui doit payer plus tard (l'acheteur de call) et un \textbf{désavantage} pour celui qui doit être payé plus tard (l'acheteur de put).
+\end{intuitionbox}
+
+\subsection{Impact des dividendes}
+
+\begin{intuitionbox}[Dividendes et Valeur d'Option]
+Les dividendes représentent des sorties de trésorerie pour l'entreprise, ce qui entraîne mécaniquement une baisse du cours de l'action à la date de détachement du coupon. Cette baisse programmée du sous-jacent affecte la valeur des options. L'annonce ou le versement d'un dividende constitue une mauvaise nouvelle pour le détenteur d'une option d'achat (Call), car la probabilité que le cours dépasse le prix d'exercice diminue. À l'inverse, c'est une bonne nouvelle pour le détenteur d'une option de vente (Put), car la baisse du cours augmente ses chances de profit.
+\end{intuitionbox}
+
+\subsection{Bornes pour la valeur des options}
+
+Nous cherchons à définir un intervalle de prix rationnel pour les options, en dehors duquel des opportunités d'arbitrage existeraient.
+
+\subsubsection{Borne supérieure du call européen}
+
+L'établissement de la limite haute pour le prix d'une option d'achat est conceptuellement direct. Fondamentalement, une option d'achat est un droit d'acquérir l'actif sous-jacent. Il serait irrationnel que ce simple droit coûte plus cher que l'actif lui-même.
+
+\begin{intuitionbox}[Logique de la borne supérieure]
+Si le prix du call $c$ était supérieur au prix de l'action $S_0$, une opportunité d'arbitrage immédiate et triviale existerait. Un investisseur vendrait le call et achèterait l'action, empochant immédiatement la différence positive $c - S_0$. Quelle que soit l'issue à l'échéance, il détient l'action pour couvrir l'éventuel exercice de l'option, conservant ainsi le profit initial sans aucun risque. Personne n'achèterait une option plus cher que l'action, car l'action confère la propriété immédiate et totale, alors que l'option ne confère qu'une propriété potentielle future moyennant un paiement supplémentaire (le strike).
+\end{intuitionbox}
+
+Cette intuition se vérifie mathématiquement en comparant les flux finaux. À l'échéance $T$, le gain de l'option est $\max(S_T - K, 0)$. Puisque le prix d'exercice $K$ est positif, ce gain est nécessairement inférieur ou égal au prix de l'action $S_T$. Si l'actif vaut plus que le dérivé à la fin, il doit valoir plus que le dérivé aujourd'hui.
+
+\begin{theorembox}[Borne Supérieure]
+La valeur d'une option d'achat européenne ne peut jamais excéder le cours actuel de l'action sous-jacente.
+$$ c \le S_0 $$
+\end{theorembox}
+
+\subsubsection{Borne inférieure du call européen}
+
+Pour déterminer la valeur minimale d'un call européen sur une action ne versant pas de dividendes, nous employons une méthodologie similaire en comparant deux portefeuilles d'investissement distincts.
+
+\begin{proofbox}[Démonstration par Portefeuilles]
+Considérons les deux stratégies suivantes :
+\begin{itemize}
+    \item \textbf{Portefeuille A :} Une option d'achat européenne ($c$) et une obligation zéro-coupon garantissant un revenu égal à $K$ à l'échéance (valeur actuelle $Ke^{-rT}$).
+    \item \textbf{Portefeuille B :} Une action ($S_0$).
+\end{itemize}
+
+Analysons la valeur du portefeuille A à l'échéance $T$. L'obligation rapporte $K$.
+\begin{itemize}
+    \item Si $S_T > K$ : L'option est exercée. Nous utilisons le cash $K$ pour acheter l'action. Valeur finale : $S_T$.
+    \item Si $S_T \le K$ : L'option n'est pas exercée. Nous conservons le cash. Valeur finale : $K$.
+\end{itemize}
+Ainsi, la valeur du portefeuille A à l'échéance est $\max(S_T, K)$.
+
+Puisque $\max(S_T, K)$ est toujours supérieur ou égal à $S_T$ (la valeur du portefeuille B), il s'ensuit par absence d'arbitrage que la valeur actuelle du portefeuille A doit être supérieure ou égale à celle du portefeuille B :
+$$ c + Ke^{-rT} \ge S_0 $$
+\end{proofbox}
+
+En réarrangeant les termes de cette inégalité, nous obtenons une première borne : $c \ge S_0 - Ke^{-rT}$. Toutefois, comme pour le put, la valeur de l'option ne peut être négative.
+
+\begin{theorembox}[Borne Inférieure du Call Européen]
+La valeur d'un call européen est minorée par la différence entre le cours de l'action et la valeur actuelle du prix d'exercice, ou zéro si cette différence est négative :
+$$ c \ge \max(S_0 - Ke^{-rT}, 0) $$
+\end{theorembox}
+
+\subsubsection{Borne inférieure du put européen}
+
+Pour déterminer la valeur minimale d'un put européen sur une action ne versant pas de dividendes, nous employons une méthodologie similaire à celle du call, en comparant deux portefeuilles d'investissement distincts.
+
+\begin{proofbox}[Démonstration par Portefeuilles]
+Considérons les deux stratégies suivantes :
+\begin{itemize}
+    \item \textbf{Portefeuille C :} Une option de vente européenne ($p$) et une action ($S_0$).
+    \item \textbf{Portefeuille D :} Une obligation zéro-coupon garantissant un revenu égal à $K$ à l'échéance (valeur actuelle $Ke^{-rT}$).
+\end{itemize}
+
+Analysons la valeur du portefeuille C à l'échéance $T$. Si le cours de l'action $S_T$ est inférieur à $K$, l'option est exercée (gain de $K-S_T$) et nous possédons l'action ($S_T$), ce qui totalise $K$. Si l'action est supérieure à $K$, l'option vaut 0 mais nous possédons l'action $S_T$.
+Ainsi, la valeur du portefeuille C à l'échéance est $\max(S_T, K)$.
+
+Puisque $\max(S_T, K)$ est toujours supérieur ou égal à $K$ (la valeur du portefeuille D), il s'ensuit par absence d'arbitrage que la valeur actuelle du portefeuille C doit être supérieure ou égale à celle du portefeuille D :
+$$ p + S_0 \ge Ke^{-rT} $$
+\end{proofbox}
+
+En réarrangeant les termes de cette inégalité, nous obtenons une première borne : $p \ge Ke^{-rT} - S_0$. Toutefois, nous savons également qu'une option, représentant un droit et non une obligation, ne peut jamais avoir une valeur négative.
+
+\begin{theorembox}[Borne Inférieure du Put Européen]
+La valeur d'un put européen est minorée par la différence entre la valeur actuelle du prix d'exercice et le cours de l'action, ou zéro si cette différence est négative :
+$$ p \ge \max(Ke^{-rT} - S_0, 0) $$
+\end{theorembox}
+
+\subsection{La parité Call-Put}
+
+Il existe une relation fondamentale et contraignante entre le prix d'un call européen et celui d'un put européen ayant le même prix d'exercice et la même échéance. Cette relation est connue sous le nom de parité Call-Put.
+
+\begin{theorembox}[Relation de Parité Call-Put]
+Pour une action ne versant pas de dividendes, la relation suivante doit toujours être vérifiée en l'absence d'opportunité d'arbitrage :
+$$ c + Ke^{-rT} = p + S_0 $$
+Autrement dit : \textit{Call + Cash = Put + Action}.
+\end{theorembox}
+
+\begin{intuitionbox}[Compréhension de la Parité]
+Cette égalité découle directement de la comparaison des portefeuilles que nous avons étudiés précédemment.
+Imaginons deux investisseurs :
+\begin{itemize}
+    \item L'investisseur A détient un \textbf{Call} et de l'argent liquide ($Ke^{-rT}$) pour payer le prix d'exercice.
+    \item L'investisseur C détient un \textbf{Put} et l'\textbf{Action}.
+\end{itemize}
+À l'échéance, quelle que soit l'évolution du marché, ces deux investisseurs se retrouveront avec exactement la même richesse finale, soit $\max(S_T, K)$. Puisque les flux futurs sont identiques, les coûts de constitution de ces portefeuilles aujourd'hui doivent être strictement égaux.
+
+Cette équation est puissante car elle permet de déduire le prix d'un call si l'on connaît celui du put (et inversement), sans même avoir besoin d'un modèle d'évaluation complexe.
+\end{intuitionbox}
+
+\subsection{Généralisation : La parité Call-Put avec dividendes}
+
+La relation de parité établie précédemment suppose que l'actif sous-jacent ne génère aucun revenu. Or, dans la réalité, la plupart des actions versent des dividendes. Cette distribution de cash modifie l'équilibre car le détenteur de l'action (dans le portefeuille de droite) perçoit les dividendes, tandis que le détenteur du call (dans le portefeuille de gauche) ne les perçoit pas.
+
+Pour rétablir l'égalité, nous devons ajuster le cours de l'action en soustrayant la valeur actuelle des dividendes à percevoir pendant la durée de vie de l'option. Nous notons $I$ la valeur actuelle de ces dividendes.
+
+\begin{theorembox}[Parité Call-Put avec Dividendes]
+Si $I$ représente la valeur actuelle des dividendes versés par l'action avant l'échéance $T$, la relation d'absence d'arbitrage devient :
+$$ c + Ke^{-rT} = p + S_0 - I $$
+\end{theorembox}
+
+\begin{intuitionbox}[Ajustement du sous-jacent]
+La logique est identique à celle des contrats forward. Le cours "efficace" pour l'évaluation de l'option n'est pas le cours brut $S_0$, mais le cours net des sorties de trésorerie prévisibles.
+On peut réécrire l'équation ainsi :
+$$ c + Ke^{-rT} + I = p + S_0 $$
+Cela signifie que pour reproduire parfaitement la possession de l'action (qui donne droit au prix final $S_T$ \textbf{et} aux dividendes), le portefeuille composé du Call et du Cash ($Ke^{-rT}$) doit être complété par une somme $I$ équivalente aux dividendes que l'on souhaite "synthétiser".
+\end{intuitionbox}
