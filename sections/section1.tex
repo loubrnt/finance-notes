@@ -1,164 +1,123 @@
-\section{Les marchés de taux d'intérêt}
+\section{Méthodologies d'évaluation et Arbitrage}
 
-\subsection{Définition du taux d'intérêt}
+\subsection{La couverture en Delta (Delta Hedging)}
 
-\begin{definitionbox}[Taux d'intérêt et Spread]
-Un taux d'intérêt, dans une situation donnée, définit le montant qu'un emprunteur promet de payer à un prêteur.
-Le supplément de taux pour un prêt avec risques que l'emprunteur paie est souvent appelé \textit{spread de crédit}.
-Les taux d'intérêt et les spreads sont exprimés le plus souvent en points de base (bps). Un point de base est égal à 0,01\% par an.
+\begin{intuitionbox}[Le principe de base]
+Sous certaines hypothèses sur le comportement d'une action, il est possible de déterminer le "juste prix" d'une option. L'idée fondamentale repose sur le fait que la valeur d'une option dépend principalement de deux facteurs :
+\begin{itemize}[label=$\cdot$]
+    \item Le temps restant avant l'expiration.
+    \item Le prix actuel de l'action sous-jacente.
+\end{itemize}
+Si l'on sait comment le prix de l'option varie en fonction du prix de l'action, on connaît son taux de variation. En termes mathématiques, il s'agit de la dérivée du prix de l'option par rapport au prix de l'action. En finance mathématique, ce taux de variation est appelé le Delta.
+\end{intuitionbox}
+
+\begin{definitionbox}[Le Delta ($\Delta$)]
+Le Delta d'une option mesure la sensibilité de son prix par rapport aux variations du prix de l'action sous-jacente. 
+Par exemple, si le Delta est de $0,5$, cela signifie que pour une augmentation de 1~€ du prix de l'action, le prix de l'option augmentera d'environ 0,50~€.
 \end{definitionbox}
 
-\subsection{Le taux de repo}
+\begin{examplebox}[Création d'un portefeuille couvert (sans risque)]
+Imaginons un opérateur de marché qui vend une option. Il est exposé au risque si le prix de l'action bouge en sa défaveur. Pour neutraliser ce risque, il va construire le portefeuille suivant :
+\begin{itemize}[label=$\cdot$]
+    \item Il a vendu une option (position courte : $-1$ option).
+    \item Il achète en couverture une quantité d'actions exactement égale au Delta ($\Delta$ actions).
+\end{itemize}
+Le taux de variation global de ce portefeuille devient alors zéro. Si le prix de l'action varie légèrement, la perte (ou le gain) sur les actions détenues sera exactement compensée par le gain (ou la perte) sur l'option vendue. Mathématiquement, on a éliminé tout le risque du portefeuille.
+\end{examplebox}
 
-\begin{definitionbox}[Taux de Repo]
-Les taux de repo correspondent à des opérations peu risquées. Quand une institution trouve certaines garanties par le repo, elle conclut un contrat spécifiant la vente de certains titres avec une promesse de rachat à une date future et à un prix plus élevé.
-La banque X, vendeuse de titres, les livre à une banque Y, qui paie le prix de ces titres (apportant ainsi du cash à la première).
-En quelques sortes, il s'agit d'un prêt de fonds par Y à X. La différence entre le prix de rachat des titres et le prix de vente initial rémunère les fonds prêtés.
-\end{definitionbox}
+\begin{remarquebox}[Couverture dynamique et modèle de Black-Scholes]
+Le point crucial est que le Delta n'est pas constant : dès que le prix de l'action change, le taux de variation (le Delta) change également. La quantité d'actions détenues dans le portefeuille doit donc être ajustée en permanence. C'est ce qu'on appelle la couverture dynamique (\textit{dynamic hedging}).
 
-\subsection{La mesure des taux d'intérêts}
-Considérons un montant $A$ investi pendant $n$ années à un taux annuel $R$. Si la composition est annuelle, on obtient à la fin des $n$ années :
-$$ A(1+R)^n $$
-Si la composition des intérêts a lieu $m$ fois par an, le résultat final est :
-$$ A = \left(1 + \frac{R}{m}\right)^{mn} $$
-La limite du résultat précédent lorsque $m$ tend vers l'infini s'appelle \textbf{composition continue des intérêts}. Cette limite est égale à :
-$$ A e^{Rn} $$
-où $e$ est la base du logarithme népérien ($e \approx 2,71828$).
-Pour les problèmes pratiques, une composition continue peut être vue comme une composition journalière.
-
-\begin{remarquebox}[Taux Continu vs. Taux Discret]
-Notons $R_c$ un taux continu et $R_m$ le taux équivalent pour une composition $m$ fois par an. Nous avons la relation suivante :
-$$ A e^{R_c n} = A \left(1 + \frac{R_m}{m}\right)^{mn} $$
-ou encore :
-$$ R_c = m \ln\left(1 + \frac{R_m}{m}\right) $$
-et donc :
-$$ R_m = m(e^{R_c/m} - 1) $$
-Ces relations sont utilisées pour convertir un taux composé $m$ fois par an en un taux continu et vice-versa.
+Si l'on suppose qu'il est possible de réajuster ce portefeuille \textit{en continu}, on obtient un portefeuille dont la valeur est totalement prévisible et sans risque. Selon les lois de l'arbitrage, un portefeuille sans risque doit rapporter exactement le taux d'intérêt sans risque. C'est cet argument logique strict qui permet de déduire le prix exact de l'option, appelé le prix de Black-Scholes, point de départ de toute la finance mathématique moderne.
 \end{remarquebox}
 
-\subsection{Les taux zéro-coupon}
+\newpage
 
-\begin{definitionbox}[Taux Zéro-Coupon (ZC)]
-Le taux zéro-coupon à $n$ années est le taux d'intérêt obtenu par un investissement portant sur un seul flux au terme de $n$ années, sans flux intermédiaire.
-\end{definitionbox}
+\subsection{Exemple pratique et intuitif : Déduction du prix par l'arbitrage}
 
-\begin{examplebox}
-Si le taux d'État zéro-coupon à 5 ans (composition continue) est de 5\%, cela signifie qu'un investissement de 100 € dans ce taux sans risque rapporte au terme de 5 ans :
-$$ 100 \times e^{0,05 \times 5} = 128,40 € $$
-\end{examplebox}
-
-\subsection{L'évaluation des obligations}
-
-\begin{examplebox}[Prix théorique d'une obligation]
-Le prix théorique d'une obligation peut être calculé en actualisant le $cash flow$ espéré aux taux ZC correspondants. Supposons que les taux zéro-coupon sont ceux du tableau suivant.
-\begin{center}
-\begin{tabular}{|l|c|}
-\hline
-\textbf{Maturité (années)} & \textbf{Taux zéro-coupon en \%} \\ \hline
-1 & 2,5 \\ \hline
-2 & 2,9 \\ \hline
-3 & 3,2 \\ \hline
-4 & 3,4 \\ \hline
-\end{tabular}
-\end{center}
-Une obligation d'échéance 4 ans paie un coupon annuel de 3\% sur un principal de 100 €. Pour calculer la valeur actuelle du premier coupon, on actualise celui-ci avec le taux ZC à 1 an (2,5\%), on actualise de même le second au taux ZC à 2 ans, et ainsi de suite.
-
-Le prix théorique de l'obligation (comprenant le principal de 100 au dernier flux) est alors :
-$$ 3e^{-0,025 \times 1} + 3e^{-0,029 \times 2} + 3e^{-0,032 \times 3} + 103e^{-0,034 \times 4} = 98,39 € $$
-\end{examplebox}
-
-\subsection{Le taux au pair}
-\begin{definitionbox}[Taux au Pair]
-Le taux au pair pour une maturité donnée est le taux du coupon qui équilibre le prix de l'obligation et son nominal.
-\end{definitionbox}
-
-\subsection{Le taux actuariel}
-\begin{definitionbox}[Taux Actuariel]
-Le taux actuariel d'une obligation est le taux d'actualisation unique qui, appliqué à tous les flux, donne le prix de marché de l'obligation.
-\end{definitionbox}
-
-\begin{examplebox}[Calcul du taux actuariel]
-Supposons que l'obligation précédente (de l'exemple ci-dessus) soit effectivement cotée à 98,39 €. Si l'on note $y$ le taux actuariel (continu) de cette obligation, $y$ est solution de l'équation :
-$$ 3e^{-y \times 1} + 3e^{-y \times 2} + 3e^{-y \times 3} + 103e^{-y \times 4} = 98,39 $$
-Ce genre d'équation est résolu par une méthode itérative et l'on aboutit à $y \approx 3,38\%$.
-\end{examplebox}
-
-\subsection{La détermination des taux zéro-coupon}
-
-\begin{examplebox}[La méthode du Bootstrap]
-On détermine les taux zéro-coupon à partir des prix des instruments d'État. Une première approche est la méthode du \textit{bootstrap}. Pour illustrer cette méthode, considérons le prix des obligations du tableau suivant :
-
-\begin{center}
-\begin{tabular}{|l|c|c|c|l|}
-\hline
-\textbf{Principal} & \textbf{Maturité} & \textbf{Coupon} & \textbf{Prix} & \textbf{Taux actuariel} \\ \hline
-100 & 0.5 & 0 & 99.8 & 1.604 (S) \\ \hline
-100 & 1.0 & 0 & 99.0 & 2.020 (S) \\ \hline
-100 & 1.5 & 0 & 98.8 & 2.249 (S) \\ \hline
-100 & 2.0 & 4 & 102.5 & 2.854 (S) \\ \hline
-100 & 2.5 & 5 & 105.0 & 2.978 (S) \\ \hline
-\end{tabular}
-\end{center}
-\textit{La fréquence de composition des intérêts correspond à la fréquence des paiements. T=Trimestre, S=Semestre, A=Année.}
-
-Les 3 premières obligations ne payent pas de coupon (ce sont des zéro-coupons). Les taux ZC correspondants à ces maturités sont aisément obtenus.
-\begin{itemize}
-    \item \textbf{Maturité 0.5 (6 mois):} En payant 99,8 € pour la première obligation, on obtient 100 € 6 mois plus tard. Le taux continu $R$ est solution de :
-    $$ 100 = 99,8 e^{R \times 0,5} \implies R = 1,603\% $$
-    \item \textbf{Maturité 1.0 (1 an):} De la même façon, le taux ZC continu de l'obligation à 1 an est solution de :
-    $$ 100 = 99,0 e^{R \times 1,0} \implies R = 2,020\% $$
-    \item \textbf{Maturité 1.5 (1.5 an):} Le taux continu à 1,5 an est déduit des prix de la troisième obligation :
-    $$ 100 = 98.8 e^{R \times 1.5} \implies R = 2,225\% $$
+\begin{examplebox}[Le décor du modèle simplifié binomial]
+Pour comprendre la logique fondamentale du \textit{Delta Hedging} sans les mathématiques complexes, utilisons un scénario simple où le temps s'arrête "demain" :
+\begin{itemize}[label=$\cdot$]
+    \item L'action aujourd'hui : Elle vaut 100~€.
+    \item L'action demain (à l'expiration) : Elle ne peut faire que deux choses : monter à 120~€ ou baisser à 80~€.
+    \item L'option : Vous vendez une option d'achat (\textit{Call}) donnant le droit d'acheter l'action à 100~€ demain.
+    \item Le taux sans risque : La banque (ou l'État) propose un taux d'intérêt garanti de 5\%.
 \end{itemize}
-Les deux dernières obligations paient des coupons semestriels. Par conséquent, les flux de l'obligation à 2 ans (la 4ème) sont :
-\begin{itemize}
-    \item 6 mois: 2 € (coupon)
-    \item 12 mois: 2 € (coupon)
-    \item 18 mois: 2 € (coupon)
-    \item 24 mois: 102 € (coupon + principal)
-\end{itemize}
-Nous avons déjà calculé les taux ZC à 6 mois (1.603\%), 1 an (2.020\%) et 1.5 an (2.225\%). Nous pouvons les utiliser pour actualiser les 3 premiers flux. Le taux ZC à 2 ans (noté $R$) est notre inconnu :
-$$ 2e^{-0,01603 \times 0,5} + 2e^{-0,02020 \times 1,0} + 2e^{-0,02225 \times 1,5} + 102e^{-R \times 2,0} = 102,5 $$
-En résolvant pour $R$, on trouve le taux ZC à 2 ans. (Note: l'exemple dans l'image s'arrête au calcul de 1.5 an, mais utilise l'obligation à 2.0 ans pour un calcul erroné de R à 1.5 an. J'ai corrigé la logique du bootstrap.)
+\textit{La grande question :} À quel prix exact devez-vous vendre cette option aujourd'hui pour être sûr de ne pas perdre d'argent, ni d'offrir une opportunité d'arbitrage ("d'argent gratuit") au marché ?
 \end{examplebox}
 
-\subsection{Les taux forward}
-
-\begin{definitionbox}[Taux Forward]
-Les taux forward sont les taux d'emprunt ou de placement, pour des périodes futures, implicites dans les taux zéro-coupon aujourd'hui.
-\end{definitionbox}
-
-\begin{examplebox}[Calcul d'un Taux Forward]
-Imaginons deux investisseurs qui veulent placer 1 euro sur 5 ans.
-\begin{itemize}
-    \item \textbf{Stratégie 1 (Directe):} Il achète un zéro-coupon 5 ans qui lui garantit le taux ZC de 6\% ($R_5$). Sa valeur acquise sera :
-    $$ e^{R_5 \times 5} = e^{0,06 \times 5} = e^{0,3} \approx 1,3498 $$
-    \item \textbf{Stratégie 2 (en deux temps):} Il achète d'abord un zéro-coupon sur 1 an au taux ZC de 2\% ($R_1$). Dès qu'il perçoit le produit, il le réinvestit de la 1ère année jusqu'à la 5ème année (pour 4 ans).
+\begin{intuitionbox}[Le raisonnement pas à pas]
+Étape 1 : Calculer le Delta\\
+Que vaudra l'option demain dans nos deux scénarios ?
+\begin{itemize}[label=$\cdot$]
+    \item Si l'action monte à 120~€ : L'option vaut 20~€ (le droit d'acheter à 100 ce qui vaut 120).
+    \item Si l'action baisse à 80~€ : L'option vaut 0~€ (personne n'exerce le droit d'acheter à 100 ce qui vaut 80).
 \end{itemize}
-Le taux garanti pour cette période future (entre l'année 1 et 5) est le taux forward $F$. En l'absence d'arbitrage, les two stratégies doivent donner la même valeur finale :
-$$ (e^{R_5 \times 5}) = (e^{R_1 \times 1}) \times (e^{F \times (5-1)}) $$
-$$ e^{0,06 \times 5} = e^{0,02 \times 1} \times e^{F \times 4} $$
-En simplifiant les exposants (car $e^a = e^b \times e^c \implies a = b+c$):
-$$ R_5 \times 5 = R_1 \times 1 + F \times 4 $$
-On obtient la formule du taux forward :
-$$ F = \frac{R_5 \times 5 - R_1 \times 1}{4} = \frac{0,06 \times 5 - 0,02 \times 1}{4} = \frac{0,3 - 0,02}{4} = \frac{0,28}{4} = 0,07 $$
-Le taux forward implicite entre l'année 1 et 5 est de 7\%.
-(Note: les chiffres 0,3 et 0,10 de l'image impliquent un $R_1$ de 10\%, pas 2\%. J'ai utilisé les taux ZC logiques de 6\% et 2\% pour l'exemple.)
-\end{examplebox}
+L'écart potentiel de l'action est de 40~€ (de 80 à 120). L'écart potentiel de l'option est de 20~€ (de 0 à 20). \\
+Le Delta est le rapport entre les deux : $20 / 40 = 0,5$. \\
+Le Delta est donc de 0,5. L'option bouge deux fois moins vite que l'action.
 
-\subsection{La Duration}
+\vspace{0.4cm}
+Étape 2 : Créer le portefeuille "Sans Risque"\\
+Puisque vous avez vendu 1 option (vous êtes en danger si l'action monte), vous vous couvrez en achetant 0,5 action (la valeur du Delta).
+Combien d'argent sortez-vous de votre poche aujourd'hui pour construire cela ?
+\begin{itemize}[label=$\cdot$]
+    \item Achat d'une demi-action à 100~€ : -50~€
+    \item Vente de l'option : + Prix de l'option (notre inconnue)
+\end{itemize}
+Votre investissement net initial aujourd'hui est donc : 50~€ - Prix de l'option.
 
-\begin{definitionbox}[Duration]
-La duration d'une obligation est une mesure de durée moyenne d'attente pour percevoir les flux de cette obligation. Un zéro-coupon de maturité $m$ années a une duration égale à $m$.
-\end{definitionbox}
+\vspace{0.4cm}
+Étape 3 : Que se passe-t-il demain ? (La "Magie")\\
+Regardons la valeur de ce portefeuille dans les deux scénarios finaux :
+\begin{itemize}[label=$\cdot$]
+    \item Scénario A (L'action explose à 120~€) :
+    \begin{itemize}[label=$\triangleright$]
+        \item Votre demi-action vaut $0,5 \times 120 = +60$~€.
+        \item L'acheteur exerce son option, vous lui devez -20~€.
+        \item Valeur totale dans votre poche : $60 - 20 = 40$~€.
+    \end{itemize}
+    \vspace{0.2cm}
+    \item Scénario B (L'action s'effondre à 80~€) :
+    \begin{itemize}[label=$\triangleright$]
+        \item Votre demi-action vaut $0,5 \times 80 = +40$~€.
+        \item L'option expire sans valeur, vous ne devez rien (0~€).
+        \item Valeur totale dans votre poche : $40 - 0 = 40$~€.
+    \end{itemize}
+\end{itemize}
+Constat incroyable : Quoi qu'il arrive, vous aurez exactement 40~€ demain. Vous avez créé un investissement garanti à 100\%, c'est-à-dire strictement sans risque.
 
-\begin{remarquebox}[Formulation Mathématique de la Duration]
-Considérons une obligation de taux actuariel continu $y$, payant des flux $C_i$ (pour $i=1...m$) aux dates $t_i$. Le prix $B$ de l'obligation est lié au taux actuariel $y$ par la relation :
-$$ B = \sum_{i=1}^{m} C_i e^{-y t_i} $$
-La duration (Duration de Macaulay), $D$, de l'obligation est définie par :
-$$ D = \sum_{i=1}^{m} t_i \frac{C_i e^{-y t_i}}{B} $$
-Qui peut encore s'écrire :
-$$ D = \sum_{i=1}^{m} t_i \left[ \frac{C_i e^{-y t_i}}{B} \right] $$
-Les termes entre crochets sont les poids de chaque flux (actualisé) dans la valeur totale (le prix $B$) de l'obligation.
-Comme ce prix $B$ est égal à la somme des cash-flows actualisés, ces termes définissent un système de poids dont la somme est égale à 1. La duration est donc la moyenne pondérée des maturités $t_i$ de chaque flux.
+\vspace{0.4cm}
+Étape 4 : Le principe de Non-Arbitrage\\
+Puisque vous êtes certain d'avoir 40~€ demain, cet investissement est identique à un placement bancaire garanti à 5\%. \\
+Combien devez-vous placer à la banque aujourd'hui pour obtenir 40~€ demain ? \\
+La réponse s'obtient par actualisation : $40 / 1,05 \approx 38,10$~€.
+
+La finance moderne repose sur une règle d'or : deux investissements qui rapportent exactement la même chose sans risque doivent coûter le même prix aujourd'hui. La création de votre portefeuille DOIT donc vous coûter exactement 38,10~€.
+
+\vspace{0.4cm}
+Conclusion : Déduction du juste prix de l'option\\
+Reprenons la formule de notre investissement à l'Étape 2 : \\
+Investissement aujourd'hui = 50~€ - Prix de l'option.
+
+Puisque cet investissement doit valoir 38,10~€, il suffit de résoudre l'équation :\\
+$50 - \text{Prix de l'option} = 38,10$ \\
+Prix de l'option = 11,90~€
+\end{intuitionbox}
+
+\begin{remarquebox}[Généralisation aux options en dehors de la monnaie (OTM)]
+Cette logique de couverture fonctionne avec absolument n'importe quel Strike (ainsi qu'avec des \textit{Puts}). Puisque le prix de l'option est mathématiquement lié à celui de l'action, il existera toujours un ratio exact (le Delta) permettant d'annuler le risque.
+
+Prenons le même scénario, mais avec un \textit{Call} de Strike 110~€ :
+\begin{itemize}[label=$\cdot$]
+    \item Nouveau Delta : Si l'action monte à 120~€, l'option vaut 10~€. Si elle baisse à 80~€, l'option vaut 0~€. \\
+    Le Delta devient donc $10 / 40 = 0,25$.
+    \item Nouveau Portefeuille : Vous vendez l'option et achetez 0,25 action (soit un investissement de 25~€ sur les actions).
+    \item La Magie à l'expiration : 
+    \begin{itemize}[label=$\triangleright$]
+        \item Si 120~€ : Vos 0,25 actions valent 30~€. Vous devez 10~€ à l'acheteur. Reste : 20~€.
+        \item Si 80~€ : Vos 0,25 actions valent 20~€. L'option expire à 0~€. Reste : 20~€.
+    \end{itemize}
+\end{itemize}
+Conclusion : Quoi qu'il arrive, la valeur finale est figée à 20~€. Le portefeuille est toujours parfaitement couvert et sans risque. On peut alors appliquer la même logique d'actualisation à 5\% pour déduire le prix exact de ce Call à 110~€.
 \end{remarquebox}
