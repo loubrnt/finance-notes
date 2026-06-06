@@ -121,3 +121,108 @@ Prenons le même scénario, mais avec un \textit{Call} de Strike 110~€ :
 \end{itemize}
 Conclusion : Quoi qu'il arrive, la valeur finale est figée à 20~€. Le portefeuille est toujours parfaitement couvert et sans risque. On peut alors appliquer la même logique d'actualisation à 5\% pour déduire le prix exact de ce Call à 110~€.
 \end{remarquebox}
+
+\newpage
+
+\subsection{Évaluation des contrats Forward et Coût de Détention}
+
+\begin{theorembox}[Valeur d'un contrat Forward]
+Si un actif liquide s'échange aujourd'hui au prix $S_0$, avec un taux de dividende continu $d$ et un taux d'intérêt sans risque composé en continu $r$, alors la valeur $V$ d'un contrat forward pour acheter cet actif au prix $K$ à l'échéance $T$ est :
+\begin{equation*}
+    V = e^{-rT} (S_0 e^{(r-d)T} - K)
+\end{equation*}
+Le contrat a une valeur nulle à l'origine si et seulement si le prix d'exercice est fixé au prix forward théorique :
+\begin{equation*}
+    K = S_0 e^{(r-d)T}
+\end{equation*}
+\end{theorembox}
+
+\begin{intuitionbox}[Logique du financement par emprunt]
+Pour déterminer le juste prix d'un contrat financier, on utilise un raisonnement d'absence d'opportunité d'arbitrage (AOA). L'idée est de construire une stratégie de réplication qui ne coûte strictement rien aujourd'hui (coût initial de $0$). 
+
+Pour acheter l'action aujourd'hui sans sortir d'argent de notre poche, nous sommes obligés de financer cet achat par un emprunt bancaire. Le mécanisme repose sur trois étapes :
+\begin{enumerate}
+    \item À l'origine ($t=0$) : On emprunte de l'argent à la banque pour acheter l'actif. Le flux de trésorerie net est nul ($+\text{emprunt} - \text{achat} = 0$).
+    \item Pendant la durée ($0$ à $T$) : Les dividendes de l'actif sont réinvestis, tandis que la dette à la banque accumule des intérêts au taux sans risque $r$.
+    \item À l'échéance ($T$) : On possède $1$ actif, mais on a une dette à rembourser. Pour fixer le prix Forward juste ($K$), il faut que le prix de vente de l'actif couvre exactement le remboursement de cette dette, laissant un gain final de zéro.
+\end{enumerate}
+\end{intuitionbox}
+
+\begin{proofbox}[L'argument de non-arbitrage]
+Pour prouver que le prix forward est $S_0 e^{(r-d)T}$, on construit un portefeuille à coût zéro aujourd'hui :
+\begin{itemize}
+    \item On emprunte la somme $e^{-dT} S_0$.
+    \item On achète une fraction d'actif égale à $e^{-dT}$.
+\end{itemize}
+À l'échéance $T$ :
+\begin{itemize}
+    \item La fraction d'actif $e^{-dT}$ a reçu des dividendes qui, une fois réinvestis, nous permettent de détenir exactement $1$ actif complet.
+    \item La dette a accumulé des intérêts et vaut désormais $e^{-dT} S_0 \times e^{rT} = S_0 e^{(r-d)T}$.
+\end{itemize}
+Si le contrat forward nous permet de vendre cet actif au prix $K = S_0 e^{(r-d)T}$, nous recevons exactement la somme nécessaire pour rembourser la dette. Toute différence de prix créerait un profit sans risque (arbitrage).
+\end{proofbox}
+
+\begin{examplebox}[Exemple pratique]
+Considérons une action $S_0 = 100$, avec $r = 0,05$ et $d = 0,02$ sur une durée $T = 1$.
+
+1. Calcul du prix forward juste :
+\begin{equation*}
+    F = 100 \times e^{(0,05 - 0,02) \times 1} = 100 \times e^{0,03} \approx 103,05
+\end{equation*}
+
+2. Valeur du contrat :
+Si vous avez signé un contrat pour acheter cette action à $K = 100$ dans un an :
+\begin{itemize}
+    \item À l'échéance, vous paierez $100$ pour un actif qui en vaut théoriquement $103,05$.
+    \item La valeur de ce contrat aujourd'hui est le gain futur actualisé : 
+    $V = e^{-0,05} \times (103,05 - 100) \approx 2,90$.
+\end{itemize}
+\end{examplebox}
+
+\newpage
+
+\subsection{Parité Call-Put et bornes sur les prix d'options}
+
+\begin{theorembox}[Parité Call-Put]
+Si une option d'achat (Call) de prix $C$, une option de vente (Put) de prix $P$ et un contrat forward de valeur $V$ possèdent le même prix d'exercice $K$ et la même échéance $T$, alors :
+\begin{equation*}
+    C - P = V
+\end{equation*}
+En utilisant la définition de la valeur d'un contrat forward, nous avons :
+\begin{equation*}
+    C - P = e^{-rT} (S_0 e^{(r-d)T} - K)
+\end{equation*}
+\end{theorembox}
+
+\begin{definitionbox}[États d'une option]
+Une option est qualifiée selon la position du prix de l'actif par rapport au prix d'exercice $K$ :
+\begin{itemize}
+    \item Dans la monnaie (In-the-money) : l'option aurait une valeur positive si elle était exercée à l'échéance avec le prix actuel.
+    \item En dehors de la monnaie (Out-of-the-money) : l'option n'aurait aucune valeur dans les mêmes conditions.
+    \item À la monnaie (At-the-money) : le prix de l'actif est égal au prix d'exercice.
+\end{itemize}
+Il existe également le concept d'At-the-forward, où le prix d'exercice $K$ est égal au prix forward de l'actif. À ce point précis, la valeur du contrat forward est de $0$, ce qui implique que $C = P$.
+\end{definitionbox}
+
+\begin{intuitionbox}[Indépendance vis-à-vis des anticipations]
+Un résultat fondamental de la finance mathématique est que nos vues subjectives sur la valeur future moyenne de l'actif n'affectent pas le prix des options. Si nous pensons que le prix a plus de chances de finir au-dessus du prix forward, nous pourrions être tentés de dire que le Call devrait valoir plus que le Put. Cependant, la parité Call-Put montre que si $K$ est égal au prix forward, le Call et le Put doivent avoir exactement la même valeur pour éviter tout arbitrage, quelles que soient les croyances sur la direction du marché.
+\end{intuitionbox}
+
+\begin{theorembox}[Bornes sur le prix d'un Call]
+Pour une action ne versant pas de dividendes ($d = 0$), le prix d'un Call européen $C_0$ est encadré par le prix actuel de l'action $S_0$ et sa valeur intrinsèque actualisée. Soit $Z_0 = e^{-rT}$ le prix d'un zéro-coupon :
+\begin{equation*}
+    S_0 > C_0 > S_0 - K Z_0
+\end{equation*}
+Si les taux d'intérêt sont non négatifs ($r \geq 0$), alors $Z_0 \leq 1$, ce qui implique que le Call vaut toujours plus que sa valeur d'exercice immédiate : $C_0 > S_0 - K$.
+\end{theorembox}
+
+\begin{proofbox}[Preuve des bornes]
+La borne supérieure $S_0 > C_0$ découle du fait qu'à l'échéance, l'option vaut $\max(S_T - K, 0)$, ce qui est toujours inférieur ou égal au prix de l'action $S_T$. Par le théorème de monotonicité, cette relation doit être vraie à $t = 0$.
+
+Pour la borne inférieure, considérons un portefeuille composé d'une option Call et de $K$ obligations zéro-coupon. À l'échéance $T$ :
+\begin{itemize}
+    \item Si $S_T > K$ : on exerce l'option pour $K$ et on possède l'action qui vaut $S_T$.
+    \item Si $S_T \leq K$ : l'option vaut $0$ et on possède les $K$ de l'obligation.
+\end{itemize}
+La valeur finale est $\max(S_T, K)$, ce qui est toujours supérieur ou égal à $S_T$. À l'origine, le portefeuille $C_0 + K Z_0$ doit donc valoir plus que l'action $S_0$. En réarrangeant, on obtient $C_0 > S_0 - K Z_0$.
+\end{proofbox}
