@@ -43,7 +43,7 @@ Pour comprendre la logique fondamentale du \textit{Delta Hedging} sans les math�
     \item L'option : Vous vendez une option d'achat (\textit{Call}) donnant le droit d'acheter l'action à 100~€ demain.
     \item Le taux sans risque : La banque (ou l'État) propose un taux d'intérêt garanti de 5\%.
 \end{itemize}
-\textit{La grande question :} À quel prix exact devez-vous vendre cette option aujourd'hui pour être sûr de ne pas perdre d'argent, ni d'offrir une opportunité d'arbitrage ("d'argent gratuit") au marché ?
+La grande question : À quel prix exact devez-vous vendre cette option aujourd'hui pour être sûr de ne pas perdre d'argent, ni d'offrir une opportunité d'arbitrage ("d'argent gratuit") au marché ?
 \end{examplebox}
 
 \begin{intuitionbox}[Le raisonnement pas à pas]
@@ -152,8 +152,6 @@ Que se passe-t-il à l'échéance $T$ ?
 Pour que l'opération soit neutre, le contrat Forward doit nous permettre de vendre l'actif à un prix $K$ qui couvre exactement cette dette finale. Le "juste prix" est donc $K = S_0 e^{(r-d)T}$. Toute différence permettrait un arbitrage sans risque.
 \end{proofbox}
 
-\newpage
-
 \begin{theorembox}[Valeur et Prix théorique d'un contrat Forward]
 Si un actif liquide s'échange aujourd'hui au prix $S_0$, avec un taux de dividende continu $d$ et un taux d'intérêt sans risque composé en continu $r$, alors le prix forward théorique $F$ (le prix d'exercice qui annule la valeur du contrat à l'origine) est :
 \begin{equation*}
@@ -165,7 +163,9 @@ Si l'on possède déjà un contrat forward s'engageant à acheter cet actif à u
 \end{equation*}
 \end{theorembox}
 
-\begin{examplebox}[Prix théorique vs Valeur en cours]
+\newpage
+
+\begin{examplebox}[Exemple 1 : Prix théorique vs Valeur en cours]
 Considérons une action $S_0 = 100$, avec $r = 0,05$ et $d = 0,02$ sur une durée $T = 1$.
 
 1. Le prix forward juste fixé aujourd'hui :
@@ -182,7 +182,7 @@ Imaginons que vous ayez signé un contrat (il y a quelques mois) pour acheter ce
 \end{itemize}
 \end{examplebox}
 
-\begin{examplebox}[Opportunité d'arbitrage en cas de misspricing]
+\begin{examplebox}[Exemple 2 : Opportunité d'arbitrage en cas de "Mispricing"]
 Reprenons les mêmes données ($S_0 = 100$, $r = 0,05$, $d = 0,02$, donc $F_{\text{théorique}} \approx 103,05$) et analysons une anomalie de marché.
 
 Cas d'une surévaluation du marché ($F_{\text{marché}} = 105$) :
@@ -223,6 +223,21 @@ En utilisant la définition de la valeur d'un contrat forward, nous avons :
 \end{equation*}
 \end{theorembox}
 
+\begin{proofbox}[Justification par les flux finaux (Payoffs)]
+Pour démontrer logiquement cette égalité, il suffit de comparer ce que rapportent ces instruments à l'échéance finale $T$ :
+\begin{itemize}[label=$\rightarrow$]
+    \item Le Call donne le droit d'acheter à $K$, son flux final est $\max(S_T - K, 0)$.
+    \item Le Put donne le droit de vendre à $K$, son flux final est $\max(K - S_T, 0)$.
+\end{itemize}
+Si l'on construit un portefeuille où l'on achète un Call et l'on vend un Put en même temps ($C - P$), la valeur de ce portefeuille à l'échéance sera exactement :
+\begin{equation*}
+    \max(S_T - K, 0) - \max(K - S_T, 0) = S_T - K
+\end{equation*}
+Parallèlement, un contrat Forward avec un prix d'exercice $K$ nous engage fermement à acheter l'actif à $K$. À l'échéance, la valeur de cet engagement est exactement $S_T - K$.
+
+Puisque le portefeuille composé d'options ($C - P$) et le contrat Forward ($V$) produisent exactement le même flux financier final, quelle que soit la valeur que prendra l'actif $S_T$, le principe d'absence d'opportunité d'arbitrage impose qu'ils aient obligatoirement le même prix de départ. On retrouve ainsi $C - P = V$.
+\end{proofbox}
+
 \begin{definitionbox}[États d'une option]
 Une option est qualifiée selon la position du prix de l'actif par rapport au prix d'exercice $K$ :
 \begin{itemize}[label=$\rightarrow$]
@@ -255,3 +270,34 @@ Pour la borne inférieure, considérons un portefeuille composé d'une option Ca
 \end{itemize}
 La valeur finale est $\max(S_T, K)$, ce qui est toujours supérieur ou égal à $S_T$. À l'origine, le portefeuille $C_0 + K Z_0$ doit donc valoir plus que l'action $S_0$. En réarrangeant, on obtient $C_0 > S_0 - K Z_0$.
 \end{proofbox}
+
+\begin{theorembox}[Bornes sur le prix d'un Put]
+Pour une action ne versant pas de dividendes ($d = 0$), le prix d'un Put européen $P_0$ est encadré par la valeur actuelle du prix d'exercice et sa valeur intrinsèque actualisée :
+\begin{equation*}
+    K Z_0 > P_0 > K Z_0 - S_0
+\end{equation*}
+Où $Z_0 = e^{-rT}$ est le prix d'un zéro-coupon.
+\end{theorembox}
+
+\begin{proofbox}[Preuve des bornes du Put]
+La borne supérieure $P_0 < K Z_0$ découle du fait qu'à l'échéance, le payoff $\max(K - S_T, 0)$ est strictement inférieur ou égal à $K$. À l'origine, le Put doit donc valoir moins que la valeur actualisée de $K$.
+
+Pour la borne inférieure, on utilise la parité Call-Put ($C_0 - P_0 = S_0 - K Z_0$) combinée au fait que $C_0 \ge 0$. En réarrangeant :
+\begin{equation*}
+    P_0 = C_0 + K Z_0 - S_0 \ge K Z_0 - S_0
+\end{equation*}
+Puisque le prix d'une option est toujours non négatif, on obtient $P_0 \ge \max(K Z_0 - S_0, 0)$.
+\end{proofbox}
+
+\begin{theorembox}[Non-optimalité de l'exercice anticipé]
+Pour une action ne versant pas de dividendes, il n'est jamais optimal d'exercer une option d'achat (Call) américaine avant son échéance. Par conséquent, un Call américain a la même valeur qu'un Call européen :
+\begin{equation*}
+    C_{\text{américain}} = C_{\text{européen}}
+\end{equation*}
+\end{theorembox}
+
+\begin{intuitionbox}[L'explication par les bornes]
+Nous avons démontré que si $r \ge 0$, alors $C_0 > S_0 - K$. 
+Si un investisseur décide d'exercer son Call américain immédiatement, il reçoit la valeur intrinsèque immédiate : $S_0 - K$.
+Or, en vendant le Call sur le marché, il obtient sa valeur de marché $C_0$, qui est strictement supérieure à $S_0 - K$. L'investisseur a donc toujours intérêt à vendre l'option plutôt qu'à l'exercer. De plus, exercer par anticipation revient à payer le prix d'exercice $K$ immédiatement au lieu de conserver cette trésorerie rémunérée au taux sans risque jusqu'à l'échéance.
+\end{intuitionbox}
