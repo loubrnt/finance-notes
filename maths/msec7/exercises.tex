@@ -1,0 +1,158 @@
+\subsection{Exercices}
+
+% --- Lois Jointes et Marginales (Discret) ---
+
+\begin{exercicebox}[Exercice 1 : Loi Jointe et Marginales]
+Soit le tableau suivant représentant la loi de probabilité jointe $P(X=x, Y=y)$ d'un couple de variables aléatoires $(X, Y)$.
+
+\begin{center}
+\begin{tabular}{|c|ccc|}
+\hline
+\diagbox{$X$}{$Y$} & 0 & 1 & 2 \\ \hline
+0 & 0.1 & 0.2 & 0.1 \\
+1 & 0.3 & 0.1 & 0.2 \\ \hline
+\end{tabular}
+\end{center}
+
+\begin{enumerate}
+    \item Vérifiez qu'il s'agit bien d'une loi de probabilité.
+    \item Calculez la loi marginale de $X$, $P(X=x)$.
+    \item Calculez la loi marginale de $Y$, $P(Y=y)$.
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 2 : Calcul de Probabilité Jointe]
+En utilisant la loi jointe de l'exercice 1 :
+\begin{enumerate}
+    \item Calculez $P(X=0, Y \le 1)$.
+    \item Calculez $P(X=Y)$.
+    \item Calculez $P(X > Y)$.
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 3 : Indépendance (Loi Jointe)]
+En utilisant la loi jointe de l'exercice 1 :
+\begin{enumerate}
+    \item Calculez $P(X=0) \times P(Y=0)$.
+    \item Comparez ce résultat à $P(X=0, Y=0)$.
+    \item Les variables $X$ et $Y$ sont-elles indépendantes ? Justifiez.
+\end{enumerate}
+\end{exercicebox}
+
+% --- Espérance, Covariance et Corrélation ---
+
+\begin{exercicebox}[Exercice 4 : Espérances Marginales]
+En utilisant les lois marginales calculées à l'exercice 1 :
+\begin{enumerate}
+    \item Calculez l'espérance $E[X]$.
+    \item Calculez l'espérance $E[Y]$.
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 5 : Espérance d'une Fonction (LOTUS)]
+En utilisant la loi jointe de l'exercice 1, calculez $E[XY]$.
+(Indice : $E[XY] = \sum_x \sum_y (xy) P(X=x, Y=y)$).
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 6 : Covariance (Calcul)]
+En utilisant les résultats des exercices 4 et 5, calculez la covariance $\text{Cov}(X,Y)$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 7 : Variances Marginales]
+En utilisant les lois marginales de l'exercice 1 et les espérances de l'exercice 4 :
+\begin{enumerate}
+    \item Calculez $E[X^2]$ et $\text{Var}(X)$.
+    \item Calculez $E[Y^2]$ et $\text{Var}(Y)$.
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 8 : Corrélation (Calcul)]
+En utilisant les résultats des exercices 6 et 7, calculez le coefficient de corrélation $\text{Corr}(X,Y)$.
+\end{exercicebox}
+
+% --- Propriétés de la Variance et de la Covariance ---
+
+\begin{exercicebox}[Exercice 9 : Variance d'une Somme (Non Indépendant)]
+Soient $X$ et $Y$ deux variables aléatoires telles que $\text{Var}(X) = 10$, $\text{Var}(Y) = 5$ et $\text{Cov}(X,Y) = 2$.
+Calculez $\text{Var}(X+Y)$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 10 : Variance d'une Différence (Indépendant)]
+Soient $X$ et $Y$ deux variables aléatoires \textbf{indépendantes} telles que $\text{Var}(X) = 16$ et $\text{Var}(Y) = 9$.
+\begin{enumerate}
+    \item Que vaut $\text{Cov}(X,Y)$ ?
+    \item Calculez $\text{Var}(X-Y)$. (Rappel : $\text{Var}(X-Y) = \text{Var}(X) + \text{Var}(Y) - 2\text{Cov}(X,Y)$).
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 11 : Bilinéarité de la Covariance]
+Soient $X, Y, Z$ trois variables aléatoires. Exprimez $\text{Cov}(X+Y, Z)$ en fonction des covariances des variables individuelles.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 12 : Variance d'une Combinaison Linéaire]
+Soient $X$ et $Y$ deux variables aléatoires indépendantes avec $\text{Var}(X) = 4$ et $\text{Var}(Y) = 2$.
+Calculez $\text{Var}(3X - 5Y + 1)$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 13 : Variance d'une Somme (Dés)]
+On lance deux dés équilibrés $D_1$ et $D_2$. Soit $S = D_1 + D_2$.
+On rappelle que pour un dé, $\text{Var}(D_i) = 35/12$.
+\begin{enumerate}
+    \item Les variables $D_1$ et $D_2$ sont-elles indépendantes ?
+    \item Calculez $\text{Var}(S)$.
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 14 : Covariance et Variance]
+Soit $X$ une variable aléatoire. En utilisant la bilinéarité de la covariance, montrez que $\text{Cov}(X, X) = \text{Var}(X)$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 15 : Covariance avec une Constante]
+Soit $X$ une variable aléatoire et $c$ une constante.
+Montrez que $\text{Cov}(X, c) = 0$. (Indice : $E[c]=c$ et $E[Xc] = cE[X]$).
+\end{exercicebox}
+
+% --- Standardisation et Somme de Poissons ---
+
+\begin{exercicebox}[Exercice 16 : Standardisation (Centrer-Réduire)]
+Soit $X$ une variable aléatoire avec $E[X] = 10$ et $\text{Var}(X) = 4$.
+Soit $Z = \frac{X - E[X]}{\sqrt{\text{Var}(X)}} = \frac{X - 10}{2}$ la variable standardisée.
+\begin{enumerate}
+    \item Calculez $E[Z]$.
+    \item Calculez $\text{Var}(Z)$.
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 17 : Corrélation et Standardisation]
+Soit $\text{Corr}(X,Y) = 0.5$. Soient $Z_X$ et $Z_Y$ les versions standardisées de $X$ et $Y$.
+Que vaut $\text{Cov}(Z_X, Z_Y)$ ? (Indice : regardez l'intuition de la corrélation).
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 18 : Somme de Lois de Poisson]
+Un magasin reçoit des clients au comptoir A selon $X \sim \text{Poisson}(\lambda_1=5 \text{ clients/heure})$ et au comptoir B selon $Y \sim \text{Poisson}(\lambda_2=3 \text{ clients/heure})$. On suppose que $X$ et $Y$ sont indépendantes.
+Soit $S = X+Y$ le nombre total de clients arrivant au magasin en une heure.
+\begin{enumerate}
+    \item Quelle est la loi de $S$ ? Donnez son nom et son paramètre.
+    \item Quelle est la probabilité qu'exactement 6 clients au total arrivent en une heure, $P(S=6)$ ?
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 19 : Corrélation Nulle mais Dépendance]
+Soit $X$ une variable aléatoire $X \in \{-1, 0, 1\}$, avec $P(X=-1)=1/3$, $P(X=0)=1/3$, $P(X=1)=1/3$.
+Soit $Y = X^2$.
+\begin{enumerate}
+    \item Calculez $E[X]$.
+    \item Calculez $E[XY]$. (Indice : $E[XY] = E[X^3]$).
+    \item Calculez $\text{Cov}(X,Y)$.
+    \item Les variables $X$ et $Y$ sont-elles indépendantes ?
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 20 : Bornes de la Corrélation]
+Soit $X$ une variable aléatoire et $Y = -3X + 5$.
+Sans faire de calcul, que vaut $\text{Corr}(X,Y)$ ? Justifiez.
+\end{exercicebox}
+
+\subsection{Corrections des Exercices}
+
+% --- Corrections : Lois Jointes et Marginales (Discret) ---

@@ -1,0 +1,117 @@
+\subsection{Exercices}
+
+\begin{exercicebox}[Exercice 1 :]
+Soit la fonction $f(x) = cx^2$ pour $x \in [0, 2]$, et $f(x)=0$ sinon.
+\begin{enumerate}
+    \item Calculez la valeur de $c$ pour que $f(x)$ soit une PDF valide.
+    \item En utilisant la valeur de $c$ trouvée, calculez $P(X > 1)$.
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 2 :]
+Soit une v.a. $X$ de PDF $f(x) = \frac{1}{2}x$ sur $[0, 2]$, et $f(x)=0$ sinon.
+\begin{enumerate}
+    \item Déterminez la fonction de répartition (CDF) $F(x)$.
+    \item En utilisant la CDF, calculez $P(1 \le X \le 1.5)$.
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 3 :]
+La CDF d'une v.a. $X$ est donnée par :
+$$F(x) = \begin{cases} 0 & \text{si } x < 0 \\ \sin(x) & \text{si } 0 \le x \le \pi/2 \\ 1 & \text{si } x > \pi/2 \end{cases}$$
+Calculez la PDF $f(x)$ de $X$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 4 :]
+Soit $X$ une variable aléatoire continue avec une PDF $f(x)$. Démontrez que pour tout $a \in \mathbb{R}$, $P(X = a) = 0$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 5 :]
+Soit $X$ une v.a. de PDF $f(x) = 3x^2$ sur $[0, 1]$.
+\begin{enumerate}
+    \item Calculez l'espérance $E[X]$.
+    \item Calculez $E[X^2]$.
+    \item Déduisez-en la variance $\text{Var}(X)$.
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 6 :]
+Soit $X$ une v.a. de PDF $f(x) = 2x$ sur $[0, 1]$. En utilisant le théorème de LOTUS, calculez $E[1/X]$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 7 : Variance d'une transformation affine]
+Soit $X$ une v.a. avec une variance $\text{Var}(X)$ finie. En utilisant les propriétés de l'espérance, démontrez que pour $a, b \in \mathbb{R}$ :
+$$ \text{Var}(aX + b) = a^2 \text{Var}(X) $$
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 8 :]
+Le temps d'attente $T$ (en minutes) d'un bus suit une loi $T \sim \text{Unif}(0, 12)$.
+\begin{enumerate}
+    \item Quelle est la probabilité d'attendre moins de 4 minutes ?
+    \item Quelle est la probabilité d'attendre entre 5 et 10 minutes ?
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 9 :]
+Pour le temps d'attente $T \sim \text{Unif}(0, 12)$ de l'exercice précédent :
+\begin{enumerate}
+    \item Calculez le temps d'attente moyen $E[T]$.
+    \item Calculez la variance $\text{Var}(T)$.
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 10 :]
+Soit $X \sim \text{Unif}(a, b)$. La PDF est $f(x) = \frac{1}{b-a}$ pour $x \in [a, b]$.
+Démontrez par un calcul intégral direct que $E[X] = \frac{a+b}{2}$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 11 :]
+Un générateur produit un nombre $X \sim \text{Unif}(a, b)$. On sait que $E[X] = 10$ et $\text{Var}(X) = 12$. Trouvez $a$ et $b$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 12 :]
+La durée de vie $T$ (en années) d'un composant suit $T \sim \text{Exp}(\lambda)$. Sa durée de vie moyenne $E[T]$ est de 5 ans.
+\begin{enumerate}
+    \item Déterminez $\lambda$.
+    \item Calculez la probabilité que le composant tombe en panne avant 2 ans, $P(T \le 2)$.
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 13 :]
+En utilisant le scénario de l'exercice 12 ($E[T]=5$ ans), calculez la probabilité que le composant dure 10 ans de plus, sachant qu'il a déjà duré 3 ans : $P(T > 13 \mid T > 3)$. Comparez ce résultat à $P(T > 10)$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 14 :]
+Soit $X \sim \text{Exp}(\lambda)$. Sa PDF est $f(x) = \lambda e^{-\lambda x}$ pour $x \ge 0$.
+En utilisant une intégration par parties, prouvez que $E[X] = 1/\lambda$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 15 :]
+Soit $X \sim \text{Exp}(\lambda)$. Démontrez formellement la propriété d'absence de mémoire :
+$$ P(X > s+t \mid X > s) = P(X > t) \quad \text{pour tous } s, t \ge 0 $$
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 16 :]
+Soit $F(x)$ la CDF d'une v.a. continue $X$. Démontrez que pour $a < b$, on a :
+$$ P(a < X \le b) = F(b) - F(a) $$
+(Indice : Utilisez $P(A) = P(B) - P(B \setminus A)$ avec $A = \{X \le a\}$ et $B = \{X \le b\}$).
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 17 :]
+Soit $X$ une v.a. continue de PDF $f(x)$. Démontrez que $E[aX + b] = aE[X] + b$ pour $a, b \in \mathbb{R}$, en utilisant la définition de l'espérance (LOTUS).
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 18 :]
+Soit $X \sim \text{Unif}(0, 1)$. Soit $Y = 5X - 2$.
+Trouvez la PDF $f_Y(y)$ de $Y$ en utilisant la méthode de la CDF ou la formule de changement de variable. Sur quel intervalle $Y$ est-elle définie ?
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 19 :]
+Soit $X \sim \text{Unif}(-1, 1)$. Soit $Y = X^2$.
+Trouvez la PDF $f_Y(y)$ de $Y$. (Attention : la fonction $g(x)=x^2$ n'est pas monotone sur $[-1, 1]$).
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 20 :]
+Soit $X \sim \text{Exp}(1)$ (donc $f_X(x) = e^{-x}$ pour $x \ge 0$). Soit $Y = \sqrt{X}$.
+Trouvez la PDF $f_Y(y)$ de $Y$.
+\end{exercicebox}

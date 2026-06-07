@@ -1,0 +1,174 @@
+\subsection{Exercices}
+
+\textit{Pour tous les exercices de calcul, vous pouvez utiliser les valeurs (arrondies) suivantes pour la fonction de répartition de la loi normale standard $\Phi(z) = P(Z \le z)$ :}
+\begin{itemize}
+    \item $\Phi(0) = 0.5$
+    \item $\Phi(0.08) \approx 0.5319$
+    \item $\Phi(0.1) \approx 0.5398$
+    \item $\Phi(1.0) \approx 0.8413$
+    \item $\Phi(1.5) \approx 0.9332$
+    \item $\Phi(1.58) \approx 0.9429$
+    \item $\Phi(1.645) \approx 0.95$
+    \item $\Phi(1.75) \approx 0.9599$
+    \item $\Phi(1.96) \approx 0.975$
+    \item $\Phi(2.0) \approx 0.9772$
+    \item $\Phi(2.33) \approx 0.99$
+    \item $\Phi(2.5) \approx 0.9938$
+    \item $\Phi(3.0) \approx 0.9987$
+    \item $\Phi(10.0) \approx 1.0$
+\end{itemize}
+\textit{Et rappelez-vous la propriété de symétrie : $\Phi(-z) = 1 - \Phi(z)$.}
+
+% --- Section 1 : Inégalité de Chebyshev ---
+
+\begin{exercicebox}[Exercice 1 : Chebyshev (Calcul de base)]
+Une variable aléatoire $Y$ a une moyenne $\mu=50$ et une variance $\sigma^2=16$.
+Utilisez l'inégalité de Chebyshev pour trouver une borne supérieure à $P(|Y - 50| \ge 10)$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 2 : Chebyshev (En termes d'écarts-types)]
+Quelle est la borne \textit{universelle} (valable pour toute distribution) pour la probabilité qu'une variable aléatoire s'écarte de sa moyenne de plus de 5 écarts-types ?
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 3 : Chebyshev (Application à $\bar{X}_n$)]
+Soit $X_i$ une suite de v.a. i.i.d. avec $\mu=100$ et $\sigma^2=400$. Soit $n=100$.
+\begin{enumerate}
+    \item Calculez $E[\bar{X}_{100}]$ et $\text{Var}(\bar{X}_{100})$.
+    \item En utilisant Chebyshev, bornez $P(|\bar{X}_{100} - 100| \ge 4)$.
+\end{enumerate}
+\end{exercicebox}
+
+% --- Section 2 : CLT (Forme $\bar{X}_n$) ---
+
+\begin{exercicebox}[Exercice 4 : CLT (Distribution de $\bar{X}_n$)]
+On prélève un échantillon de $n=64$ observations d'une population de moyenne $\mu=20$ et de variance $\sigma^2=16$.
+Quelle est la distribution approximative de la moyenne d'échantillon $\bar{X}_{64}$ selon le TCL ?
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 5 : CLT (Calcul de probabilité pour $\bar{X}_n$)]
+En utilisant les informations de l'exercice 4, calculez $P(\bar{X}_{64} \le 21)$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 6 : CLT (Calcul de probabilité pour $\bar{X}_n$)]
+On prélève $n=100$ observations d'une population de moyenne $\mu=50$ et d'écart-type $\sigma=5$.
+Calculez $P(49 \le \bar{X}_{100} \le 51)$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 7 : CLT (Inverse pour $\bar{X}_n$)]
+Soit $\bar{X}_n$ la moyenne de $n=36$ v.a. i.i.d. de moyenne $\mu=10$ et de variance $\sigma^2=81$.
+Trouvez la valeur $c$ telle que $P(\bar{X}_{36} \le c) \approx 0.9772$.
+\end{exercicebox}
+
+% --- Section 3 : CLT (Forme $S_n$) ---
+
+\begin{exercicebox}[Exercice 8 : CLT (Distribution de $S_n$)]
+On prélève un échantillon de $n=100$ observations d'une population de moyenne $\mu=10$ et de variance $\sigma^2=4$.
+Quelle est la distribution approximative de la somme $S_{100} = \sum X_i$ selon le TCL ?
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 9 : CLT (Calcul de probabilité pour $S_n$)]
+En utilisant les informations de l'exercice 8, calculez $P(S_{100} > 1020)$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 10 : CLT (Application $S_n$)]
+Un ascenseur doit transporter $n=49$ personnes. Le poids de chaque personne est une v.a. i.i.d. de moyenne $\mu=70$kg et d'écart-type $\sigma=14$kg.
+Calculez la probabilité que le poids total $S_{49}$ dépasse 3500 kg.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 11 : CLT (Inverse pour $S_n$)]
+Soit $S_n$ la somme de $n=64$ v.a. i.i.d. de moyenne $\mu=5$ et de variance $\sigma^2=1$.
+Trouvez la valeur $c$ telle que $P(S_{64} > c) \approx 0.05$.
+\end{exercicebox}
+
+% --- Section 4 : Approximation Normale de la Loi Binomiale ---
+
+\begin{exercicebox}[Exercice 12 : Règle d'Approximation]
+Peut-on approximer une loi $X \sim \text{Bin}(n=40, p=0.1)$ par une loi normale en utilisant la règle $np \ge 10$ et $n(1-p) \ge 10$ ?
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 13 : Règle d'Approximation]
+Peut-on approximer une loi $X \sim \text{Bin}(n=500, p=0.04)$ par une loi normale en utilisant la règle $np \ge 10$ et $n(1-p) \ge 10$ ?
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 14 : Paramètres d'Approximation]
+Soit $X \sim \text{Bin}(100, 0.3)$. On souhaite l'approximer par $Y \sim \mathcal{N}(\mu_Y, \sigma_Y^2)$.
+Calculez $\mu_Y$ et $\sigma_Y^2$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 15 : Correction de Continuité (Règles)]
+Soit $X$ une variable binomiale (discrète) et $Y$ son approximation normale (continue).
+Traduisez les probabilités discrètes suivantes en probabilités continues :
+\begin{enumerate}
+    \item $P(X = 50)$
+    \item $P(X \ge 50)$
+    \item $P(X \le 49)$
+    \item $P(X < 49)$
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 16 : Correction de Continuité (Règles)]
+Traduisez les probabilités discrètes suivantes en probabilités continues :
+\begin{enumerate}
+    \item $P(X > 30)$
+    \item $P(30 < X < 40)$
+    \item $P(30 \le X \le 40)$
+\end{enumerate}
+\end{exercicebox}
+
+% --- Section 5 : Calculs Complets (Approximation Binomiale) ---
+
+\begin{exercicebox}[Exercice 17 : Binomiale (Calcul P(X=k))]
+On lance une pièce équilibrée 100 fois. Soit $X$ le nombre de "Pile".
+Utilisez l'approximation normale (avec correction de continuité) pour estimer $P(X=50)$.
+(C'est l'exemple du texte).
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 18 : Binomiale (Calcul $P(X \ge k)$)]
+On lance une pièce équilibrée 100 fois ($X \sim \text{Bin}(100, 0.5)$).
+Estimez $P(X \ge 60)$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 19 : Binomiale (Calcul $P(X \le k)$)]
+Un traitement a un taux de succès de $p=0.2$. On l'administre à $n=400$ patients. Soit $X$ le nombre de succès.
+Estimez $P(X \le 70)$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 20 : Binomiale (Calcul $P(X > k)$)]
+En utilisant la situation de l'exercice 19 ($X \sim \text{Bin}(400, 0.2)$), estimez $P(X > 92)$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 21 : Binomiale (Calcul $P(k_1 \le X \le k_2)$)]
+Un sondage est mené auprès de $n=100$ personnes. On suppose que $p=0.6$ est la probabilité qu'une personne soutienne une mesure. Soit $X$ le nombre de supporters.
+Estimez $P(50 \le X \le 65)$.
+\end{exercicebox}
+
+% --- Section 6 : Synthèse ---
+
+\begin{exercicebox}[Exercice 22 : TCL vs Chebyshev]
+Soit $\bar{X}_{100}$ la moyenne de $n=100$ v.a. i.i.d. de moyenne $\mu=10$ et $\sigma^2=25$.
+Calculez $P(|\bar{X}_{100} - 10| \ge 1)$ en utilisant :
+\begin{enumerate}
+    \item L'inégalité de Chebyshev.
+    \item Le Théorème Central Limite.
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 23 : Taille d'Échantillon (CLT)]
+Soient $X_i$ des v.a. i.i.d. avec $\mu=0$ et $\sigma^2=1$.
+Combien d'échantillons $n$ faut-il pour garantir que $P(|\bar{X}_n| \le 0.1) \ge 0.95$ ?
+(Indice : $P(-1.96 \le Z \le 1.96) = 0.95$).
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 24 : LLN vs CLT]
+Considérons $\bar{X}_n$ pour des $X_i$ i.i.d. avec $\mu=10, \sigma^2=100$.
+\begin{enumerate}
+    \item Calculez $P(9 \le \bar{X}_n \le 11)$ pour $n=100$.
+    \item Calculez $P(9 \le \bar{X}_n \le 11)$ pour $n=10000$.
+    \item Comment ce résultat illustre-t-il la LLN ?
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 25 : Binomiale (Sans Correction)]
+Soit $X \sim \text{Bin}(400, 0.1)$. Estimez $P(X \le 30.5)$ \textit{sans} utiliser la correction de continuité (c'est-à-dire en approximant $P(X \le 30.5) \approx P(Y \le 30.5)$).
+(Ceci permet de comparer avec l'exercice 19).
+\end{exercicebox}

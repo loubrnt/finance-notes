@@ -1,0 +1,306 @@
+\newpage
+\section{Méthodologies d'évaluation et Arbitrage}
+
+\subsection{La couverture en Delta (Delta Hedging)}
+
+\begin{intuitionbox}[Le principe de base]
+Sous certaines hypothèses sur le comportement d'une action, il est possible de déterminer le "juste prix" d'une option. L'idée fondamentale repose sur le fait que la valeur d'une option dépend principalement de deux facteurs :
+\begin{itemize}[label=$\rightarrow$]
+    \item Le temps restant avant l'expiration.
+    \item Le prix actuel de l'action sous-jacente.
+\end{itemize}
+Si l'on sait comment le prix de l'option varie en fonction du prix de l'action, on connaît son taux de variation. En termes mathématiques, il s'agit de la dérivée du prix de l'option par rapport au prix de l'action. En finance mathématique, ce taux de variation est appelé le Delta.
+\end{intuitionbox}
+
+\begin{definitionbox}[Le Delta ($\Delta$)]
+Le Delta d'une option mesure la sensibilité de son prix par rapport aux variations du prix de l'action sous-jacente. 
+Par exemple, si le Delta est de $0,5$, cela signifie que pour une augmentation de 1~€ du prix de l'action, le prix de l'option augmentera d'environ 0,50~€.
+\end{definitionbox}
+
+\begin{examplebox}[Création d'un portefeuille couvert (sans risque)]
+Imaginons un opérateur de marché qui vend une option. Il est exposé au risque si le prix de l'action bouge en sa défaveur. Pour neutraliser ce risque, il va construire le portefeuille suivant :
+\begin{itemize}[label=$\rightarrow$]
+    \item Il a vendu une option (position courte : $-1$ option).
+    \item Il achète en couverture une quantité d'actions exactement égale au Delta ($\Delta$ actions).
+\end{itemize}
+Le taux de variation global de ce portefeuille devient alors zéro. Si le prix de l'action varie légèrement, la perte (ou le gain) sur les actions détenues sera exactement compensée par le gain (ou la perte) sur l'option vendue. Mathématiquement, on a éliminé tout le risque du portefeuille.
+\end{examplebox}
+
+\begin{remarquebox}[Couverture dynamique et modèle de Black-Scholes]
+Le point crucial est que le Delta n'est pas constant : dès que le prix de l'action change, le taux de variation (le Delta) change également. La quantité d'actions détenues dans le portefeuille doit donc être ajustée en permanence. C'est ce qu'on appelle la couverture dynamique (\textit{dynamic hedging}).
+
+Si l'on suppose qu'il est possible de réajuster ce portefeuille \textit{en continu}, on obtient un portefeuille dont la valeur est totalement prévisible et sans risque. Selon les lois de l'arbitrage, un portefeuille sans risque doit rapporter exactement le taux d'intérêt sans risque. C'est cet argument logique strict qui permet de déduire le prix exact de l'option, appelé le prix de Black-Scholes, point de départ de toute la finance mathématique moderne.
+\end{remarquebox}
+
+\subsection{Exemple pratique et intuitif : Déduction du prix par l'arbitrage}
+
+\begin{examplebox}[Le décor du modèle simplifié binomial]
+Pour comprendre la logique fondamentale du \textit{Delta Hedging} sans les mathématiques complexes, utilisons un scénario simple où le temps s'arrête "demain" :
+\begin{itemize}[label=$\rightarrow$]
+    \item L'action aujourd'hui : Elle vaut 100~€.
+    \item L'action demain (à l'expiration) : Elle ne peut faire que deux choses : monter à 120~€ ou baisser à 80~€.
+    \item L'option : Vous vendez une option d'achat (\textit{Call}) donnant le droit d'acheter l'action à 100~€ demain.
+    \item Le taux sans risque : La banque (ou l'État) propose un taux d'intérêt garanti de 5\%.
+\end{itemize}
+La grande question : À quel prix exact devez-vous vendre cette option aujourd'hui pour être sûr de ne pas perdre d'argent, ni d'offrir une opportunité d'arbitrage ("d'argent gratuit") au marché ?
+\end{examplebox}
+
+\newpage
+
+\begin{intuitionbox}[Le raisonnement pas à pas]
+Étape 1 : Calculer le Delta\\
+Que vaudra l'option demain dans nos deux scénarios ?
+\begin{itemize}[label=$\rightarrow$]
+    \item Si l'action monte à 120~€ : L'option vaut 20~€ (le droit d'acheter à 100 ce qui vaut 120).
+    \item Si l'action baisse à 80~€ : L'option vaut 0~€ (personne n'exerce le droit d'acheter à 100 ce qui vaut 80).
+\end{itemize}
+L'écart potentiel de l'action est de 40~€ (de 80 à 120). L'écart potentiel de l'option est de 20~€ (de 0 à 20). \\
+Le Delta est le rapport entre les deux : $20 / 40 = 0,5$. \\
+Le Delta est donc de 0,5. L'option bouge deux fois moins vite que l'action.
+
+\vspace{0.4cm}
+Étape 2 : Créer le portefeuille "Sans Risque"\\
+Puisque vous avez vendu 1 option (vous êtes en danger si l'action monte), vous vous couvrez en achetant 0,5 action (la valeur du Delta).
+Combien d'argent sortez-vous de votre poche aujourd'hui pour construire cela ?
+\begin{itemize}[label=$\rightarrow$]
+    \item Achat d'une demi-action à 100~€ : -50~€
+    \item Vente de l'option : + Prix de l'option (notre inconnue)
+\end{itemize}
+Votre investissement net initial aujourd'hui est donc : 50~€ - Prix de l'option.
+
+\vspace{0.4cm}
+Étape 3 : Que se passe-t-il demain ? (La "Magie")\\
+Regardons la valeur de ce portefeuille dans les deux scénarios finaux :
+\begin{itemize}[label=$\rightarrow$]
+    \item Scénario A (L'action explose à 120~€) :
+    \begin{itemize}[label=$\cdot$]
+        \item Votre demi-action vaut $0,5 \times 120 = +60$~€.
+        \item L'acheteur exerce son option, vous lui devez -20~€.
+        \item Valeur totale dans votre poche : $60 - 20 = 40$~€.
+    \end{itemize}
+    \vspace{0.2cm}
+    \item Scénario B (L'action s'effondre à 80~€) :
+    \begin{itemize}[label=$\cdot$]
+        \item Votre demi-action vaut $0,5 \times 80 = +40$~€.
+        \item L'option expire sans valeur, vous ne devez rien (0~€).
+        \item Valeur totale dans votre poche : $40 - 0 = 40$~€.
+    \end{itemize}
+\end{itemize}
+Constat incroyable : Quoi qu'il arrive, vous aurez exactement 40~€ demain. Vous avez créé un investissement garanti à 100\%, c'est-à-dire strictement sans risque.
+
+\vspace{0.4cm}
+Étape 4 : Le principe de Non-Arbitrage\\
+Puisque vous êtes certain d'avoir 40~€ demain, cet investissement est identique à un placement bancaire garanti à 5\%. \\
+Combien devez-vous placer à la banque aujourd'hui pour obtenir 40~€ demain ? \\
+La réponse s'obtient par actualisation : $40 / 1,05 \approx 38,10$~€.
+
+La finance moderne repose sur une règle d'or : deux investissements qui rapportent exactement la même chose sans risque doivent coûter le même prix aujourd'hui. La création de votre portefeuille DOIT donc vous coûter exactement 38,10~€.
+
+\vspace{0.4cm}
+Conclusion : Déduction du juste prix de l'option\\
+Reprenons la formule de notre investissement à l'Étape 2 : \\
+Investissement aujourd'hui = 50~€ - Prix de l'option.
+
+Puisque cet investissement doit valoir 38,10~€, il suffit de résoudre l'équation :\\
+$50 - \text{Prix de l'option} = 38,10$ \\
+Prix de l'option = 11,90~€
+\end{intuitionbox}
+
+\newpage
+
+\begin{remarquebox}[Généralisation aux options en dehors de la monnaie (OTM)]
+Cette logique de couverture fonctionne avec absolument n'importe quel Strike (ainsi qu'avec des \textit{Puts}). Puisque le prix de l'option est mathématiquement lié à celui de l'action, il existera toujours un ratio exact (le Delta) permettant d'annuler le risque.
+
+Prenons le même scénario, mais avec un \textit{Call} de Strike 110~€ :
+\begin{itemize}[label=$\rightarrow$]
+    \item Nouveau Delta : Si l'action monte à 120~€, l'option vaut 10~€. Si elle baisse à 80~€, l'option vaut 0~€. \\
+    Le Delta devient donc $10 / 40 = 0,25$.
+    \item Nouveau Portefeuille : Vous vendez l'option et achetez 0,25 action (soit un investissement de 25~€ sur les actions).
+    \item La Magie à l'expiration : 
+    \begin{itemize}[label=$\cdot$]
+        \item Si 120~€ : Vos 0,25 actions valent 30~€. Vous devez 10~€ à l'acheteur. Reste : 20~€.
+        \item Si 80~€ : Vos 0,25 actions valent 20~€. L'option expire à 0~€. Reste : 20~€.
+    \end{itemize}
+\end{itemize}
+Conclusion : Quoi qu'il arrive, la valeur finale est figée à 20~€. Le portefeuille est toujours parfaitement couvert et sans risque. On peut alors appliquer la même logique d'actualisation à 5\% pour déduire le prix exact de ce Call à 110~€.
+\end{remarquebox}
+
+\subsection{Évaluation des contrats Forward et Coût de Détention}
+
+\begin{intuitionbox}[L'intuition fondamentale : La stratégie de "Cash and Carry"]
+Pour déterminer le juste prix d'un contrat Forward (le prix auquel on s'engage à vendre un actif dans le futur), on utilise un raisonnement d'absence d'opportunité d'arbitrage (AOA). L'idée est de simuler la vente future en construisant aujourd'hui une stratégie qui ne nous coûte strictement rien au départ. 
+
+Imaginons que l'on veuille s'engager à vendre une action dans un an à un prix fixé aujourd'hui. Pour être certain de pouvoir livrer l'action sans subir les variations du marché, on l'achète aujourd'hui. Le mécanisme repose sur trois étapes :
+\begin{enumerate}
+    \item À l'origine ($t=0$) : N'ayant pas de capital à mobiliser, on emprunte l'argent à la banque pour acheter l'actif. Le flux de trésorerie initial est parfaitement nul.
+    \item Pendant la durée du contrat : On est propriétaire légal de l'action, on encaisse donc ses dividendes réguliers. En parallèle, notre dette à la banque s'alourdit des intérêts au taux sans risque.
+    \item À l'échéance ($T$) : On livre l'actif à l'acheteur au prix convenu. Pour qu'il n'y ait pas d'arbitrage (ni gain magique, ni perte), ce prix de vente doit correspondre exactement au montant qu'il nous reste à rembourser à la banque, une fois les dividendes déduits. 
+\end{enumerate}
+\end{intuitionbox}
+
+\begin{proofbox}[L'argument de non-arbitrage pas à pas]
+Traduisons cette intuition mathématiquement pour une action valant $S_0$, avec un taux sans risque $r$ et un taux de dividende continu $d$.
+Construisons notre portefeuille à coût zéro aujourd'hui :
+\begin{itemize}[label=$\rightarrow$]
+    \item Sachant que l'action verse un dividende continu $d$ que nous allons réinvestir en achetant des fractions d'actions, nous n'avons pas besoin d'acheter 1 action entière aujourd'hui. Il suffit d'en acheter une fraction égale à $e^{-dT}$.
+    \item Pour financer cet achat, on emprunte exactement la somme nécessaire : $e^{-dT} S_0$.
+\end{itemize}
+Que se passe-t-il à l'échéance $T$ ?
+\begin{itemize}[label=$\rightarrow$]
+    \item La fraction d'actif $e^{-dT}$ a généré des dividendes continus. Grâce au réinvestissement, nous possédons désormais exactement $1$ actif complet.
+    \item La dette initiale a accumulé des intérêts au taux $r$. Le montant à rembourser est de : $e^{-dT} S_0 \times e^{rT} = S_0 e^{(r-d)T}$.
+\end{itemize}
+Pour que l'opération soit neutre, le contrat Forward doit nous permettre de vendre l'actif à un prix $K$ qui couvre exactement cette dette finale. Le "juste prix" est donc $K = S_0 e^{(r-d)T}$. Toute différence permettrait un arbitrage sans risque.
+\end{proofbox}
+
+\newpage
+
+\begin{theorembox}[Valeur et Prix théorique d'un contrat Forward]
+Si un actif liquide s'échange aujourd'hui au prix $S_0$, avec un taux de dividende continu $d$ et un taux d'intérêt sans risque composé en continu $r$, alors le prix forward théorique $F$ (le prix d'exercice qui annule la valeur du contrat à l'origine) est :
+\begin{equation*}
+    F = S_0 e^{(r-d)T}
+\end{equation*}
+Si l'on possède déjà un contrat forward s'engageant à acheter cet actif à un prix d'exercice arbitraire $K$ à l'échéance $T$, la valeur $V$ de ce contrat aujourd'hui est la différence actualisée entre le prix forward actuel et le prix d'exercice $K$ :
+\begin{equation*}
+    V = e^{-rT} (S_0 e^{(r-d)T} - K)
+\end{equation*}
+\end{theorembox}
+
+\begin{examplebox}[Exemple 1 : Prix théorique vs Valeur en cours]
+Considérons une action $S_0 = 100$, avec $r = 0,05$ et $d = 0,02$ sur une durée $T = 1$.
+
+1. Le prix forward juste fixé aujourd'hui :
+\begin{equation*}
+    F = 100 \times e^{(0,05 - 0,02) \times 1} = 100 \times e^{0,03} \approx 103,05
+\end{equation*}
+
+2. La valeur d'un contrat en cours :
+Imaginons que vous ayez signé un contrat (il y a quelques mois) pour acheter cette action à $K = 100$ dans un an :
+\begin{itemize}[label=$\rightarrow$]
+    \item À l'échéance, vous paierez $100$ pour un actif dont le prix de livraison équitable aujourd'hui est évalué à $103,05$. Vous faites donc une "bonne affaire" de $3,05$.
+    \item La valeur de ce contrat aujourd'hui est ce gain futur actualisé : 
+    $V = e^{-0,05} \times (103,05 - 100) \approx 2,90$.
+\end{itemize}
+\end{examplebox}
+
+\begin{examplebox}[Exemple 2 : Opportunité d'arbitrage en cas de "Mispricing"]
+Reprenons les mêmes données ($S_0 = 100$, $r = 0,05$, $d = 0,02$, donc $F_{\text{théorique}} \approx 103,05$) et analysons une anomalie de marché.
+
+Cas d'une surévaluation du marché ($F_{\text{marché}} = 105$) :
+Le prix proposé par le marché est trop élevé par rapport au prix théorique d'absence d'arbitrage. Un arbitrageur va exécuter une stratégie de \textit{Cash and Carry} pour capturer un gain certain :
+\begin{itemize}[label=$\rightarrow$]
+    \item À $t = 0$ (Flux de trésorerie net = $0$) : 
+    \begin{itemize}[label=$\cdot$]
+        \item Vendre (position courte) le contrat Forward au prix surévalué de $105$ €.
+        \item Emprunter la somme de $100 \times e^{-0,02 \times 1} \approx 98,02$ € à la banque au taux sans risque de $5\%$.
+        \item Acheter immédiatement la fraction $e^{-0,02}$ d'action au prix spot.
+    \end{itemize}
+    \item À l'échéance $T = 1$ :
+    \begin{itemize}[label=$\cdot$]
+        \item Grâce au réinvestissement des dividendes continus, la fraction d'action est devenue exactement $1$ action entière.
+        \item Livrer cette action pour honorer le contrat Forward et recevoir les $105$ € du marché.
+        \item Rembourser l'emprunt bancaire avec les intérêts accumulés : $98,02 \times e^{0,05 \times 1} \approx 103,05$ €.
+    \end{itemize}
+    \item Gain d'arbitrage net à $T = 1$ : 
+    \begin{equation*}
+        \text{Profit} = 105 - 103,05 = 1,95 \text{ €}
+    \end{equation*}
+\end{itemize}
+L'arbitrageur encaisse $1,95$ € de profit pur sans risque et sans aucun capital initial. L'activité de tous les arbitrageurs vendant le forward à ce prix va exercer une pression baissière sur $F_{\text{marché}}$ jusqu'à ce qu'il s'aligne sur le prix théorique de $103,05$.
+\end{examplebox}
+
+\newpage
+
+\subsection{Parité Call-Put et bornes sur les prix d'options}
+
+\begin{theorembox}[Parité Call-Put]
+Si une option d'achat (Call) de prix $C$, une option de vente (Put) de prix $P$ et un contrat forward de valeur $V$ possèdent le même prix d'exercice $K$ et la même échéance $T$, alors :
+\begin{equation*}
+    C - P = V
+\end{equation*}
+En utilisant la définition de la valeur d'un contrat forward, nous avons :
+\begin{equation*}
+    C - P = e^{-rT} (S_0 e^{(r-d)T} - K)
+\end{equation*}
+\end{theorembox}
+
+\begin{proofbox}[Justification par les flux finaux (Payoffs)]
+Pour démontrer logiquement cette égalité, il suffit de comparer ce que rapportent ces instruments à l'échéance finale $T$ :
+\begin{itemize}[label=$\rightarrow$]
+    \item Le Call donne le droit d'acheter à $K$, son flux final est $\max(S_T - K, 0)$.
+    \item Le Put donne le droit de vendre à $K$, son flux final est $\max(K - S_T, 0)$.
+\end{itemize}
+Si l'on construit un portefeuille où l'on achète un Call et l'on vend un Put en même temps ($C - P$), la valeur de ce portefeuille à l'échéance sera exactement :
+\begin{equation*}
+    \max(S_T - K, 0) - \max(K - S_T, 0) = S_T - K
+\end{equation*}
+Parallèlement, un contrat Forward avec un prix d'exercice $K$ nous engage fermement à acheter l'actif à $K$. À l'échéance, la valeur de cet engagement est exactement $S_T - K$.
+
+Puisque le portefeuille composé d'options ($C - P$) et le contrat Forward ($V$) produisent exactement le même flux financier final, quelle que soit la valeur que prendra l'actif $S_T$, le principe d'absence d'opportunité d'arbitrage impose qu'ils aient obligatoirement le même prix de départ. On retrouve ainsi $C - P = V$.
+\end{proofbox}
+
+\begin{definitionbox}[États d'une option]
+Une option est qualifiée selon la position du prix de l'actif par rapport au prix d'exercice $K$ :
+\begin{itemize}[label=$\rightarrow$]
+    \item Dans la monnaie (In-the-money) : l'option aurait une valeur positive si elle était exercée à l'échéance avec le prix actuel.
+    \item En dehors de la monnaie (Out-of-the-money) : l'option n'aurait aucune valeur dans les mêmes conditions.
+    \item À la monnaie (At-the-money) : le prix de l'actif est égal au prix d'exercice.
+\end{itemize}
+Il existe également le concept d'At-the-forward, où le prix d'exercice $K$ est égal au prix forward de l'actif. À ce point précis, la valeur du contrat forward est de $0$, ce qui implique que $C = P$.
+\end{definitionbox}
+
+\begin{intuitionbox}[Indépendance vis-à-vis des anticipations]
+Un résultat fondamental de la finance mathématique est que nos vues subjectives sur la valeur future moyenne de l'actif n'affectent pas le prix des options. Si nous pensons que le prix a plus de chances de finir au-dessus du prix forward, nous pourrions être tentés de dire que le Call devrait valoir plus que le Put. Cependant, la parité Call-Put montre que si $K$ est égal au prix forward, le Call et le Put doivent avoir exactement la même valeur pour éviter tout arbitrage, quelles que soient les croyances sur la direction du marché.
+\end{intuitionbox}
+
+\begin{theorembox}[Bornes sur le prix d'un Call]
+Pour une action ne versant pas de dividendes ($d = 0$), le prix d'un Call européen $C_0$ est encadré par le prix actuel de l'action $S_0$ et sa valeur intrinsèque actualisée. Soit $Z_0 = e^{-rT}$ le prix d'un zéro-coupon :
+\begin{equation*}
+    S_0 > C_0 > S_0 - K Z_0
+\end{equation*}
+Si les taux d'intérêt sont non négatifs ($r \geq 0$), alors $Z_0 \leq 1$, ce qui implique que le Call vaut toujours plus que sa valeur d'exercice immédiate : $C_0 > S_0 - K$.
+\end{theorembox}
+
+\newpage
+
+\begin{proofbox}[Preuve des bornes]
+La borne supérieure $S_0 > C_0$ découle du fait qu'à l'échéance, l'option vaut $\max(S_T - K, 0)$, ce qui est toujours inférieur ou égal au prix de l'action $S_T$. Par le théorème de monotonicité, cette relation doit être vraie à $t = 0$.
+
+Pour la borne inférieure, considérons un portefeuille composé d'une option Call et de $K$ obligations zéro-coupon. À l'échéance $T$ :
+\begin{itemize}[label=$\rightarrow$]
+    \item Si $S_T > K$ : on exerce l'option pour $K$ et on possède l'action qui vaut $S_T$.
+    \item Si $S_T \leq K$ : l'option vaut $0$ et on possède les $K$ de l'obligation.
+\end{itemize}
+La valeur finale est $\max(S_T, K)$, ce qui est toujours supérieur ou égal à $S_T$. À l'origine, le portefeuille $C_0 + K Z_0$ doit donc valoir plus que l'action $S_0$. En réarrangeant, on obtient $C_0 > S_0 - K Z_0$.
+\end{proofbox}
+
+\begin{theorembox}[Bornes sur le prix d'un Put]
+Pour une action ne versant pas de dividendes ($d = 0$), le prix d'un Put européen $P_0$ est encadré par la valeur actuelle du prix d'exercice et sa valeur intrinsèque actualisée :
+\begin{equation*}
+    K Z_0 > P_0 > K Z_0 - S_0
+\end{equation*}
+Où $Z_0 = e^{-rT}$ est le prix d'un zéro-coupon.
+\end{theorembox}
+
+\begin{proofbox}[Preuve des bornes du Put]
+La borne supérieure $P_0 < K Z_0$ découle du fait qu'à l'échéance, le payoff $\max(K - S_T, 0)$ est strictement inférieur ou égal à $K$. À l'origine, le Put doit donc valoir moins que la valeur actualisée de $K$.
+
+Pour la borne inférieure, on utilise la parité Call-Put ($C_0 - P_0 = S_0 - K Z_0$) combinée au fait que $C_0 \ge 0$. En réarrangeant :
+\begin{equation*}
+    P_0 = C_0 + K Z_0 - S_0 \ge K Z_0 - S_0
+\end{equation*}
+Puisque le prix d'une option est toujours non négatif, on obtient $P_0 \ge \max(K Z_0 - S_0, 0)$.
+\end{proofbox}
+
+\begin{theorembox}[Non-optimalité de l'exercice anticipé]
+Pour une action ne versant pas de dividendes, il n'est jamais optimal d'exercer une option d'achat (Call) américaine avant son échéance. Par conséquent, un Call américain a la même valeur qu'un Call européen :
+\begin{equation*}
+    C_{\text{américain}} = C_{\text{européen}}
+\end{equation*}
+\end{theorembox}
+
+\begin{intuitionbox}[L'explication par les bornes]
+Nous avons démontré que si $r \ge 0$, alors $C_0 > S_0 - K$. 
+Si un investisseur décide d'exercer son Call américain immédiatement, il reçoit la valeur intrinsèque immédiate : $S_0 - K$.
+Or, en vendant le Call sur le marché, il obtient sa valeur de marché $C_0$, qui est strictement supérieure à $S_0 - K$. L'investisseur a donc toujours intérêt à vendre l'option plutôt qu'à l'exercer. De plus, exercer par anticipation revient à payer le prix d'exercice $K$ immédiatement au lieu de conserver cette trésorerie rémunérée au taux sans risque jusqu'à l'échéance.
+\end{intuitionbox}

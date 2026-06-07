@@ -1,0 +1,136 @@
+
+
+
+\subsection{Exercices}
+
+%  Concepts de Base et Règle du Produit 
+
+\begin{exercicebox}[Exercice 1 : Dés et Probabilité Conditionnelle Simple]
+On lance deux dés équilibrés à 6 faces.
+\begin{enumerate}
+    \item Quelle est la probabilité que la somme des dés soit 8 ?
+    \item Sachant que le premier dé a donné un 3, quelle est la probabilité que la somme soit 8 ?
+    \item Sachant que la somme est 8, quelle est la probabilité que le premier dé ait donné un 3 ?
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 2 : Tirage de Cartes (Sans Remise)]
+On tire deux cartes successivement et sans remise d'un jeu standard de 52 cartes.
+\begin{enumerate}
+    \item Quelle est la probabilité que la deuxième carte soit un Roi, sachant que la première était un Roi ?
+    \item Quelle est la probabilité de tirer deux Rois ?
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 3 : Urne (Règle du Produit)]
+Une urne contient 7 boules rouges et 3 boules bleues. On tire deux boules successivement et sans remise.
+\begin{enumerate}
+    \item Quelle est la probabilité que la première boule soit rouge ?
+    \item Quelle est la probabilité que la deuxième boule soit bleue, sachant que la première était rouge ?
+    \item Quelle est la probabilité de tirer une boule rouge puis une boule bleue ?
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 4 : Famille (Condition Simple)]
+Une famille a deux enfants. On suppose que la probabilité d'avoir un garçon (G) ou une fille (F) est la même (0.5) et que les naissances sont indépendantes.
+\begin{enumerate}
+    \item Quel est l'univers $S$ des possibilités ?
+    \item Sachant que l'aîné est un garçon, quelle est la probabilité que la famille ait deux garçons ?
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 5 : Famille (Condition "Au Moins")]
+En utilisant le même scénario que l'exercice 4 (famille de deux enfants) :
+Sachant qu'il y a \textit{au moins un} garçon dans la famille, quelle est la probabilité que la famille ait deux garçons ?
+\end{exercicebox}
+
+%  Indépendance 
+
+\begin{exercicebox}[Exercice 6 : Indépendance (Dés)]
+On lance deux dés équilibrés.
+Soit $A$ l'événement "le premier dé donne 3" et $B$ l'événement "la somme des deux dés est 7".
+Les événements $A$ et $B$ sont-ils indépendants ? Justifiez par le calcul.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 7 : Indépendance (Cartes)]
+On tire une carte d'un jeu de 52 cartes.
+Soit $A$ l'événement "la carte est un Roi" et $B$ l'événement "la carte est un Cœur".
+Les événements $A$ et $B$ sont-ils indépendants ?
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 8 : Indépendance vs Exclusion Mutuelle]
+Soient $A$ et $B$ deux événements avec $P(A)=0.5$ et $P(B)=0.3$.
+\begin{enumerate}
+    \item Si $A$ et $B$ sont mutuellement exclusifs (disjoints), sont-ils indépendants ?
+    \item Si $A$ et $B$ sont indépendants, quelle est $P(A \cup B)$ ?
+\end{enumerate}
+\end{exercicebox}
+
+%  Formule des Probabilités Totales (LTP) 
+
+\begin{exercicebox}[Exercice 9 : LTP (Deux Urnes)]
+L'urne U1 contient 2 boules noires et 3 boules blanches. L'urne U2 contient 4 boules noires et 1 boule blanche.
+On choisit une urne au hasard (chaque urne a 50\% de chance d'être choisie), puis on tire une boule de cette urne.
+Quelle est la probabilité de tirer une boule blanche ?
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 10 : LTP (Usine)]
+Une usine utilise deux machines, M1 et M2, pour produire des pièces. M1 produit 40\% des pièces et M2 produit 60\%. 5\% des pièces de M1 sont défectueuses, et 2\% des pièces de M2 sont défectueuses.
+Si l'on choisit une pièce au hasard dans la production totale, quelle est la probabilité qu'elle soit défectueuse ?
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 11 : LTP (Pièce de Monnaie Inconnue)]
+On a deux pièces. La pièce A est équilibrée ($P(\text{Pile})=0.5$). La pièce B est truquée ($P(\text{Pile})=0.8$).
+On choisit une pièce au hasard et on la lance. Quelle est la probabilité d'obtenir Pile ?
+\end{exercicebox}
+
+%  Règle de Bayes 
+
+\begin{exercicebox}[Exercice 12 : Bayes (Test Médical)]
+Une maladie touche 1 personne sur 1000 ($P(M)=0.001$). Un test de dépistage donne un résultat positif chez 98\% des personnes malades ($P(T|M)=0.98$). Il donne aussi un résultat positif (un "faux positif") chez 3\% des personnes non malades ($P(T|\neg M)=0.03$).
+Une personne reçoit un test positif. Quelle est la probabilité qu'elle soit réellement malade ?
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 13 : Bayes (Inversion d'Urnes)]
+Reprenons le scénario de l'exercice 9 (U1 avec 2N/3B, U2 avec 4N/1B).
+On a tiré une boule et on constate qu'elle est blanche. Quelle est la probabilité qu'elle provienne de l'urne U1 ?
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 14 : Bayes (Spam)]
+Dans une boîte de réception, 60\% des emails sont des spams. 70\% des spams contiennent le mot "gratuit". Seuls 10\% des emails légitimes contiennent le mot "gratuit".
+Vous recevez un email qui contient le mot "gratuit". Quelle est la probabilité que ce soit un spam ?
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 15 : Bayes (Usine Inversée)]
+Reprenons le scénario de l'exercice 10 (M1: 40\% prod, 5\% défaut; M2: 60% prod, 2% défaut).
+On trouve une pièce défectueuse. Quelle est la probabilité qu'elle ait été produite par la machine M1 ?
+\end{exercicebox}
+
+%  Règle de la Chaîne et Problèmes Combinés 
+
+\begin{exercicebox}[Exercice 16 : Règle de la Chaîne (3 Cartes)]
+On tire 3 cartes successivement et sans remise d'un jeu de 52 cartes.
+Quelle est la probabilité de tirer 3 Piques ?
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 17 : Problème de Monty Hall (Calcul)]
+En utilisant la formalisation du problème de Monty Hall (vous choisissez la Porte 1, la voiture est en $V \in \{1, 2, 3\}$, l'animateur ouvre $H \in \{2, 3\}$) :
+Calculez $P(V=1 | H=3)$ (la probabilité que la voiture soit derrière votre porte, sachant que l'animateur a ouvert la 3). Supposez que $P(V=i)=1/3$ pour $i=1,2,3$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 18 : Bayes avec Mise à Jour (Pièce Truquée)]
+Reprenons l'exercice 11 (Pièce A équilibrée, Pièce B truquée $P(\text{Pile})=0.8$).
+On choisit une pièce au hasard. On la lance deux fois et on obtient Pile, puis Pile (PP).
+Quelle est la probabilité que l'on ait choisi la pièce truquée (Pièce B) ?
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 19 : Indépendance Conditionnelle (Dés)]
+On lance deux dés, $D_1$ et $D_2$. Soit $S = D_1 + D_2$ leur somme.
+Soit $A$ l'événement "$D_1 = 1$", $B$ l'événement "$D_2 = 1$".
+$A$ et $B$ sont indépendants. Sont-ils indépendants conditionnellement à l'événement $C = \{S = 2\}$ ?
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 20 : Jeu Séquentiel]
+Alice et Bob jouent à un jeu. Ils lancent un dé à tour de rôle, en commençant par Alice. Le premier qui obtient un 6 gagne.
+Quelle est la probabilité qu'Alice gagne ?
+\end{exercicebox}

@@ -1,0 +1,176 @@
+
+\subsection{Corrections des Exercices}
+
+\begin{correctionbox}[Correction Exercice 1 : Concepts (PDF)]
+1.  La variance de A ($\sigma_A^2=4$) est plus petite que celle de B ($\sigma_B^2=9$). Une variance plus petite signifie une distribution plus concentrée, donc un pic plus élevé (l'aire totale devant rester 1). C'est la distribution A.
+2.  La distribution B ($\sigma_B=3$) a un écart-type plus grand que A ($\sigma_A=2$), elle est donc plus dispersée, c'est-à-dire plus "large et aplatie".
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 2 : Z-Score (Calcul)]
+On a $x=184$, $\mu=175$, $\sigma=6$.
+$$Z = \frac{x - \mu}{\sigma} = \frac{184 - 175}{6} = \frac{9}{6} = 1.5$$
+L'étudiant se situe à 1.5 écarts-types au-dessus de la moyenne.
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 3 : Z-Score (Interprétation)]
+Cela signifie que la valeur $X$ observée est $2.5$ écarts-types \textbf{en dessous} de la moyenne $\mu$. (c-à-d, $x = \mu - 2.5\sigma$).
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 4 : Z-Score (Calcul Inverse)]
+On a $\mu=50$ et $\sigma^2=100 \implies \sigma=10$. On cherche $x$.
+$z = \frac{x - \mu}{\sigma} \implies x = \mu + z\sigma$
+$x = 50 + (1.5)(10) = 50 + 15 = 65$.
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 5 : Z-Score (Comparaison)]
+On compare les Z-scores :
+$Z_{Alice} = \frac{115 - 100}{15} = \frac{15}{15} = 1.0$.
+$Z_{Bob} = \frac{24 - 20}{2} = \frac{4}{2} = 2.0$.
+Bob a un Z-score plus élevé (2.0 contre 1.0), il a donc mieux réussi par rapport à son groupe.
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 6 : Règle Empirique (68-95-99.7)]
+On a $\mu=500$ et $\sigma=10$. L'intervalle [490, 510] correspond à $[\mu - 1\sigma, \mu + 1\sigma]$.
+Selon la règle empirique, environ \textbf{68\%} des paquets se trouvent dans cet intervalle.
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 7 : Règle Empirique (Queue)]
+La règle dit que $P(\mu - 2\sigma \le X \le \mu + 2\sigma) \approx 0.95$.
+L'aire totale est 1. L'aire en dehors de cet intervalle est $1 - 0.95 = 0.05$.
+En raison de la symétrie, cette aire de 0.05 est répartie également entre les deux queues (gauche et droite).
+L'aire de la queue droite $P(X > \mu + 2\sigma)$ est donc $0.05 / 2 = 0.025$ (soit 2.5\%).
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 8 : Loi Standard (Lecture Directe)]
+$P(Z \le 1.5) = \Phi(1.5)$. En utilisant la table fournie, $P(Z \le 1.5) \approx 0.9332$.
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 9 : Loi Standard (Queue Droite)]
+$P(Z > 1) = 1 - P(Z \le 1) = 1 - \Phi(1)$.
+$P(Z > 1) \approx 1 - 0.8413 = 0.1587$.
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 10 : Loi Standard (Queue Gauche)]
+$P(Z \le -2) = \Phi(-2)$. Par symétrie, $\Phi(-2) = 1 - \Phi(2)$.
+$P(Z \le -2) \approx 1 - 0.9772 = 0.0228$.
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 11 : Loi Standard (Intervalle)]
+$P(-1 \le Z \le 2) = P(Z \le 2) - P(Z \le -1) = \Phi(2) - \Phi(-1)$.
+$\Phi(-1) = 1 - \Phi(1) \approx 1 - 0.8413 = 0.1587$.
+$P(-1 \le Z \le 2) \approx 0.9772 - 0.1587 = 0.8185$.
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 12 : Calcul (Standardisation)]
+$X \sim \mathcal{N}(50, 25) \implies \mu=50, \sigma=5$.
+On cherche $P(X \le 60)$.
+$Z = \frac{60 - 50}{5} = \frac{10}{5} = 2$.
+$P(X \le 60) = P(Z \le 2) = \Phi(2) \approx 0.9772$.
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 13 : Calcul (Standardisation)]
+$X \sim \mathcal{N}(100, 225) \implies \mu=100, \sigma=15$.
+On cherche $P(X > 77.5)$.
+$Z = \frac{77.5 - 100}{15} = \frac{-22.5}{15} = -1.5$.
+$P(X > 77.5) = P(Z > -1.5) = 1 - P(Z \le -1.5) = 1 - \Phi(-1.5)$.
+$\Phi(-1.5) = 1 - \Phi(1.5) \approx 1 - 0.9332 = 0.0668$.
+$P(Z > -1.5) = 1 - 0.0668 = 0.9332$. (Logique : $P(Z > -1.5) = P(Z \le 1.5)$ par symétrie).
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 14 : Calcul (Intervalle)]
+$X \sim \mathcal{N}(40, 16) \implies \mu=40, \sigma=4$.
+On cherche $P(38 \le X \le 42)$.
+$z_1 = \frac{38 - 40}{4} = -0.5$. $z_2 = \frac{42 - 40}{4} = 0.5$.
+$P(38 \le X \le 42) = P(-0.5 \le Z \le 0.5) = \Phi(0.5) - \Phi(-0.5)$.
+$\Phi(-0.5) = 1 - \Phi(0.5)$.
+$P = \Phi(0.5) - (1 - \Phi(0.5)) = 2\Phi(0.5) - 1$.
+(La valeur $\Phi(0.5) \approx 0.6915$ n'est pas fournie, mais $P(-1 \le Z \le 1) \approx 0.68$, donc on s'attend à une valeur plus petite).
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 15 : Propriété de la CDF]
+$P(Z > z) = 1 - P(Z \le z) = 1 - \Phi(z)$.
+$P(Z \le -z) = \Phi(-z)$.
+Par symétrie de la PDF $\phi(z) = \phi(-z)$, l'aire à droite de $z$ est égale à l'aire à gauche de $-z$.
+Donc $P(Z > z) = P(Z \le -z)$, ce qui implique $1 - \Phi(z) = \Phi(-z)$.
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 16 : Inverse (Z-Score)]
+On cherche $z$ tel que $P(Z \le z) = 0.975$.
+C'est $\Phi(z) = 0.975$. D'après la table, $z = 1.96$.
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 17 : Inverse (Z-Score Queue Droite)]
+On cherche $z$ tel que $P(Z > z) = 0.1587$.
+Cela signifie $P(Z \le z) = 1 - 0.1587 = 0.8413$.
+$\Phi(z) = 0.8413$. D'après la table, $z = 1$.
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 18 : Inverse (Z-Score Intervalle Central)]
+Si $P(-z \le Z \le z) = 0.95$, l'aire restante dans les deux queues est $1 - 0.95 = 0.05$.
+Par symétrie, l'aire dans la queue gauche $P(Z < -z)$ est $0.05 / 2 = 0.025$.
+L'aire totale à gauche de $z$ est $P(Z \le z) = 0.95 + 0.025 = 0.975$.
+On cherche $z$ tel que $\Phi(z) = 0.975$.
+D'après la table, $z = 1.96$. (On retrouve $\mu \pm 1.96\sigma$ comme l'intervalle à 95\% exact).
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 19 : Problème Inverse (Application)]
+$X \sim \mathcal{N}(100, 15^2)$. On cherche $x$ tel que $P(X > x) = 0.025$.
+Standardisation : $P(Z > z) = 0.025$, où $z = (x-100)/15$.
+$P(Z \le z) = 1 - 0.025 = 0.975$.
+D'après la table, $z$ tel que $\Phi(z)=0.975$ est $z=1.96$.
+On résout : $1.96 = \frac{x - 100}{15} \implies x = 100 + 1.96(15) = 100 + 29.4 = 129.4$.
+Il faut un score minimum de 129.4.
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 20 : Problème Inverse (Application)]
+$X \sim \mathcal{N}(1000, 20^2)$. On cherche $x$ tel que $P(X > x) = 0.9987$.
+Standardisation : $P(Z > z) = 0.9987$, où $z = (x-1000)/20$.
+$P(Z \le z) = 1 - 0.9987 = 0.0013$.
+C'est une valeur très faible. Utilisons la symétrie : $\Phi(-z) = 1 - \Phi(z)$.
+$\Phi(z) = 0.0013$. On cherche $z$ dans la table.
+On voit que $\Phi(3) = 0.9987$, donc $\Phi(-3) = 1 - 0.9987 = 0.0013$.
+Le Z-score est $z = -3$.
+On résout : $-3 = \frac{x - 1000}{20} \implies x = 1000 - 3(20) = 1000 - 60 = 940$.
+Le poids garanti est 940g.
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 21 : Stabilité par Transformation Linéaire]
+$X \sim \mathcal{N}(10, 4) \implies \mu_X=10, \sigma_X^2=4$. $Y = aX + b$ avec $a=3, b=5$.
+$Y$ suit une loi normale.
+$E[Y] = a\mu_X + b = 3(10) + 5 = 35$.
+$\text{Var}(Y) = a^2 \text{Var}(X) = 3^2 \times 4 = 9 \times 4 = 36$.
+Donc, $Y \sim \mathcal{N}(35, 36)$.
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 22 : Stabilité (Changement d'Unités)]
+$T_{cm} \sim \mathcal{N}(170, 100) \implies \mu=170, \sigma^2=100$.
+$T_m = a T_{cm} + b$ avec $a=1/100 = 0.01$ et $b=0$.
+$E[T_m] = a\mu + b = 0.01(170) + 0 = 1.7$.
+$\text{Var}(T_m) = a^2 \text{Var}(T_{cm}) = (0.01)^2 \times 100 = 0.0001 \times 100 = 0.01$.
+Donc, $T_m \sim \mathcal{N}(1.7, 0.01)$. (L'écart-type est $\sigma_m = \sqrt{0.01} = 0.1$ m, ce qui est logique : 10cm = 0.1m).
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 23 : Stabilité par Addition (Indépendante)]
+$X \sim \mathcal{N}(50, 10)$, $Y \sim \mathcal{N}(30, 6)$. $X, Y$ indépendantes.
+$S = X + Y$ suit une loi normale.
+$E[S] = E[X] + E[Y] = 50 + 30 = 80$.
+$\text{Var}(S) = \text{Var}(X) + \text{Var}(Y) = 10 + 6 = 16$.
+Donc, $S \sim \mathcal{N}(80, 16)$.
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 24 : Stabilité par Différence (Indépendante)]
+$D = X - Y = X + (-1)Y$. C'est une somme de variables normales indépendantes (si $X, Y$ le sont, $X, -Y$ le sont aussi). $D$ suit une loi normale.
+$E[D] = E[X] + E[-Y] = E[X] - E[Y] = 50 - 30 = 20$.
+$\text{Var}(D) = \text{Var}(X) + \text{Var}(-1 \cdot Y) = \text{Var}(X) + (-1)^2 \text{Var}(Y)$
+$\text{Var}(D) = \text{Var}(X) + \text{Var}(Y) = 10 + 6 = 16$.
+Donc, $D \sim \mathcal{N}(20, 16)$. (Note : les variances s'ajoutent toujours !)
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 25 : Somme de $n$ variables i.i.d.]
+Soit $P_i \sim \mathcal{N}(150, 100)$ le poids de la $i$-ème pomme.
+$P_{total} = P_1 + \dots + P_{10}$. C'est une somme de 10 v.a. normales indépendantes.
+$P_{total}$ suit une loi normale.
+$E[P_{total}] = E[P_1] + \dots + E[P_{10}] = 10 \times E[P_1] = 10 \times 150 = 1500g$.
+$\text{Var}(P_{total}) = \text{Var}(P_1) + \dots + \text{Var}(P_{10}) = 10 \times \text{Var}(P_1) = 10 \times 100 = 1000$.
+Donc, $P_{total} \sim \mathcal{N}(1500, 1000)$.
+\end{correctionbox}

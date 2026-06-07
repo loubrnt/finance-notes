@@ -1,0 +1,138 @@
+\subsection{Exercices}
+
+\textit{Pour tous les exercices de calcul, vous pouvez utiliser les valeurs suivantes pour la fonction de répartition de la loi normale standard $\Phi(z) = P(Z \le z)$ :}
+\begin{itemize}
+    \item $\Phi(0) = 0.5$
+    \item $\Phi(0.675) \approx 0.75$
+    \item $\Phi(1) \approx 0.8413$
+    \item $\Phi(1.28) \approx 0.90$
+    \item $\Phi(1.5) \approx 0.9332$
+    \item $\Phi(1.96) \approx 0.975$
+    \item $\Phi(2) \approx 0.9772$
+    \item $\Phi(2.5) \approx 0.9938$
+    \item $\Phi(3) \approx 0.9987$
+\end{itemize}
+\textit{Et rappelez-vous la propriété de symétrie : $\Phi(-z) = 1 - \Phi(z)$.}
+
+% --- Section 1 : Concepts, Z-Scores & Règle Empirique ---
+
+\begin{exercicebox}[Exercice 1 : Concepts (PDF)]
+Soit deux lois normales $A \sim \mathcal{N}(10, 4)$ et $B \sim \mathcal{N}(10, 9)$.
+\begin{enumerate}
+    \item Laquelle des deux distributions a le pic le plus élevé ?
+    \item Laquelle des deux distributions est la plus "aplatie" ?
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 2 : Z-Score (Calcul)]
+La taille des étudiants suit $X \sim \mathcal{N}(175, 6^2)$, où les unités sont en cm. Un étudiant mesure 184 cm. Calculez son Z-score.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 3 : Z-Score (Interprétation)]
+Un score de $Z = -2.5$ est obtenu pour une variable $X$. Qu'est-ce que cela signifie en termes de moyenne ($\mu$) et d'écart-type ($\sigma$) ?
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 4 : Z-Score (Calcul Inverse)]
+Pour une distribution $\mathcal{N}(50, 100)$, quelle valeur $x$ correspond à un Z-score de $z = 1.5$ ?
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 5 : Z-Score (Comparaison)]
+Alice obtient 115 à un test de QI $\mathcal{N}(100, 15^2)$. Bob obtient 24 à un test d'aptitude $\mathcal{N}(20, 2^2)$. Qui a le mieux réussi par rapport à son groupe ?
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 6 : Règle Empirique (68-95-99.7)]
+Le poids de paquets de café suit $\mathcal{N}(500g, 10^2)$.
+En utilisant la règle empirique, quel pourcentage approximatif de paquets pèse entre 490g et 510g ?
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 7 : Règle Empirique (Queue)]
+En utilisant la règle empirique pour $\mathcal{N}(\mu, \sigma^2)$, quelle est la probabilité approximative $P(X > \mu + 2\sigma)$ ?
+\end{exercicebox}
+
+% --- Section 2 : Calculs de Probabilités (Standardisation) ---
+
+\begin{exercicebox}[Exercice 8 : Loi Standard (Lecture Directe)]
+Soit $Z \sim \mathcal{N}(0, 1)$. Calculez $P(Z \le 1.5)$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 9 : Loi Standard (Queue Droite)]
+Soit $Z \sim \mathcal{N}(0, 1)$. Calculez $P(Z > 1)$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 10 : Loi Standard (Queue Gauche)]
+Soit $Z \sim \mathcal{N}(0, 1)$. Calculez $P(Z \le -2)$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 11 : Loi Standard (Intervalle)]
+Soit $Z \sim \mathcal{N}(0, 1)$. Calculez $P(-1 \le Z \le 2)$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 12 : Calcul (Standardisation)]
+Soit $X \sim \mathcal{N}(50, 25)$. (Attention : $\sigma^2=25$).
+Calculez $P(X \le 60)$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 13 : Calcul (Standardisation)]
+Soit $X \sim \mathcal{N}(100, 225)$. (Attention : $\sigma^2=225$).
+Calculez $P(X > 77.5)$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 14 : Calcul (Intervalle)]
+La durée de vie d'une batterie suit $X \sim \mathcal{N}(40 \text{ heures}, 16)$.
+Calculez $P(38 \le X \le 42)$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 15 : Propriété de la CDF]
+En utilisant les définitions, montrez que $P(Z > z) = P(Z \le -z)$.
+\end{exercicebox}
+
+% --- Section 3 : Problèmes Inverses ---
+
+\begin{exercicebox}[Exercice 16 : Inverse (Z-Score)]
+Soit $Z \sim \mathcal{N}(0, 1)$. Trouvez la valeur $z$ telle que $P(Z \le z) = 0.975$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 17 : Inverse (Z-Score Queue Droite)]
+Soit $Z \sim \mathcal{N}(0, 1)$. Trouvez la valeur $z$ telle que $P(Z > z) = 0.1587$.
+(Indice : $1 - 0.1587 = 0.8413$).
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 18 : Inverse (Z-Score Intervalle Central)]
+Soit $Z \sim \mathcal{N}(0, 1)$. Trouvez la valeur $z$ (positive) telle que $P(-z \le Z \le z) = 0.95$.
+(Indice : si l'aire centrale est 0.95, combien vaut l'aire à gauche de $z$ ?)
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 19 : Problème Inverse (Application)]
+Le score à un examen suit $\mathcal{N}(100, 15^2)$. Pour obtenir la note "A", un étudiant doit être dans le top 2.5\% (c'est-à-dire $P(X > x) = 0.025$).
+Quel score $x$ minimum faut-il obtenir ?
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 20 : Problème Inverse (Application)]
+Une machine remplit des sacs de farine $\mathcal{N}(1000g, 20^2)$. On veut garantir que 99.87\% des sacs pèsent *plus* qu'un certain poids $x$.
+Quelle est la valeur de $x$ ?
+\end{exercicebox}
+
+% --- Section 4 : Propriétés (Stabilité, Sommes) ---
+
+\begin{exercicebox}[Exercice 21 : Stabilité par Transformation Linéaire]
+Si $X \sim \mathcal{N}(10, 4)$ (donc $\sigma=2$), quelle est la loi de la variable $Y = 3X + 5$ ?
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 22 : Stabilité (Changement d'Unités)]
+La taille $T_{cm}$ d'une population suit $\mathcal{N}(170, 100)$. Quelle est la loi de la taille $T_{m}$ en mètres ? (Rappel : $T_{m} = T_{cm} / 100$).
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 23 : Stabilité par Addition (Indépendante)]
+Soit $X \sim \mathcal{N}(50, 10)$ et $Y \sim \mathcal{N}(30, 6)$ deux variables indépendantes.
+Quelle est la loi de la somme $S = X + Y$ ?
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 24 : Stabilité par Différence (Indépendante)]
+En utilisant les variables $X$ et $Y$ de l'exercice 23, quelle est la loi de la différence $D = X - Y$ ?
+(Indice : $D = X + (-1)Y$).
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 25 : Somme de $n$ variables i.i.d.]
+On prélève 10 pommes d'un lot où le poids d'une pomme suit $\mathcal{N}(150g, 10^2)$. Soit $P_{total}$ le poids total des 10 pommes (supposées indépendantes).
+Quelle est la loi de $P_{total}$ ?
+\end{exercicebox}

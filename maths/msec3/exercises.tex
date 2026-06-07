@@ -1,0 +1,211 @@
+\subsection{Exercices}
+
+% --- Lois Binomiale et Bernoulli ---
+
+\begin{exercicebox}[Exercice 1 : Loi Binomiale (Quiz)]
+Un étudiant répond au hasard à un QCM de 10 questions. Chaque question a 4 choix de réponse, dont un seul est correct. Soit $X$ le nombre de bonnes réponses.
+\begin{enumerate}
+    \item Quelle loi suit $X$ ? Précisez ses paramètres.
+    \item Quelle est la probabilité que l'étudiant ait exactement 5 bonnes réponses ?
+    \item Quelle est la probabilité que l'étudiant ait au moins une bonne réponse ?
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 2 : Loi Binomiale (Contrôle Qualité)]
+Une usine produit des ampoules. 5\% des ampoules sont défectueuses. On prélève un lot de 20 ampoules. Soit $X$ le nombre d'ampoules défectueuses dans le lot.
+\begin{enumerate}
+    \item Quelle loi suit $X$ ? (On suppose le prélèvement "avec remise" ou d'une production très grande).
+    \item Quelle est la probabilité qu'il n'y ait aucune ampoule défectueuse ?
+    \item Quelle est la probabilité qu'il y ait exactement deux ampoules défectueuses ?
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 3 : Espérance et Variance (Binomiale)]
+Un archer touche la cible avec une probabilité $p=0.8$ à chaque tir. Il tire $n=40$ flèches. Soit $X$ le nombre de tirs réussis.
+\begin{enumerate}
+    \item Calculer l'espérance $E(X)$.
+    \item Calculer la variance $\text{Var}(X)$ et l'écart-type $\text{SD}(X)$.
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 4 : Loi de Bernoulli (Indicatrice)]
+Soit $A$ un événement avec $P(A) = p$. Soit $I_A$ la variable indicatrice de $A$.
+\begin{enumerate}
+    \item Écrire la PMF de $I_A$.
+    \item Calculer $E(I_A)$.
+    \item Calculer $\text{Var}(I_A)$ en utilisant $\text{Var}(X) = E(X^2) - [E(X)]^2$. (Indice : $I_A^2 = I_A$).
+\end{enumerate}
+\end{exercicebox}
+
+% --- Loi de Poisson ---
+
+\begin{exercicebox}[Exercice 5 : Loi de Poisson (Emails)]
+Un serveur de messagerie reçoit en moyenne 2 emails "spam" par minute. Soit $X$ le nombre de spams reçus en une minute.
+\begin{enumerate}
+    \item Quelle loi suit $X$ ?
+    \item Quelle est la probabilité de recevoir exactement 3 spams en une minute ?
+    \item Quelle est la probabilité de recevoir au plus 2 spams en une minute ?
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 6 : Loi de Poisson (Échelle de temps)]
+Une substance radioactive émet en moyenne $\lambda=4$ particules par seconde. Soit $Y$ le nombre de particules émises en 3 secondes.
+\begin{enumerate}
+    \item Quelle est la loi de $Y$ ? (Indice : ajuster le paramètre $\lambda$).
+    \item Quelle est la probabilité que $Y=10$ ?
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 7 : Approximation de Poisson (Binomiale)]
+Un livre de 500 pages contient 1000 fautes de frappe distribuées au hasard. Soit $X$ le nombre de fautes de frappe sur une page donnée.
+\begin{enumerate}
+    \item Quelle est la loi exacte de $X$ ? (On suppose qu'une faute ne peut pas être à cheval sur deux pages).
+    \item Par quelle loi peut-on approximer $X$ ? Précisez le paramètre.
+    \item En utilisant l'approximation, calculez la probabilité qu'une page choisie au hasard contienne au moins une faute.
+\end{enumerate}
+\end{exercicebox}
+
+% --- Lois Géométrique et Hypergéométrique ---
+
+\begin{exercicebox}[Exercice 8 : Loi Géométrique (Échecs avant succès)]
+On lance un dé équilibré jusqu'à obtenir un 6. Soit $X$ le nombre d'échecs (lancers qui ne sont pas 6) avant d'obtenir le premier 6.
+\begin{enumerate}
+    \item Quelle loi suit $X$ ? Précisez le paramètre $p$.
+    \item Quelle est la probabilité d'échouer exactement 3 fois ? (c-à-d, le 6 arrive au 4ème lancer).
+    \item Quelle est l'espérance du nombre d'échecs $E(X)$ ?
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 9 : Loi Géométrique (Propriété)]
+Soit $X \sim \text{Geom}(p)$ (comptant les échecs).
+Quelle est la probabilité $P(X \ge k)$ ? C'est-à-dire, la probabilité d'avoir au moins $k$ échecs.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 10 : Loi Hypergéométrique (Comité)]
+Un club est composé de 12 hommes et 8 femmes. On choisit un comité de 5 personnes au hasard. Soit $X$ le nombre de femmes dans le comité.
+\begin{enumerate}
+    \item Quelle loi suit $X$ ? Précisez les paramètres.
+    \item Quelle est la probabilité que le comité soit composé d'exactement 2 femmes ?
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 11 : Loi Hypergéométrique (Pêche)]
+Un lac contient 100 poissons, dont 10 ont été marqués. Un pêcheur attrape 8 poissons (sans remise). Soit $X$ le nombre de poissons marqués parmi les 8 attrapés.
+\begin{enumerate}
+    \item Quelle est la loi de $X$ ?
+    \item Quelle est la probabilité qu'il n'attrape aucun poisson marqué ?
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 12 : Binomiale vs Hypergéométrique]
+Expliquez la différence fondamentale entre la loi Binomiale et la loi Hypergéométrique. Dans quel cas la loi Binomiale est-elle une bonne approximation de la loi Hypergéométrique ?
+\end{exercicebox}
+
+% --- PMF, CDF, Espérance Générale, LOTUS, Variance ---
+
+\begin{exercicebox}[Exercice 13 : PMF (Trouver la constante)]
+Soit $X$ une variable aléatoire discrète dont la PMF est donnée par $P(X=k) = c \cdot k^2$ pour $k \in \{1, 2, 3\}$. Pour toutes les autres valeurs, $P(X=x)=0$.
+\begin{enumerate}
+    \item Trouvez la valeur de la constante $c$.
+    \item Calculez $P(X \ge 2)$.
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 14 : Espérance (Jeu de Hasard)]
+Un joueur paie 5€ pour jouer à un jeu. Il lance deux dés. Il gagne $S$ euros, où $S$ est la somme des deux dés. Soit $G$ son gain net (gain - mise).
+\begin{enumerate}
+    \item Rappeler $E(S)$ (espérance de la somme de two dés).
+    \item Calculer $E(G)$. Le jeu est-il équitable ?
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 15 : LOTUS (Jeu de Hasard 2)]
+On lance un dé équilibré. Soit $X$ le résultat. Vous gagnez $g(X) = (X-3)^2$ euros.
+\begin{enumerate}
+    \item Calculez l'espérance de votre gain, $E[g(X)]$.
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 16 : CDF (Fonction de Répartition)]
+Soit $X$ une variable aléatoire avec la PMF suivante :
+$P(X=0) = 0.2$, $P(X=1) = 0.5$, $P(X=2) = 0.3$.
+\begin{enumerate}
+    \item Écrivez la fonction de répartition $F_X(x) = P(X \le x)$.
+    \item Calculez $P(0 < X \le 2)$.
+    \item Calculez $P(X > 1)$.
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 17 : Variance (Calcul)]
+Pour la variable $X$ de l'exercice 16 :
+\begin{enumerate}
+    \item Calculez $E(X)$.
+    \item Calculez $E(X^2)$ en utilisant LOTUS.
+    \item Calculez $\text{Var}(X)$ en utilisant la formule $E(X^2) - [E(X)]^2$.
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 18 : Propriétés de la Variance]
+Soit $X$ une variable aléatoire avec $E(X)=10$ et $\text{Var}(X)=4$. Soit $Y = 5X - 2$.
+\begin{enumerate}
+    \item Calculez $E(Y)$.
+    \item Calculez $\text{Var}(Y)$.
+\end{enumerate}
+\end{exercicebox}
+
+% --- Linéarité et Indicateurs ---
+
+\begin{exercicebox}[Exercice 19 : Linéarité de l'Espérance (Mélange)]
+On lance un dé (résultat $D$) et une pièce (résultat $P$, 1 pour Pile, 0 for Face).
+Soit $X = D + 3P$.
+Calculez $E(X)$ en utilisant la linéarité de l'espérance.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 20 : Indicateurs (Problème des Chapeaux)]
+$n$ personnes jettent leur chapeau au centre d'une pièce. Les chapeaux sont mélangés, et chaque personne en reprend un au hasard. Soit $X$ le nombre de personnes qui reprennent leur propre chapeau.
+\begin{enumerate}
+    \item Définir $X$ comme une somme de $n$ variables indicatrices $I_i$. Que représente $I_i$ ?
+    \item Quelle est la probabilité $P(I_i=1)$ ? (C-à-d, la probabilité que la personne $i$ reprenne son chapeau).
+    \item Calculez $E(X)$ en utilisant la linéarité.
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 21 : Indicateurs (Collectionneurs)]
+On achète $n=5$ boîtes de céréales. Chaque boîte contient une figurine au hasard parmi $k=4$ types de figurines (types A, B, C, D). Soit $X$ le nombre de types de figurines *distincts* que nous avons obtenus.
+\begin{enumerate}
+    \item Soit $I_A$ l'indicatrice que nous avons obtenu au moins une figurine de type A.
+    \item Calculez $P(I_A=0)$. (Probabilité de n'avoir *aucune* figurine A dans les 5 boîtes).
+    \item Calculez $E(I_A)$.
+    \item Exprimez $X$ en fonction d'indicatrices $I_A, I_B, I_C, I_D$ et calculez $E(X)$.
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 22 : Variance (Propriétés)]
+Prouvez que $\text{Var}(aX + b) = a^2 \text{Var}(X)$ pour des constantes $a$ et $b$.
+\end{exercicebox}
+
+% --- Exercices de Synthèse ---
+
+\begin{exercicebox}[Exercice 23 : Identifier la Loi]
+Pour chaque scénario, identifiez la loi discrète la plus appropriée (Bernoulli, Binomiale, Hypergéométrique, Géométrique, Poisson).
+\begin{enumerate}
+    \item On compte le nombre de "Face" lors de 20 lancers de pièce.
+    \item On compte le nombre d'accidents à une intersection un jour donné (sachant un taux moyen de 1.5/jour).
+    \item On compte le nombre de Rois dans une main de 5 cartes tirées d'un jeu de 52 cartes.
+    \item On compte le nombre de lancers de dé nécessaires avant d'obtenir le premier 3 (en comptant les échecs).
+    \item On vérifie si un seul composant électronique est défectueux ou non.
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 24 : Espérance (Loi Hypergéométrique)]
+Soit $X \sim \text{HG}(w, b, m)$ (tirage de $m$ boules parmi $w$ blanches et $b$ noires).
+En utilisant des variables indicatrices, montrez que $E(X) = m \left( \frac{w}{w+b} \right)$.
+(Indice : Soit $I_j$ l'indicatrice que la $j$-ème boule tirée est blanche, pour $j=1 \dots m$. $X = \sum I_j$. Calculez $E(I_j)$.)
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 25 : Variance (Poisson)]
+On admet que si $X \sim \text{Bin}(n, p)$, $\text{Var}(X) = np(1-p)$.
+En utilisant l'approximation Poisson $X_n \sim \text{Bin}(n, \lambda/n)$, que devient la variance lorsque $n \to \infty$ ?
+\end{exercicebox}
+
+

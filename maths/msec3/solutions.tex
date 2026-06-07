@@ -1,0 +1,214 @@
+
+\subsection{Corrections des Exercices}
+
+\begin{correctionbox}[Correction Exercice 1 : Loi Binomiale (Quiz)]
+1. $X$ suit une loi Binomiale, car c'est la somme de $n=10$ succès indépendants (bonnes réponses), chacun avec une probabilité $p = 1/4 = 0.25$. $X \sim \text{Bin}(10, 0.25)$.
+2. $P(X=5) = \binom{10}{5} (0.25)^5 (1-0.25)^{10-5} = 252 \times (0.25)^5 (0.75)^5 \approx 0.0584$.
+3. $P(X \ge 1) = 1 - P(X=0)$.
+$P(X=0) = \binom{10}{0} (0.25)^0 (0.75)^{10} = (0.75)^{10} \approx 0.0563$.
+$P(X \ge 1) = 1 - 0.0563 = 0.9437$.
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 2 : Loi Binomiale (Contrôle Qualité)]
+1. $X \sim \text{Bin}(n=20, p=0.05)$.
+2. $P(X=0) = \binom{20}{0} (0.05)^0 (0.95)^{20} = (0.95)^{20} \approx 0.3585$.
+3. $P(X=2) = \binom{20}{2} (0.05)^2 (0.95)^{18} = 190 \times (0.0025) \times (0.95)^{18} \approx 0.1887$.
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 3 : Espérance et Variance (Binomiale)]
+1. $X \sim \text{Bin}(40, 0.8)$. L'espérance est $E(X) = np = 40 \times 0.8 = 32$. (On s'attend à 32 tirs réussis).
+2. $\text{Var}(X) = np(1-p) = 40 \times 0.8 \times 0.2 = 6.4$.
+$\text{SD}(X) = \sqrt{\text{Var}(X)} = \sqrt{6.4} \approx 2.53$.
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 4 : Loi de Bernoulli (Indicatrice)]
+1. $I_A$ suit la loi de Bernoulli $\text{Bern}(p)$.
+$P(I_A=1) = p$ et $P(I_A=0) = 1-p$.
+2. $E(I_A) = 1 \cdot P(I_A=1) + 0 \cdot P(I_A=0) = 1 \cdot p + 0 = p$.
+3. On utilise LOTUS pour $E(I_A^2)$:
+$E(I_A^2) = (1^2) \cdot P(I_A=1) + (0^2) \cdot P(I_A=0) = 1 \cdot p + 0 = p$.
+(Note : $I_A^2 = I_A$ car $1^2=1$ et $0^2=0$, donc $E(I_A^2) = E(I_A) = p$).
+$\text{Var}(I_A) = E(I_A^2) - [E(I_A)]^2 = p - p^2 = p(1-p)$.
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 5 : Loi de Poisson (Emails)]
+1. $X$ suit une loi de Poisson de paramètre $\lambda=2$. $X \sim \text{Poisson}(2)$.
+2. $P(X=3) = \frac{e^{-2} 2^3}{3!} = \frac{e^{-2} \times 8}{6} \approx 0.1804$.
+3. $P(X \le 2) = P(X=0) + P(X=1) + P(X=2)$
+$P(X=0) = \frac{e^{-2} 2^0}{0!} = e^{-2}$
+$P(X=1) = \frac{e^{-2} 2^1}{1!} = 2e^{-2}$
+$P(X=2) = \frac{e^{-2} 2^2}{2!} = 2e^{-2}$
+$P(X \le 2) = e^{-2}(1 + 2 + 2) = 5e^{-2} \approx 0.6767$.
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 6 : Loi de Poisson (Échelle de temps)]
+1. Le taux est $\lambda=4$ par seconde. Sur 3 secondes, le taux moyen est $\lambda' = 4 \times 3 = 12$.
+$Y \sim \text{Poisson}(12)$.
+2. $P(Y=10) = \frac{e^{-12} 12^{10}}{10!} \approx 0.1048$.
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 7 : Approximation de Poisson (Binomiale)]
+1. C'est un tirage sans remise (une faute ne peut pas être comptée deux fois). C'est $\text{Hypergéométrique}$. (Ou $\text{Binomiale}$ si on considère que chaque mot a une prob $p$ d'être une faute, mais $n$ (nb de mots) est inconnu).
+On peut aussi voir cela comme $n=1000$ essais (fautes) de Bernoulli où le succès est "tomber sur la page X" (prob $p=1/500$). $X \sim \text{Bin}(1000, 1/500)$.
+2. La loi Binomiale $\text{Bin}(n=1000, p=1/500)$ a $n$ grand et $p$ petit.
+On approxime par Poisson avec $\lambda = np = 1000 \times (1/500) = 2$.
+$X \approx \text{Poisson}(2)$.
+3. $P(X \ge 1) = 1 - P(X=0) = 1 - \frac{e^{-2} 2^0}{0!} = 1 - e^{-2} \approx 1 - 0.1353 = 0.8647$.
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 8 : Loi Géométrique (Échecs avant succès)]
+1. $X$ compte le nombre d'échecs avant le premier succès. Le succès est "obtenir 6", $p=1/6$.
+$X \sim \text{Geom}(p=1/6)$.
+2. On cherche $P(X=3)$. $P(X=k) = (1-p)^k p$.
+$P(X=3) = (5/6)^3 \times (1/6) = \frac{125}{216} \times \frac{1}{6} = \frac{125}{1296} \approx 0.0965$.
+3. $E(X) = \frac{q}{p} = \frac{1-p}{p} = \frac{5/6}{1/6} = 5$. (On s'attend à 5 échecs en moyenne).
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 9 : Loi Géométrique (Propriété)]
+$P(X \ge k)$ est la probabilité d'avoir au moins $k$ échecs.
+Cela signifie que les $k$ premiers essais ont *tous* été des échecs.
+La probabilité d'un échec est $q=1-p$. La probabilité de $k$ échecs consécutifs est $q^k$.
+(Après ces $k$ échecs, peu importe ce qui se passe, la condition $X \ge k$ est remplie).
+Donc, $P(X \ge k) = (1-p)^k$.
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 10 : Loi Hypergéométrique (Comité)]
+1. Tirage sans remise. Population totale $w+b = 20$. On s'intéresse aux femmes (disons "blanches", $w=8$). Les hommes sont "noires" ($b=12$). On tire $m=5$ personnes.
+$X \sim \text{HG}(w=8, b=12, m=5)$.
+2. $P(X=2) = \frac{\binom{w}{k} \binom{b}{m-k}}{\binom{w+b}{m}} = \frac{\binom{8}{2} \binom{12}{3}}{\binom{20}{5}} = \frac{28 \times 220}{15504} = \frac{6160}{15504} \approx 0.3973$.
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 11 : Loi Hypergéométrique (Pêche)]
+1. $w=10$ (marqués), $b=90$ (non marqués). $w+b=100$. $m=8$ (tirage).
+$X \sim \text{HG}(w=10, b=90, m=8)$.
+2. $P(X=0) = \frac{\binom{10}{0} \binom{90}{8}}{\binom{100}{8}} = \frac{1 \times \frac{90!}{8!82!}}{\frac{100!}{8!92!}} = \frac{90! 92!}{82! 100!} = \frac{90 \cdot \dots \cdot 83}{100 \cdot \dots \cdot 93} \approx 0.4166$.
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 12 : Binomiale vs Hypergéométrique]
+La différence est l'indépendance des tirages.
+\begin{itemize}
+    \item \textbf{Binomiale :} Modélise $n$ tirages \textit{avec remise} (ou indépendants). La probabilité de succès $p$ est constante.
+    \item \textbf{Hypergéométrique :} Modélise $m$ tirages \textit{sans remise} d'une population finie. La probabilité de succès change à chaque tirage.
+\end{itemize}
+La Binomiale approxime bien l'Hypergéométrique lorsque la taille de la population ($w+b$) est très grande par rapport à la taille de l'échantillon ($m$). Dans ce cas, $p \approx w/(w+b)$ est presque constant.
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 13 : PMF (Trouver la constante)]
+1. La somme des probabilités doit valoir 1 : $\sum P(X=k) = 1$.
+$P(X=1) + P(X=2) + P(X=3) = 1$
+$c \cdot 1^2 + c \cdot 2^2 + c \cdot 3^2 = 1$
+$c(1 + 4 + 9) = 1 \implies 14c = 1 \implies c = 1/14$.
+2. $P(X \ge 2) = P(X=2) + P(X=3) = c \cdot 2^2 + c \cdot 3^2 = 4c + 9c = 13c = 13/14$.
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 14 : Espérance (Jeu de Hasard)]
+1. $E(S) = E(D_1 + D_2) = E(D_1) + E(D_2) = 3.5 + 3.5 = 7$.
+2. $G = S - 5$ (Gain = Somme - Mise).
+Par linéarité : $E(G) = E(S - 5) = E(S) - E(5) = E(S) - 5$.
+$E(G) = 7 - 5 = 2$.
+L'espérance de gain net est de 2€. Le jeu est très en faveur du joueur (et non équitable).
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 15 : LOTUS (Jeu de Hasard 2)]
+On cherche $E[g(X)] = E[(X-3)^2]$. On utilise LOTUS : $E[g(X)] = \sum g(x) P(X=x)$.
+$E[(X-3)^2] = \sum_{k=1}^6 (k-3)^2 P(X=k) = \sum_{k=1}^6 (k-3)^2 \cdot (1/6)$
+$= \frac{1}{6} \left[ (1-3)^2 + (2-3)^2 + (3-3)^2 + (4-3)^2 + (5-3)^2 + (6-3)^2 \right]$
+$= \frac{1}{6} \left[ (-2)^2 + (-1)^2 + 0^2 + 1^2 + 2^2 + 3^2 \right]$
+$= \frac{1}{6} [ 4 + 1 + 0 + 1 + 4 + 9 ] = \frac{19}{6} \approx 3.167€$.
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 16 : CDF (Fonction de Répartition)]
+1. $F_X(x)$ accumule les probabilités :
+$F_X(x) = \begin{cases} 
+      0 & \text{si } x < 0 \\
+      0.2 & \text{si } 0 \le x < 1 \\
+      0.2 + 0.5 = 0.7 & \text{si } 1 \le x < 2 \\
+      0.7 + 0.3 = 1.0 & \text{si } x \ge 2 
+   \end{cases}$
+2. $P(0 < X \le 2) = P(X=1) + P(X=2) = 0.5 + 0.3 = 0.8$.
+(Alternativement : $F_X(2) - F_X(0) = 1.0 - 0.2 = 0.8$).
+3. $P(X > 1) = P(X=2) = 0.3$.
+(Alternativement : $1 - P(X \le 1) = 1 - F_X(1) = 1 - 0.7 = 0.3$).
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 17 : Variance (Calcul)]
+1. $E(X) = \sum x P(X=x) = (0)(0.2) + (1)(0.5) + (2)(0.3) = 0 + 0.5 + 0.6 = 1.1$.
+2. $E(X^2) = \sum x^2 P(X=x) = (0^2)(0.2) + (1^2)(0.5) + (2^2)(0.3) = 0 + 0.5 + (4)(0.3) = 0.5 + 1.2 = 1.7$.
+3. $\text{Var}(X) = E(X^2) - [E(X)]^2 = 1.7 - (1.1)^2 = 1.7 - 1.21 = 0.49$.
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 18 : Propriétés de la Variance]
+1. $E(Y) = E(5X - 2) = E(5X) - E(2) = 5E(X) - 2 = 5(10) - 2 = 48$.
+2. $\text{Var}(Y) = \text{Var}(5X - 2) = \text{Var}(5X) = 5^2 \text{Var}(X) = 25 \times 4 = 100$.
+(La constante $b=-2$ n'affecte pas la dispersion).
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 19 : Linéarité de l'Espérance (Mélange)]
+On cherche $E(X) = E(D + 3P)$.
+Par linéarité : $E(X) = E(D) + E(3P) = E(D) + 3E(P)$.
+$E(D) = 3.5$ (espérance d'un dé).
+$P$ est une Bernoulli $\text{Bern}(0.5)$. $E(P) = p = 0.5$.
+$E(X) = 3.5 + 3(0.5) = 3.5 + 1.5 = 5.0$.
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 20 : Indicateurs (Problème des Chapeaux)]
+1. $I_i$ est la variable indicatrice de l'événement "la personne $i$ reprend son propre chapeau".
+$X = \sum_{i=1}^n I_i$.
+2. Il y a $n!$ permutations (arrangements) possibles des chapeaux. Il y a $(n-1)!$ permutations où la personne $i$ a son propre chapeau.
+$P(I_i=1) = \frac{(n-1)!}{n!} = \frac{1}{n}$.
+3. Par linéarité : $E(X) = E(\sum I_i) = \sum E(I_i)$.
+$E(I_i) = P(I_i=1) = 1/n$.
+$E(X) = \sum_{i=1}^n (1/n) = n \times (1/n) = 1$.
+En moyenne, quel que soit $n$, une seule personne reprend son chapeau !
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 21 : Indicateurs (Collectionneurs)]
+1. $I_A = 1$ si on a au moins une fig. A, $I_A = 0$ sinon.
+2. $P(I_A=0) = P(\text{n'avoir aucune fig. A})$. À chaque boîte, $P(\text{pas A}) = 3/4$.
+Pour 5 boîtes indépendantes : $P(I_A=0) = (3/4)^5$.
+3. $E(I_A) = P(I_A=1) = 1 - P(I_A=0) = 1 - (3/4)^5$.
+4. $X$ est le nombre de types distincts, $X = I_A + I_B + I_C + I_D$.
+Par linéarité : $E(X) = E(I_A) + E(I_B) + E(I_C) + E(I_D)$.
+Par symétrie, $E(I_A) = E(I_B) = E(I_C) = E(I_D) = 1 - (3/4)^5$.
+$E(X) = 4 \times \left( 1 - (3/4)^5 \right) \approx 4 \times (1 - 0.2373) = 4 \times 0.7627 = 3.0508$.
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 22 : Variance (Propriétés)]
+Soit $\mu = E(X)$. Alors $E(aX+b) = aE(X)+b = a\mu+b$.
+Par définition de la variance :
+$\text{Var}(aX+b) = E\left[ ( (aX+b) - E[aX+b] )^2 \right]$
+$= E\left[ ( (aX+b) - (a\mu+b) )^2 \right]$
+$= E\left[ ( aX - a\mu )^2 \right]$
+$= E\left[ ( a(X - \mu) )^2 \right]$
+$= E\left[ a^2 (X - \mu)^2 \right]$
+$= a^2 E\left[ (X - \mu)^2 \right]$ (car $a^2$ est une constante)
+$= a^2 \text{Var}(X)$.
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 23 : Identifier la Loi]
+1. \textbf{Binomiale} (n=20 essais de Bernoulli indépendants).
+2. \textbf{Poisson} (comptage d'événements rares dans un intervalle fixe).
+3. \textbf{Hypergéométrique} (tirage sans remise d'une population finie).
+4. \textbf{Géométrique} (comptage d'échecs avant le premier succès).
+5. \textbf{Bernoulli} (un seul essai, deux issues).
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 24 : Espérance (Loi Hypergéométrique)]
+Soit $I_j = 1$ si la $j$-ème boule tirée (pour $j=1 \dots m$) est blanche, $I_j=0$ sinon.
+Le nombre total de blanches est $X = \sum_{j=1}^m I_j$.
+Par linéarité, $E(X) = \sum_{j=1}^m E(I_j)$.
+$E(I_j) = P(I_j=1)$. Quelle est la probabilité que la $j$-ème boule tirée soit blanche ?
+Par symétrie (ou en considérant un tirage aléatoire), n'importe quelle boule a la même probabilité d'être à la $j$-ème position. Il y a $w$ blanches sur $w+b$ boules au total.
+$P(I_j=1) = \frac{w}{w+b}$ (c'est vrai pour $j=1$, $j=2$, ... $j=m$).
+$E(X) = \sum_{j=1}^m \frac{w}{w+b} = m \left( \frac{w}{w+b} \right)$.
+\end{correctionbox}
+
+\begin{correctionbox}[Correction Exercice 25 : Variance (Poisson)]
+$X_n \sim \text{Bin}(n, \lambda/n)$.
+$\text{Var}(X_n) = np(1-p) = n(\lambda/n)(1 - \lambda/n) = \lambda(1 - \lambda/n)$.
+Lorsque $n \to \infty$ :
+$\lim_{n \to \infty} \text{Var}(X_n) = \lim_{n \to \infty} \lambda(1 - \lambda/n)$
+Puisque $\lambda/n \to 0$, la limite est $\lambda(1 - 0) = \lambda$.
+On en déduit que pour $X \sim \text{Poisson}(\lambda)$, la variance est $\text{Var}(X) = \lambda$.
+(L'espérance et la variance sont égales pour la loi de Poisson).
+\end{correctionbox}

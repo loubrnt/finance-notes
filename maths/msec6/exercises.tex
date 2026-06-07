@@ -1,0 +1,149 @@
+\subsection{Exercices}
+
+\textit{Pour tous les exercices de calcul, vous pouvez utiliser les valeurs suivantes pour la fonction de répartition de la loi normale standard $\Phi(z) = P(Z \le z)$ :}
+\begin{itemize}
+    \item $\Phi(0) = 0.5$
+    \item $\Phi(0.5) \approx 0.6915$
+    \item $\Phi(1) \approx 0.8413$
+    \item $\Phi(1.5) \approx 0.9332$
+    \item $\Phi(1.96) \approx 0.975$
+    \item $\Phi(2) \approx 0.9772$
+    \item $\Phi(2.5) \approx 0.9938$
+    \item $\Phi(3) \approx 0.9987$
+\end{itemize}
+\textit{Et rappelez-vous la propriété de symétrie : $\Phi(-z) = 1 - \Phi(z)$.}
+
+% --- Section 1 : Définitions et Concepts ---
+
+\begin{exercicebox}[Exercice 1 : Définition (Paramètres)]
+Soit $Y \sim \text{Log-}\mathcal{N}(3, 16)$.
+\begin{enumerate}
+    \item Soit $X = \ln(Y)$. Quelle est la loi de $X$ ?
+    \item Que valent $E[X]$ et $\text{Var}(X)$ ?
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 2 : Définition (Inverse)]
+Soit $X \sim \mathcal{N}(0, 1)$. Si $Y = e^X$, quelle est la notation de la loi de $Y$ ?
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 3 : Intuition (Somme vs Produit)]
+La taille d'une population de bactéries au temps $t$ est $P(t) = P(0) \times F_1 \times F_2 \times \dots \times F_t$, où les $F_i$ sont des facteurs de croissance aléatoires.
+Pourquoi est-il plus probable que $P(t)$ suive une loi log-normale plutôt qu'une loi normale ?
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 4 : Intuition (Transformation)]
+Si $X \sim \mathcal{N}(0, \sigma^2)$, on sait que la distribution de $X$ est symétrique autour de 0.
+Pourquoi la distribution de $Y = e^X$ n'est-elle pas symétrique ?
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 5 : PDF (Propriétés)]
+Soit $Y \sim \text{Log-}\mathcal{N}(\mu, \sigma^2)$. Quelle est la probabilité $P(Y \le 0)$ ?
+\end{exercicebox}
+
+% --- Section 2 : Moments et Mesures Centrales ---
+
+\begin{exercicebox}[Exercice 6 : Espérance]
+Soit $Y \sim \text{Log-}\mathcal{N}(\mu=4, \sigma^2=2)$.
+Calculez l'espérance $E[Y]$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 7 : Médiane]
+Soit $Y \sim \text{Log-}\mathcal{N}(\mu=4, \sigma^2=2)$.
+Calculez la médiane $\text{Med}(Y)$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 8 : Mode]
+Soit $Y \sim \text{Log-}\mathcal{N}(\mu=4, \sigma^2=2)$.
+Calculez le mode $\text{Mode}(Y)$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 9 : Relation d'Ordre]
+En utilisant les résultats des exercices 6, 7 et 8, vérifiez la relation d'ordre (inégalité) entre le mode, la médiane et l'espérance.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 10 : Variance]
+Soit $Y \sim \text{Log-}\mathcal{N}(\mu=1, \sigma^2=1)$.
+Calculez la variance $\text{Var}(Y)$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 11 : Moments (Problème Inverse)]
+Soit $Y$ une variable log-normale. On sait que sa médiane est $e^5$ et que son espérance est $e^{5.5}$.
+\begin{enumerate}
+    \item Trouvez $\mu$.
+    \item Trouvez $\sigma^2$.
+\end{enumerate}
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 12 : Impact de $\sigma$ sur l'Espérance]
+Soient $A \sim \text{Log-}\mathcal{N}(0, 1)$ et $B \sim \text{Log-}\mathcal{N}(0, 2)$.
+Les deux ont la même médiane ($e^0=1$). Laquelle a l'espérance la plus élevée ? Pourquoi ?
+\end{exercicebox}
+
+% --- Section 3 : Calculs de Probabilités ---
+
+\begin{exercicebox}[Exercice 13 : Calcul de CDF (Simple)]
+Soit $Y \sim \text{Log-}\mathcal{N}(\mu=5, \sigma^2=1)$. (donc $\sigma=1$).
+Calculez $P(Y \le e^5)$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 14 : Calcul de CDF]
+Soit $Y \sim \text{Log-}\mathcal{N}(\mu=3, \sigma=2)$.
+Calculez $P(Y \le e^4)$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 15 : Calcul de Probabilité (Queue Droite)]
+Soit $Y \sim \text{Log-}\mathcal{N}(\mu=0, \sigma=1)$.
+Calculez $P(Y > 1)$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 16 : Calcul de Probabilité (Queue Gauche)]
+Soit $Y \sim \text{Log-}\mathcal{N}(\mu=1, \sigma=1)$.
+Calculez $P(Y \le e^{-1})$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 17 : Calcul de Probabilité (Intervalle)]
+Soit $Y \sim \text{Log-}\mathcal{N}(\mu=10, \sigma=3)$.
+Calculez $P(e \le Y \le e^{16})$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 18 : Application (Revenu)]
+Le revenu $Y$ (en milliers) suit $\text{Log-}\mathcal{N}(\mu=3, \sigma=1)$.
+Quelle est la probabilité qu'un individu ait un revenu $Y$ inférieur à $e^2$ (milliers) ?
+\end{exercicebox}
+
+% --- Section 4 : Problèmes Inverses ---
+
+\begin{exercicebox}[Exercice 19 : Problème Inverse (Médiane)]
+Soit $Y \sim \text{Log-}\mathcal{N}(\mu=5, \sigma=2)$. Trouvez la valeur $y$ telle que $P(Y \le y) = 0.5$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 20 : Problème Inverse (Percentile)]
+Soit $Y \sim \text{Log-}\mathcal{N}(\mu=0, \sigma=1)$. Trouvez le 84.13ème percentile de $Y$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 21 : Problème Inverse (Percentile)]
+Soit $Y \sim \text{Log-}\mathcal{N}(\mu=2, \sigma=3)$. Trouvez la valeur $y$ telle que $P(Y \le y) \approx 0.9772$.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 22 : Problème Inverse (Quantile bas)]
+Soit $Y \sim \text{Log-}\mathcal{N}(\mu=10, \sigma=2)$. Trouvez la valeur $y$ telle que $P(Y > y) \approx 0.9938$.
+\end{exercicebox}
+
+% --- Section 5 : Applications (Modèle Financier) ---
+
+\begin{exercicebox}[Exercice 23 : Modèle Financier (Paramètres)]
+Le log-rendement journalier $x_i$ d'un actif a $\mu=E[x_i]=0.01$ et $\sigma^2=\text{Var}(x_i)=0.04$.
+Soit $X = \sum_{i=1}^{16} x_i$ le log-rendement total sur 16 jours. On suppose l'indépendance.
+Quelle est la loi de $X$ ? (Donnez son nom, $E[X]$ et $\text{Var}(X)$).
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 24 : Modèle Financier (Loi du Prix)]
+En utilisant l'exercice 23, soit $S(0)$ le prix initial et $S(16)$ le prix après 16 jours.
+Quelle est la loi du \textit{ratio} de prix $Y = S(16)/S(0)$ ?
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 25 : Modèle Financier (Calcul de Prob.)]
+Un actif a $S(0)=100$. Le log-rendement sur 1 an $X = \ln(S(1)/S(0))$ suit $\mathcal{N}(\mu=0.05, \sigma^2=0.09)$.
+Quelle est la probabilité que le prix de l'actif après 1 an soit inférieur à 100 ? (c-à-d, $P(S(1) < 100)$).
+\end{exercicebox}
