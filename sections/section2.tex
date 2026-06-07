@@ -541,3 +541,208 @@ L'objectif ultime de cette modélisation mathématique n'est pas de calculer un 
 Pour que la limite ait un sens mathématique et économique, il faudra réduire la taille de la variation de prix ($x$) au fur et à mesure que le nombre d'étapes ($N$) augmente, tout en préservant certaines propriétés de la volatilité de l'action. 
 C'est précisément ce passage à la limite qui nous fera basculer de l'arbre binomial discret au mouvement brownien continu, fondement du modèle de Black-Scholes.
 \end{intuitionbox}
+
+\subsection{Le Modèle Normal}
+
+\begin{intuitionbox}[La convergence et le calibrage de l'arbre]
+Pour obtenir un prix d'option infiniment précis, il faut découper le temps en intervalles de plus en plus petits, c'est-à-dire faire tendre le nombre de pas de temps vers l'infini. Cependant, nous ne pouvons pas conserver une variation de prix constante à chaque étape, sous peine de voir la volatilité finale exploser. Il faut que la taille du saut diminue à mesure que le nombre d'étapes augmente. La méthode exacte pour réduire cette taille définit la nature du modèle continu que nous obtiendrons à la limite.
+\end{intuitionbox}
+
+\begin{theorembox}[Calibrage de la moyenne et de la variance]
+Considérons un modèle simplifié où le taux d'intérêt est nul. L'actif a une valeur initiale $S_0$. L'échéance de l'option est $T$.
+Nous imposons deux contraintes statistiques fondamentales sur le prix de l'actif à l'échéance $T$ :
+\begin{itemize}[label=$\rightarrow$]
+    \item L'espérance du prix final doit être égale au prix initial : $\mathbb{E}[S_T] = S_0$.
+    \item La variance totale du prix final doit croître linéairement avec le temps : $Var(S_T) = \sigma^2 T$, où $\sigma$ représente la volatilité absolue.
+\end{itemize}
+\end{theorembox}
+
+\begin{definitionbox}[Détermination de la taille du saut]
+Nous divisons la durée totale $T$ en $N$ pas de temps réguliers. 
+Puisque les mouvements à chaque pas sont indépendants, la variance totale est la somme des variances locales. Pour obtenir une variance totale de $\sigma^2 T$ après $N$ pas, la variance de chaque micro-étape doit obligatoirement être de $\sigma^2 T / N$.
+
+Supposons qu'à chaque étape, l'actif monte d'un montant $+x_N$ ou baisse d'un montant $-x_N$ avec une probabilité équiprobable de $0,5$.
+L'espérance locale de ce mouvement est bien nulle : $0,5(x_N) + 0,5(-x_N) = 0$.
+La variance locale de ce mouvement est l'espérance des carrés : $0,5(x_N)^2 + 0,5(-x_N)^2 = (x_N)^2$.
+
+En égalisant cette variance locale avec notre cible, nous déduisons la taille exacte du saut par pas de temps :
+\begin{equation*}
+    (x_N)^2 = \frac{\sigma^2 T}{N} \implies x_N = \sigma \sqrt{\frac{T}{N}}
+\end{equation*}
+Le mouvement de l'actif à chaque étape doit donc être proportionnel à la racine carrée du pas de temps.
+\end{definitionbox}
+
+\begin{examplebox}[L'équation de la trajectoire discrète]
+Pour formaliser cette dynamique, introduisons une suite de variables aléatoires indépendantes $Z_i$. À l'étape $i$, $Z_i$ prend la valeur $+1$ ou $-1$, chacune avec une probabilité de $0,5$.
+Après $N$ étapes de temps, le prix de l'actif est la somme de son prix initial et de toutes ses variations :
+\begin{equation*}
+    S_N = S_0 + \sigma \sqrt{\frac{T}{N}} \sum_{i=1}^{N} Z_i
+\end{equation*}
+Le prix sans arbitrage de l'option d'achat (qui verse un flux final $f(S_T)$) est l'espérance mathématique calculée sur l'ensemble de ces chemins :
+\begin{equation*}
+    Opt_0 = \mathbb{E}\left[ f\left( S_0 + \sigma \sqrt{\frac{T}{N}} \sum_{i=1}^{N} Z_i \right) \right]
+\end{equation*}
+\end{examplebox}
+
+\begin{remarquebox}[L'appel au Théorème Central Limite]
+Le but de cette construction est d'étudier la limite de cette espérance lorsque $N$ tend vers l'infini. 
+Dans l'équation ci-dessus, le terme $\sum_{i=1}^{N} Z_i$ représente une somme de variables aléatoires indépendantes et identiquement distribuées, de moyenne nulle. Le Théorème Central Limite affirme que lorsqu'on normalise une telle somme par la racine carrée de $N$, sa distribution de probabilité converge irrémédiablement vers une loi Normale standard (la fameuse courbe en cloche de Gauss).
+Par conséquent, à la limite continue, le prix futur de l'action $S_T$ suivra une distribution Normale. Ce modèle arithmétique constitue les bases historiques posées par Louis Bachelier en 1900.
+\end{remarquebox}
+
+\subsection{Convergence vers l'Intégrale de Valorisation}
+
+\begin{theorembox}[Théorème Central Limite (TCL)]
+Soit $X_1, X_2, \dots$ une suite de variables aléatoires indépendantes et identiquement distribuées (i.i.d.), ayant une moyenne finie $\mu$ et une variance finie non nulle $\sigma^2$.
+Soit $S_n$ la somme de ces $n$ variables :
+\begin{equation*}
+    S_n = X_1 + X_2 + \dots + X_n
+\end{equation*}
+Alors, la distribution de la variable centrée et réduite :
+\begin{equation*}
+    \frac{S_n - n\mu}{\sigma \sqrt{n}}
+\end{equation*}
+converge vers celle d'une variable aléatoire Gaussienne de moyenne 0 et de variance 1 lorsque $n$ tend vers l'infini.
+\end{theorembox}
+
+\begin{intuitionbox}[Application du TCL à notre modèle]
+Dans notre arbre binomial calibré, les variables aléatoires $Z_i$ prennent les valeurs $+1$ ou $-1$ avec probabilité $0,5$. Elles sont indépendantes, de moyenne nulle ($\mu = 0$) et de variance unitaire ($\sigma^2 = 1$).
+En appliquant le Théorème Central Limite, la somme de ces variables divisée par la racine du nombre de pas $N$ :
+\begin{equation*}
+    \frac{1}{\sqrt{N}} \sum_{i=1}^{N} Z_i
+\end{equation*}
+converge vers une distribution Gaussienne standard, notée $\mathcal{N}(0,1)$, de moyenne 0 et de variance 1, lorsque $N \to \infty$.
+\end{intuitionbox}
+
+\begin{definitionbox}[Le prix limite en temps continu]
+Le prix de l'actif après $N$ étapes était donné par :
+\begin{equation*}
+    S_N = S_0 + \sigma \sqrt{T} \left( \frac{1}{\sqrt{N}} \sum_{i=1}^{N} Z_i \right)
+\end{equation*}
+En passant à la limite continue ($N \to \infty$), le terme entre parenthèses devient la variable aléatoire $\mathcal{N}(0,1)$. La distribution du prix futur de l'actif converge donc vers :
+\begin{equation*}
+    S_T = S_0 + \sigma \sqrt{T} \mathcal{N}(0,1)
+\end{equation*}
+
+Le prix d'arbitrage de l'option est l'espérance mathématique de son flux final $f(S_T)$. Puisque $S_T$ suit une loi Normale, cette espérance se calcule formellement à l'aide de la fonction de densité de la loi Normale.
+Le prix converge vers l'intégrale suivante :
+\begin{equation*}
+    Opt_0 = \mathbb{E}[f(S_T)] = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} f(S_0 + \sigma \sqrt{T} x) e^{-\frac{x^2}{2}} dx
+\end{equation*}
+Pour certains types de flux finaux, comme celui d'une option d'achat classique vanille où $f(S) = \max(S - K, 0)$, cette intégrale peut être résolue analytiquement pour obtenir une formule de prix explicite.
+\end{definitionbox}
+
+\begin{remarquebox}[Le modèle de Bachelier et ses limites]
+La formule obtenue ici (le modèle Normal) suppose que le prix de l'actif suit une loi Normale (arithmétique). Bien qu'élégante mathématiquement, cette modélisation pose un problème financier majeur : une variable régie par une loi Normale peut prendre des valeurs négatives. Or, le prix d'une action, du fait de la responsabilité limitée des actionnaires, ne peut jamais tomber sous zéro. C'est cette aberration économique qui a conduit les chercheurs à abandonner le modèle Normal de Bachelier au profit du modèle Lognormal (géométrique) pour construire la théorie moderne de Black-Scholes.
+\end{remarquebox}
+
+\newpage
+
+\subsection{L'Intégration des Taux d'Intérêt}
+
+\begin{intuitionbox}[La valeur temporelle de l'argent]
+Jusqu'à présent, le modèle supposait un taux d'intérêt nul. Dans la réalité, le capital possède une valeur temporelle. Nous introduisons un taux d'intérêt sans risque composé en continu, noté r. 
+Sur un intervalle de temps donné $\Delta t$, un placement bancaire de 1 euro croît au taux sans risque et vaudra $e^{r\Delta t}$ à la fin de la période. 
+L'action, valant $S_0$ initialement, prendra la valeur $S_+$ en cas de hausse, ou $S_-$ en cas de baisse.
+\end{intuitionbox}
+
+\begin{theorembox}[Condition d'absence d'opportunité d'arbitrage (AOA)]
+Pour qu'aucun arbitrage ne soit possible entre l'action et l'obligation sans risque, le rendement garanti de l'obligation doit impérativement se situer entre le pire et le meilleur scénario de l'action :
+\begin{equation*}
+    S_- < S_0 e^{r\Delta t} < S_+
+\end{equation*}
+Si $S_0 e^{r\Delta t} > S_+$, un opérateur vendrait l'action à découvert pour tout placer à la banque et ferait un profit certain. Inversement, si le taux de la banque était inférieur au pire scénario $S_-$, l'opérateur emprunterait à l'infini pour acheter des actions sans aucun risque de perte.
+\end{theorembox}
+
+\begin{definitionbox}[La probabilité risque-neutre généralisée]
+La neutralité au risque impose que le rendement espéré de l'action soit exactement égal au rendement de l'actif sans risque. L'espérance de la valeur future de l'action n'est donc plus $S_0$, mais sa valeur capitalisée à la banque :
+\begin{equation*}
+    \mathbb{E}[S_{\Delta t}] = p S_+ + (1-p) S_- = S_0 e^{r\Delta t}
+\end{equation*}
+En résolvant cette équation pour extraire p, nous obtenons la formule fondamentale de la probabilité risque-neutre dans un arbre avec taux d'intérêt :
+\begin{equation*}
+    p = \frac{S_0 e^{r\Delta t} - S_-}{S_+ - S_-}
+\end{equation*}
+Grâce à la condition d'AOA définie précédemment, cette fraction donnera toujours un résultat strictement compris entre 0 et 1.
+\end{definitionbox}
+
+\begin{remarquebox}[Le concept d'Espérance Actualisée]
+Avec l'introduction du taux r, notre ancien argument d'évaluation directe s'effondre. L'espérance de l'obligation future n'est plus égale à sa valeur initiale, car 1 euro devient $e^{r\Delta t}$. 
+Pour conserver la validité de la théorie de l'arbitrage, nous devons utiliser les prix actualisés. La règle d'or devient : la valeur initiale de n'importe quel portefeuille est égale à l'espérance de sa valeur future, divisée par le facteur de capitalisation de l'actif sans risque.
+\end{remarquebox}
+
+\begin{definitionbox}[Tarification de l'option avec taux d'intérêt]
+Le prix de l'option (Opt) aujourd'hui est l'espérance mathématique de son flux futur $f(S_{\Delta t})$ sous la probabilité risque-neutre p, le tout actualisé au taux sans risque :
+\begin{equation*}
+    Opt_0 = e^{-r\Delta t} \mathbb{E}^{RN}[f(S_{\Delta t})] = e^{-r\Delta t} \Big[ p \cdot f(S_+) + (1-p) \cdot f(S_-) \Big]
+\end{equation*}
+\end{definitionbox}
+
+\begin{intuitionbox}[Conséquence sur la couverture dans les arbres à N périodes]
+Cette logique s'applique de manière itérative dans un arbre à multiples périodes. La méthode par couverture reste parfaitement valide : pour répliquer l'option, il faut investir à t=0 une somme dans l'action et le reste sur un compte bancaire rémunéré au taux r. 
+Au fur et à mesure que le nombre de pas de temps tend vers l'infini, la durée $\Delta t$ tend vers zéro. L'opérateur devra alors acheter et vendre l'action, tout en empruntant ou plaçant du cash de manière continue pour maintenir son clone parfait. C'est le principe fondateur de la couverture dynamique en temps continu.
+\end{intuitionbox}
+
+\newpage
+
+\begin{examplebox}[Application globale : Arbre à 3 périodes avec taux d'intérêt]
+Nous allons évaluer une option de vente (Put) européenne de prix d'exercice K = 100, arrivant à échéance dans 3 mois (T = 0,25 année). 
+Les paramètres de notre modèle à 3 étapes sont les suivants :
+\begin{itemize}[label=$\cdot$]
+    \item Prix initial de l'action : $S_0 = 100$.
+    \item L'arbre comporte $N = 3$ pas de temps. La durée d'une étape est $\Delta t = T / 3 = 0,25 / 3 = 1/12$ d'année (soit 1 mois).
+    \item Le taux d'intérêt continu sans risque est $r = 5\%$ par an ($r = 0,05$).
+    \item À chaque étape, l'action subit une variation multiplicative. Elle monte de 5\% ($u = 1,05$) ou baisse de 4,76\% ($d = 0,9524$, notons que $u \times d \approx 1$).
+\end{itemize}
+
+Étape 1 : Calcul de la probabilité risque-neutre (p)
+Nous appliquons la formule vue précédemment. À chaque nœud, l'action valant S évolue vers $S_+ = S \times u$ ou $S_- = S \times d$.
+\begin{equation*}
+    p = \frac{S e^{r\Delta t} - S_-}{S_+ - S_-} = \frac{e^{r\Delta t} - d}{u - d}
+\end{equation*}
+Calculons le facteur de capitalisation sur un mois : $e^{0,05 \times (1/12)} \approx 1,004175$.
+\begin{equation*}
+    p = \frac{1,004175 - 0,9524}{1,05 - 0,9524} = \frac{0,051775}{0,0976} \approx 0,5305
+\end{equation*}
+La probabilité de baisse est donc $1 - p = 0,4695$. Ces probabilités restent constantes sur tout l'arbre.
+
+Étape 2 : Construction de l'arbre des prix de l'action
+À t=0, $S_0 = 100$.
+À t=1 (1 mois) : Les prix possibles sont 105 et 95,24.
+À t=2 (2 mois) : Les prix possibles sont 110,25 (deux hausses), 100 (une hausse, une baisse) et 90,70 (deux baisses).
+À t=3 (3 mois) : Les 4 prix finaux possibles sont :
+\begin{itemize}[label=$\cdot$]
+    \item 3 hausses : $110,25 \times 1,05 = 115,76$
+    \item 2 hausses, 1 baisse : $100 \times 1,05 = 105$
+    \item 1 hausse, 2 baisses : $90,70 \times 1,05 = 95,24$
+    \item 3 baisses : $90,70 \times 0,9524 = 86,38$
+\end{itemize}
+
+Étape 3 : Évaluation des flux finaux de l'option (Put K=100) à t=3
+Le payoff du Put est $\max(100 - S_3, 0)$.
+\begin{itemize}[label=$\cdot$]
+    \item Pour $S_3 = 115,76$ : Put = 0
+    \item Pour $S_3 = 105$ : Put = 0
+    \item Pour $S_3 = 95,24$ : Put = $100 - 95,24 = 4,76$
+    \item Pour $S_3 = 86,38$ : Put = $100 - 86,38 = 13,62$
+\end{itemize}
+
+Étape 4 : Induction rétrograde et Actualisation
+Pour trouver le prix du Put à t=0, nous utilisons la méthode probabiliste globale. Le nombre de chemins pour atteindre chaque nœud suit les coefficients binomiaux pour N=3 (1, 3, 3, 1). L'espérance totale des flux est calculée puis actualisée sur la durée totale T.
+\begin{equation*}
+    Opt_0 = e^{-rT} \Big[ 1(p^3)(0) + 3(p^2)(1-p)(0) + 3(p)(1-p)^2(4,76) + 1(1-p)^3(13,62) \Big]
+\end{equation*}
+Calculons l'espérance brute :
+\begin{equation*}
+    \mathbb{E} = 3 \times (0,5305) \times (0,4695)^2 \times 4,76 + 1 \times (0,4695)^3 \times 13,62
+\end{equation*}
+\begin{equation*}
+    \mathbb{E} = (1,5915 \times 0,2204 \times 4,76) + (0,1035 \times 13,62) = 1,67 + 1,41 = 3,08
+\end{equation*}
+Il ne reste plus qu'à actualiser cette espérance au taux sans risque continu sur 3 mois :
+\begin{equation*}
+    Opt_0 = 3,08 \times e^{-0,05 \times 0,25} = 3,08 \times e^{-0,0125} \approx 3,08 \times 0,9876 \approx 3,04 \text{ €}
+\end{equation*}
+Le juste prix de cette option de vente est de 3,04 €.
+\end{examplebox}
+
