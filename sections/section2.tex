@@ -310,3 +310,116 @@ L'état C (100) est atteint de deux manières différentes : une hausse suivie d
 Ce découpage temporel est une avancée théorique majeure. En regardant l'arbre globalement à t=1, nous avons bien trois états finaux possibles (110, 100, 90). Cependant, si nous nous plaçons à n'importe quel nœud spécifique de l'arbre, il n'y a que deux chemins possibles pour l'étape suivante. 
 Le marché est donc localement complet à chaque nœud. Nous pourrons utiliser nos techniques d'évaluation (Couverture ou Risque-Neutre) à chaque intersection pour déduire un prix exact, en travaillant à rebours depuis l'échéance finale jusqu'à aujourd'hui.
 \end{remarquebox}
+
+\subsection{Évaluation par Couverture dans un Arbre à Deux Périodes}
+
+\begin{intuitionbox}[Le principe d'induction rétrograde]
+Pour calculer la valeur de l'option aujourd'hui, nous devons procéder à l'envers (calcul à rebours). Puisque le marché est complet à chaque nœud, nous pouvons appliquer notre argument de couverture locale. Nous calculons d'abord la valeur de l'option à la mi-journée (nœuds D et E) en utilisant les flux finaux (nœuds A, B et C). Une fois ces valeurs intermédiaires connues, nous recommençons l'opération pour trouver la valeur initiale à t=0.
+\end{intuitionbox}
+
+\newpage
+
+\begin{examplebox}[Calcul pas à pas par couverture (Delta Hedging)]
+Considérons notre option d'achat (Call) de prix d'exercice K = 100. Son profil de flux à l'échéance (t=1) est : 10 en A, 0 en C, 0 en B. Le taux d'intérêt sans risque est toujours supposé nul.
+
+\begin{enumerate}[label=Étape \arabic* :, leftmargin=*]
+    
+    \item Évaluation au nœud E (L'action vaut 95 à t=0,5)
+    \begin{itemize}[label=$\cdot$]
+        \item Si nous sommes au nœud E, l'action finira à l'échéance soit à 100 (État C), soit à 90 (État B). 
+        \item Dans les deux cas, le Call de Strike 100 ne vaudra strictement rien (0).
+        \item Conclusion immédiate : La valeur de l'option au nœud E est Opt(E) = 0.
+    \end{itemize}
+    
+    \vspace{0.2cm}
+    \item Évaluation au nœud D (L'action vaut 105 à t=0,5)
+    \begin{itemize}[label=$\cdot$]
+        \item À partir de D, l'action peut monter à 110 (le Call vaudra 10) ou baisser à 100 (le Call vaudra 0).
+        \item Construisons le portefeuille de couverture : nous achetons une quantité delta d'actions.
+        \item Valeur future du portefeuille : 110 delta - 10 (si hausse) et 100 delta - 0 (si baisse).
+        \item Pour éliminer le risque, nous égalisons : 110 delta - 10 = 100 delta, ce qui donne 10 delta = 10, soit delta = 1.
+        \item Avec 1 action, la valeur garantie à t=1 est de 100.
+        \item Par arbitrage, le portefeuille au nœud D vaut 100 : 105(1) - Opt(D) = 100, ce qui implique Opt(D) = 5.
+    \end{itemize}
+
+    \vspace{0.2cm}
+    \item Évaluation au nœud initial (L'action vaut 100 à t=0)
+    \begin{itemize}[label=$\cdot$]
+        \item Nous connaissons désormais les valeurs à la mi-journée : 5 si l'action monte à 105, 0 si elle baisse à 95.
+        \item Construisons le portefeuille initial : nous achetons une nouvelle quantité delta d'actions.
+        \item Valeur future (à t=0,5) : 105 delta - 5 (si hausse vers D) et 95 delta - 0 (si baisse vers E).
+        \item Égalisation des flux : 105 delta - 5 = 95 delta, ce qui donne 10 delta = 5, soit delta = 0,5.
+        \item Avec 0,5 action, la valeur garantie à t=0,5 est de 95(0,5) = 47,5.
+        \item Par arbitrage, la valeur initiale du portefeuille aujourd'hui doit être de 47,5 : 100(0,5) - Opt(0) = 47,5.
+        \item Le prix final de l'option aujourd'hui est Opt(0) = 2,5.
+    \end{itemize}
+
+\end{enumerate}
+\end{examplebox}
+
+\begin{remarquebox}[Couverture dynamique]
+Cet exemple démontre mathématiquement la notion de couverture dynamique évoquée précédemment. Remarquez que le delta (la quantité d'actions à détenir pour se couvrir) n'est pas constant. Il vaut 0,5 au début de la journée. Si l'action monte à 105, le vendeur de l'option devra ajuster son portefeuille en achetant 0,5 action supplémentaire pour que son delta passe à 1. La couverture parfaite exige un ajustement à chaque pas de temps.
+\end{remarquebox}
+
+\subsection{Évaluation Risque-Neutre dans un Arbre à Deux Périodes}
+
+\begin{intuitionbox}[L'avantage de la méthode probabiliste]
+Bien que l'argument de couverture nous garantisse un prix mathématiquement parfait, les calculs de portefeuilles deviennent vite fastidieux. L'approche par la probabilité risque-neutre, bien que plus abstraite, est beaucoup plus simple à appliquer. Elle donnera toujours un résultat strictement identique à la méthode par couverture.
+Il existe deux manières de l'utiliser : en remontant l'arbre pas à pas (induction rétrograde), ou en calculant directement les probabilités globales d'atteindre chaque état final.
+\end{intuitionbox}
+
+\newpage
+
+\begin{examplebox}[Méthode 1 : Calcul pas à pas (Induction rétrograde)]
+Nous reprenons le même arbre. Le taux d'intérêt est nul, donc l'espérance du prix futur de l'action doit égaler son prix actuel à chaque nœud.
+
+\begin{enumerate}[label=Étape \arabic* :, leftmargin=*]
+    \item Évaluation au nœud D (L'action vaut 105)
+    \begin{itemize}[label=$\cdot$]
+        \item L'action peut passer à 110 ou 100. La probabilité p (Hausse) doit vérifier : 110p + 100(1-p) = 105.
+        \item La seule probabilité valide est p = 1/2.
+        \item La valeur de l'option est son espérance : Opt(D) = 0,5(10) + 0,5(0) = 5.
+    \end{itemize}
+
+    \vspace{0.2cm}
+    \item Évaluation au nœud E (L'action vaut 95)
+    \begin{itemize}[label=$\cdot$]
+        \item Les flux finaux de l'option sont nuls dans tous les scénarios (États C et B).
+        \item L'espérance est de zéro quelle que soit la probabilité. Opt(E) = 0.
+    \end{itemize}
+
+    \vspace{0.2cm}
+    \item Évaluation initiale (L'action vaut 100)
+    \begin{itemize}[label=$\cdot$]
+        \item L'action passe à 105 ou 95. Pour que l'espérance soit 100, la probabilité de Hausse doit de nouveau être p = 1/2.
+        \item La valeur initiale de l'option est l'espérance de ses valeurs futures intermédiaires (Opt(D) et Opt(E)).
+        \item Opt(0) = 0,5(5) + 0,5(0) = 2,5.
+    \end{itemize}
+\end{enumerate}
+Le résultat est identique au prix d'arbitrage obtenu par la méthode de couverture en delta.
+\end{examplebox}
+
+\begin{examplebox}[Méthode 2 : Calcul par les probabilités globales des chemins]
+Plutôt que de calculer les valeurs intermédiaires de l'option, nous pouvons calculer directement la probabilité risque-neutre de nous retrouver dans chaque état final à t=1, puis calculer l'espérance finale en une seule fois.
+Sachant qu'à chaque nœud la probabilité de Hausse est de 1/2 :
+
+\begin{itemize}[label=$\cdot$]
+    \item État A (Action à 110) : Il faut 2 hausses successives. Probabilité = 1/2 fois 1/2 = 1/4.
+    \item État C (Action à 100) : Il faut 1 hausse et 1 baisse (ou inversement). Probabilité = 1/4 + 1/4 = 1/2.
+    \item État B (Action à 90) : Il faut 2 baisses successives. Probabilité = 1/2 fois 1/2 = 1/4.
+\end{itemize}
+
+Calcul direct de l'espérance de l'option aujourd'hui :
+Opt(0) = 1/4(10) + 1/2(0) + 1/4(0) = 10/4 = 2,5.
+
+Cette méthode est extrêmement puissante car elle permet de sauter toutes les étapes intermédiaires de calcul.
+\end{examplebox}
+
+\begin{theorembox}[Généralisation et Tarification Dynamique]
+L'unique caractéristique qualitative cruciale de cet argument est qu'à chaque pas de temps, l'actif ne peut évoluer que vers deux nouvelles valeurs possibles. C'est ce qui garantit la complétude locale du marché.
+\begin{itemize}[label=$\rightarrow$]
+    \item Le nombre total de pas de temps n'a aucune importance mathématique. On peut subdiviser le temps en autant d'étapes que l'on souhaite (10, 100, 1000 étapes). Tant que l'arbre reste binomial à chaque nœud, le prix d'arbitrage sera unique.
+    \item L'interprétation par la réplication reste valide : le prix de l'option (2,5) est exactement la somme d'argent qu'il faut investir aujourd'hui pour fabriquer un clone parfait de l'option.
+    \item Ce clone nécessite un rééquilibrage continu. La quantité d'actions à détenir (le Delta) et le montant de cash (emprunt ou placement) changent à chaque nœud de l'arbre en fonction du temps et du prix de l'action. C'est l'essence même de la gestion de portefeuille dynamique.
+\end{itemize}
+\end{theorembox}
