@@ -31,8 +31,6 @@ Le point crucial est que le Delta n'est pas constant : dès que le prix de l'act
 Si l'on suppose qu'il est possible de réajuster ce portefeuille \textit{en continu}, on obtient un portefeuille dont la valeur est totalement prévisible et sans risque. Selon les lois de l'arbitrage, un portefeuille sans risque doit rapporter exactement le taux d'intérêt sans risque. C'est cet argument logique strict qui permet de déduire le prix exact de l'option, appelé le prix de Black-Scholes, point de départ de toute la finance mathématique moderne.
 \end{remarquebox}
 
-\newpage
-
 \subsection{Exemple pratique et intuitif : Déduction du prix par l'arbitrage}
 
 \begin{examplebox}[Le décor du modèle simplifié binomial]
@@ -45,6 +43,8 @@ Pour comprendre la logique fondamentale du \textit{Delta Hedging} sans les math�
 \end{itemize}
 La grande question : À quel prix exact devez-vous vendre cette option aujourd'hui pour être sûr de ne pas perdre d'argent, ni d'offrir une opportunité d'arbitrage ("d'argent gratuit") au marché ?
 \end{examplebox}
+
+\newpage
 
 \begin{intuitionbox}[Le raisonnement pas à pas]
 Étape 1 : Calculer le Delta\\
@@ -105,6 +105,8 @@ $50 - \text{Prix de l'option} = 38,10$ \\
 Prix de l'option = 11,90~€
 \end{intuitionbox}
 
+\newpage
+
 \begin{remarquebox}[Généralisation aux options en dehors de la monnaie (OTM)]
 Cette logique de couverture fonctionne avec absolument n'importe quel Strike (ainsi qu'avec des \textit{Puts}). Puisque le prix de l'option est mathématiquement lié à celui de l'action, il existera toujours un ratio exact (le Delta) permettant d'annuler le risque.
 
@@ -121,8 +123,6 @@ Prenons le même scénario, mais avec un \textit{Call} de Strike 110~€ :
 \end{itemize}
 Conclusion : Quoi qu'il arrive, la valeur finale est figée à 20~€. Le portefeuille est toujours parfaitement couvert et sans risque. On peut alors appliquer la même logique d'actualisation à 5\% pour déduire le prix exact de ce Call à 110~€.
 \end{remarquebox}
-
-\newpage
 
 \subsection{Évaluation des contrats Forward et Coût de Détention}
 
@@ -152,6 +152,8 @@ Que se passe-t-il à l'échéance $T$ ?
 Pour que l'opération soit neutre, le contrat Forward doit nous permettre de vendre l'actif à un prix $K$ qui couvre exactement cette dette finale. Le "juste prix" est donc $K = S_0 e^{(r-d)T}$. Toute différence permettrait un arbitrage sans risque.
 \end{proofbox}
 
+\newpage
+
 \begin{theorembox}[Valeur et Prix théorique d'un contrat Forward]
 Si un actif liquide s'échange aujourd'hui au prix $S_0$, avec un taux de dividende continu $d$ et un taux d'intérêt sans risque composé en continu $r$, alors le prix forward théorique $F$ (le prix d'exercice qui annule la valeur du contrat à l'origine) est :
 \begin{equation*}
@@ -162,8 +164,6 @@ Si l'on possède déjà un contrat forward s'engageant à acheter cet actif à u
     V = e^{-rT} (S_0 e^{(r-d)T} - K)
 \end{equation*}
 \end{theorembox}
-
-\newpage
 
 \begin{examplebox}[Exemple 1 : Prix théorique vs Valeur en cours]
 Considérons une action $S_0 = 100$, avec $r = 0,05$ et $d = 0,02$ sur une durée $T = 1$.
@@ -259,6 +259,8 @@ Pour une action ne versant pas de dividendes ($d = 0$), le prix d'un Call europ�
 \end{equation*}
 Si les taux d'intérêt sont non négatifs ($r \geq 0$), alors $Z_0 \leq 1$, ce qui implique que le Call vaut toujours plus que sa valeur d'exercice immédiate : $C_0 > S_0 - K$.
 \end{theorembox}
+
+\newpage
 
 \begin{proofbox}[Preuve des bornes]
 La borne supérieure $S_0 > C_0$ découle du fait qu'à l'échéance, l'option vaut $\max(S_T - K, 0)$, ce qui est toujours inférieur ou égal au prix de l'action $S_T$. Par le théorème de monotonicité, cette relation doit être vraie à $t = 0$.

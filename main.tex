@@ -1,7 +1,8 @@
 \documentclass{article}
 
 % --- GESTION DES MARGES DE PAGE ---
-\usepackage[a4paper, top=2.5cm, bottom=2.5cm, left=3cm, right=3cm]{geometry}
+% MODIFIÉ : Réduction des marges pour maximiser l'espace horizontal
+\usepackage[a4paper, top=2cm, bottom=2cm, left=1.5cm, right=1.5cm]{geometry}
 
 % --- PRÉAMBULE STANDARD ---
 \usepackage[utf8]{inputenc}
@@ -133,7 +134,7 @@
   arc=0mm,       % Coins carrés
   boxrule=0pt,   % Pas de cadre
   colback=codeBackground, % Fond clair (F8F8F8)
-  borderline west={2pt}{0pt}{vscodeBlue}, % Barre latérale bleue
+  borderline west={1pt}{0pt}{vscodeBlue}, % MODIFIÉ : Barre latérale plus fine (1pt)
   fonttitle=\bfseries\color{vscodeBlue}, % Titre en bleu
   listing only,
   listing options={style=vscode, basicstyle=\ttfamily\footnotesize\color{codeText}}, % TEXTE NOIR
@@ -146,7 +147,7 @@
   arc=0mm,       % Coins carrés
   boxrule=0pt,   % Pas de cadre
   colback=black!5, % Fond gris très clair (Output)
-  borderline west={2pt}{0pt}{corrColor}, % Barre latérale grise
+  borderline west={1pt}{0pt}{corrColor}, % MODIFIÉ : Barre latérale plus fine (1pt)
   fonttitle=\bfseries\color{corrColor}, % Titre en gris
   listing only,
   listing options={style=outputstyle, basicstyle=\ttfamily\footnotesize\color{codeText}}, % TEXTE NOIR
@@ -192,31 +193,31 @@
 % --- CELLULES "SIDEBAR" (Pour le contenu théorique) ---
 \newtcolorbox{definitionbox}[1][]{
   sidebarstyle,
-  borderline west={2pt}{0pt}{defColor}, % Barre latérale gauche
+  borderline west={1pt}{0pt}{defColor}, % MODIFIÉ : Barre latérale plus fine (1pt)
   fonttitle=\bfseries\color{defColor},  % Titre en couleur (sans fond)
   title=Définition\ifstrempty{#1}{}{ : #1}
 }
 \newtcolorbox{theorembox}[1][]{
   sidebarstyle,
-  borderline west={2pt}{0pt}{theoColor},
+  borderline west={1pt}{0pt}{theoColor}, % MODIFIÉ (1pt)
   fonttitle=\bfseries\color{theoColor},
   title=Théorème\ifstrempty{#1}{}{ : #1}
 }
 \newtcolorbox{proofbox}[1][]{
   sidebarstyle,
-  borderline west={2pt}{0pt}{proofColor},
+  borderline west={1pt}{0pt}{proofColor}, % MODIFIÉ (1pt)
   fonttitle=\bfseries\color{proofColor},
   title=Preuve\ifstrempty{#1}{}{ : #1}
 }
 \newtcolorbox{intuitionbox}[1][]{
   sidebarstyle,
-  borderline west={2pt}{0pt}{intuitionColor},
+  borderline west={1pt}{0pt}{intuitionColor}, % MODIFIÉ (1pt)
   fonttitle=\bfseries\color{intuitionColor},
   title=Intuition\ifstrempty{#1}{}{ : #1}
 }
 \newtcolorbox{remarquebox}[1][]{
   sidebarstyle,
-  borderline west={2pt}{0pt}{remarqueColor},
+  borderline west={1pt}{0pt}{remarqueColor}, % MODIFIÉ (1pt)
   fonttitle=\bfseries\color{remarqueColor},
   title=Remarque\ifstrempty{#1}{}{ : #1}
 }
@@ -225,19 +226,19 @@
 % --- CELLULES "SIDEBAR" (Pour les applications) ---
 \newtcolorbox{examplebox}[1][]{
   sidebarstyle,
-  borderline west={2pt}{0pt}{exampleColor},
+  borderline west={1pt}{0pt}{exampleColor}, % MODIFIÉ (1pt)
   fonttitle=\bfseries\color{exampleColor},
   title=Exemple\ifstrempty{#1}{}{ : #1}
 }
 \newtcolorbox{exercicebox}[1][]{
     sidebarstyle,
-    borderline west={2pt}{0pt}{corrColor},
+    borderline west={1pt}{0pt}{corrColor}, % MODIFIÉ (1pt)
     fonttitle=\bfseries\color{corrColor},
     title=#1 % <-- On utilise directement l'argument fourni
 }
 \newtcolorbox{correctionbox}[1][]{
     sidebarstyle,
-    borderline west={2pt}{0pt}{exoColor},
+    borderline west={1pt}{0pt}{exoColor}, % MODIFIÉ (1pt)
     fonttitle=\bfseries\color{exoColor},
     title=#1
 }
@@ -260,7 +261,9 @@
 \newpage
 
 \input{sections/section1.tex}
-% \input{sections/section2.tex}
+\input{sections/section1exo.tex}
+\input{sections/section1sol.tex}
+\input{sections/section2.tex}
 
 % Les fichiers suivants sont commentés car ils n'existent pas encore
 %\input{sections/section3.tex}
