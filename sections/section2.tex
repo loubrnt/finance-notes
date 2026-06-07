@@ -423,3 +423,121 @@ L'unique caractéristique qualitative cruciale de cet argument est qu'à chaque 
     \item Ce clone nécessite un rééquilibrage continu. La quantité d'actions à détenir (le Delta) et le montant de cash (emprunt ou placement) changent à chaque nœud de l'arbre en fonction du temps et du prix de l'action. C'est l'essence même de la gestion de portefeuille dynamique.
 \end{itemize}
 \end{theorembox}
+
+\subsection{Généralisation à N Périodes}
+
+\begin{intuitionbox}[La mécanique de l'arbre global]
+Il n'y a rien de magique dans un modèle à deux étapes. Tant que chaque nœud de l'arbre se divise exactement en deux branches, la logique d'induction rétrograde garantit un prix sans arbitrage unique, que l'arbre compte 2, 4 ou 10 000 étapes.
+Au lieu de calculer à rebours (nœud par nœud, couche par couche) depuis l'échéance finale jusqu'à aujourd'hui, nous pouvons directement calculer les probabilités globales d'atteindre chaque nœud final de l'arbre, puis faire l'espérance mathématique des flux finaux.
+\end{intuitionbox}
+
+\newpage
+
+\begin{examplebox}[Exemple d'un arbre à 4 pas de temps (Taux d'intérêt = 0)]
+Imaginons un arbre à 4 étapes, où le cours de l'action monte ou baisse de 2,5 à chaque pas. L'action part de 100 à t=0. 
+Puisque le taux d'intérêt est nul, la probabilité risque-neutre de hausse (p) est obligatoirement de 0,5 à chaque nœud pour maintenir l'espérance locale.
+Calculons la probabilité risque-neutre globale de chaque état final à la 4ème étape :
+
+\begin{itemize}[label=$\cdot$]
+    \item Arrivée à 110 : Il faut exactement 4 hausses successives.
+    Il n'y a qu'un seul chemin. Probabilité : $1 \times (1/2)^4 = 1/16$.
+    
+    \item Arrivée à 105 : Il faut exactement 3 hausses et 1 baisse.
+    Le nombre de combinaisons possibles est donné par le coefficient binomial $C_4^1 = 4$.
+    Probabilité : $4 \times (1/2)^4 = 4/16 = 1/4$.
+    
+    \item Arrivée à 100 : Il faut exactement 2 hausses et 2 baisses.
+    Nombre de combinaisons $C_4^2 = 6$.
+    Probabilité : $6 \times (1/2)^4 = 6/16 = 3/8$.
+    
+    \item Arrivée à 95 : Il faut exactement 1 hausse et 3 baisses.
+    Nombre de combinaisons $C_4^3 = 4$.
+    Probabilité : $4 \times (1/2)^4 = 4/16 = 1/4$.
+    
+    \item Arrivée à 90 : Il faut exactement 0 hausse et 4 baisses.
+    Il n'y a qu'un seul chemin. Probabilité : $1 \times (1/2)^4 = 1/16$.
+\end{itemize}
+
+Tarification d'un Call de Strike 100 :
+Nous multiplions la probabilité de chaque état par la valeur intrinsèque du Call dans cet état.
+Opt(K=100) = (1/16) fois (110 - 100) + (1/4) fois (105 - 100) + 0 + 0 + 0
+Opt(K=100) = 10/16 + 5/4 = 10/16 + 20/16 = 30/16 = 15/8.
+\end{examplebox}
+
+\vspace{0.5cm}
+\begin{center}
+\begin{tikzpicture}[>=stealth, sloped]
+    % Style pour les mini noeuds d'un grand arbre
+    \tikzstyle{mini_node} = [circle, draw=vscodeBlue, fill=codeBackground, thick, minimum size=0.4cm, inner sep=0pt, font=\tiny]
+    \tikzstyle{time_style} = [font=\small\color{gray}]
+
+    % Dimensions de l'arbre
+    \def\N{5} % Nombre d'étapes
+    \def\dx{1.8} % Espace horizontal entre les étapes
+    \def\dy{0.8} % Espace vertical entre les noeuds
+
+    % Lignes de temps
+    \foreach \i in {0,...,\N} {
+        \node[time_style] at (\i*\dx, \N*\dy*0.5 + 0.8) {$t=\i$};
+    }
+
+    % Génération automatique des noeuds et des liens (Arbre Recombinant)
+    \foreach \i in {0,...,\N} {
+        \foreach \j in {0,...,\i} {
+            % Calcul de la position Y : Centré autour de Y=0
+            \pgfmathsetmacro{\ypos}{(\i - 2*\j)*\dy*0.5}
+            \node[mini_node] (N-\i-\j) at (\i*\dx, \ypos) {};
+            
+            % Dessiner les liens vers la génération précédente (si on n'est pas à i=0)
+            \ifnum\i>0
+                \pgfmathtruncatemacro{\prevI}{\i-1} % CORRECTION ICI
+                % Lien depuis le noeud supérieur (baisse)
+                \ifnum\j>0
+                    \pgfmathtruncatemacro{\prevJup}{\j-1} % CORRECTION ICI
+                    \draw[->, vscodeBlue!60] (N-\prevI-\prevJup) -- (N-\i-\j);
+                \fi
+                % Lien depuis le noeud inférieur (hausse)
+                \ifnum\j<\i
+                    \pgfmathtruncatemacro{\prevJdown}{\j} % CORRECTION ICI
+                    \draw[->, vscodeBlue!60] (N-\prevI-\prevJdown) -- (N-\i-\j);
+                \fi
+            \fi
+        }
+    }
+    
+    % Étiquette pour montrer la multiplication des chemins
+    \node[right=0.2cm of N-\N-0, font=\scriptsize] {5 Hausses};
+    \node[right=0.2cm of N-\N-5, font=\scriptsize] {5 Baisses};
+    \node[right=0.2cm of N-\N-2, font=\scriptsize] {Chemins multiples};
+    
+\end{tikzpicture}
+\end{center}
+\vspace{0.5cm}
+
+\begin{theorembox}[La Formule Globale pour N pas de temps]
+Considérons une action de prix initial S. L'arbre compte $N$ étapes. À chaque étape, l'action monte ou baisse d'un montant absolu $x$.
+À la fin de l'arbre, la valeur de l'action dépend uniquement du nombre total de hausses (noté $j$). Si l'action a fait $j$ hausses, elle a obligatoirement fait $(N - j)$ baisses.
+Le prix final de l'action $S_j$ dans l'état avec $j$ hausses s'écrit :
+\begin{equation*}
+    S_j = S + j(x) - (N - j)(x) = S + (2j - N)x
+\end{equation*}
+
+Puisque la probabilité d'une hausse est de $1/2$ (avec un taux nul), la probabilité totale d'atteindre ce prix final $S_j$ suit une distribution binomiale :
+\begin{equation*}
+    Prob(S_j) = \frac{1}{2^N} \binom{N}{j}
+\end{equation*}
+Où $\binom{N}{j}$ représente le nombre de chemins différents permettant d'obtenir $j$ hausses sur $N$ lancers.
+
+Par conséquent, la valeur actuelle d'un produit dérivé qui génère un flux $f(S)$ à l'échéance est simplement l'espérance de tous les flux terminaux pondérés par cette probabilité :
+\begin{equation*}
+    Opt_0 = \frac{1}{2^N} \sum_{j=0}^{N} \binom{N}{j} f\left(S + (2j - N)x\right)
+\end{equation*}
+\end{theorembox}
+
+\newpage
+
+\begin{intuitionbox}[Vers le temps continu et Black-Scholes]
+L'objectif ultime de cette modélisation mathématique n'est pas de calculer un arbre géant à la main, mais de comprendre ce qui se passe mathématiquement lorsque l'on fait tendre le nombre d'étapes $N$ vers l'infini. 
+Pour que la limite ait un sens mathématique et économique, il faudra réduire la taille de la variation de prix ($x$) au fur et à mesure que le nombre d'étapes ($N$) augmente, tout en préservant certaines propriétés de la volatilité de l'action. 
+C'est précisément ce passage à la limite qui nous fera basculer de l'arbre binomial discret au mouvement brownien continu, fondement du modèle de Black-Scholes.
+\end{intuitionbox}
