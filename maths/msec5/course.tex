@@ -63,95 +63,202 @@ Sa densité a une forme caractéristique de \textbf{cloche symétrique} :
 
 Mais d'où vient cette formule spécifique ? Il existe une dérivation fascinante à partir d'hypothèses fondamentales sur les erreurs aléatoires (argument d'Herschel-Maxwell).
 
+% \begin{proofbox}[Dérivation de la Densité Normale à partir des Principes Fondamentaux]
+
+% \textbf{Contexte Visuel :} Imaginons un nuage de points dispersés autour d'une cible à l'origine $(0,0)$, comme des impacts de fléchettes. Le graphique ci-dessous illustre cette dispersion. On s'intéresse à la probabilité de tomber dans une petite zone, comme $dA$, autour d'un point $(x, y)$.
+
+% \begin{center}
+% \begin{tikzpicture}
+% \begin{axis}[
+%     axis lines=middle, % Axes qui passent par l'origine (0,0)
+%     xlabel=$x$,       % Étiquette axe X
+%     ylabel=$y$,       % Étiquette axe Y
+%     axis line style={magenta}, % Couleur des axes
+%     xlabel style={anchor=west, magenta}, % Style de l'étiquette X
+%     ylabel style={anchor=south, magenta}, % Style de l'étiquette Y
+%     xmin=-3.5, xmax=3.5, % Limites du graphique
+%     ymin=-3.5, ymax=3.5,
+%     tick label style={font=\tiny} % Police plus petite pour les graduations
+% ]
+
+% % Ajout des points du nuage. Ce sont des coordonnées approximatives.
+% \addplot [only marks, mark=*, cyan, mark size=1.5pt]
+% coordinates {
+%     (0.2, 0.1) (-0.5, 0.2) (0.1, -0.3) (0.5, -0.8) (-0.3, -1.2) (0,0.1)
+%     (1.5, 1.5) (0.8, 0.8) (2.0, -0.5) (2.8, -1.4) (2.5, -0.2)
+%     (-1.8, -1.3) (-2.5, 0.5) (-1.5, 0.3) (-2.2, -0.8) (-0.8, 0.5)
+%     (0.5, 1.2) (0.7, 2.8) (0.2, 3.2) (-0.5, 1.5) (-1.0, -2.0)
+%     (1.8, -1.0) (1.0, -1.5) (0.3, -2.5) (-1.8, -2.8) (1.2, 0.5)
+%     (-1.2, -1.5) (-0.8, 1.1)
+% };
+
+% % --- Annotations ---
+
+% % Points et boîte pour 'dA'
+% \addplot [only marks, mark=*, red, mark size=1.5pt] coordinates {(1.3, 2.0)};
+% \draw [red, thick] (axis cs:1.1, 1.8) rectangle (axis cs:1.5, 2.2);
+% \node [red, above] at (axis cs:1.3, 2.2) {$dA$};
+
+% % Points et boîte pour 'dB'
+% \addplot [only marks, mark=*, cyan, mark size=1.5pt] 
+% coordinates {(-1.2, 2.0) (-1.3, 2.3) (-1.0, 2.2) (-1.1, 1.9)};
+% \draw [blue, thick] (axis cs:-1.8, 1.2) rectangle (axis cs:-0.8, 2.8);
+% \node [blue, above] at (axis cs:-1.3, 2.8) {$dB$};
+
+% \end{axis}
+% \end{tikzpicture}
+% \end{center}
+
+% \textbf{Objectif :} Expliquer comment arriver à la formule mathématique de la courbe en cloche (densité de probabilité normale) en partant de principes fondamentaux sur les erreurs aléatoires.
+
+% \textbf{1. Le Point de Départ : Densité et Aire $dA$}
+% Dans une distribution continue, la probabilité de tomber \textit{exactement} sur un point $(x, y)$ est nulle. On ne peut donc pas parler de "probabilité d'un point". On parle de la probabilité de tomber \textit{dans une petite zone}, comme un rectangle $dA = dx \cdot dy$ autour du point $(x, y)$.
+% Cette probabilité, notée $P(\text{dans } dA)$, est \textit{proportionnelle} à l'aire de la zone $dA$. La \textit{constante de proportionnalité} est la \textbf{fonction de densité de probabilité} $p(x, y)$ évaluée en ce point. En d'autres termes, la densité $p(x, y)$ \textit{représente} localement la concentration de probabilité. Ainsi, la probabilité de tomber dans la zone $dA$ est approximativement :
+% $$ P(\text{dans } dA) \approx p(x, y) \cdot dA $$
+
+% \textbf{2. Les Hypothèses Fondamentales}
+% On pose deux hypothèses sur la nature de ces erreurs (représentées par la densité $p(x, y)$) :
+% \begin{enumerate}
+%     \item \textbf{Indépendance des axes :} L'erreur horizontale ($x$) est indépendante de l'erreur verticale ($y$). Cela implique que la densité jointe $p(x, y)$ peut s'écrire comme le produit de la densité marginale sur $x$, notée $f(x)$, et de la densité marginale sur $y$, notée $f(y)$. Donc, $p(x, y) = f(x) \cdot f(y)$.
+%     \item \textbf{Symétrie de rotation (Isotropie) :} La densité ne dépend que de la distance $r = \sqrt{x^2 + y^2}$ au centre, pas de l'angle. Il existe donc une fonction $\phi(r)$ telle que la densité en $(x,y)$ est $p(x, y) = \phi(\sqrt{x^2 + y^2})$.
+% \end{enumerate}
+
+% \textbf{3. L'Équation Fonctionnelle}
+% En égalant les deux expressions pour la même densité $p(x, y)$ (à une constante près), on obtient :
+% $$ f(x) \cdot f(y) = \phi(\sqrt{x^2 + y^2}) $$
+% Pour $y=0$, on a $f(x) \cdot f(0) = \phi(x)$. Posons $f(0) = \lambda$. Alors $\phi(x) = \lambda f(x)$.
+% L'équation devient :
+% $$ f(x) \cdot f(y) = \lambda f(\sqrt{x^2 + y^2}) $$
+
+% \textbf{4. Résolution de l'Équation Fonctionnelle}
+% Posons $g(x) = f(x)/\lambda$, avec $g(0)=1$. L'équation se simplifie en :
+% $$ g(x) g(y) = g(\sqrt{x^2 + y^2}) $$
+% Posons $g(x) = h(x^2)$. L'équation devient $h(x^2)h(y^2) = h(x^2+y^2)$. Avec $a=x^2$ et $b=y^2$, on a :
+% $$ h(a) h(b) = h(a+b) $$
+% La solution continue de cette équation de Cauchy est $h(a) = e^{Aa}$ pour une constante $A$.
+% Retour aux fonctions : $g(x) = h(x^2) = e^{Ax^2}$. $f(x) = \lambda g(x) = \lambda e^{Ax^2}$.
+% Comme la densité doit diminuer loin du centre, $A$ doit être négative. Posons $A = -k$ avec $k>0$.
+% $$ f(x) = \lambda e^{-k x^2} $$
+
+% \textbf{5. Normalisation et Identification des Paramètres}
+% \begin{enumerate}
+%     \item \textbf{Condition $\int f(x) dx = 1$} : L'intégrale Gaussienne $\int_{-\infty}^{\infty} e^{-k x^2} \, \mathrm{d}x = \sqrt{\frac{\pi}{k}}$.
+%     Donc, $\int_{-\infty}^{\infty} f(x) dx = \lambda \sqrt{\frac{\pi}{k}} = 1 \implies \lambda = \sqrt{\frac{k}{\pi}}$.
+%     \item \textbf{Lien avec la Variance ($\sigma^2$)} : Pour une distribution centrée, $\sigma^2 = E[X^2] = \int x^2 f(x) dx$.
+%     $$ \sigma^2 = \int_{-\infty}^{\infty} x^2 \left( \sqrt{\frac{k}{\pi}} e^{-k x^2} \right) \, \mathrm{d}x = \sqrt{\frac{k}{\pi}} \left( \frac{1}{2k} \sqrt{\frac{\pi}{k}} \right) = \frac{1}{2k} $$
+%     Donc, $k = \frac{1}{2\sigma^2}$.
+%     \item \textbf{Substitution Finale :} Remplaçons $k$ dans $\lambda$ et $f(x)$.
+%     $$ \lambda = \sqrt{\frac{1/(2\sigma^2)}{\pi}} = \frac{1}{\sigma\sqrt{2\pi}} $$
+%     $$ f(x) = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{1}{2\sigma^2} x^2} = \frac{1}{\sigma\sqrt{2\pi}} e^{ -\frac{x^2}{2\sigma^2} } $$
+%     \item \textbf{Généralisation (Moyenne $\mu$)} : Pour centrer la distribution sur $\mu$, on remplace $x$ par $(x-\mu)$ dans l'exposant :
+%     $$ f(x; \mu, \sigma) = \frac{1}{\sigma \sqrt{2\pi}} e^{ -\frac{(x-\mu)^2}{2\sigma^2} } $$
+% \end{enumerate}
+% C'est la fonction de densité de la loi normale $\mathcal{N}(\mu, \sigma^2)$.
+% \end{proofbox}
+
 \begin{proofbox}[Dérivation de la Densité Normale à partir des Principes Fondamentaux]
 
-\textbf{Contexte Visuel :} Imaginons un nuage de points dispersés autour d'une cible à l'origine $(0,0)$, comme des impacts de fléchettes. Le graphique ci-dessous illustre cette dispersion. On s'intéresse à la probabilité de tomber dans une petite zone, comme $dA$, autour d'un point $(x, y)$.
+Contexte Visuel : Imaginons un lanceur de fléchettes visant le centre d'une cible à l'origine $(0,0)$. À cause de multiples facteurs aléatoires inhérents à son geste, les impacts forment un nuage de points dispersés. Le graphique ci-dessous illustre cette dispersion. On s'intéresse à la probabilité qu'une fléchette atterrisse dans une très petite zone, notée $dA$, autour d'un point $(x,y)$.
 
 \begin{center}
 \begin{tikzpicture}
 \begin{axis}[
-    axis lines=middle, % Axes qui passent par l'origine (0,0)
-    xlabel=$x$,       % Étiquette axe X
-    ylabel=$y$,       % Étiquette axe Y
-    axis line style={magenta}, % Couleur des axes
-    xlabel style={anchor=west, magenta}, % Style de l'étiquette X
-    ylabel style={anchor=south, magenta}, % Style de l'étiquette Y
-    xmin=-3.5, xmax=3.5, % Limites du graphique
-    ymin=-3.5, ymax=3.5,
-    tick label style={font=\tiny} % Police plus petite pour les graduations
+axis lines=middle,
+xlabel=$x$,
+ylabel=$y$,
+axis line style={magenta},
+xlabel style={anchor=west, magenta},
+ylabel style={anchor=south, magenta},
+xmin=-3.5, xmax=3.5,
+ymin=-3.5, ymax=3.5,
+tick label style={font=\tiny}
 ]
 
-% Ajout des points du nuage. Ce sont des coordonnées approximatives.
 \addplot [only marks, mark=*, cyan, mark size=1.5pt]
 coordinates {
-    (0.2, 0.1) (-0.5, 0.2) (0.1, -0.3) (0.5, -0.8) (-0.3, -1.2) (0,0.1)
-    (1.5, 1.5) (0.8, 0.8) (2.0, -0.5) (2.8, -1.4) (2.5, -0.2)
-    (-1.8, -1.3) (-2.5, 0.5) (-1.5, 0.3) (-2.2, -0.8) (-0.8, 0.5)
-    (0.5, 1.2) (0.7, 2.8) (0.2, 3.2) (-0.5, 1.5) (-1.0, -2.0)
-    (1.8, -1.0) (1.0, -1.5) (0.3, -2.5) (-1.8, -2.8) (1.2, 0.5)
-    (-1.2, -1.5) (-0.8, 1.1)
+(0.2, 0.1) (-0.5, 0.2) (0.1, -0.3) (0.5, -0.8) (-0.3, -1.2) (0,0.1)
+(1.5, 1.5) (0.8, 0.8) (2.0, -0.5) (2.8, -1.4) (2.5, -0.2)
+(-1.8, -1.3) (-2.5, 0.5) (-1.5, 0.3) (-2.2, -0.8) (-0.8, 0.5)
+(0.5, 1.2) (0.7, 2.8) (0.2, 3.2) (-0.5, 1.5) (-1.0, -2.0)
+(1.8, -1.0) (1.0, -1.5) (0.3, -2.5) (-1.8, -2.8) (1.2, 0.5)
+(-1.2, -1.5) (-0.8, 1.1)
 };
 
-% --- Annotations ---
-
-% Points et boîte pour 'dA'
 \addplot [only marks, mark=*, red, mark size=1.5pt] coordinates {(1.3, 2.0)};
 \draw [red, thick] (axis cs:1.1, 1.8) rectangle (axis cs:1.5, 2.2);
 \node [red, above] at (axis cs:1.3, 2.2) {$dA$};
-
-% Points et boîte pour 'dB'
-\addplot [only marks, mark=*, cyan, mark size=1.5pt] 
-coordinates {(-1.2, 2.0) (-1.3, 2.3) (-1.0, 2.2) (-1.1, 1.9)};
-\draw [blue, thick] (axis cs:-1.8, 1.2) rectangle (axis cs:-0.8, 2.8);
-\node [blue, above] at (axis cs:-1.3, 2.8) {$dB$};
 
 \end{axis}
 \end{tikzpicture}
 \end{center}
 
-\textbf{Objectif :} Expliquer comment arriver à la formule mathématique de la courbe en cloche (densité de probabilité normale) en partant de principes fondamentaux sur les erreurs aléatoires.
+Objectif : Démontrer que la célèbre courbe en cloche (la loi normale) n'est pas arbitraire, mais la conséquence mathématique inévitable de deux principes physiques simples sur le hasard.
 
-\textbf{1. Le Point de Départ : Densité et Aire $dA$}
-Dans une distribution continue, la probabilité de tomber \textit{exactement} sur un point $(x, y)$ est nulle. On ne peut donc pas parler de "probabilité d'un point". On parle de la probabilité de tomber \textit{dans une petite zone}, comme un rectangle $dA = dx \cdot dy$ autour du point $(x, y)$.
-Cette probabilité, notée $P(\text{dans } dA)$, est \textit{proportionnelle} à l'aire de la zone $dA$. La \textit{constante de proportionnalité} est la \textbf{fonction de densité de probabilité} $p(x, y)$ évaluée en ce point. En d'autres termes, la densité $p(x, y)$ \textit{représente} localement la concentration de probabilité. Ainsi, la probabilité de tomber dans la zone $dA$ est approximativement :
-$$ P(\text{dans } dA) \approx p(x, y) \cdot dA $$
+1. Le Point de Départ : Densité et Aire $dA$
+Dans le monde continu, la probabilité de toucher exactement le point géométrique $(x,y)$ est nulle. On calcule plutôt la probabilité de tomber dans une petite zone rectangulaire $dA = dx \cdot dy$ autour de ce point.
+Cette probabilité est proportionnelle à l'aire $dA$. La constante de proportionnalité est appelée fonction de densité de probabilité, notée $p(x,y)$.
 
-\textbf{2. Les Hypothèses Fondamentales}
-On pose deux hypothèses sur la nature de ces erreurs (représentées par la densité $p(x, y)$) :
+$$P(\text{dans } dA) \approx p(x,y) \cdot dA$$
+
+
+2. Les Hypothèses Fondamentales
+Nous posons deux principes sur la nature de l'erreur (le hasard du lancer) :
 \begin{enumerate}
-    \item \textbf{Indépendance des axes :} L'erreur horizontale ($x$) est indépendante de l'erreur verticale ($y$). Cela implique que la densité jointe $p(x, y)$ peut s'écrire comme le produit de la densité marginale sur $x$, notée $f(x)$, et de la densité marginale sur $y$, notée $f(y)$. Donc, $p(x, y) = f(x) \cdot f(y)$.
-    \item \textbf{Symétrie de rotation (Isotropie) :} La densité ne dépend que de la distance $r = \sqrt{x^2 + y^2}$ au centre, pas de l'angle. Il existe donc une fonction $\phi(r)$ telle que la densité en $(x,y)$ est $p(x, y) = \phi(\sqrt{x^2 + y^2})$.
+\item L'indépendance des axes (La simplicité du geste) : L'erreur horizontale ($x$) n'influence pas l'erreur verticale ($y$). La probabilité combinée est donc simplement le produit des probabilités individuelles sur chaque axe :
+
+$$p(x,y) = f(x) \cdot f(y)$$
+
+
+
+\item L'isotropie (Le hasard pur) : Le hasard ne privilégie aucune direction. La probabilité dépend uniquement de la distance $r$ au centre, et non de l'angle. D'après le théorème de Pythagore ($r^2 = x^2 + y^2$), il existe une fonction $\phi$ telle que :
+
+$$p(x,y) = \phi(x^2 + y^2)$$
+
+
+
 \end{enumerate}
+3. L'Équation Fonctionnelle
+En égalant ces deux visions de la même probabilité (indépendance et isotropie), nous obtenons notre clé de voûte mathématique :
 
-\textbf{3. L'Équation Fonctionnelle}
-En égalant les deux expressions pour la même densité $p(x, y)$ (à une constante près), on obtient :
-$$ f(x) \cdot f(y) = \phi(\sqrt{x^2 + y^2}) $$
-Pour $y=0$, on a $f(x) \cdot f(0) = \phi(x)$. Posons $f(0) = \lambda$. Alors $\phi(x) = \lambda f(x)$.
-L'équation devient :
-$$ f(x) \cdot f(y) = \lambda f(\sqrt{x^2 + y^2}) $$
+$$f(x) \cdot f(y) = \phi(x^2 + y^2)$$
 
-\textbf{4. Résolution de l'Équation Fonctionnelle}
-Posons $g(x) = f(x)/\lambda$, avec $g(0)=1$. L'équation se simplifie en :
-$$ g(x) g(y) = g(\sqrt{x^2 + y^2}) $$
-Posons $g(x) = h(x^2)$. L'équation devient $h(x^2)h(y^2) = h(x^2+y^2)$. Avec $a=x^2$ et $b=y^2$, on a :
-$$ h(a) h(b) = h(a+b) $$
-La solution continue de cette équation de Cauchy est $h(a) = e^{Aa}$ pour une constante $A$.
-Retour aux fonctions : $g(x) = h(x^2) = e^{Ax^2}$. $f(x) = \lambda g(x) = \lambda e^{Ax^2}$.
-Comme la densité doit diminuer loin du centre, $A$ doit être négative. Posons $A = -k$ avec $k>0$.
-$$ f(x) = \lambda e^{-k x^2} $$
 
-\textbf{5. Normalisation et Identification des Paramètres}
+4. Résolution Algébrique (L'apparition de l'exponentielle)
+Cherchons la forme exacte de la fonction $f$ :
 \begin{enumerate}
-    \item \textbf{Condition $\int f(x) dx = 1$} : L'intégrale Gaussienne $\int_{-\infty}^{\infty} e^{-k x^2} \, \mathrm{d}x = \sqrt{\frac{\pi}{k}}$.
-    Donc, $\int_{-\infty}^{\infty} f(x) dx = \lambda \sqrt{\frac{\pi}{k}} = 1 \implies \lambda = \sqrt{\frac{k}{\pi}}$.
-    \item \textbf{Lien avec la Variance ($\sigma^2$)} : Pour une distribution centrée, $\sigma^2 = E[X^2] = \int x^2 f(x) dx$.
-    $$ \sigma^2 = \int_{-\infty}^{\infty} x^2 \left( \sqrt{\frac{k}{\pi}} e^{-k x^2} \right) \, \mathrm{d}x = \sqrt{\frac{k}{\pi}} \left( \frac{1}{2k} \sqrt{\frac{\pi}{k}} \right) = \frac{1}{2k} $$
-    Donc, $k = \frac{1}{2\sigma^2}$.
-    \item \textbf{Substitution Finale :} Remplaçons $k$ dans $\lambda$ et $f(x)$.
-    $$ \lambda = \sqrt{\frac{1/(2\sigma^2)}{\pi}} = \frac{1}{\sigma\sqrt{2\pi}} $$
-    $$ f(x) = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{1}{2\sigma^2} x^2} = \frac{1}{\sigma\sqrt{2\pi}} e^{ -\frac{x^2}{2\sigma^2} } $$
-    \item \textbf{Généralisation (Moyenne $\mu$)} : Pour centrer la distribution sur $\mu$, on remplace $x$ par $(x-\mu)$ dans l'exposant :
-    $$ f(x; \mu, \sigma) = \frac{1}{\sigma \sqrt{2\pi}} e^{ -\frac{(x-\mu)^2}{2\sigma^2} } $$
+\item Si l'on se place sur l'axe des abscisses ($y=0$), l'équation devient $f(x) \cdot f(0) = \phi(x^2)$. En posant la constante $\lambda = f(0)$, on déduit que $\phi(x^2) = \lambda f(x)$.
+\item Remplaçons $\phi$ dans notre équation de départ : $f(x) \cdot f(y) = \lambda f(\sqrt{x^2 + y^2})$.
+\item Pour clarifier, définissons une nouvelle fonction traitant les valeurs au carré : $h(x^2) = \frac{f(x)}{\lambda}$. En posant $a = x^2$ et $b = y^2$, l'équation devient la célèbre équation de Cauchy :
+
+$$h(a) \cdot h(b) = h(a + b)$$
+
+
+
+\item La seule solution continue transformant une addition en multiplication est la fonction exponentielle : $h(a) = e^{Aa}$.
+\item Retour à notre fonction de départ : $f(x) = \lambda h(x^2) = \lambda e^{Ax^2}$.
+\end{enumerate}
+Pour que la probabilité diminue lorsqu'on s'éloigne de la cible (l'erreur devient rare), la constante $A$ doit être négative. Posons $A = -k$ (avec $k > 0$). Nous obtenons la structure de la courbe en cloche :
+
+$$f(x) = \lambda e^{-k x^2}$$
+
+
+5. Normalisation et Paramètres Physiques
+La fléchette atterrissant obligatoirement quelque part, l'aire totale sous la courbe de probabilité doit valoir exactement 1.
+\begin{enumerate}
+\item L'aire totale : L'intégrale de Gauss nous donne $\int_{-\infty}^{\infty} e^{-k x^2} dx = \sqrt{\frac{\pi}{k}}$. Pour que l'aire totale $\lambda \sqrt{\frac{\pi}{k}}$ soit égale à 1, il faut que $\lambda = \sqrt{\frac{k}{\pi}}$.
+\item Lien avec la variance ($\sigma^2$) : L'écart-type $\sigma$ mesure l'ampleur moyenne de la dispersion. En calculant la variance $\sigma^2 = \int_{-\infty}^{\infty} x^2 f(x) dx$, on trouve $\sigma^2 = \frac{1}{2k}$. On en déduit que $k = \frac{1}{2\sigma^2}$.
+\item Substitution finale : En remplaçant $k$ par $\frac{1}{2\sigma^2}$ dans les expressions de $\lambda$ et de $f(x)$, on obtient l'équation de la loi normale centrée :
+
+$$f(x) = \frac{1}{\sigma\sqrt{2\pi}} e^{ -\frac{x^2}{2\sigma^2} }$$
+
+
+
+\item Généralisation : Pour modéliser une distribution centrée sur une autre valeur $\mu$ (la moyenne), il suffit de décaler l'équation en remplaçant $x$ par $(x-\mu)$ :
+
+$$f(x; \mu, \sigma) = \frac{1}{\sigma \sqrt{2\pi}} e^{ -\frac{(x-\mu)^2}{2\sigma^2} }$$
+
+
+
 \end{enumerate}
 C'est la fonction de densité de la loi normale $\mathcal{N}(\mu, \sigma^2)$.
 \end{proofbox}

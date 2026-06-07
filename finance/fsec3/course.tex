@@ -746,3 +746,64 @@ Il ne reste plus qu'à actualiser cette espérance au taux sans risque continu s
 Le juste prix de cette option de vente est de 3,04 €.
 \end{examplebox}
 
+\subsection{Le Modèle Lognormal : Comportement dans le Monde Réel}
+
+\begin{intuitionbox}[La correction du modèle Normal]
+Le modèle arithmétique précédent présentait un défaut rédhibitoire en finance : en soustrayant des variations fixes, le prix de l'actif pouvait mathématiquement devenir négatif. Pour y remédier, nous ne modélisons plus le prix de l'actif de manière additive, mais nous modélisons les variations de son logarithme naturel. L'exponentielle d'un nombre réel (même négatif) étant toujours strictement positive, ce changement de variable garantit que le prix de l'action ne tombera jamais sous zéro.
+\end{intuitionbox}
+
+\begin{definitionbox}[Dérive, Volatilité et Paramétrage local]
+Plaçons-nous dans le monde réel (historique) sur une période totale T. 
+Nous définissons deux paramètres constants :
+\begin{itemize}[label=$\rightarrow$]
+    \item La dérive $\mu$ (Drift) : le taux de croissance moyen de l'actif. Dans le monde réel, ce taux est supérieur au taux sans risque r pour compenser le risque assumé par l'investisseur.
+    \item La volatilité $\sigma$ : l'écart-type mesurant l'amplitude des fluctuations.
+\end{itemize}
+Nous découpons la période T en N étapes régulières. La durée d'une étape est donc $\Delta t = \frac{T}{N}$.
+Pour que la moyenne et la variance globales sur la période T soient respectivement $\mu T$ et $\sigma^2 T$, les lois des probabilités (somme de variables indépendantes) imposent qu'à chaque petite étape $\Delta t$, la moyenne locale soit $\mu \Delta t$ et la variance locale soit $\sigma^2 \Delta t$.
+\end{definitionbox}
+
+\begin{examplebox}[Détail mathématique de l'accumulation des prix]
+Soit une variable aléatoire $Z_j$ valant $+1$ ou $-1$ avec une probabilité de $0,5$. Son espérance est nulle et sa variance est unitaire.
+La variation du logarithme du prix entre l'étape $j-1$ et l'étape $j$ est modélisée par l'équation suivante :
+\begin{equation*}
+    \log(S_j) - \log(S_{j-1}) = \mu \Delta t + \sigma \sqrt{\Delta t} Z_j
+\end{equation*}
+Pour trouver le prix à l'échéance T (qui correspond à la dernière étape N), nous écrivons cette équation pour toutes les étapes successives :
+\begin{align*}
+    \log(S_1) - \log(S_0) &= \mu \Delta t + \sigma \sqrt{\Delta t} Z_1 \\
+    \log(S_2) - \log(S_1) &= \mu \Delta t + \sigma \sqrt{\Delta t} Z_2 \\
+    \log(S_3) - \log(S_2) &= \mu \Delta t + \sigma \sqrt{\Delta t} Z_3 \\
+    &\dots \\
+    \log(S_N) - \log(S_{N-1}) &= \mu \Delta t + \sigma \sqrt{\Delta t} Z_N
+\end{align*}
+Additionnons verticalement toutes ces équations. Sur la partie gauche, chaque terme positif s'annule avec le terme négatif de la ligne suivante. C'est le principe d'une somme télescopique. Seuls le tout dernier terme et le tout premier terme survivent :
+\begin{equation*}
+    \log(S_N) - \log(S_0) = \sum_{j=1}^{N} \left( \mu \Delta t \right) + \sum_{j=1}^{N} \left( \sigma \sqrt{\Delta t} Z_j \right)
+\end{equation*}
+Puisque $\mu \Delta t$ est une constante répétée N fois, la première somme devient $N \mu \Delta t$. Or, comme $\Delta t = \frac{T}{N}$, alors $N \Delta t = T$. L'équation se simplifie ainsi :
+\begin{equation*}
+    \log(S_N) = \log(S_0) + \mu T + \sigma \sqrt{\Delta t} \sum_{j=1}^{N} Z_j
+\end{equation*}
+\end{examplebox}
+
+\begin{theorembox}[Passage à la limite continue et Distribution Lognormale]
+Pour observer le modèle en temps continu, nous devons faire tendre le nombre de pas N vers l'infini. 
+Remplaçons $\Delta t$ par $\frac{T}{N}$ dans le terme aléatoire de l'équation précédente :
+\begin{equation*}
+    \sigma \sqrt{\frac{T}{N}} \sum_{j=1}^{N} Z_j = \sigma \frac{\sqrt{T}}{\sqrt{N}} \sum_{j=1}^{N} Z_j = \sigma \sqrt{T} \left( \frac{1}{\sqrt{N}} \sum_{j=1}^{N} Z_j \right)
+\end{equation*}
+Les variables $Z_j$ ont une espérance $\mu_Z = 0$ et un écart-type $\sigma_Z = 1$. Le terme entre parenthèses est donc exactement la formule centrée-réduite du Théorème Central Limite. Lorsque N tend vers l'infini, ce bloc converge vers une variable aléatoire suivant une loi Normale standard, notée $\mathcal{N}(0,1)$.
+
+À la limite continue, l'équation algébrique du logarithme devient :
+\begin{equation*}
+    \log(S_T) = \log(S_0) + \mu T + \sigma \sqrt{T} \mathcal{N}(0,1)
+\end{equation*}
+Pour retrouver le prix final de l'actif, nous appliquons la fonction exponentielle des deux côtés de l'égalité :
+\begin{align*}
+    \exp(\log(S_T)) &= \exp\left( \log(S_0) + \mu T + \sigma \sqrt{T} \mathcal{N}(0,1) \right) \\
+    S_T &= \exp(\log(S_0)) \times \exp\left( \mu T + \sigma \sqrt{T} \mathcal{N}(0,1) \right) \\
+    S_T &= S_0 e^{\mu T + \sigma \sqrt{T} \mathcal{N}(0,1)}
+\end{align*}
+Puisque le logarithme de $S_T$ suit une distribution Normale, on conclut mathématiquement que le prix de l'actif $S_T$ suit une distribution Lognormale.
+\end{theorembox}
