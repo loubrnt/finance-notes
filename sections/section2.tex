@@ -235,7 +235,7 @@ Dans un tel marché :
 Le prix exact qui sera négocié sur le marché ne dépendra plus d'une équation, mais des préférences au risque et de la psychologie des acteurs du marché.
 \end{theorembox}
 
-\subsection{Modèle à Plusieurs Périodes : Le Découpage du Temps}
+\subsection{Modèle à Plusieurs Périodes}
 
 \begin{intuitionbox}[L'astuce du temps continu pour sauver le modèle]
 Nous venons de voir qu'ajouter un troisième état final (stagnation à 100) détruit l'unicité du prix et rend le marché incomplet. 
@@ -258,8 +258,55 @@ Plutôt que d'envisager une variation de plus ou moins 10 sur une journée enti�
 L'état C (100) est atteint de deux manières différentes : une hausse suivie d'une baisse, ou une baisse suivie d'une hausse. C'est ce que l'on appelle un arbre recombinant.
 \end{examplebox}
 
+\vspace{0.5cm}
+\begin{center}
+\begin{tikzpicture}[>=stealth, sloped]
+    % Définition des styles pour les noeuds
+    \tikzstyle{node_style} = [circle, draw=vscodeBlue, fill=white, thick, minimum size=1cm, inner sep=2pt, font=\small]
+    \tikzstyle{time_style} = [font=\small\color{gray}]
+
+    % Les axes de temps (Placés plus haut à y=4.5 pour éviter le chevauchement)
+    \node[time_style] at (0, 4.5) {Aujourd'hui ($t=0$)};
+    \node[time_style] at (4, 4.5) {Mi-journée ($t=0,5$)};
+    \node[time_style] at (8, 4.5) {Demain ($t=1$)};
+
+    % Placement des noeuds
+    % t=0
+    \node[node_style] (S0) at (0, 0) {100};
+
+    % t=0.5
+    \node[node_style] (D) at (4, 1.5) {105};
+    \node[node_style] (E) at (4, -1.5) {95};
+
+    % t=1 (Le noeud A est à y=3)
+    \node[node_style] (A) at (8, 3) {110};
+    \node[node_style] (C) at (8, 0) {100};
+    \node[node_style] (B) at (8, -3) {90};
+
+    % Dessin des flèches
+    \draw[->, thick, vscodeBlue] (S0) -- (D) node[midway, above] {Hausse};
+    \draw[->, thick, vscodeBlue] (S0) -- (E) node[midway, below] {Baisse};
+
+    \draw[->, thick, vscodeBlue] (D) -- (A);
+    \draw[->, thick, vscodeBlue] (D) -- (C);
+    
+    \draw[->, thick, vscodeBlue] (E) -- (C);
+    \draw[->, thick, vscodeBlue] (E) -- (B);
+    
+    % Noms des états à côté des noeuds finaux
+    \node[right=0.2cm of A, font=\small] {État A};
+    \node[right=0.2cm of C, font=\small] {État C};
+    \node[right=0.2cm of B, font=\small] {État B};
+    
+    % Noms des états intermédiaires
+    \node[above=0.2cm of D, font=\small] {Nœud D};
+    \node[below=0.2cm of E, font=\small] {Nœud E};
+
+\end{tikzpicture}
+\end{center}
+\vspace{0.5cm}
+
 \begin{remarquebox}[Le retour à la complétude du marché]
 Ce découpage temporel est une avancée théorique majeure. En regardant l'arbre globalement à t=1, nous avons bien trois états finaux possibles (110, 100, 90). Cependant, si nous nous plaçons à n'importe quel nœud spécifique de l'arbre, il n'y a que deux chemins possibles pour l'étape suivante. 
 Le marché est donc localement complet à chaque nœud. Nous pourrons utiliser nos techniques d'évaluation (Couverture ou Risque-Neutre) à chaque intersection pour déduire un prix exact, en travaillant à rebours depuis l'échéance finale jusqu'à aujourd'hui.
 \end{remarquebox}
-
