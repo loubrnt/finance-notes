@@ -1,0 +1,163 @@
+\subsection{Le Miracle du Monde Risque-Neutre : La disparition de $\mu$}
+
+\begin{intuitionbox}[La disparition des croyances du marché]
+Rappelons la conclusion majeure établie à la section 2 sur la Parité Call-Put (\textbf{Équation 2.1}) : \textbf{le prix d'une option est totalement indépendant des anticipations du marché}. 
+Pourtant, dans notre modèle continu, la dérive réelle $\mu$ (l'optimisme des acteurs) est omniprésente. Pour que la théorie tienne, il faut prouver rigoureusement que lors de l'évaluation sous probabilité risque-neutre, ce $\mu$ s'annule de lui-même et que la volatilité reste intacte.
+\end{intuitionbox}
+
+\begin{proofbox}[Calcul rigoureux de la probabilité $p$]
+D'après notre modèle lognormal, les facteurs de hausse et de baisse intègrent $\mu$ :
+\begin{equation*}
+    u = e^{\mu \Delta t + \sigma \sqrt{\Delta t}} \quad \text{et} \quad d = e^{\mu \Delta t - \sigma \sqrt{\Delta t}}
+\end{equation*}
+Injectons-les dans la formule de $p$ \eqref{eq:prob_rn_taux} et simplifions par $e^{\mu \Delta t}$ :
+\begin{equation*}
+    p = \frac{e^{(r-\mu)\Delta t} - e^{-\sigma \sqrt{\Delta t}}}{e^{\sigma \sqrt{\Delta t}} - e^{-\sigma \sqrt{\Delta t}}}
+\end{equation*}
+Calculons le \textbf{Dénominateur} avec Taylor \eqref{eq:taylor_exp} :
+\begin{align*}
+    e^{\sigma \sqrt{\Delta t}} - e^{-\sigma \sqrt{\Delta t}} &= \left(1 + \sigma \sqrt{\Delta t} + \frac{\sigma^2 \Delta t}{2} + \mathcal{O}(\Delta t^{3/2})\right) - \left(1 - \sigma \sqrt{\Delta t} + \frac{\sigma^2 \Delta t}{2} + \mathcal{O}(\Delta t^{3/2})\right) \\
+    &= 2\sigma \sqrt{\Delta t} + \mathcal{O}(\Delta t^{3/2}) = 2\sigma \sqrt{\Delta t} \big(1 + \mathcal{O}(\Delta t)\big)
+\end{align*}
+Calculons le \textbf{Numérateur} avec Taylor :
+\begin{align*}
+    e^{(r-\mu)\Delta t} &= 1 + (r-\mu)\Delta t + \mathcal{O}(\Delta t^2) \\
+    e^{-\sigma \sqrt{\Delta t}} &= 1 - \sigma \sqrt{\Delta t} + \frac{\sigma^2}{2}\Delta t + \mathcal{O}(\Delta t^{3/2}) \\
+    \text{Différence} &= \sigma \sqrt{\Delta t} + \left(r - \mu - \frac{1}{2}\sigma^2\right)\Delta t + \mathcal{O}(\Delta t^{3/2})
+\end{align*}
+Effectuons la \textbf{Division} en utilisant la propriété d'inversion \eqref{eq:taylor_inv} :
+\begin{align*}
+    p &= \frac{\sigma \sqrt{\Delta t} + (r - \mu - \frac{1}{2}\sigma^2)\Delta t + \mathcal{O}(\Delta t^{3/2})}{2\sigma \sqrt{\Delta t}} \times \big(1 + \mathcal{O}(\Delta t)\big)^{-1} \\
+    &= \left[ \frac{1}{2} + \frac{r - \mu - \frac{1}{2}\sigma^2}{2\sigma}\sqrt{\Delta t} + \mathcal{O}(\Delta t) \right] \times \big(1 + \mathcal{O}(\Delta t)\big)
+\end{align*}
+Ce qui aboutit au résultat asymptotique fondamental :
+\begin{equation}\label{eq:limit_p}
+    p = \frac{1}{2} + \left( \frac{r - \mu - \frac{1}{2}\sigma^2}{2\sigma} \right)\sqrt{\Delta t} + \mathcal{O}(\Delta t)
+\end{equation}
+\end{proofbox}
+
+\begin{remarquebox}[L'ajustement de probabilité et la convexité]
+Remarquez que même si $\mu$ est tel que la prime de risque soit nulle, on n'obtient jamais exactement $p=1/2$. Cela provient d'un phénomène purement mathématique (la convexité) : la moyenne de l'exponentielle n'est pas l'exponentielle de la moyenne $\frac{1}{2}(e^{\sigma\sqrt{\Delta t}} + e^{-\sigma\sqrt{\Delta t}}) \neq 1$. L'ajustement de $p$ est indispensable pour compenser cette convexité.
+\end{remarquebox}
+
+\begin{theorembox}[L'annulation de $\mu$ et la conservation de la Variance]
+Appelons $\tilde{Z}_j$ le saut sous probabilité risque-neutre (valant $+1$ avec prob. $p$, et $-1$ avec prob. $1-p$). 
+Calculons sa moyenne $\nu = \mathbb{E}[\tilde{Z}_j]$ :
+\begin{equation}
+    \nu = (+1)p + (-1)(1-p) = 2p - 1 = \left( \frac{r - \mu - \frac{1}{2}\sigma^2}{\sigma} \right) \sqrt{\Delta t} + \mathcal{O}(\Delta t)
+\end{equation}
+En injectant $\nu$ dans l'espérance de la trajectoire \eqref{eq:log_trajectory_discrete}, l'espérance devient :
+\begin{align*}
+    \mathbb{E}^{RN}[\log S_N] &= \log(S_0) + \mu T + \sigma \sqrt{\Delta t} \cdot N \cdot \nu \\
+    &= \log(S_0) + \mu T + \sigma \sqrt{\Delta t} \cdot \frac{T}{\Delta t} \left( \frac{r - \mu - \frac{1}{2}\sigma^2}{\sigma} \right) \sqrt{\Delta t} + \mathcal{O}(N\Delta t^{3/2}) \\
+    &= \log(S_0) + \mu T + T \left( r - \mu - \frac{1}{2}\sigma^2 \right) + \mathcal{O}(N^{-1/2}) \\
+    \lim_{N \to \infty} \mathbb{E}^{RN}[\log S_T] &= \log(S_0) + \left( r - \frac{1}{2}\sigma^2 \right) T
+\end{align*}
+\textbf{Le paramètre $\mu$ s'est annulé !} 
+Pour s'assurer que l'échelle du modèle est respectée, calculons la variance.
+La variance de $\tilde{Z}_j$ est $\mathbb{E}[\tilde{Z}_j^2] - \mathbb{E}[\tilde{Z}_j]^2$. Puisque $\tilde{Z}_j^2 = 1$, on a :
+\begin{equation}
+    Var(\tilde{Z}_j) = 1 - \nu^2 = 1 - \mathcal{O}(\Delta t)
+\end{equation}
+La somme de $N$ variables indépendantes a pour variance $N(1 - \mathcal{O}(\Delta t)) = N + \mathcal{O}(1)$.
+En appliquant le facteur d'échelle $\sigma\sqrt{\Delta t}$ de l'équation \eqref{eq:log_trajectory_discrete}, la variance finale est :
+\begin{equation}
+    Var(\log S_N) = \left(\sigma\sqrt{\frac{T}{N}}\right)^2 \times [N + \mathcal{O}(1)] = \frac{\sigma^2 T}{N} \times N + \mathcal{O}(N^{-1}) \xrightarrow{N \to \infty} \sigma^2 T
+\end{equation}
+Conclusion : Sous la probabilité risque-neutre, $\log S_T$ converge vers une distribution Normale de moyenne $\log(S_0) + (r - \frac{1}{2}\sigma^2)T$ et de variance $\sigma^2 T$.
+\end{theorembox}
+
+\subsection{La Formule de Black-Scholes et l'Espérance Exponentielle}
+
+\begin{intuitionbox}[La preuve finale de l'absence d'arbitrage]
+La distribution Normale trouvée ci-dessus comporte un étrange terme de pénalité : $-\frac{1}{2}\sigma^2 T$. On l'appelle la correction d'Itô. 
+Ce terme est vital. Sans lui, l'espérance du prix de l'action s'envolerait. Il existe une identité mathématique fondamentale pour les lois normales centrées réduites : la fonction génératrice des moments.
+\begin{equation}\label{eq:mgf_normal}
+    \mathbb{E}\big[ e^{\sigma\sqrt{T} \mathcal{N}(0,1)} \big] = e^{\frac{1}{2}\sigma^2 T}
+\end{equation}
+Si l'on calcule l'espérance du prix futur de l'action $S_T = S_0 e^{(r - \frac{1}{2}\sigma^2)T + \sigma\sqrt{T}\mathcal{N}(0,1)}$ :
+\begin{equation*}
+    \mathbb{E}[S_T] = S_0 e^{(r - \frac{1}{2}\sigma^2)T} \cdot \mathbb{E}\big[ e^{\sigma\sqrt{T}\mathcal{N}(0,1)} \big] = S_0 e^{rT} e^{-\frac{1}{2}\sigma^2 T} e^{\frac{1}{2}\sigma^2 T} = S_0 e^{rT}
+\end{equation*}
+L'équation prouve que dans le monde risque-neutre, la croissance espérée de l'action est exactement le taux sans risque. La boucle est bouclée.
+\end{intuitionbox}
+
+\begin{definitionbox}[L'intégrale et les Formules de Black-Scholes (1973)]
+Pour pricer un Call européen, il suffit de résoudre l'intégrale formelle de la valeur intrinsèque (dénotée $( \cdot )_+$) selon la distribution établie :
+\begin{equation}\label{eq:bs_integral}
+    Opt_0 = e^{-rT} \mathbb{E}\Big[ \big( S_0 e^{(r-\frac{1}{2}\sigma^2)T + \sigma\sqrt{T}\mathcal{N}(0,1)} - K \big)_+ \Big]
+\end{equation}
+La résolution analytique de cette intégrale aboutit à la formule fermée :
+\begin{align}
+    \label{eq:bs_call} C(S_0, K, \sigma, r, T) &= S_0 \mathcal{N}(d_1) - K e^{-rT} \mathcal{N}(d_2) \\
+    \label{eq:bs_put} P(S_0, K, \sigma, r, T) &= -S_0 \mathcal{N}(-d_1) + K e^{-rT} \mathcal{N}(-d_2)
+\end{align}
+Où les variables d'ajustement de probabilité s'écrivent élégamment :
+\begin{equation}\label{eq:bs_dj}
+    d_j = \frac{\log\left(\frac{S_0}{K}\right) + \left(r + (-1)^{j-1}\frac{1}{2}\sigma^2\right)T}{\sigma \sqrt{T}} \quad \text{pour } j \in \{1, 2\}
+\end{equation}
+Et où $\mathcal{N}(x)$ représente la fonction de répartition (cumulative) de la loi Normale.
+\end{definitionbox}
+
+\begin{examplebox}[Anatomie et Application numérique]
+La formule du Call \eqref{eq:bs_call} se lit comme un bilan : $[\text{Ce que je reçois}] - [\text{Ce que je paie}]$.
+\begin{itemize}[label=$\cdot$]
+    \item $K e^{-rT} \mathcal{N}(d_2)$ : Je paie le Strike actualisé (rappel \textbf{Équation 1.2}), mais \textit{seulement si} l'option finit dans la monnaie. $\mathcal{N}(d_2)$ est très exactement cette probabilité réelle.
+    \item $S_0 \mathcal{N}(d_1)$ : Je reçois l'action, ajustée par $\mathcal{N}(d_1)$ (qui se trouve être le Delta).
+\end{itemize}
+\textit{Application : $S_0=100, K=100, r=5\%, \sigma=20\%, T=1$.}
+Calculons \eqref{eq:bs_dj} : $d_1 = \frac{0 + (0,05 + 0,02)}{0,20} = 0,35$ et $d_2 = 0,35 - 0,20 = 0,15$.
+Via la table normale : $\mathcal{N}(0,35) \approx 0,6368$ et $\mathcal{N}(0,15) \approx 0,5596$.
+Le Call vaut : $100(0,6368) - 100(e^{-0,05})(0,5596) = 63,68 - 53,23 = 10,45$ €.
+\end{examplebox}
+
+\subsection{Approximation Linéaire : La Règle d'Or du Trader}
+
+\begin{intuitionbox}[La simplification visuelle]
+Si l'on trace le prix d'une option "à la monnaie" en fonction de la volatilité $\sigma$, la courbe obtenue est une ligne droite parfaite. Cette linéarité permet d'extraire une approximation mentale via un développement de Taylor formel de la fonction $\mathcal{N}(x)$.
+\end{intuitionbox}
+
+\begin{proofbox}[Dérivation de l'approximation à la monnaie (AT-Forward)]
+Considérons une option à la monnaie au sens Forward (cf. Section 2) : $K = S_0 e^{rT}$. 
+Dans l'équation \eqref{eq:bs_dj}, $\log(S_0/K) = -rT$. Le paramètre $d_1$ se simplifie massivement car $-rT + rT = 0$. Il reste $d_1 = \frac{1}{2}\sigma \sqrt{T}$ et $d_2 = -\frac{1}{2}\sigma \sqrt{T}$.
+Le prix du Call \eqref{eq:bs_call} s'écrit :
+\begin{equation*}
+    C = S_0 \left[ \mathcal{N}\left(\frac{1}{2}\sigma\sqrt{T}\right) - \mathcal{N}\left(-\frac{1}{2}\sigma\sqrt{T}\right) \right]
+\end{equation*}
+Appliquons le développement de Taylor de la fonction de répartition autour de zéro :
+\begin{equation*}
+    \mathcal{N}(x) = \mathcal{N}(0) + \mathcal{N}'(0)x + \frac{x^2}{2}\mathcal{N}''(0) + \mathcal{O}(x^3)
+\end{equation*}
+En soustrayant $\mathcal{N}(-x)$ à $\mathcal{N}(x)$, les termes pairs (le $\mathcal{N}(0)$ constant et le terme en $x^2$) \textbf{s'annulent exactement}. Il ne reste que :
+\begin{equation*}
+    \mathcal{N}(x) - \mathcal{N}(-x) = 2 \mathcal{N}'(0)x + \mathcal{O}(x^3)
+\end{equation*}
+La dérivée $\mathcal{N}'(0)$ est la densité de la courbe en cloche au centre : $1/\sqrt{2\pi}$. En remplaçant $x$ par $\frac{1}{2}\sigma\sqrt{T}$, la valeur devient :
+\begin{equation}
+    C = S_0 \left( 2 \frac{1}{\sqrt{2\pi}} \frac{1}{2}\sigma\sqrt{T} + \mathcal{O}(\sigma^3 T^{3/2}) \right) \approx \frac{S_0 \sigma \sqrt{T}}{\sqrt{2\pi}}
+\end{equation}
+\end{proofbox}
+
+\begin{theorembox}[Formule de Brenner-Subrahmanyam (1988)]
+La constante $1 / \sqrt{2\pi} \approx 0,3989$ étant proche de $0,4$, la valeur d'une option ATM est donnée par :
+\begin{equation}\label{eq:brenner}
+    Prix_{ATM} \approx 0,4 \cdot S_0 \cdot \sigma \cdot \sqrt{T}
+\end{equation}
+\textit{Exemple mental :} $S_0=100, \sigma=20\%, T=1$. Le prix mental est $0,4 \times 100 \times 0,20 \times 1 = 8$ €. Le prix exact (Black-Scholes avec $r=0$) est $7,96$ €. L'erreur est infime, prouvant que l'option ATM ne rémunère \textbf{que} le risque ($\sigma\sqrt{T}$).
+\end{theorembox}
+
+\subsection{Retour à la Couverture : Le Delta en Temps Continu et les Grecques}
+
+\begin{intuitionbox}[Fermeture de la boucle théorique]
+Nous avons obtenu le prix de Black-Scholes via la méthode probabiliste. Cependant, le fondement de notre cours est que la méthode risque-neutre et la méthode par couverture étudiée à la \textbf{Section 2} produisent exactement le même prix. Si la formule est valide, il doit exister un portefeuille de couverture (Hedging) parfait en temps continu.
+\end{intuitionbox}
+
+\begin{theorembox}[La dérivation du Delta et des Grecques]
+Pour répliquer l'obligation, nous détenons un portefeuille $\Pi$ composé d'une option vendue ($-C$) et d'une quantité $\Delta$ d'actions achetées ($\Delta \cdot S$). 
+Pour que ce portefeuille soit "sans risque", son taux de variation face à de micro-mouvements de l'action $S$ doit être nul :
+\begin{equation}
+    \frac{\partial \Pi}{\partial S} = -\frac{\partial C}{\partial S} + \Delta = 0 \implies \Delta = \frac{\partial C}{\partial S}(S, t)
+\end{equation}
+Pour se couvrir, le trader doit détenir à chaque instant une fraction d'action égale à la dérivée de la formule de valorisation. 
+L'erreur d'ajustement temporel (\textbf{Exercice 12 de la Section 2}) donne naissance au \textbf{Gamma} ($\Gamma = \frac{\partial^2 C}{\partial S^2}$). Le passage du temps est mesuré par le \textbf{Theta} ($\Theta = \frac{\partial C}{\partial t}$), et le risque de volatilité par le \textbf{Vega} ($\nu = \frac{\partial C}{\partial \sigma}$). C'est l'essence de la gestion de portefeuille moderne.
+\end{theorembox}

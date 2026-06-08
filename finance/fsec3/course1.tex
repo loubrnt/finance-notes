@@ -44,16 +44,16 @@ Regardons la valeur de ce portefeuille demain dans les deux états :
 
 \textbf{Étape 1 : Couverture du risque (Delta)}\\
 Pour éliminer toute incertitude, le portefeuille doit valoir la même chose dans les deux états ($\Pi_u = \Pi_d$) :
-\begin{equation*}
+\begin{equation}
     110\delta - 10 = 90\delta \implies 20\delta = 10 \implies \delta = \frac{1}{2}
-\end{equation*}
+\end{equation}
 En détenant une demi-action, notre portefeuille vaudra demain exactement $90 \times (0,5) = 45$, quoi qu'il arrive.
 
 \textbf{Étape 2 : Application du principe de non-arbitrage}\\
 Puisque le taux d'intérêt est nul ($r=0$) et que notre portefeuille est sans risque, sa valeur aujourd'hui doit être exactement égale à sa valeur de demain :
-\begin{equation*}
+\begin{equation}
     \Pi_0 = 45 \implies 100(0,5) - Opt_0 = 45 \implies 50 - Opt_0 = 45 \implies Opt_0 = 5
-\end{equation*}
+\end{equation}
 Le prix unique et sans arbitrage de l'option est de $5$.
 \end{proofbox}
 
@@ -71,23 +71,23 @@ Que se passe-t-il si nous essayons d'évaluer l'option en utilisant une espéran
 
 \begin{theorembox}[Probabilité Risque-Neutre]
 Pour retrouver le prix d'arbitrage, on définit une probabilité fictive $p$ (pour l'état "Up") et $1-p$ (pour l'état "Down"), telle que l'espérance de la valeur future de l'action soit exactement égale à sa valeur actuelle (car $r=0$) :
-\begin{equation*}
+\begin{equation}
     \mathbb{E}[S_1] = S_0
-\end{equation*}
+\end{equation}
 \end{theorembox}
 
 \begin{examplebox}[Calcul du prix via la probabilité risque-neutre]
 \textbf{Étape 1 : Trouver la probabilité $p$}\\
 Posons l'équation d'espérance de l'action :
-\begin{equation*}
+\begin{equation}
     110p + 90(1-p) = 100 \implies 20p + 90 = 100 \implies 20p = 10 \implies p = \frac{1}{2}
-\end{equation*}
+\end{equation}
 
 \textbf{Étape 2 : Évaluer l'option}\\
 Dans ce monde risque-neutre, la valeur de l'option aujourd'hui est simplement l'espérance mathématique de ses flux futurs :
-\begin{equation*}
+\begin{equation}
     Opt_0 = \mathbb{E}[Flux] = p \times 10 + (1-p) \times 0 = \frac{1}{2}(10) + \frac{1}{2}(0) = 5
-\end{equation*}
+\end{equation}
 Nous retrouvons exactement le prix d'arbitrage calculé précédemment, mais avec un calcul beaucoup plus direct.
 \end{examplebox}
 
@@ -203,24 +203,24 @@ Tentons de nous couvrir en vendant l'option et en achetant une quantité y d'act
 \end{itemize}
 Pour éliminer le risque, ces trois montants doivent être égaux. Mathématiquement, c'est impossible : nous avons 3 équations simultanées à résoudre mais une seule variable (y).
 Si nous utilisons le ratio y = 0,5 du modèle précédent, notre portefeuille vaudra 45 (en A), 50 (en C) ou 45 (en B). Le risque n'est pas éliminé, mais nous savons que le portefeuille vaudra au minimum 45. Par conséquent, sa valeur initiale doit être d'au moins 45 :
-\begin{equation*}
+\begin{equation}
     100(0,5) - Opt_0 \ge 45 \implies Opt_0 \le 5
-\end{equation*}
+\end{equation}
 L'argument d'arbitrage ne donne plus un prix exact, mais une borne supérieure.
 \end{proofbox}
 
 \begin{examplebox}[L'échec de la probabilité risque-neutre unique]
 Cherchons une probabilité risque-neutre telle que l'espérance de l'action demain soit 100.
 Soit $P_A, P_B, P_C$ les probabilités des trois états.
-\begin{equation*}
+\begin{equation}
     110 P_A + 100 P_C + 90 P_B = 100
-\end{equation*}
+\end{equation}
 Sachant que $P_C = 1 - P_A - P_B$, l'équation se simplifie pour donner : $P_A = P_B$.
 Posons $P_A = P_B = p$. La probabilité $p$ peut être n'importe quel chiffre compris entre 0 et 0,5. Il existe donc une infinité de probabilités risque-neutres valides.
 Le prix de l'option étant son espérance, nous avons :
-\begin{equation*}
+\begin{equation}
     Opt_0 = 10 \times p + 0 \times P_C + 0 \times P_B = 10p
-\end{equation*}
+\end{equation}
 Puisque p est compris entre 0 et 0,5, le prix du Call est un intervalle compris entre 0 et 5.
 \end{examplebox}
 
@@ -310,4 +310,3 @@ L'état C (100) est atteint de deux manières différentes : une hausse suivie d
 Ce découpage temporel est une avancée théorique majeure. En regardant l'arbre globalement à t=1, nous avons bien trois états finaux possibles (110, 100, 90). Cependant, si nous nous plaçons à n'importe quel nœud spécifique de l'arbre, il n'y a que deux chemins possibles pour l'étape suivante. 
 Le marché est donc localement complet à chaque nœud. Nous pourrons utiliser nos techniques d'évaluation (Couverture ou Risque-Neutre) à chaque intersection pour déduire un prix exact, en travaillant à rebours depuis l'échéance finale jusqu'à aujourd'hui.
 \end{remarquebox}
-

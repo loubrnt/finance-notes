@@ -148,7 +148,7 @@ Construisons notre portefeuille à coût zéro aujourd'hui :
 Que se passe-t-il à l'échéance $T$ ?
 \begin{itemize}[label=$\rightarrow$]
     \item La fraction d'actif $e^{-dT}$ a généré des dividendes continus. Grâce au réinvestissement, nous possédons désormais exactement $1$ actif complet.
-    \item La dette initiale a accumulé des intérêts au taux $r$. Le montant à rembourser est de : $e^{-dT} S_0 \times e^{rT} = S_0 e^{(r-d)T}$.
+    \item La debt initiale a accumulé des intérêts au taux $r$. Le montant à rembourser est de : $e^{-dT} S_0 \times e^{rT} = S_0 e^{(r-d)T}$.
 \end{itemize}
 Pour que l'opération soit neutre, le contrat Forward doit nous permettre de vendre l'actif à un prix $K$ qui couvre exactement cette dette finale. Le "juste prix" est donc $K = S_0 e^{(r-d)T}$. Toute différence permettrait un arbitrage sans risque.
 \end{proofbox}
@@ -157,22 +157,22 @@ Pour que l'opération soit neutre, le contrat Forward doit nous permettre de ven
 
 \begin{theorembox}[Valeur et Prix théorique d'un contrat Forward]
 Si un actif liquide s'échange aujourd'hui au prix $S_0$, avec un taux de dividende continu $d$ et un taux d'intérêt sans risque composé en continu $r$, alors le prix forward théorique $F$ (le prix d'exercice qui annule la valeur du contrat à l'origine) est :
-\begin{equation*}
+\begin{equation}
     F = S_0 e^{(r-d)T}
-\end{equation*}
+\end{equation}
 Si l'on possède déjà un contrat forward s'engageant à acheter cet actif à un prix d'exercice arbitraire $K$ à l'échéance $T$, la valeur $V$ de ce contrat aujourd'hui est la différence actualisée entre le prix forward actuel et le prix d'exercice $K$ :
-\begin{equation*}
+\begin{equation}
     V = e^{-rT} (S_0 e^{(r-d)T} - K)
-\end{equation*}
+\end{equation}
 \end{theorembox}
 
 \begin{examplebox}[Exemple 1 : Prix théorique vs Valeur en cours]
 Considérons une action $S_0 = 100$, avec $r = 0,05$ et $d = 0,02$ sur une durée $T = 1$.
 
 1. Le prix forward juste fixé aujourd'hui :
-\begin{equation*}
+\begin{equation}
     F = 100 \times e^{(0,05 - 0,02) \times 1} = 100 \times e^{0,03} \approx 103,05
-\end{equation*}
+\end{equation}
 
 2. La valeur d'un contrat en cours :
 Imaginons que vous ayez signé un contrat (il y a quelques mois) pour acheter cette action à $K = 100$ dans un an :
@@ -202,9 +202,9 @@ Le prix proposé par le marché est trop élevé par rapport au prix théorique 
         \item Rembourser l'emprunt bancaire avec les intérêts accumulés : $98,02 \times e^{0,05 \times 1} \approx 103,05$ €.
     \end{itemize}
     \item Gain d'arbitrage net à $T = 1$ : 
-    \begin{equation*}
+    \begin{equation}
         \text{Profit} = 105 - 103,05 = 1,95 \text{ €}
-    \end{equation*}
+    \end{equation}
 \end{itemize}
 L'arbitrageur encaisse $1,95$ € de profit pur sans risque et sans aucun capital initial. L'activité de tous les arbitrageurs vendant le forward à ce prix va exercer une pression baissière sur $F_{\text{marché}}$ jusqu'à ce qu'il s'aligne sur le prix théorique de $103,05$.
 \end{examplebox}
@@ -215,13 +215,13 @@ L'arbitrageur encaisse $1,95$ € de profit pur sans risque et sans aucun capita
 
 \begin{theorembox}[Parité Call-Put]
 Si une option d'achat (Call) de prix $C$, une option de vente (Put) de prix $P$ et un contrat forward de valeur $V$ possèdent le même prix d'exercice $K$ et la même échéance $T$, alors :
-\begin{equation*}
+\begin{equation}
     C - P = V
-\end{equation*}
+\end{equation}
 En utilisant la définition de la valeur d'un contrat forward, nous avons :
-\begin{equation*}
+\begin{equation}
     C - P = e^{-rT} (S_0 e^{(r-d)T} - K)
-\end{equation*}
+\end{equation}
 \end{theorembox}
 
 \begin{proofbox}[Justification par les flux finaux (Payoffs)]
@@ -231,9 +231,9 @@ Pour démontrer logiquement cette égalité, il suffit de comparer ce que rappor
     \item Le Put donne le droit de vendre à $K$, son flux final est $\max(K - S_T, 0)$.
 \end{itemize}
 Si l'on construit un portefeuille où l'on achète un Call et l'on vend un Put en même temps ($C - P$), la valeur de ce portefeuille à l'échéance sera exactement :
-\begin{equation*}
+\begin{equation}
     \max(S_T - K, 0) - \max(K - S_T, 0) = S_T - K
-\end{equation*}
+\end{equation}
 Parallèlement, un contrat Forward avec un prix d'exercice $K$ nous engage fermement à acheter l'actif à $K$. À l'échéance, la valeur de cet engagement est exactement $S_T - K$.
 
 Puisque le portefeuille composé d'options ($C - P$) et le contrat Forward ($V$) produisent exactement le même flux financier final, quelle que soit la valeur que prendra l'actif $S_T$, le principe d'absence d'opportunité d'arbitrage impose qu'ils aient obligatoirement le même prix de départ. On retrouve ainsi $C - P = V$.
@@ -255,9 +255,9 @@ Un résultat fondamental de la finance mathématique est que nos vues subjective
 
 \begin{theorembox}[Bornes sur le prix d'un Call]
 Pour une action ne versant pas de dividendes ($d = 0$), le prix d'un Call européen $C_0$ est encadré par le prix actuel de l'action $S_0$ et sa valeur intrinsèque actualisée. Soit $Z_0 = e^{-rT}$ le prix d'un zéro-coupon :
-\begin{equation*}
+\begin{equation}
     S_0 > C_0 > S_0 - K Z_0
-\end{equation*}
+\end{equation}
 Si les taux d'intérêt sont non négatifs ($r \geq 0$), alors $Z_0 \leq 1$, ce qui implique que le Call vaut toujours plus que sa valeur d'exercice immédiate : $C_0 > S_0 - K$.
 \end{theorembox}
 
@@ -276,9 +276,9 @@ La valeur finale est $\max(S_T, K)$, ce qui est toujours supérieur ou égal à 
 
 \begin{theorembox}[Bornes sur le prix d'un Put]
 Pour une action ne versant pas de dividendes ($d = 0$), le prix d'un Put européen $P_0$ est encadré par la valeur actuelle du prix d'exercice et sa valeur intrinsèque actualisée :
-\begin{equation*}
+\begin{equation}
     K Z_0 > P_0 > K Z_0 - S_0
-\end{equation*}
+\end{equation}
 Où $Z_0 = e^{-rT}$ est le prix d'un zéro-coupon.
 \end{theorembox}
 
@@ -286,17 +286,17 @@ Où $Z_0 = e^{-rT}$ est le prix d'un zéro-coupon.
 La borne supérieure $P_0 < K Z_0$ découle du fait qu'à l'échéance, le payoff $\max(K - S_T, 0)$ est strictement inférieur ou égal à $K$. À l'origine, le Put doit donc valoir moins que la valeur actualisée de $K$.
 
 Pour la borne inférieure, on utilise la parité Call-Put ($C_0 - P_0 = S_0 - K Z_0$) combinée au fait que $C_0 \ge 0$. En réarrangeant :
-\begin{equation*}
+\begin{equation}
     P_0 = C_0 + K Z_0 - S_0 \ge K Z_0 - S_0
-\end{equation*}
+\end{equation}
 Puisque le prix d'une option est toujours non négatif, on obtient $P_0 \ge \max(K Z_0 - S_0, 0)$.
 \end{proofbox}
 
 \begin{theorembox}[Non-optimalité de l'exercice anticipé]
 Pour une action ne versant pas de dividendes, il n'est jamais optimal d'exercer une option d'achat (Call) américaine avant son échéance. Par conséquent, un Call américain a la même valeur qu'un Call européen :
-\begin{equation*}
+\begin{equation}
     C_{\text{américain}} = C_{\text{européen}}
-\end{equation*}
+\end{equation}
 \end{theorembox}
 
 \begin{intuitionbox}[L'explication par les bornes]
