@@ -37,7 +37,6 @@ Le prix de l'option (Opt) aujourd'hui est l'espérance mathématique de son flux
 Cette logique s'applique de manière itérative dans un arbre à multiples périodes. La méthode par couverture reste parfaitement valide : pour répliquer l'option, il faut investir à t=0 une somme dans l'action et le reste sur un compte bancaire rémunéré au taux r. 
 Au fur et à mesure que le nombre de pas de temps tend vers l'infini, la durée $\Delta t$ tend vers zéro. L'opérateur devra alors acheter et vendre l'action, tout en empruntant ou plaçant du cash de manière continue pour maintenir son clone parfait. C'est le principe fondateur de la couverture dynamique en temps continu.
 
-\newpage
 
 \begin{examplebox}[Application globale : Arbre à 3 périodes avec taux d'intérêt]
 Nous allons évaluer une option de vente (Put) européenne de prix d'exercice K = 100, arrivant à échéance dans 3 mois (T = 0,25 année). 

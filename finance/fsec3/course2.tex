@@ -2,8 +2,6 @@
 
 Pour calculer la valeur de l'option aujourd'hui, nous devons procéder à l'envers (calcul à rebours). Puisque le marché est complet à chaque nœud, nous pouvons appliquer notre argument de couverture locale par induction rétrograde. Nous calculons d'abord la valeur de l'option à la mi-journée (nœuds D et E) en utilisant les flux finaux (nœuds A, B et C). Une fois ces valeurs intermédiaires connues, nous recommençons l'opération pour trouver la valeur initiale à t=0.
 
-\newpage
-
 Considérons notre option d'achat (Call) de prix d'exercice K = 100. Son profil de flux à l'échéance (t=1) est : 10 en A, 0 en C, 0 en B. Le taux d'intérêt sans risque est toujours supposé nul.
 
 \begin{enumerate}[label=Étape \arabic* :, leftmargin=*]
@@ -45,8 +43,6 @@ Cet exemple démontre mathématiquement la notion de couverture dynamique. Remar
 \subsection{Évaluation Risque-Neutre dans un Arbre à Deux Périodes}
 
 Bien que l'argument de couverture nous garantisse un prix mathématiquement parfait, les calculs de portefeuilles deviennent vite fastidieux. L'approche par la probabilité risque-neutre, bien que plus abstraite, est beaucoup plus simple à appliquer. Elle donnera toujours un résultat strictement identique à la méthode par couverture. Il existe deux manières de l'utiliser : en remontant l'arbre pas à pas (induction rétrograde), ou en calculant directement les probabilités globales d'atteindre chaque état final.
-
-\newpage
 
 Méthode 1 : Calcul pas à pas (Induction rétrograde)
 
@@ -97,8 +93,6 @@ L'unique caractéristique qualitative cruciale de cet argument est qu'à chaque 
 \subsection{Généralisation à N Périodes}
 
 Il n'y a rien de magique dans un modèle à deux étapes. Tant que chaque nœud de l'arbre se divise exactement en deux branches, la logique d'induction rétrograde garantit un prix sans arbitrage unique. Au lieu de calculer à rebours (nœud par nœud, couche par couche) depuis l'échéance finale jusqu'à aujourd'hui, nous pouvons directement calculer les probabilités globales d'atteindre chaque nœud final de l'arbre, puis faire l'espérance mathématique des flux finaux.
-
-\newpage
 
 Exemple d'un arbre à 4 pas de temps (Taux d'intérêt = 0) :
 Imaginons un arbre à 4 étapes, où le cours de l'action monte ou baisse de 2,5 à chaque pas. L'action part de 100 à t=0. 
@@ -203,8 +197,6 @@ Par conséquent, la valeur actuelle d'un produit dérivé qui génère un flux $
 \end{equation}
 \end{theorembox}
 
-\newpage
-
 L'objectif ultime de cette modélisation mathématique n'est pas de calculer un arbre géant à la main, mais de comprendre ce qui se passe mathématiquement lorsque l'on fait tendre le nombre d'étapes $N$ vers l'infini. Pour que la limite ait un sens mathématique et économique, il faudra réduire la taille de la variation de prix ($x$) au fur et à mesure que le nombre d'étapes ($N$) augmente, tout en préservant certaines propriétés de la volatilité de l'action. C'est précisément ce passage à la limite qui nous fera basculer de l'arbre binomial discret au mouvement brownien continu, fondement du modèle de Black-Scholes.
 
 \subsection{Le Modèle Normal}
@@ -288,5 +280,3 @@ Le prix converge vers l'intégrale suivante :
 Pour certains types de flux finaux, comme celui d'une option d'achat classique vanille où $f(S) = \max(S - K, 0)$, cette intégrale peut être résolue analytiquement pour obtenir une formule de prix explicite.
 
 La formule obtenue ici (le modèle Normal) suppose que le prix de l'actif suit une loi Normale (arithmétique). Bien qu'élégante mathématiquement, cette modélisation pose un problème financier majeur : une variable régie par une loi Normale peut prendre des valeurs négatives. Or, le prix d'une action, du fait de la responsabilité limitée des actionnaires, ne peut jamais tomber sous zéro. C'est cette aberration économique qui a conduit les chercheurs à abandonner le modèle Normal de Bachelier au profit du modèle Lognormal (géométrique) pour construire la théorie moderne de Black-Scholes.
-
-\newpage
