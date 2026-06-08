@@ -12,10 +12,12 @@ Le \textbf{taux sans risque} (noté $r$) est le taux de rendement d'un investiss
 
 En finance de marché moderne, on utilise systématiquement la \textbf{composition continue}. Si l'on place un capital $C_0$ à un taux continu $r$ pendant une durée $T$ (exprimée en années), sa valeur future $C_T$ (capitalisation) s'écrit :
 \begin{equation}
+    \label{eq:fsec1-capitalisation}
     C_T = C_0 e^{rT}
 \end{equation}
 À l'inverse, pour connaître la valeur aujourd'hui (actualisation) d'un montant $C_T$ que l'on recevra dans $T$ années :
 \begin{equation}
+    \label{eq:fsec1-actualisation}
     C_0 = C_T e^{-rT}
 \end{equation}
 \end{definitionbox}
@@ -65,10 +67,12 @@ L'acheteur du Call anticipe une \textit{hausse} du marché. Il fige son prix d'a
 \end{itemize}
 La formule mathématique du Payoff est donc :
 \begin{equation}
+    \label{eq:fsec1-payoff_call}
     \text{Payoff du Call} = \max(S_T - K, 0)
 \end{equation}
 Le \textbf{Profit} net de l'investisseur prend en compte le coût initial de l'option (la Prime $C_0$) :
 \begin{equation}
+    \label{eq:fsec1-profit_call}
     \text{Profit} = \max(S_T - K, 0) - C_0
 \end{equation}
 \textit{(Note : Pour simplifier, nous ignorons ici la capitalisation de la prime jusqu'en T).}
@@ -97,10 +101,12 @@ L'acheteur du Put anticipe une \textit{baisse} du marché. Il fige son prix de v
 \end{itemize}
 La formule mathématique du Payoff est :
 \begin{equation}
+    \label{eq:fsec1-payoff_put}
     \text{Payoff du Put} = \max(K - S_T, 0)
 \end{equation}
 Le profit net, en tenant compte de la prime payée $P_0$, est :
 \begin{equation}
+    \label{eq:fsec1-profit_put}
     \text{Profit} = \max(K - S_T, 0) - P_0
 \end{equation}
 \end{theorembox}

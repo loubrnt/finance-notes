@@ -158,10 +158,12 @@ Pour que l'opération soit neutre, le contrat Forward doit nous permettre de ven
 \begin{theorembox}[Valeur et Prix théorique d'un contrat Forward]
 Si un actif liquide s'échange aujourd'hui au prix $S_0$, avec un taux de dividende continu $d$ et un taux d'intérêt sans risque composé en continu $r$, alors le prix forward théorique $F$ (le prix d'exercice qui annule la valeur du contrat à l'origine) est :
 \begin{equation}
+    \label{eq:fsec2-forward_theorique}
     F = S_0 e^{(r-d)T}
 \end{equation}
 Si l'on possède déjà un contrat forward s'engageant à acheter cet actif à un prix d'exercice arbitraire $K$ à l'échéance $T$, la valeur $V$ de ce contrat aujourd'hui est la différence actualisée entre le prix forward actuel et le prix d'exercice $K$ :
 \begin{equation}
+    \label{eq:fsec2-forward_valeur}
     V = e^{-rT} (S_0 e^{(r-d)T} - K)
 \end{equation}
 \end{theorembox}
@@ -171,6 +173,7 @@ Considérons une action $S_0 = 100$, avec $r = 0,05$ et $d = 0,02$ sur une duré
 
 1. Le prix forward juste fixé aujourd'hui :
 \begin{equation}
+    \label{eq:fsec2-ex_forward_calc}
     F = 100 \times e^{(0,05 - 0,02) \times 1} = 100 \times e^{0,03} \approx 103,05
 \end{equation}
 
@@ -203,6 +206,7 @@ Le prix proposé par le marché est trop élevé par rapport au prix théorique 
     \end{itemize}
     \item Gain d'arbitrage net à $T = 1$ : 
     \begin{equation}
+        \label{eq:fsec2-ex_arbitrage_profit}
         \text{Profit} = 105 - 103,05 = 1,95 \text{ €}
     \end{equation}
 \end{itemize}
@@ -216,10 +220,12 @@ L'arbitrageur encaisse $1,95$ € de profit pur sans risque et sans aucun capita
 \begin{theorembox}[Parité Call-Put]
 Si une option d'achat (Call) de prix $C$, une option de vente (Put) de prix $P$ et un contrat forward de valeur $V$ possèdent le même prix d'exercice $K$ et la même échéance $T$, alors :
 \begin{equation}
+    \label{eq:fsec2-parite_call_put}
     C - P = V
 \end{equation}
 En utilisant la définition de la valeur d'un contrat forward, nous avons :
 \begin{equation}
+    \label{eq:fsec2-parite_dev}
     C - P = e^{-rT} (S_0 e^{(r-d)T} - K)
 \end{equation}
 \end{theorembox}
@@ -232,6 +238,7 @@ Pour démontrer logiquement cette égalité, il suffit de comparer ce que rappor
 \end{itemize}
 Si l'on construit un portefeuille où l'on achète un Call et l'on vend un Put en même temps ($C - P$), la valeur de ce portefeuille à l'échéance sera exactement :
 \begin{equation}
+    \label{eq:fsec2-parite_payoff}
     \max(S_T - K, 0) - \max(K - S_T, 0) = S_T - K
 \end{equation}
 Parallèlement, un contrat Forward avec un prix d'exercice $K$ nous engage fermement à acheter l'actif à $K$. À l'échéance, la valeur de cet engagement est exactement $S_T - K$.
@@ -256,6 +263,7 @@ Un résultat fondamental de la finance mathématique est que nos vues subjective
 \begin{theorembox}[Bornes sur le prix d'un Call]
 Pour une action ne versant pas de dividendes ($d = 0$), le prix d'un Call européen $C_0$ est encadré par le prix actuel de l'action $S_0$ et sa valeur intrinsèque actualisée. Soit $Z_0 = e^{-rT}$ le prix d'un zéro-coupon :
 \begin{equation}
+    \label{eq:fsec2-bornes_call}
     S_0 > C_0 > S_0 - K Z_0
 \end{equation}
 Si les taux d'intérêt sont non négatifs ($r \geq 0$), alors $Z_0 \leq 1$, ce qui implique que le Call vaut toujours plus que sa valeur d'exercice immédiate : $C_0 > S_0 - K$.
@@ -277,6 +285,7 @@ La valeur finale est $\max(S_T, K)$, ce qui est toujours supérieur ou égal à 
 \begin{theorembox}[Bornes sur le prix d'un Put]
 Pour une action ne versant pas de dividendes ($d = 0$), le prix d'un Put européen $P_0$ est encadré par la valeur actuelle du prix d'exercice et sa valeur intrinsèque actualisée :
 \begin{equation}
+    \label{eq:fsec2-bornes_put}
     K Z_0 > P_0 > K Z_0 - S_0
 \end{equation}
 Où $Z_0 = e^{-rT}$ est le prix d'un zéro-coupon.
@@ -287,6 +296,7 @@ La borne supérieure $P_0 < K Z_0$ découle du fait qu'à l'échéance, le payof
 
 Pour la borne inférieure, on utilise la parité Call-Put ($C_0 - P_0 = S_0 - K Z_0$) combinée au fait que $C_0 \ge 0$. En réarrangeant :
 \begin{equation}
+    \label{eq:fsec2-bornes_put_proof}
     P_0 = C_0 + K Z_0 - S_0 \ge K Z_0 - S_0
 \end{equation}
 Puisque le prix d'une option est toujours non négatif, on obtient $P_0 \ge \max(K Z_0 - S_0, 0)$.
@@ -295,6 +305,7 @@ Puisque le prix d'une option est toujours non négatif, on obtient $P_0 \ge \max
 \begin{theorembox}[Non-optimalité de l'exercice anticipé]
 Pour une action ne versant pas de dividendes, il n'est jamais optimal d'exercer une option d'achat (Call) américaine avant son échéance. Par conséquent, un Call américain a la même valeur qu'un Call européen :
 \begin{equation}
+    \label{eq:fsec2-call_americain}
     C_{\text{américain}} = C_{\text{européen}}
 \end{equation}
 \end{theorembox}

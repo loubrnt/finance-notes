@@ -206,17 +206,20 @@ Considérons une action de prix initial S. L'arbre compte $N$ étapes. À chaque
 À la fin de l'arbre, la valeur de l'action dépend uniquement du nombre total de hausses (noté $j$). Si l'action a fait $j$ hausses, elle a obligatoirement fait $(N - j)$ baisses.
 Le prix final de l'action $S_j$ dans l'état avec $j$ hausses s'écrit :
 \begin{equation}
+    \label{eq:fsec3-prix_sj}
     S_j = S + j(x) - (N - j)(x) = S + (2j - N)x
 \end{equation}
 
 Puisque la probabilité d'une hausse est de $1/2$ (avec un taux nul), la probabilité totale d'atteindre ce prix final $S_j$ suit une distribution binomiale :
 \begin{equation}
+    \label{eq:fsec3-prob_binom}
     Prob(S_j) = \frac{1}{2^N} \binom{N}{j}
 \end{equation}
 Où $\binom{N}{j}$ représente le nombre de chemins différents permettant d'obtenir $j$ hausses sur $N$ lancers.
 
 Par conséquent, la valeur actuelle d'un produit dérivé qui génère un flux $f(S)$ à l'échéance est simplement l'espérance de tous les flux terminaux pondérés par cette probabilité :
 \begin{equation}
+    \label{eq:fsec3-prix_n_pas}
     Opt_0 = \frac{1}{2^N} \sum_{j=0}^{N} \binom{N}{j} f\left(S + (2j - N)x\right)
 \end{equation}
 \end{theorembox}
@@ -254,6 +257,7 @@ La variance locale de ce mouvement est l'espérance des carrés : $0,5(x_N)^2 + 
 
 En égalisant cette variance locale avec notre cible, nous déduisons la taille exacte du saut par pas de temps :
 \begin{equation}
+    \label{eq:fsec3-taille_saut}
     (x_N)^2 = \frac{\sigma^2 T}{N} \implies x_N = \sigma \sqrt{\frac{T}{N}}
 \end{equation}
 Le mouvement de l'actif à chaque étape doit donc être proportionnel à la racine carrée du pas de temps.
@@ -263,10 +267,12 @@ Le mouvement de l'actif à chaque étape doit donc être proportionnel à la rac
 Pour formaliser cette dynamique, introduisons une suite de variables aléatoires indépendantes $Z_i$. À l'étape $i$, $Z_i$ prend la valeur $+1$ ou $-1$, chacune avec une probabilité de $0,5$.
 Après $N$ étapes de temps, le prix de l'actif est la somme de son prix initial et de toutes ses variations :
 \begin{equation}
+    \label{eq:fsec3-prix_sn_discret}
     S_N = S_0 + \sigma \sqrt{\frac{T}{N}} \sum_{i=1}^{N} Z_i
 \end{equation}
 Le prix sans arbitrage de l'option d'achat (qui verse un flux final $f(S_T)$) est l'espérance mathématique calculée sur l'ensemble de ces chemins :
 \begin{equation}
+    \label{eq:fsec3-opt_sn_discret}
     Opt_0 = \mathbb{E}\left[ f\left( S_0 + \sigma \sqrt{\frac{T}{N}} \sum_{i=1}^{N} Z_i \right) \right]
 \end{equation}
 \end{examplebox}
@@ -283,10 +289,12 @@ Par conséquent, à la limite continue, le prix futur de l'action $S_T$ suivra u
 Soit $X_1, X_2, \dots$ une suite de variables aléatoires indépendantes et identiquement distribuées (i.i.d.), ayant une moyenne finie $\mu$ et une variance finie non nulle $\sigma^2$.
 Soit $S_n$ la somme de ces $n$ variables :
 \begin{equation}
+    \label{eq:fsec3-tcl_somme}
     S_n = X_1 + X_2 + \dots + X_n
 \end{equation}
 Alors, la distribution de la variable centrée et réduite :
 \begin{equation}
+    \label{eq:fsec3-tcl_normale}
     \frac{S_n - n\mu}{\sigma \sqrt{n}}
 \end{equation}
 converge vers celle d'une variable aléatoire Gaussienne de moyenne 0 et de variance 1 lorsque $n$ tend vers l'infini.
@@ -296,6 +304,7 @@ converge vers celle d'une variable aléatoire Gaussienne de moyenne 0 et de vari
 Dans notre arbre binomial calibré, les variables aléatoires $Z_i$ prennent les valeurs $+1$ ou $-1$ avec probabilité $0,5$. Elles sont indépendantes, de moyenne nulle ($\mu = 0$) et de variance unitaire ($\sigma^2 = 1$).
 En appliquant le Théorème Central Limite, la somme de ces variables divisée par la racine du nombre de pas $N$ :
 \begin{equation}
+    \label{eq:fsec3-tcl_app}
     \frac{1}{\sqrt{N}} \sum_{i=1}^{N} Z_i
 \end{equation}
 converge vers une distribution Gaussienne standard, notée $\mathcal{N}(0,1)$, de moyenne 0 et de variance 1, lorsque $N \to \infty$.
@@ -304,16 +313,19 @@ converge vers une distribution Gaussienne standard, notée $\mathcal{N}(0,1)$, d
 \begin{definitionbox}[Le prix limite en temps continu]
 Le prix de l'actif après $N$ étapes était donné par :
 \begin{equation}
+    \label{eq:fsec3-sn_limite}
     S_N = S_0 + \sigma \sqrt{T} \left( \frac{1}{\sqrt{N}} \sum_{i=1}^{N} Z_i \right)
 \end{equation}
 En passant à la limite continue ($N \to \infty$), le terme entre parenthèses devient la variable aléatoire $\mathcal{N}(0,1)$. La distribution du prix futur de l'actif converge donc vers :
 \begin{equation}
+    \label{eq:fsec3-st_continu}
     S_T = S_0 + \sigma \sqrt{T} \mathcal{N}(0,1)
 \end{equation}
 
 Le prix d'arbitrage de l'option est l'espérance mathématique de son flux final $f(S_T)$. Puisque $S_T$ suit une loi Normale, cette espérance se calcule formellement à l'aide de la fonction de densité de la loi Normale.
 Le prix converge vers l'intégrale suivante :
 \begin{equation}
+    \label{eq:fsec3-integrale_continue}
     Opt_0 = \mathbb{E}[f(S_T)] = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} f(S_0 + \sigma \sqrt{T} x) e^{-\frac{x^2}{2}} dx
 \end{equation}
 Pour certains types de flux finaux, comme celui d'une option d'achat classique vanille où $f(S) = \max(S - K, 0)$, cette intégrale peut être résolue analytiquement pour obtenir une formule de prix explicite.
