@@ -3,14 +3,12 @@
 
 \subsection{La couverture en Delta (Delta Hedging)}
 
-\begin{intuitionbox}[Le principe de base]
 Sous certaines hypothèses sur le comportement d'une action, il est possible de déterminer le "juste prix" d'une option. L'idée fondamentale repose sur le fait que la valeur d'une option dépend principalement de deux facteurs :
 \begin{itemize}[label=$\rightarrow$]
     \item Le temps restant avant l'expiration.
     \item Le prix actuel de l'action sous-jacente.
 \end{itemize}
 Si l'on sait comment le prix de l'option varie en fonction du prix de l'action, on connaît son taux de variation. En termes mathématiques, il s'agit de la dérivée du prix de l'option par rapport au prix de l'action. En finance mathématique, ce taux de variation est appelé le Delta.
-\end{intuitionbox}
 
 \begin{definitionbox}[Le Delta ($\Delta$)]
 Le Delta d'une option mesure la sensibilité de son prix par rapport aux variations du prix de l'action sous-jacente. 
@@ -34,7 +32,6 @@ Si l'on suppose qu'il est possible de réajuster ce portefeuille \textit{en cont
 
 \subsection{Exemple pratique et intuitif : Déduction du prix par l'arbitrage}
 
-\begin{examplebox}[Le décor du modèle simplifié binomial]
 Pour comprendre la logique fondamentale du \textit{Delta Hedging} sans les mathématiques complexes, utilisons un scénario simple où le temps s'arrête "demain" :
 \begin{itemize}[label=$\rightarrow$]
     \item L'action aujourd'hui : Elle vaut 100~€.
@@ -43,11 +40,9 @@ Pour comprendre la logique fondamentale du \textit{Delta Hedging} sans les math�
     \item Le taux sans risque : La banque (ou l'État) propose un taux d'intérêt garanti de 5\%.
 \end{itemize}
 La grande question : À quel prix exact devez-vous vendre cette option aujourd'hui pour être sûr de ne pas perdre d'argent, ni d'offrir une opportunité d'arbitrage ("d'argent gratuit") au marché ?
-\end{examplebox}
 
 \newpage
 
-\begin{intuitionbox}[Le raisonnement pas à pas]
 Étape 1 : Calculer le Delta\\
 Que vaudra l'option demain dans nos deux scénarios ?
 \begin{itemize}[label=$\rightarrow$]
@@ -104,11 +99,9 @@ Investissement aujourd'hui = 50~€ - Prix de l'option.
 Puisque cet investissement doit valoir 38,10~€, il suffit de résoudre l'équation :\\
 $50 - \text{Prix de l'option} = 38,10$ \\
 Prix de l'option = 11,90~€
-\end{intuitionbox}
 
-\newpage
-
-\begin{remarquebox}[Généralisation aux options en dehors de la monnaie (OTM)]
+\vspace{0.4cm}
+Généralisation aux options en dehors de la monnaie (OTM) :
 Cette logique de couverture fonctionne avec absolument n'importe quel Strike (ainsi qu'avec des \textit{Puts}). Puisque le prix de l'option est mathématiquement lié à celui de l'action, il existera toujours un ratio exact (le Delta) permettant d'annuler le risque.
 
 Prenons le même scénario, mais avec un \textit{Call} de Strike 110~€ :
@@ -123,11 +116,11 @@ Prenons le même scénario, mais avec un \textit{Call} de Strike 110~€ :
     \end{itemize}
 \end{itemize}
 Conclusion : Quoi qu'il arrive, la valeur finale est figée à 20~€. Le portefeuille est toujours parfaitement couvert et sans risque. On peut alors appliquer la même logique d'actualisation à 5\% pour déduire le prix exact de ce Call à 110~€.
-\end{remarquebox}
+
+\newpage
 
 \subsection{Évaluation des contrats Forward et Coût de Détention}
 
-\begin{intuitionbox}[L'intuition fondamentale : La stratégie de "Cash and Carry"]
 Pour déterminer le juste prix d'un contrat Forward (le prix auquel on s'engage à vendre un actif dans le futur), on utilise un raisonnement d'absence d'opportunité d'arbitrage (AOA). L'idée est de simuler la vente future en construisant aujourd'hui une stratégie qui ne nous coûte strictement rien au départ. 
 
 Imaginons que l'on veuille s'engager à vendre une action dans un an à un prix fixé aujourd'hui. Pour être certain de pouvoir livrer l'action sans subir les variations du marché, on l'achète aujourd'hui. Le mécanisme repose sur trois étapes :
@@ -136,9 +129,7 @@ Imaginons que l'on veuille s'engager à vendre une action dans un an à un prix 
     \item Pendant la durée du contrat : On est propriétaire légal de l'action, on encaisse donc ses dividendes réguliers. En parallèle, notre dette à la banque s'alourdit des intérêts au taux sans risque.
     \item À l'échéance ($T$) : On livre l'actif à l'acheteur au prix convenu. Pour qu'il n'y ait pas d'arbitrage (ni gain magique, ni perte), ce prix de vente doit correspondre exactement au montant qu'il nous reste à rembourser à la banque, une fois les dividendes déduits. 
 \end{enumerate}
-\end{intuitionbox}
 
-\begin{proofbox}[L'argument de non-arbitrage pas à pas]
 Traduisons cette intuition mathématiquement pour une action valant $S_0$, avec un taux sans risque $r$ et un taux de dividende continu $d$.
 Construisons notre portefeuille à coût zéro aujourd'hui :
 \begin{itemize}[label=$\rightarrow$]
@@ -148,10 +139,9 @@ Construisons notre portefeuille à coût zéro aujourd'hui :
 Que se passe-t-il à l'échéance $T$ ?
 \begin{itemize}[label=$\rightarrow$]
     \item La fraction d'actif $e^{-dT}$ a généré des dividendes continus. Grâce au réinvestissement, nous possédons désormais exactement $1$ actif complet.
-    \item La debt initiale a accumulé des intérêts au taux $r$. Le montant à rembourser est de : $e^{-dT} S_0 \times e^{rT} = S_0 e^{(r-d)T}$.
+    \item La dette initiale a accumulé des intérêts au taux $r$. Le montant à rembourser est de : $e^{-dT} S_0 \times e^{rT} = S_0 e^{(r-d)T}$.
 \end{itemize}
 Pour que l'opération soit neutre, le contrat Forward doit nous permettre de vendre l'actif à un prix $K$ qui couvre exactement cette dette finale. Le "juste prix" est donc $K = S_0 e^{(r-d)T}$. Toute différence permettrait un arbitrage sans risque.
-\end{proofbox}
 
 \newpage
 
@@ -256,9 +246,7 @@ Une option est qualifiée selon la position du prix de l'actif par rapport au pr
 Il existe également le concept d'At-the-forward, où le prix d'exercice $K$ est égal au prix forward de l'actif. À ce point précis, la valeur du contrat forward est de $0$, ce qui implique que $C = P$.
 \end{definitionbox}
 
-\begin{intuitionbox}[Indépendance vis-à-vis des anticipations]
 Un résultat fondamental de la finance mathématique est que nos vues subjectives sur la valeur future moyenne de l'actif n'affectent pas le prix des options. Si nous pensons que le prix a plus de chances de finir au-dessus du prix forward, nous pourrions être tentés de dire que le Call devrait valoir plus que le Put. Cependant, la parité Call-Put montre que si $K$ est égal au prix forward, le Call et le Put doivent avoir exactement la même valeur pour éviter tout arbitrage, quelles que soient les croyances sur la direction du marché.
-\end{intuitionbox}
 
 \begin{theorembox}[Bornes sur le prix d'un Call]
 Pour une action ne versant pas de dividendes ($d = 0$), le prix d'un Call européen $C_0$ est encadré par le prix actuel de l'action $S_0$ et sa valeur intrinsèque actualisée. Soit $Z_0 = e^{-rT}$ le prix d'un zéro-coupon :
@@ -310,8 +298,6 @@ Pour une action ne versant pas de dividendes, il n'est jamais optimal d'exercer 
 \end{equation}
 \end{theorembox}
 
-\begin{intuitionbox}[L'explication par les bornes]
 Nous avons démontré que si $r \ge 0$, alors $C_0 > S_0 - K$. 
 Si un investisseur décide d'exercer son Call américain immédiatement, il reçoit la valeur intrinsèque immédiate : $S_0 - K$.
 Or, en vendant le Call sur le marché, il obtient sa valeur de marché $C_0$, qui est strictement supérieure à $S_0 - K$. L'investisseur a donc toujours intérêt à vendre l'option plutôt qu'à l'exercer. De plus, exercer par anticipation revient à payer le prix d'exercice $K$ immédiatement au lieu de conserver cette trésorerie rémunérée au taux sans risque jusqu'à l'échéance.
-\end{intuitionbox}

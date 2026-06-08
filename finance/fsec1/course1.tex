@@ -3,14 +3,13 @@
 
 \subsection{L'Environnement Financier de Base}
 
-\begin{intuitionbox}[La valeur temporelle de l'argent]
 Un principe fondamental en finance stipule qu'un euro aujourd'hui vaut plus qu'un euro demain. Ce postulat repose sur le fait que l'argent disponible aujourd'hui peut être investi pour générer un rendement. Pour comparer des flux financiers se produisant à des dates différentes, nous devons utiliser un taux d'intérêt pour "déplacer" ces montants dans le temps.
-\end{intuitionbox}
 
-\begin{definitionbox}[Le Taux Sans Risque et la Composition Continue]
-Le \textbf{taux sans risque} (noté $r$) est le taux de rendement d'un investissement pour lequel il n'y a absolument aucun risque de défaut (généralement modélisé par les obligations d'États très solides). 
+\begin{definitionbox}[Le Taux Sans Risque]
+Le taux sans risque (noté $r$) est le taux de rendement d'un investissement pour lequel il n'y a absolument aucun risque de défaut (généralement modélisé par les obligations d'États très solides). 
+\end{definitionbox}
 
-En finance de marché moderne, on utilise systématiquement la \textbf{composition continue}. Si l'on place un capital $C_0$ à un taux continu $r$ pendant une durée $T$ (exprimée en années), sa valeur future $C_T$ (capitalisation) s'écrit :
+En finance de marché moderne, on utilise systématiquement la composition continue. Si l'on place un capital $C_0$ à un taux continu $r$ pendant une durée $T$ (exprimée en années), sa valeur future $C_T$ (capitalisation) s'écrit :
 \begin{equation}
     \label{eq:fsec1-capitalisation}
     C_T = C_0 e^{rT}
@@ -20,34 +19,31 @@ En finance de marché moderne, on utilise systématiquement la \textbf{compositi
     \label{eq:fsec1-actualisation}
     C_0 = C_T e^{-rT}
 \end{equation}
-\end{definitionbox}
 
 \begin{definitionbox}[L'Actif Sous-jacent]
-Un produit dérivé est un instrument financier dont la valeur dépend (dérive) du prix d'un autre actif, appelé \textbf{actif sous-jacent} (noté $S$). Il peut s'agir d'une action, d'un indice boursier, d'une devise ou d'une matière première. 
+Un produit dérivé est un instrument financier dont la valeur dépend (dérive) du prix d'un autre actif, appelé actif sous-jacent (noté $S$). Il peut s'agir d'une action, d'un indice boursier, d'une devise ou d'une matière première. 
 On note $S_0$ le prix au comptant (Spot) aujourd'hui, et $S_T$ son prix à une date future $T$.
 \end{definitionbox}
 
 \subsection{Qu'est-ce qu'une Option ?}
 
-\begin{intuitionbox}[Le concept d'assurance]
 Une option fonctionne exactement comme un contrat d'assurance. Vous payez une prime aujourd'hui pour avoir le droit (mais non l'obligation) d'être protégé contre un événement futur (par exemple, la baisse d'une action ou l'explosion de son prix). Si l'événement ne se produit pas, vous perdez votre prime, mais si l'événement se produit, l'option vous indemnise.
-\end{intuitionbox}
 
 \begin{definitionbox}[Définition formelle d'une option]
-Une option est un contrat qui confère à son acheteur le \textbf{droit}, mais non l'obligation, d'acheter ou de vendre un actif sous-jacent à un prix fixé à l'avance, pendant une période donnée ou à une date précise.
+Une option est un contrat qui confère à son acheteur le droit, mais non l'obligation, d'acheter ou de vendre un actif sous-jacent à un prix fixé à l'avance, pendant une période donnée ou à une date précise.
 Les caractéristiques fondamentales sont :
 \begin{itemize}[label=$\rightarrow$]
-    \item \textbf{Le prix d'exercice (Strike - noté $K$)} : Le prix auquel la transaction future se fera si l'option est exercée.
-    \item \textbf{L'échéance (Maturité - notée $T$)} : La date d'expiration du contrat.
-    \item \textbf{La Prime (Premium)} : Le prix qu'il faut payer aujourd'hui pour acheter cette option.
+    \item Le prix d'exercice (Strike, noté $K$) : Le prix auquel la transaction future se fera si l'option est exercée.
+    \item L'échéance (Maturité, notée $T$) : La date d'expiration du contrat.
+    \item La Prime (Premium) : Le prix qu'il faut payer aujourd'hui pour acheter cette option.
 \end{itemize}
 \end{definitionbox}
 
 \begin{remarquebox}[Options Européennes vs Américaines]
 Il existe deux grands "styles" d'options qui définissent quand l'acheteur peut exercer son droit :
 \begin{itemize}[label=$\cdot$]
-    \item \textbf{Option Européenne} : L'exercice ne peut se faire \textit{qu'à la date d'échéance} exacte $T$.
-    \item \textbf{Option Américaine} : L'exercice peut se faire \textit{à tout moment} entre aujourd'hui et la date d'échéance $T$.
+    \item Option Européenne : L'exercice ne peut se faire \textit{qu'à la date d'échéance} exacte $T$.
+    \item Option Américaine : L'exercice peut se faire \textit{à tout moment} entre aujourd'hui et la date d'échéance $T$.
 \end{itemize}
 Dans cette introduction, nous nous concentrerons sur les flux à l'échéance (options européennes).
 \end{remarquebox}
@@ -55,11 +51,10 @@ Dans cette introduction, nous nous concentrerons sur les flux à l'échéance (o
 \subsection{L'Option d'Achat (Call)}
 
 \begin{definitionbox}[Le Call]
-Un \textbf{Call} donne le droit d'\textbf{acheter} l'actif sous-jacent au prix d'exercice $K$.
+Un Call donne le droit d'acheter l'actif sous-jacent au prix d'exercice $K$.
 L'acheteur du Call anticipe une \textit{hausse} du marché. Il fige son prix d'achat à $K$.
 \end{definitionbox}
 
-\begin{theorembox}[Flux final (Payoff) et Profit d'un Call]
 À l'échéance $T$, le flux généré par la détention d'un Call (son Payoff) dépend du prix final du sous-jacent $S_T$ :
 \begin{itemize}[label=$\rightarrow$]
     \item Si $S_T > K$ : Le droit d'acheter à $K$ est intéressant car on peut revendre immédiatement l'actif sur le marché à $S_T$. On exerce l'option. Gain = $S_T - K$.
@@ -70,13 +65,12 @@ La formule mathématique du Payoff est donc :
     \label{eq:fsec1-payoff_call}
     \text{Payoff du Call} = \max(S_T - K, 0)
 \end{equation}
-Le \textbf{Profit} net de l'investisseur prend en compte le coût initial de l'option (la Prime $C_0$) :
+Le Profit net de l'investisseur prend en compte le coût initial de l'option (la Prime $C_0$) :
 \begin{equation}
     \label{eq:fsec1-profit_call}
     \text{Profit} = \max(S_T - K, 0) - C_0
 \end{equation}
 \textit{(Note : Pour simplifier, nous ignorons ici la capitalisation de la prime jusqu'en T).}
-\end{theorembox}
 
 \begin{examplebox}[Mécanique du Call]
 Vous achetez un Call sur l'action Total avec un Strike $K = 50$ €, pour une prime de $3$ €.
@@ -89,11 +83,10 @@ Vous achetez un Call sur l'action Total avec un Strike $K = 50$ €, pour une pr
 \subsection{L'Option de Vente (Put)}
 
 \begin{definitionbox}[Le Put]
-Un \textbf{Put} donne le droit de \textbf{vendre} l'actif sous-jacent au prix d'exercice $K$.
+Un Put donne le droit de vendre l'actif sous-jacent au prix d'exercice $K$.
 L'acheteur du Put anticipe une \textit{baisse} du marché. Il fige son prix de vente à $K$.
 \end{definitionbox}
 
-\begin{theorembox}[Flux final (Payoff) et Profit d'un Put]
 À l'échéance $T$, pour le détenteur d'un Put :
 \begin{itemize}[label=$\rightarrow$]
     \item Si $S_T < K$ : Le droit de vendre à $K$ est intéressant car le prix de marché est plus bas. On exerce l'option. Gain = $K - S_T$.
@@ -109,31 +102,28 @@ Le profit net, en tenant compte de la prime payée $P_0$, est :
     \label{eq:fsec1-profit_put}
     \text{Profit} = \max(K - S_T, 0) - P_0
 \end{equation}
-\end{theorembox}
 
 \subsection{Positions et Asymétrie des Risques}
 
-\begin{intuitionbox}[Le jeu à somme nulle]
 Les marchés d'options sont un jeu à somme nulle. Pour qu'une personne puisse acheter un Call (Position Longue), une autre personne doit lui vendre ce Call (Position Courte). Le profil de gain de l'acheteur est exactement l'inverse (le miroir) du profil de perte du vendeur.
-\end{intuitionbox}
 
 \begin{definitionbox}[Les 4 positions fondamentales]
 Sur le marché des options, un acteur peut prendre 4 positions distinctes :
 \begin{enumerate}
-    \item \textbf{Long Call (Achat de Call)} : Parie à la hausse. Gain potentiel illimité, perte maximale limitée à la prime payée.
-    \item \textbf{Short Call (Vente de Call)} : Parie à la stagnation/baisse. Gain maximal limité à la prime reçue, perte potentielle \textit{illimitée} (très risqué).
-    \item \textbf{Long Put (Achat de Put)} : Parie à la baisse. Gain potentiel très important (jusqu'à ce que l'action vaille 0), perte maximale limitée à la prime.
-    \item \textbf{Short Put (Vente de Put)} : Parie à la stagnation/hausse. Gain maximal limité à la prime, perte potentielle très importante (si l'action chute à 0).
+    \item Long Call (Achat de Call) : Parie à la hausse. Gain potentiel illimité, perte maximale limitée à la prime payée.
+    \item Short Call (Vente de Call) : Parie à la stagnation/baisse. Gain maximal limité à la prime reçue, perte potentielle \textit{illimitée} (très risqué).
+    \item Long Put (Achat de Put) : Parie à la baisse. Gain potentiel très important (jusqu'à ce que l'action vaille 0), perte maximale limitée à la prime.
+    \item Short Put (Vente de Put) : Parie à la stagnation/hausse. Gain maximal limité à la prime, perte potentielle très importante (si l'action chute à 0).
 \end{enumerate}
 \end{definitionbox}
 
 \begin{definitionbox}[Le statut (Moneyness) de l'option]
 Le statut d'une option décrit si elle a une valeur intrinsèque immédiate (si on l'exerçait tout de suite) par rapport au prix actuel du sous-jacent $S$ :
 \begin{itemize}[label=$\cdot$]
-    \item \textbf{Dans la monnaie (In The Money - ITM)} : L'exercice immédiat serait profitable.
+    \item Dans la monnaie (In The Money, ITM) : L'exercice immédiat serait profitable.
         (Pour un Call : $S > K$ / Pour un Put : $S < K$)
-    \item \textbf{Hors de la monnaie (Out of The Money - OTM)} : L'exercice immédiat ne serait pas intéressant.
+    \item Hors de la monnaie (Out of The Money, OTM) : L'exercice immédiat ne serait pas intéressant.
         (Pour un Call : $S < K$ / Pour un Put : $S > K$)
-    \item \textbf{À la monnaie (At The Money - ATM)} : Le prix de l'actif est exactement égal au strike ($S = K$).
+    \item À la monnaie (At The Money, ATM) : Le prix de l'actif est exactement égal au strike ($S = K$).
 \end{itemize}
 \end{definitionbox}

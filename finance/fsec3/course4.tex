@@ -1,12 +1,9 @@
 \subsection{Passage à la Limite Continue : L'Ajustement Risque-Neutre}
 
-\begin{intuitionbox}[La correction de la probabilité]
 Dans la section précédente, nous avons établi que le logarithme du prix de l'action suit une trajectoire modélisée par l'équation \ref{eq:fsec3-log_sn}, incluant une dérive historique $\mu$. Cette dérive reflète la croissance réelle espérée par les investisseurs. Or, l'évaluation d'options requiert de basculer dans le monde risque-neutre, un monde théorique où tout actif croît au taux sans risque $r$. 
 
 Pour opérer cette bascule, nous ne modifions pas la taille des sauts de l'action, mais nous allons truquer les probabilités de la pièce que nous lançons à chaque étape. Nous devons recalculer la probabilité risque-neutre $p$ définie à l'équation \ref{eq:fsec3-proba_rn_taux} en y injectant les paramètres de notre modèle lognormal, puis observer son comportement lorsque le temps entre deux sauts, noté $\Delta t$, devient microscopique.
-\end{intuitionbox}
 
-\begin{proofbox}[Développement algébrique détaillé de la probabilité]
 Rappelons les valeurs de l'action à l'étape suivante dans le modèle lognormal :
 \begin{equation}
     \label{eq:fsec3-up_down_lognormal}
@@ -59,14 +56,10 @@ Dans le second bloc, la division de $\Delta t$ par $\sqrt{\Delta t}$ fait appara
     \label{eq:fsec3-proba_rn_taylor}
     p = \frac{1}{2} + \frac{1}{2} \left( \frac{r - \mu - \frac{1}{2}\sigma^2}{\sigma} \right) \sqrt{\Delta t} + \mathcal{O}(\Delta t)
 \end{equation}
-\end{proofbox}
 
-\begin{intuitionbox}[La magie de la nouvelle probabilité]
 L'équation \ref{eq:fsec3-proba_rn_taylor} est fascinante. Elle nous dit que dans le monde risque-neutre, la probabilité que l'action monte n'est pas exactement de cinquante pour cent. Elle est égale à $0,5$ plus un minuscule ajustement. 
 Cet ajustement a une mission mathématique précise : si le taux de la banque $r$ est différent de la croissance historique $\mu$, ce petit déséquilibre de la pièce va artificiellement pousser l'action vers le haut ou vers le bas pour forcer sa croissance à s'aligner exactement sur celle du compte bancaire.
-\end{intuitionbox}
 
-\begin{theorembox}[L'Ajustement de Convexité et la Disparition de la Dérive]
 Pour voir ce mécanisme à l'œuvre sur la durée totale du contrat $T$, définissons la variable aléatoire $\tilde{Z}_j$ de notre pièce truquée. Elle vaut $+1$ avec la probabilité $p$ et $-1$ avec la probabilité $1-p$.
 Calculons son espérance mathématique, que nous noterons $\nu$ :
 \begin{equation}
@@ -94,25 +87,27 @@ La beauté de la modélisation apparaît lors des simplifications. La volatilit�
     \label{eq:fsec3-calcul_drift_etape2}
     \mathbb{E}^{RN}[\log(S_T)] = \log(S_0) + \mu T + T \left( r - \mu - \frac{1}{2}\sigma^2 \right)
 \end{equation}
-En développant la parenthèse, le terme $\mu T$ positif annule parfaitement le terme $-\mu T$ négatif. Il nous reste l'équation fondamentale de la dynamique risque-neutre :
+En développant la parenthèse, le terme $\mu T$ positif annule parfaitement le terme $-\mu T$ négatif. Il nous reste l'équation fondamentale de la dynamique risque-neutre.
+
+\begin{theorembox}[L'Ajustement de Convexité et la Disparition de la Dérive]
+À la limite continue, la dérive historique $\mu$ disparaît totalement de la dynamique d'évaluation. L'espérance du logarithme du prix de l'action sous la probabilité risque-neutre s'écrit :
 \begin{equation}
     \label{eq:fsec3-limite_log_st}
     \mathbb{E}^{RN}[\log(S_T)] = \log(S_0) + \left( r - \frac{1}{2}\sigma^2 \right) T
 \end{equation}
 \end{theorembox}
 
-\begin{remarquebox}[L'Élimination du Risque et le Frein de la Volatilité]
 Ce résultat algébrique nous enseigne deux concepts financiers capitaux.
 Premièrement, la variable $\mu$ a totalement disparu. Le prix d'une option est donc strictement indépendant de ce que pensent les investisseurs de la direction future de l'action. 
 Deuxièmement, le taux de croissance du logarithme n'est pas le taux sans risque $r$, mais $r$ amputé de la moitié de la variance. Ce terme $-\frac{1}{2}\sigma^2$ s'appelle le frein de la volatilité ou l'ajustement de convexité (le Lemme d'Itô). En finance, à cause de la capitalisation géométrique, la fluctuation des prix érode toujours le rendement moyen d'un investissement.
-\end{remarquebox}
 
 \subsection{La Formule de Black-Scholes et l'Approximation À La Monnaie}
 
-\begin{definitionbox}[La Formule de Black-Scholes-Merton]
 L'application du Théorème Central Limite confirme que le terme aléatoire résiduel converge vers une loi normale standard $\mathcal{N}(0,1)$. Le prix futur s'écrit donc $S_T = S_0 \exp\left[ (r - \frac{1}{2}\sigma^2)T + \sigma \sqrt{T} \mathcal{N}(0,1) \right]$.
 
-En injectant cette distribution dans l'intégrale d'évaluation (équation \ref{eq:fsec3-integrale_continue}), la résolution analytique exacte pour une option d'achat (Call) donne naissance à la célèbre formule de Black-Scholes de 1973 :
+En injectant cette distribution dans l'intégrale d'évaluation (équation \ref{eq:fsec3-integrale_continue}), la résolution analytique exacte pour une option d'achat (Call) donne naissance à la célèbre formule de Black-Scholes de 1973.
+
+\begin{theorembox}[La Formule de Black-Scholes-Merton]
 \begin{equation}
     \label{eq:fsec3-black_scholes_call}
     C(S_0, K, \sigma, r, T) = S_0 \mathcal{N}(d_1) - K e^{-rT} \mathcal{N}(d_2)
@@ -131,10 +126,9 @@ La formule pour l'option de vente (Put) se déduit immédiatement par la relatio
     \label{eq:fsec3-black_scholes_put}
     P(S_0, K, \sigma, r, T) = K e^{-rT} \mathcal{N}(-d_2) - S_0 \mathcal{N}(-d_1)
 \end{equation}
-\end{definitionbox}
+\end{theorembox}
 
-\begin{examplebox}[L'Approximation Mentale : Le Prix À La Monnaie]
-La complexité des intégrales de la loi Normale rend cette formule impossible à calculer de tête. Toutefois, une astuce mathématique permet aux opérateurs de marché d'obtenir une valeur instantanée.
+La complexité des intégrales de la loi Normale rend cette formule impossible à calculer de tête. Toutefois, une astuce mathématique permet aux opérateurs de marché d'obtenir une valeur instantanée pour le prix à la monnaie.
 
 Considérons une option dont le prix d'exercice correspond exactement à l'anticipation neutre au risque du marché (le prix forward théorique vu à l'équation \ref{eq:fsec2-forward_theorique}). Si l'on pose $K = S_0 e^{rT}$, la fraction $\frac{S_0}{K}$ vaut $e^{-rT}$.
 Le logarithme naturel annule l'exponentielle, ce qui donne $\log(S_0/K) = -rT$.
@@ -164,16 +158,12 @@ En remplaçant $x$ par notre valeur $\frac{1}{2}\sigma \sqrt{T}$, le chiffre $2$
     C \approx 0,4 \times S_0 \times \sigma \times \sqrt{T}
 \end{equation}
 Grâce à la symétrie de la parité Call-Put à ce point précis, cette approximation mentale fonctionne à l'identique pour évaluer un Put.
-\end{examplebox}
 
 \subsection{La Dérivée Partielle : Le Delta en Temps Continu}
 
-\begin{intuitionbox}[L'immunisation infinitésimale]
 Dans la section d'introduction à l'arbre binomial (équation \ref{eq:fsec3-couverture_delta}), nous avons défini le Delta ($\Delta$) comme la quantité discrète d'actions à détenir pour se protéger d'un saut de prix. 
 Lorsque l'on bascule dans le modèle de Black-Scholes, la notion de saut disparaît au profit d'un flux continu. L'immunisation ne consiste plus à égaliser deux scénarios futurs, mais à s'assurer que la valeur de notre portefeuille reste totalement plate face à une variation instantanée et microscopique du marché.
-\end{intuitionbox}
 
-\begin{theorembox}[Le Delta Continu]
 Considérons le portefeuille de couverture $\Pi$ composé de la vente d'une option d'achat (pour une valeur $-C(S,t)$) et de l'achat de $\Delta$ actions (pour une valeur $\Delta \times S$). La valeur du portefeuille s'écrit $\Pi = -C(S,t) + \Delta \times S$.
 
 Pour que ce portefeuille soit parfaitement couvert en temps continu, son taux de variation instantané par rapport au prix de l'actif sous-jacent doit être nul. Mathématiquement, on impose que la dérivée partielle de la valeur du portefeuille par rapport à $S$ s'annule :
@@ -181,10 +171,13 @@ Pour que ce portefeuille soit parfaitement couvert en temps continu, son taux de
     \label{eq:fsec3-derivee_portefeuille}
     \frac{\partial \Pi}{\partial S} = -\frac{\partial C}{\partial S}(S, t) + \Delta = 0
 \end{equation}
-L'unique quantité $\Delta$ permettant de réaliser cette couverture parfaite est donc la pente géométrique de la courbe de l'option :
+
+\begin{definitionbox}[Le Delta Continu]
+L'unique quantité $\Delta$ permettant de réaliser la couverture parfaite en temps continu est la pente géométrique de la courbe de l'option (sa dérivée partielle par rapport au sous-jacent) :
 \begin{equation}
     \label{eq:fsec3-delta_continu}
     \Delta = \frac{\partial C}{\partial S}
 \end{equation}
+\end{definitionbox}
+
 Ce ratio varie en permanence en fonction de l'évolution du prix de l'action et de l'écoulement du temps. La gestion de ce risque exige de vendre et d'acheter des actions continuellement pour maintenir l'équation à zéro, ce qui constitue la définition formelle de la couverture dynamique.
-\end{theorembox}
