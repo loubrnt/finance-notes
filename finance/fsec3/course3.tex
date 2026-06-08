@@ -1,0 +1,332 @@
+
+\subsection{L'Intégration des Taux d'Intérêt}
+
+\begin{intuitionbox}[La valeur temporelle de l'argent]
+Jusqu'à présent, le modèle supposait un taux d'intérêt nul. Dans la réalité, le capital possède une valeur temporelle. Nous introduisons un taux d'intérêt sans risque composé en continu, noté r. 
+Sur un intervalle de temps donné $\Delta t$, un placement bancaire de 1 euro croît au taux sans risque et vaudra $e^{r\Delta t}$ à la fin de la période. 
+L'action, valant $S_0$ initialement, prendra la valeur $S_+$ en cas de hausse, ou $S_-$ en cas de baisse.
+\end{intuitionbox}
+
+\begin{theorembox}[Condition d'absence d'opportunité d'arbitrage (AOA)]
+Pour qu'aucun arbitrage ne soit possible entre l'action et l'obligation sans risque, le rendement garanti de l'obligation doit impérativement se situer entre le pire et le meilleur scénario de l'action :
+\begin{equation*}
+    S_- < S_0 e^{r\Delta t} < S_+
+\end{equation*}
+Si $S_0 e^{r\Delta t} > S_+$, un opérateur vendrait l'action à découvert pour tout placer à la banque et ferait un profit certain. Inversement, si le taux de la banque était inférieur au pire scénario $S_-$, l'opérateur emprunterait à l'infini pour acheter des actions sans aucun risque de perte.
+\end{theorembox}
+
+\begin{definitionbox}[La probabilité risque-neutre généralisée]
+La neutralité au risque impose que le rendement espéré de l'action soit exactement égal au rendement de l'actif sans risque. L'espérance de la valeur future de l'action n'est donc plus $S_0$, mais sa valeur capitalisée à la banque :
+\begin{equation*}
+    \mathbb{E}[S_{\Delta t}] = p S_+ + (1-p) S_- = S_0 e^{r\Delta t}
+\end{equation*}
+En résolvant cette équation pour extraire p, nous obtenons la formule fondamentale de la probabilité risque-neutre dans un arbre avec taux d'intérêt :
+\begin{equation*}
+    p = \frac{S_0 e^{r\Delta t} - S_-}{S_+ - S_-}
+\end{equation*}
+Grâce à la condition d'AOA définie précédemment, cette fraction donnera toujours un résultat strictement compris entre 0 et 1.
+\end{definitionbox}
+
+\begin{remarquebox}[Le concept d'Espérance Actualisée]
+Avec l'introduction du taux r, notre ancien argument d'évaluation directe s'effondre. L'espérance de l'obligation future n'est plus égale à sa valeur initiale, car 1 euro devient $e^{r\Delta t}$. 
+Pour conserver la validité de la théorie de l'arbitrage, nous devons utiliser les prix actualisés. La règle d'or devient : la valeur initiale de n'importe quel portefeuille est égale à l'espérance de sa valeur future, divisée par le facteur de capitalisation de l'actif sans risque.
+\end{remarquebox}
+
+\begin{definitionbox}[Tarification de l'option avec taux d'intérêt]
+Le prix de l'option (Opt) aujourd'hui est l'espérance mathématique de son flux futur $f(S_{\Delta t})$ sous la probabilité risque-neutre p, le tout actualisé au taux sans risque :
+\begin{equation*}
+    Opt_0 = e^{-r\Delta t} \mathbb{E}^{RN}[f(S_{\Delta t})] = e^{-r\Delta t} \Big[ p \cdot f(S_+) + (1-p) \cdot f(S_-) \Big]
+\end{equation*}
+\end{definitionbox}
+
+\begin{intuitionbox}[Conséquence sur la couverture dans les arbres à N périodes]
+Cette logique s'applique de manière itérative dans un arbre à multiples périodes. La méthode par couverture reste parfaitement valide : pour répliquer l'option, il faut investir à t=0 une somme dans l'action et le reste sur un compte bancaire rémunéré au taux r. 
+Au fur et à mesure que le nombre de pas de temps tend vers l'infini, la durée $\Delta t$ tend vers zéro. L'opérateur devra alors acheter et vendre l'action, tout en empruntant ou plaçant du cash de manière continue pour maintenir son clone parfait. C'est le principe fondateur de la couverture dynamique en temps continu.
+\end{intuitionbox}
+
+\newpage
+
+\begin{examplebox}[Application globale : Arbre à 3 périodes avec taux d'intérêt]
+Nous allons évaluer une option de vente (Put) européenne de prix d'exercice K = 100, arrivant à échéance dans 3 mois (T = 0,25 année). 
+Les paramètres de notre modèle à 3 étapes sont les suivants :
+\begin{itemize}[label=$\cdot$]
+    \item Prix initial de l'action : $S_0 = 100$.
+    \item L'arbre comporte $N = 3$ pas de temps. La durée d'une étape est $\Delta t = T / 3 = 0,25 / 3 = 1/12$ d'année (soit 1 mois).
+    \item Le taux d'intérêt continu sans risque est $r = 5\%$ par an ($r = 0,05$).
+    \item À chaque étape, l'action subit une variation multiplicative. Elle monte de 5\% ($u = 1,05$) ou baisse de 4,76\% ($d = 0,9524$, notons que $u \times d \approx 1$).
+\end{itemize}
+
+Étape 1 : Calcul de la probabilité risque-neutre (p)
+Nous appliquons la formule vue précédemment. À chaque nœud, l'action valant S évolue vers $S_+ = S \times u$ ou $S_- = S \times d$.
+\begin{equation*}
+    p = \frac{S e^{r\Delta t} - S_-}{S_+ - S_-} = \frac{e^{r\Delta t} - d}{u - d}
+\end{equation*}
+Calculons le facteur de capitalisation sur un mois : $e^{0,05 \times (1/12)} \approx 1,004175$.
+\begin{equation*}
+    p = \frac{1,004175 - 0,9524}{1,05 - 0,9524} = \frac{0,051775}{0,0976} \approx 0,5305
+\end{equation*}
+La probabilité de baisse est donc $1 - p = 0,4695$. Ces probabilités restent constantes sur tout l'arbre.
+
+Étape 2 : Construction de l'arbre des prix de l'action
+À t=0, $S_0 = 100$.
+À t=1 (1 mois) : Les prix possibles sont 105 et 95,24.
+À t=2 (2 mois) : Les prix possibles sont 110,25 (deux hausses), 100 (une hausse, une baisse) et 90,70 (deux baisses).
+À t=3 (3 mois) : Les 4 prix finaux possibles sont :
+\begin{itemize}[label=$\cdot$]
+    \item 3 hausses : $110,25 \times 1,05 = 115,76$
+    \item 2 hausses, 1 baisse : $100 \times 1,05 = 105$
+    \item 1 hausse, 2 baisses : $90,70 \times 1,05 = 95,24$
+    \item 3 baisses : $90,70 \times 0,9524 = 86,38$
+\end{itemize}
+
+Étape 3 : Évaluation des flux finaux de l'option (Put K=100) à t=3
+Le payoff du Put est $\max(100 - S_3, 0)$.
+\begin{itemize}[label=$\cdot$]
+    \item Pour $S_3 = 115,76$ : Put = 0
+    \item Pour $S_3 = 105$ : Put = 0
+    \item Pour $S_3 = 95,24$ : Put = $100 - 95,24 = 4,76$
+    \item Pour $S_3 = 86,38$ : Put = $100 - 86,38 = 13,62$
+\end{itemize}
+
+Étape 4 : Induction rétrograde et Actualisation
+Pour trouver le prix du Put à t=0, nous utilisons la méthode probabiliste globale. Le nombre de chemins pour atteindre chaque nœud suit les coefficients binomiaux pour N=3 (1, 3, 3, 1). L'espérance totale des flux est calculée puis actualisée sur la durée totale T.
+\begin{equation*}
+    Opt_0 = e^{-rT} \Big[ 1(p^3)(0) + 3(p^2)(1-p)(0) + 3(p)(1-p)^2(4,76) + 1(1-p)^3(13,62) \Big]
+\end{equation*}
+Calculons l'espérance brute :
+\begin{equation*}
+    \mathbb{E} = 3 \times (0,5305) \times (0,4695)^2 \times 4,76 + 1 \times (0,4695)^3 \times 13,62
+\end{equation*}
+\begin{equation*}
+    \mathbb{E} = (1,5915 \times 0,2204 \times 4,76) + (0,1035 \times 13,62) = 1,67 + 1,41 = 3,08
+\end{equation*}
+Il ne reste plus qu'à actualiser cette espérance au taux sans risque continu sur 3 mois :
+\begin{equation*}
+    Opt_0 = 3,08 \times e^{-0,05 \times 0,25} = 3,08 \times e^{-0,0125} \approx 3,08 \times 0,9876 \approx 3,04 \text{ €}
+\end{equation*}
+Le juste prix de cette option de vente est de 3,04 €.
+\end{examplebox}
+
+\subsection{Le Modèle Lognormal : Comportement dans le Monde Réel}
+
+\begin{intuitionbox}[La correction du modèle Normal]
+Le modèle arithmétique précédent présentait un défaut rédhibitoire en finance : en soustrayant des variations fixes, le prix de l'actif pouvait mathématiquement devenir négatif. Pour y remédier, nous ne modélisons plus le prix de l'actif de manière additive, mais nous modélisons les variations de son logarithme naturel. L'exponentielle d'un nombre réel (même négatif) étant toujours strictement positive, ce changement de variable garantit que le prix de l'action ne tombera jamais sous zéro.
+\end{intuitionbox}
+
+\begin{definitionbox}[Dérive, Volatilité et Paramétrage local]
+Plaçons-nous dans le monde réel (historique) sur une période totale T. 
+Nous définissons deux paramètres constants :
+\begin{itemize}[label=$\rightarrow$]
+    \item La dérive $\mu$ (Drift) : le taux de croissance moyen de l'actif. Dans le monde réel, ce taux est supérieur au taux sans risque r pour compenser le risque assumé par l'investisseur.
+    \item La volatilité $\sigma$ : l'écart-type mesurant l'amplitude des fluctuations.
+\end{itemize}
+Nous découpons la période T en N étapes régulières. La durée d'une étape est donc $\Delta t = \frac{T}{N}$.
+Pour que la moyenne et la variance globales sur la période T soient respectivement $\mu T$ et $\sigma^2 T$, les lois des probabilités (somme de variables indépendantes) imposent qu'à chaque petite étape $\Delta t$, la moyenne locale soit $\mu \Delta t$ et la variance locale soit $\sigma^2 \Delta t$.
+\end{definitionbox}
+
+\begin{examplebox}[Détail mathématique de l'accumulation des prix]
+Soit une variable aléatoire $Z_j$ valant $+1$ ou $-1$ avec une probabilité de $0,5$. Son espérance est nulle et sa variance est unitaire.
+La variation du logarithme du prix entre l'étape $j-1$ et l'étape $j$ est modélisée par l'équation suivante :
+\begin{equation*}
+    \log(S_j) - \log(S_{j-1}) = \mu \Delta t + \sigma \sqrt{\Delta t} Z_j
+\end{equation*}
+Pour trouver le prix à l'échéance T (qui correspond à la dernière étape N), nous écrivons cette équation pour toutes les étapes successives :
+\begin{align*}
+    \log(S_1) - \log(S_0) &= \mu \Delta t + \sigma \sqrt{\Delta t} Z_1 \\
+    \log(S_2) - \log(S_1) &= \mu \Delta t + \sigma \sqrt{\Delta t} Z_2 \\
+    \log(S_3) - \log(S_2) &= \mu \Delta t + \sigma \sqrt{\Delta t} Z_3 \\
+    &\dots \\
+    \log(S_N) - \log(S_{N-1}) &= \mu \Delta t + \sigma \sqrt{\Delta t} Z_N
+\end{align*}
+Additionnons verticalement toutes ces équations. Sur la partie gauche, chaque terme positif s'annule avec le terme négatif de la ligne suivante. C'est le principe d'une somme télescopique. Seuls le tout dernier terme et le tout premier terme survivent :
+\begin{equation*}
+    \log(S_N) - \log(S_0) = \sum_{j=1}^{N} \left( \mu \Delta t \right) + \sum_{j=1}^{N} \left( \sigma \sqrt{\Delta t} Z_j \right)
+\end{equation*}
+Puisque $\mu \Delta t$ est une constante répétée N fois, la première somme devient $N \mu \Delta t$. Or, comme $\Delta t = \frac{T}{N}$, alors $N \Delta t = T$. L'équation se simplifie ainsi :
+\begin{equation*}
+    \log(S_N) = \log(S_0) + \mu T + \sigma \sqrt{\Delta t} \sum_{j=1}^{N} Z_j
+\end{equation*}
+\end{examplebox}
+
+\begin{theorembox}[Passage à la limite continue et Distribution Lognormale]
+Pour observer le modèle en temps continu, nous devons faire tendre le nombre de pas N vers l'infini. 
+Remplaçons $\Delta t$ par $\frac{T}{N}$ dans le terme aléatoire de l'équation précédente :
+\begin{equation*}
+    \sigma \sqrt{\frac{T}{N}} \sum_{j=1}^{N} Z_j = \sigma \frac{\sqrt{T}}{\sqrt{N}} \sum_{j=1}^{N} Z_j = \sigma \sqrt{T} \left( \frac{1}{\sqrt{N}} \sum_{j=1}^{N} Z_j \right)
+\end{equation*}
+Les variables $Z_j$ ont une espérance $\mu_Z = 0$ et un écart-type $\sigma_Z = 1$. Le terme entre parenthèses est donc exactement la formule centrée-réduite du Théorème Central Limite. Lorsque N tend vers l'infini, ce bloc converge vers une variable aléatoire suivant une loi Normale standard, notée $\mathcal{N}(0,1)$.
+
+À la limite continue, l'équation algébrique du logarithme devient :
+\begin{equation*}
+    \log(S_T) = \log(S_0) + \mu T + \sigma \sqrt{T} \mathcal{N}(0,1)
+\end{equation*}
+Pour retrouver le prix final de l'actif, nous appliquons la fonction exponentielle des deux côtés de l'égalité :
+\begin{align*}
+    \exp(\log(S_T)) &= \exp\left( \log(S_0) + \mu T + \sigma \sqrt{T} \mathcal{N}(0,1) \right) \\
+    S_T &= \exp(\log(S_0)) \times \exp\left( \mu T + \sigma \sqrt{T} \mathcal{N}(0,1) \right) \\
+    S_T &= S_0 e^{\mu T + \sigma \sqrt{T} \mathcal{N}(0,1)}
+\end{align*}
+Puisque le logarithme de $S_T$ suit une distribution Normale, on conclut mathématiquement que le prix de l'actif $S_T$ suit une distribution Lognormale.
+\end{theorembox}
+
+\subsection{Le Comportement dans le Monde Risque-Neutre}
+
+\begin{intuitionbox}[La disparition de la subjectivité]
+Pour évaluer des options, la distribution du prix de l'actif dans le monde réel (historique, gouverné par la dérive $\mu$) n'est pas le facteur déterminant. Comme nous l'avons vu dans les modèles binomiaux, les probabilités de hausse ou de baisse n'affectent pas le prix d'arbitrage. Seule compte la distribution de l'actif sous la probabilité risque-neutre.
+Pour passer en temps continu, nous devons comprendre comment se comporte cette probabilité risque-neutre $p$ lorsque le pas de temps $\Delta t$ devient infinitésimal.
+\end{intuitionbox}
+
+\begin{proofbox}[Dérivation de la probabilité risque-neutre limite]
+Rappelons que dans notre arbre, le prix de l'actif passe de $S$ à $S \cdot u$ (hausse) ou $S \cdot d$ (baisse). D'après la modélisation lognormale précédente, sur un intervalle $\Delta t$, les facteurs de hausse et de baisse intègrent la vraie dérive $\mu$ :
+\begin{equation*}
+    u = e^{\mu \Delta t + \sigma \sqrt{\Delta t}} \quad \text{et} \quad d = e^{\mu \Delta t - \sigma \sqrt{\Delta t}}
+\end{equation*}
+La formule de la probabilité risque-neutre $p$ est :
+\begin{equation*}
+    p = \frac{e^{r\Delta t} - d}{u - d} = \frac{e^{r\Delta t} - e^{\mu \Delta t - \sigma \sqrt{\Delta t}}}{e^{\mu \Delta t + \sigma \sqrt{\Delta t}} - e^{\mu \Delta t - \sigma \sqrt{\Delta t}}}
+\end{equation*}
+Pour analyser cette fraction lorsque $\Delta t \to 0$, factorisons par $e^{\mu \Delta t}$ au numérateur et au dénominateur :
+\begin{equation*}
+    p = \frac{e^{(r-\mu)\Delta t} - e^{-\sigma \sqrt{\Delta t}}}{e^{\sigma \sqrt{\Delta t}} - e^{-\sigma \sqrt{\Delta t}}}
+\end{equation*}
+Utilisons le développement limité (série de Taylor) de la fonction exponentielle : $e^x \approx 1 + x + \frac{x^2}{2} + \mathcal{O}(x^3)$.
+\begin{itemize}[label=$\cdot$]
+    \item \textbf{Le Dénominateur :} $e^{\sigma \sqrt{\Delta t}} - e^{-\sigma \sqrt{\Delta t}} \approx \left(1 + \sigma \sqrt{\Delta t}\right) - \left(1 - \sigma \sqrt{\Delta t}\right) = 2\sigma \sqrt{\Delta t}$
+    \item \textbf{Le Numérateur :} 
+    $e^{(r-\mu)\Delta t} \approx 1 + (r-\mu)\Delta t$ \\
+    $e^{-\sigma \sqrt{\Delta t}} \approx 1 - \sigma \sqrt{\Delta t} + \frac{\sigma^2}{2}\Delta t$ \\
+    La différence donne : $\sigma \sqrt{\Delta t} + \left(r - \mu - \frac{\sigma^2}{2}\right)\Delta t$
+\end{itemize}
+En divisant le numérateur approximé par le dénominateur approximé ($2\sigma \sqrt{\Delta t}$), nous obtenons la valeur asymptotique de $p$ :
+\begin{equation*}
+    p \approx \frac{1}{2} + \frac{r - \mu - \frac{1}{2}\sigma^2}{2\sigma}\sqrt{\Delta t}
+\end{equation*}
+\end{proofbox}
+
+\begin{remarquebox}[L'ajustement pour la prime de risque]
+Ce résultat est fascinant. La probabilité de hausse dans le monde risque-neutre n'est plus exactement $\frac{1}{2}$. Elle est ajustée par un terme proportionnel à la différence entre le taux sans risque $r$ et la croissance réelle de l'actif $\mu$. Cet ajustement est précisément ce qui compense l'absence de prime de risque dans notre monde théorique d'évaluation.
+\end{remarquebox}
+
+\begin{theorembox}[La Magie de l'Évaluation : La disparition de $\mu$]
+Voyons l'impact de ce nouveau $p$ sur le comportement limite du logarithme du prix de l'actif. 
+À chaque étape, l'actif varie selon une variable aléatoire $\tilde{Z}$ qui vaut $+1$ (avec probabilité $p$) ou $-1$ (avec probabilité $1-p$).
+L'espérance de ce petit saut n'est plus zéro :
+\begin{equation*}
+    \mathbb{E}[\tilde{Z}] = (+1)p + (-1)(1-p) = 2p - 1 = \left( \frac{r - \mu - \frac{1}{2}\sigma^2}{\sigma} \right) \sqrt{\Delta t}
+\end{equation*}
+Rappelons l'équation globale du log-prix après $N$ étapes (où $T = N \Delta t$) :
+\begin{equation*}
+    \log(S_T) = \log(S_0) + \mu T + \sigma \sqrt{\Delta t} \sum_{j=1}^{N} \tilde{Z}_j
+\end{equation*}
+Calculons l'espérance de $\log(S_T)$ sous la probabilité risque-neutre :
+\begin{align*}
+    \mathbb{E}^{RN}[\log(S_T)] &= \log(S_0) + \mu T + \sigma \sqrt{\Delta t} \cdot N \cdot \mathbb{E}[\tilde{Z}] \\
+    &= \log(S_0) + \mu T + \sigma \sqrt{\Delta t} \cdot \frac{T}{\Delta t} \cdot \left( \frac{r - \mu - \frac{1}{2}\sigma^2}{\sigma} \right) \sqrt{\Delta t} \\
+    &= \log(S_0) + \mu T + T \left( r - \mu - \frac{1}{2}\sigma^2 \right) \\
+    &= \log(S_0) + \left( r - \frac{1}{2}\sigma^2 \right) T
+\end{align*}
+\textbf{Le paramètre $\mu$ s'est mathématiquement annulé !} Dans le monde risque-neutre, la vraie dérive de l'actif ne joue absolument aucun rôle. L'espérance du prix final garantit que $\mathbb{E}^{RN}[S_T] = S_0 e^{rT}$, rendant le rendement espéré de l'action strictement égal au taux sans risque.
+\end{theorembox}
+
+\subsection{La Formule de Black-Scholes}
+
+\begin{intuitionbox}[L'intégration finale]
+Puisque le modèle converge (par le Théorème Central Limite) vers une loi normale continue, nous connaissons désormais parfaitement la distribution du logarithme du prix sous probabilité risque-neutre : il suit une loi Normale de moyenne $\log(S_0) + (r - \frac{1}{2}\sigma^2)T$ et de variance $\sigma^2 T$.
+Le prix de toute option est l'espérance risque-neutre actualisée de son flux final. Au lieu de calculer un arbre, il suffit de calculer l'intégrale de ce flux pondéré par la densité de cette loi Lognormale.
+\end{intuitionbox}
+
+\begin{definitionbox}[Les formules de Black-Scholes (1973)]
+Pour une option d'achat (Call) européenne de prix d'exercice $K$ et de maturité $T$, la résolution de l'intégrale $e^{-rT} \mathbb{E}^{RN}[\max(S_T - K, 0)]$ aboutit à la célèbre formule fermée de Black-Scholes :
+\begin{equation}
+    C(S_0, K, \sigma, r, T) = S_0 \mathcal{N}(d_1) - K e^{-rT} \mathcal{N}(d_2)
+\end{equation}
+Où les termes $d_1$ et $d_2$ sont définis par :
+\begin{align*}
+    d_1 &= \frac{\log\left(\frac{S_0}{K}\right) + \left(r + \frac{1}{2}\sigma^2\right)T}{\sigma \sqrt{T}} \\
+    d_2 &= d_1 - \sigma \sqrt{T} = \frac{\log\left(\frac{S_0}{K}\right) + \left(r - \frac{1}{2}\sigma^2\right)T}{\sigma \sqrt{T}}
+\end{align*}
+Et où $\mathcal{N}(x)$ représente la fonction de répartition (cumulative) de la loi Normale standard :
+\begin{equation*}
+    \mathcal{N}(x) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{x} e^{-\frac{s^2}{2}} ds
+\end{equation*}
+
+Par la relation de parité Call-Put, le prix d'une option de vente (Put) européenne s'en déduit immédiatement :
+\begin{equation}
+    P(S_0, K, \sigma, r, T) = -S_0 \mathcal{N}(-d_1) + K e^{-rT} \mathcal{N}(-d_2)
+\end{equation}
+\end{definitionbox}
+
+\subsection{Approximation Linéaire : La Règle d'Or du Trader}
+
+\begin{intuitionbox}[La simplification visuelle]
+La formule de Black-Scholes peut sembler opaque. Cependant, si l'on trace le prix d'une option "à la monnaie" (lorsque le Strike est proche du prix actuel) en fonction de la volatilité, la courbe obtenue est une ligne droite presque parfaite. Cette linéarité remarquable permet d'extraire une formule d'approximation mentale extraordinairement puissante pour les salles de marché.
+\end{intuitionbox}
+
+\begin{proofbox}[Dérivation de l'approximation à la monnaie (ATM)]
+Considérons une option exactement à la monnaie au sens du prix "Forward", c'est-à-dire $K = S_0 e^{rT}$. 
+Injectons ce $K$ dans le terme $\log(S_0/K)$ de la formule de $d_1$ :
+\begin{equation*}
+    \log\left(\frac{S_0}{S_0 e^{rT}}\right) = \log(e^{-rT}) = -rT
+\end{equation*}
+Le paramètre $d_1$ se simplifie grandement :
+\begin{equation*}
+    d_1 = \frac{-rT + rT + \frac{1}{2}\sigma^2 T}{\sigma \sqrt{T}} = \frac{1}{2}\sigma \sqrt{T} \quad \text{et par conséquent} \quad d_2 = -\frac{1}{2}\sigma \sqrt{T}
+\end{equation*}
+La valeur du Call devient :
+\begin{equation*}
+    C = S_0 \left( \mathcal{N}\left(\frac{1}{2}\sigma\sqrt{T}\right) - \mathcal{N}\left(-\frac{1}{2}\sigma\sqrt{T}\right) \right)
+\end{equation*}
+Utilisons le développement de Taylor de la fonction de répartition $\mathcal{N}(x)$ autour de zéro :
+$\mathcal{N}(x) \approx \mathcal{N}(0) + \mathcal{N}'(0)x$.
+Sachant que la dérivée $\mathcal{N}'(0)$ est simplement la densité au centre de la courbe en cloche $\frac{1}{\sqrt{2\pi}}$, les termes pairs s'annulent et nous obtenons :
+\begin{equation*}
+    C \approx S_0 \left( 2 \times \frac{1}{\sqrt{2\pi}} \times \frac{1}{2}\sigma\sqrt{T} \right) = \frac{S_0 \sigma \sqrt{T}}{\sqrt{2\pi}}
+\end{equation*}
+Étant donné que $1 / \sqrt{2\pi} \approx 0,3989$, on l'arrondit à $0,4$.
+\end{proofbox}
+
+\begin{theorembox}[Formule de calcul mental de Brenner-Subrahmanyam (1988)]
+Pour une option à la monnaie (Call ou Put, par parité), la valeur de l'option est donnée par l'approximation linéaire extrêmement précise :
+\begin{equation}
+    Prix_{ATM} \approx 0,4 \cdot S_0 \cdot \sigma \cdot \sqrt{T}
+\end{equation}
+\end{theorembox}
+
+\begin{examplebox}[Application de l'approximation mentale]
+Imaginons qu'une action cote aujourd'hui 100 €. La volatilité implicite du marché est de 10\% ($\sigma = 0,10$). Nous voulons pricer un Call de Strike 100 à échéance de 3 mois ($T = 0,25$ année). Le taux d'intérêt est nul.
+
+\textbf{Calcul mental via l'approximation :}
+\begin{equation*}
+    C \approx 0,4 \times 100 \times 0,10 \times \sqrt{0,25} = 0,4 \times 10 \times 0,5 = 2\text{ €}
+\end{equation*}
+
+\textbf{Calcul exact par Black-Scholes :}
+\begin{equation*}
+    C = 100 \cdot \mathcal{N}(0,05) - 100 \cdot \mathcal{N}(-0,05) \approx 1,995\text{ €}
+\end{equation*}
+L'erreur de cette règle mentale de "coin de table" est inférieure à 1\% ! Elle révèle élégamment que la valeur d'une option ATM rémunère exclusivement le risque (la volatilité mesurée par l'écart-type proportionnel à la racine du temps).
+\end{examplebox}
+
+\subsection{Retour à la Couverture : Le Delta en Temps Continu}
+
+\begin{intuitionbox}[Fermeture de la boucle théorique]
+Nous avons déduit le prix sans arbitrage (Black-Scholes) via la méthode probabiliste (évaluation risque-neutre). Cependant, le fondement de notre cours est que la méthode risque-neutre et la méthode par couverture (Hedging) produisent exactement le même prix, car elles découlent toutes deux de la loi du prix unique sur un marché complet. 
+Si ce prix est valide, il doit exister un portefeuille de couverture parfait en temps continu.
+\end{intuitionbox}
+
+\begin{theorembox}[La dérivation du Delta]
+Rappelons l'argument de l'arbre binomial : nous répliquons l'obligation sans risque en détenant un portefeuille $\Pi$ composé d'une option vendue ($-C$) et d'une quantité $\Delta$ d'actions achetées ($\Delta \cdot S$). 
+La valeur de notre portefeuille est :
+\begin{equation*}
+    \Pi = -C(S, t) + \Delta \cdot S
+\end{equation*}
+Pour que ce portefeuille soit "sans risque" à un instant infinitésimal donné, sa valeur doit être totalement immunisée contre de très petites variations de l'action $S$. Mathématiquement, cela signifie que le taux de variation du portefeuille par rapport au prix de l'action doit être nul :
+\begin{equation*}
+    \frac{\partial \Pi}{\partial S} = -\frac{\partial C}{\partial S} + \Delta = 0
+\end{equation*}
+La seule quantité d'actions qui permet d'annuler ce risque (et donc d'empêcher tout arbitrage) est :
+\begin{equation*}
+    \Delta = \frac{\partial C}{\partial S}(S, t)
+\end{equation*}
+Ainsi, pour se couvrir de manière parfaite, le trader doit détenir à chaque instant une fraction d'action exactement égale à la dérivée première de la formule de valorisation par rapport au sous-jacent. Étant donné que cette dérivée change continuellement selon le prix de l'action $S$ et le temps écoulé $t$, le trader est contraint de rééquilibrer son portefeuille en permanence : c'est la naissance de la \textbf{Couverture Dynamique en temps continu (Delta Hedging)}.
+\end{theorembox}

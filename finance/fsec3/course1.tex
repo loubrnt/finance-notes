@@ -1,0 +1,313 @@
+\newpage
+
+\section{Arbres Binomiaux et Évaluation d'Options}
+
+\subsection{Le Modèle à une Période (L'Univers à Deux États)}
+
+\begin{intuitionbox}[Le concept de l'arbre]
+Pour évaluer une option classique (vanille), une méthode redoutablement efficace consiste à modéliser les mouvements de l'actif sous-jacent à l'aide d'un arbre. Nous commençons par une situation hautement stylisée (un seul pas de temps, deux états futurs possibles) afin de comprendre la mécanique fondamentale de l'absence d'arbitrage, avant de généraliser.
+\end{intuitionbox}
+
+\begin{definitionbox}[Le cadre du modèle binomial simple]
+Considérons un univers simplifié avec les paramètres suivants :
+\begin{itemize}[label=$\rightarrow$]
+    \item \textbf{Taux d'intérêt} : Pour simplifier, nous supposons qu'il est nul ($r = 0$).
+    \item \textbf{Actif sous-jacent ($S$)} : Son prix actuel est $S_0 = 100$. Demain, il ne peut prendre que deux valeurs :
+    \begin{itemize}[label=$\cdot$]
+        \item État "Up" (Hausse) : $S_u = 110$
+        \item État "Down" (Baisse) : $S_d = 90$
+    \end{itemize}
+    \item \textbf{Option d'achat (Call)} : Prix d'exercice $K = 100$.
+    \begin{itemize}[label=$\cdot$]
+        \item Flux en cas de Hausse : $\max(110 - 100, 0) = 10$
+        \item Flux en cas de Baisse : $\max(90 - 100, 0) = 0$
+    \end{itemize}
+\end{itemize}
+\end{definitionbox}
+
+\subsection{Tarification par Couverture (Hedging)}
+
+\begin{intuitionbox}[L'élimination de l'incertitude]
+En tant que vendeur de cette option, nous sommes exposés à un risque : perdre 10 si l'état "Up" se réalise, et ne rien perdre dans l'état "Down". La stratégie de couverture consiste à construire un portefeuille aujourd'hui (composé de l'actif sous-jacent et de l'option) dont la valeur de demain sera strictement identique, quel que soit l'état du monde qui se réalise.
+\end{intuitionbox}
+
+\begin{proofbox}[Détermination du prix sans arbitrage par la couverture]
+Sans connaître l'avenir, nous achetons une quantité fixe $\delta$ d'actions aujourd'hui. Soit $Opt_0$ la valeur de l'option aujourd'hui.
+\begin{itemize}[label=$\rightarrow$]
+    \item \textbf{Valeur du portefeuille aujourd'hui} : $\Pi_0 = 100\delta - Opt_0$
+\end{itemize}
+Regardons la valeur de ce portefeuille demain dans les deux états :
+\begin{itemize}[label=$\rightarrow$]
+    \item Dans l'état "Up" : $\Pi_u = 110\delta - 10$
+    \item Dans l'état "Down" : $\Pi_d = 90\delta$
+\end{itemize}
+
+\textbf{Étape 1 : Couverture du risque (Delta)}\\
+Pour éliminer toute incertitude, le portefeuille doit valoir la même chose dans les deux états ($\Pi_u = \Pi_d$) :
+\begin{equation*}
+    110\delta - 10 = 90\delta \implies 20\delta = 10 \implies \delta = \frac{1}{2}
+\end{equation*}
+En détenant une demi-action, notre portefeuille vaudra demain exactement $90 \times (0,5) = 45$, quoi qu'il arrive.
+
+\textbf{Étape 2 : Application du principe de non-arbitrage}\\
+Puisque le taux d'intérêt est nul ($r=0$) et que notre portefeuille est sans risque, sa valeur aujourd'hui doit être exactement égale à sa valeur de demain :
+\begin{equation*}
+    \Pi_0 = 45 \implies 100(0,5) - Opt_0 = 45 \implies 50 - Opt_0 = 45 \implies Opt_0 = 5
+\end{equation*}
+Le prix unique et sans arbitrage de l'option est de $5$.
+\end{proofbox}
+
+\begin{remarquebox}[L'absence des probabilités]
+Le point le plus remarquable de ce raisonnement est que les probabilités n'interviennent nulle part. Peu importe qu'il y ait 90\% ou 10\% de chances que l'action monte : l'argument de couverture reste parfaitement valide. La seule condition imposée aux probabilités réelles est qu'elles ne soient ni $0$ ni $1$ (car une probabilité de $1$ de voir l'action monter plus vite que le taux sans risque créerait une opportunité d'arbitrage immédiate).
+\end{remarquebox}
+
+\newpage
+
+\subsection{L'Évaluation Risque-Neutre}
+
+\begin{intuitionbox}[L'approche probabiliste]
+Que se passe-t-il si nous essayons d'évaluer l'option en utilisant une espérance mathématique ? Pour que cette approche donne le même résultat que notre méthode de couverture (qui est infaillible), nous devons inventer un monde théorique où les investisseurs sont neutres au risque. Dans ce monde, le rendement attendu de l'action est égal au taux sans risque.
+\end{intuitionbox}
+
+\begin{theorembox}[Probabilité Risque-Neutre]
+Pour retrouver le prix d'arbitrage, on définit une probabilité fictive $p$ (pour l'état "Up") et $1-p$ (pour l'état "Down"), telle que l'espérance de la valeur future de l'action soit exactement égale à sa valeur actuelle (car $r=0$) :
+\begin{equation*}
+    \mathbb{E}[S_1] = S_0
+\end{equation*}
+\end{theorembox}
+
+\begin{examplebox}[Calcul du prix via la probabilité risque-neutre]
+\textbf{Étape 1 : Trouver la probabilité $p$}\\
+Posons l'équation d'espérance de l'action :
+\begin{equation*}
+    110p + 90(1-p) = 100 \implies 20p + 90 = 100 \implies 20p = 10 \implies p = \frac{1}{2}
+\end{equation*}
+
+\textbf{Étape 2 : Évaluer l'option}\\
+Dans ce monde risque-neutre, la valeur de l'option aujourd'hui est simplement l'espérance mathématique de ses flux futurs :
+\begin{equation*}
+    Opt_0 = \mathbb{E}[Flux] = p \times 10 + (1-p) \times 0 = \frac{1}{2}(10) + \frac{1}{2}(0) = 5
+\end{equation*}
+Nous retrouvons exactement le prix d'arbitrage calculé précédemment, mais avec un calcul beaucoup plus direct.
+\end{examplebox}
+
+\subsection{Généralisation et Théorie des Martingales}
+
+\begin{examplebox}[Généralisation algébrique]
+Considérons un produit dérivé générique payant $a + \beta$ dans l'état "Up" et $a$ dans l'état "Down".
+\begin{itemize}[label=$\rightarrow$]
+    \item \textbf{Par couverture} : On égalise les états pour trouver $\delta$ : $110\delta - (a + \beta) = 90\delta - a \implies \delta = \frac{\beta}{20}$. La valeur future garantie est $90(\frac{\beta}{20}) - a = 4,5\beta - a$. L'équation de non-arbitrage donne : $100(\frac{\beta}{20}) - Opt_0 = 4,5\beta - a \implies Opt_0 = a + 0,5\beta$.
+    \item \textbf{Par risque-neutre} : L'espérance avec $p=0,5$ donne immédiatement $\mathbb{E}[Opt] = 0,5(a + \beta) + 0,5(a) = a + 0,5\beta$.
+\end{itemize}
+L'approche risque-neutre est considérablement plus simple à manipuler mathématiquement.
+\end{examplebox}
+
+\begin{theorembox}[Propriété de Martingale et Absence d'Arbitrage]
+Pourquoi la tarification risque-neutre fonctionne-t-elle ? Une fois la probabilité $p$ fixée de manière à ce que $\mathbb{E}[S] = S_0$, l'opérateur espérance étant linéaire, cette relation s'applique à toute combinaison d'instruments sur le marché.
+Si l'on note $B$ l'actif sans risque, on obtient le système suivant :
+\begin{align*}
+    \mathbb{E}[B_1] &= B_0 \\
+    \mathbb{E}[S_1] &= S_0 \\
+    \mathbb{E}[Opt_1] &= Opt_0
+\end{align*}
+La valeur actuelle de \textbf{tout} instrument est l'espérance de sa valeur future. Si un portefeuille vaut zéro aujourd'hui, son espérance future est zéro. Il est donc impossible que ce portefeuille soit toujours positif sans pouvoir être négatif : l'arbitrage est structurellement impossible sous cette probabilité.
+\end{theorembox}
+
+\begin{remarquebox}[Unicité du prix]
+Les deux arguments (couverture et risque-neutre) fonctionnent en sens inverse :
+\begin{itemize}[label=$\rightarrow$]
+    \item L'argument risque-neutre montre qu'un prix précis est exempt d'arbitrage (il fixe une borne inférieure).
+    \item L'argument par couverture montre que tous les autres prix peuvent être arbitrés (il fixe une borne supérieure).
+\end{itemize}
+Dans notre modèle binomial, ces deux bornes coïncident parfaitement. Le marché est dit "complet", et nous sommes laissés avec un prix d'arbitrage unique.
+\end{remarquebox}
+
+\subsection{La Tarification par Réplication}
+
+\begin{intuitionbox}[La Loi du Prix Unique et la Réplication]
+Il existe une troisième manière d'interpréter le prix d'arbitrage d'une option. Au lieu de vendre l'option et de nous couvrir, nous pouvons chercher à fabriquer un clone financier de cette option.
+Si nous parvenons à construire un portefeuille composé d'actions et d'emprunts qui génère strictement les mêmes flux que l'option dans tous les états futurs possibles, le principe d'absence d'arbitrage impose que le coût de construction de ce portefeuille aujourd'hui soit exactement égal au prix de l'option.
+\end{intuitionbox}
+
+\begin{remarquebox}[L'argument géométrique]
+Pourquoi est-il toujours possible de cloner l'option dans notre modèle ? 
+La valeur d'un portefeuille d'actions et d'obligations à l'échéance est une fonction affine du prix de l'action, soit Valeur = Delta fois le prix de l'action + Montant obligataire. Graphiquement, c'est une ligne droite.
+L'option définit deux points cibles à atteindre : son flux en cas de hausse, et son flux en cas de baisse. Or, par deux points, il passe une et une seule droite. Il existe donc une combinaison unique et exacte d'actions et d'emprunt qui réplique parfaitement l'option.
+\end{remarquebox}
+
+\begin{examplebox}[Réplication d'un Call sur Apple Inc.]
+Imaginons que nous voulions évaluer une option d'achat (Call) sur l'action Apple (ticker : AAPL).
+\begin{itemize}[label=$\rightarrow$]
+    \item L'action AAPL cote aujourd'hui 200 \$.
+    \item Demain, à la clôture, suite à une annonce de résultats, l'action sera soit à 220 \$ (Hausse), soit à 180 \$ (Baisse).
+    \item Le taux d'intérêt à un jour d'un bon du Trésor américain (US Treasury Bill, ticker : BIL) est supposé nul (0\%) pour simplifier.
+    \item Nous étudions un Call AAPL de prix d'exercice (Strike) à 200 \$.
+\end{itemize}
+
+Étape 1 : Identifier les flux cibles de l'option
+\begin{itemize}[label=$\cdot$]
+    \item Si AAPL monte à 220 \$, le Call vaut 20 \$.
+    \item Si AAPL baisse à 180 \$, le Call vaut 0 \$.
+\end{itemize}
+
+Étape 2 : Construire le portefeuille de réplication
+Nous cherchons à détenir une quantité Delta d'actions AAPL et un montant B en obligations US Treasury. Nous posons notre système d'équations pour le lendemain :
+\begin{itemize}[label=$\cdot$]
+    \item Scénario Hausse : 220 Delta + B = 20
+    \item Scénario Baisse : 180 Delta + B = 0
+\end{itemize}
+
+En soustrayant la deuxième équation à la première, on obtient : 
+40 Delta = 20, ce qui donne Delta = 0,5.
+En remplaçant Delta dans la deuxième équation : 
+180(0,5) + B = 0, ce qui donne 90 + B = 0, donc B = -90.
+
+Étape 3 : Interprétation financière et tarification
+Le calcul mathématique nous dicte la stratégie exacte à suivre aujourd'hui :
+\begin{itemize}[label=$\cdot$]
+    \item Acheter 0,5 action AAPL.
+    \item Vendre à découvert pour 90 \$ de bons du Trésor américain (ce qui équivaut à emprunter 90 \$ à la banque).
+\end{itemize}
+
+Vérifions ce clone demain : si AAPL vaut 180 \$, notre demi-action vaut 90 \$, ce qui sert tout juste à rembourser notre dette de 90 \$ au Trésor. Il nous reste 0 \$ (exactement comme le Call). Si AAPL vaut 220 \$, notre demi-action vaut 110 \$, nous remboursons les 90 \$, il nous reste 20 \$ net en poche (exactement comme le Call).
+
+Quel est le coût de création de ce clone aujourd'hui ?
+Coût net = Achat des actions AAPL - Argent emprunté via les Treasury Bills
+Coût net = 0,5 fois 200 \$ - 90 \$ = 100 \$ - 90 \$ = 10 \$.
+
+Le clone parfait coûte 10 \$. Par conséquent, le prix d'arbitrage de l'option Call AAPL sur le marché doit être très exactement de 10 \$.
+\end{examplebox}
+
+\begin{theorembox}[Symétrie de la réplication]
+Sur un marché complet, l'action, l'obligation sans risque et l'option sont structurellement liés. L'équation de valorisation peut être manipulée algébriquement pour répliquer n'importe quel instrument à partir des deux autres :
+\begin{itemize}[label=$\rightarrow$]
+    \item Hedging : Action possédée + Option vendue permet de générer des flux identiques à une Obligation sans risque.
+    \item Réplication : Action possédée + Obligation empruntée permet de générer des flux identiques à une Option d'achat.
+    \item Synthèse d'actif : Option achetée + Obligation détenue permet de générer des flux identiques à une Action.
+\end{itemize}
+\end{theorembox}
+
+\subsection{Les Limites du Modèle : Le Marché Incomplet}
+
+\begin{intuitionbox}[L'ajout d'un troisième état]
+Le modèle binomial à deux états est parfait mathématiquement, mais irréaliste économiquement. Pour s'approcher de la réalité, supposons un instant que l'action (actuellement à 100) puisse prendre trois valeurs demain : monter à 110 (A), stagner à 100 (C), ou baisser à 90 (B). Le Call a toujours un Strike de 100.
+Essayons d'appliquer nos méthodes de valorisation à cet univers à trois états.
+\end{intuitionbox}
+
+\begin{proofbox}[L'échec de la couverture et l'apparition d'inégalités]
+Tentons de nous couvrir en vendant l'option et en achetant une quantité y d'actions. Notre portefeuille demain vaudra :
+\begin{itemize}[label=$\cdot$]
+    \item État A (110) : $110y - 10$
+    \item État C (100) : $100y$
+    \item État B (90) : $90y$
+\end{itemize}
+Pour éliminer le risque, ces trois montants doivent être égaux. Mathématiquement, c'est impossible : nous avons 3 équations simultanées à résoudre mais une seule variable (y).
+Si nous utilisons le ratio y = 0,5 du modèle précédent, notre portefeuille vaudra 45 (en A), 50 (en C) ou 45 (en B). Le risque n'est pas éliminé, mais nous savons que le portefeuille vaudra au minimum 45. Par conséquent, sa valeur initiale doit être d'au moins 45 :
+\begin{equation*}
+    100(0,5) - Opt_0 \ge 45 \implies Opt_0 \le 5
+\end{equation*}
+L'argument d'arbitrage ne donne plus un prix exact, mais une borne supérieure.
+\end{proofbox}
+
+\begin{examplebox}[L'échec de la probabilité risque-neutre unique]
+Cherchons une probabilité risque-neutre telle que l'espérance de l'action demain soit 100.
+Soit $P_A, P_B, P_C$ les probabilités des trois états.
+\begin{equation*}
+    110 P_A + 100 P_C + 90 P_B = 100
+\end{equation*}
+Sachant que $P_C = 1 - P_A - P_B$, l'équation se simplifie pour donner : $P_A = P_B$.
+Posons $P_A = P_B = p$. La probabilité $p$ peut être n'importe quel chiffre compris entre 0 et 0,5. Il existe donc une infinité de probabilités risque-neutres valides.
+Le prix de l'option étant son espérance, nous avons :
+\begin{equation*}
+    Opt_0 = 10 \times p + 0 \times P_C + 0 \times P_B = 10p
+\end{equation*}
+Puisque p est compris entre 0 et 0,5, le prix du Call est un intervalle compris entre 0 et 5.
+\end{examplebox}
+
+\begin{theorembox}[Définition d'un Marché Incomplet]
+Le modèle à trois états illustre le concept fondamental de marché incomplet. Un marché est incomplet lorsqu'il y a plus d'états futurs du monde que d'actifs financiers indépendants permettant de s'y couvrir.
+Dans un tel marché :
+\begin{itemize}[label=$\rightarrow$]
+    \item La réplication parfaite d'un produit dérivé est impossible.
+    \item L'absence d'opportunité d'arbitrage ne suffit plus à fixer un prix unique.
+    \item Les mathématiques ne fournissent qu'un intervalle de prix exempts d'arbitrage (ici [0, 5]).
+\end{itemize}
+Le prix exact qui sera négocié sur le marché ne dépendra plus d'une équation, mais des préférences au risque et de la psychologie des acteurs du marché.
+\end{theorembox}
+
+\subsection{Modèle à Plusieurs Périodes}
+
+\begin{intuitionbox}[L'astuce du temps continu pour sauver le modèle]
+Nous venons de voir qu'ajouter un troisième état final (stagnation à 100) détruit l'unicité du prix et rend le marché incomplet. 
+Pour modéliser des mouvements de prix réalistes sans perdre la puissance mathématique de l'arbitrage, la solution consiste à découper le temps. Si nous supposons que les prix évoluent de manière continue, l'action ne fait pas un grand saut en une journée, elle fait plusieurs petits sauts successifs.
+\end{intuitionbox}
+
+\newpage
+
+\begin{examplebox}[Construction d'un arbre binomial à deux pas]
+Plutôt que d'envisager une variation de plus ou moins 10 sur une journée entière, nous découpons la journée en deux demi-journées, avec des variations de plus ou moins 5.
+\begin{itemize}[label=$\rightarrow$]
+    \item Instant initial (t = 0) : L'action vaut 100.
+    \item Étape intermédiaire (t = 0,5) : L'action fait face à un univers à deux états. Elle monte à 105 (Nœud D) ou baisse à 95 (Nœud E).
+    \item Étape finale (t = 1) : À partir de chaque nœud intermédiaire, l'action fait de nouveau face à deux états.
+    \begin{itemize}[label=$\cdot$]
+        \item Depuis 105 : elle monte à 110 (État A) ou baisse à 100 (État C).
+        \item Depuis 95 : elle monte à 100 (État C) ou baisse à 90 (État B).
+    \end{itemize}
+\end{itemize}
+L'état C (100) est atteint de deux manières différentes : une hausse suivie d'une baisse, ou une baisse suivie d'une hausse. C'est ce que l'on appelle un arbre recombinant.
+\end{examplebox}
+
+\vspace{0.5cm}
+\begin{center}
+\begin{tikzpicture}[>=stealth, sloped]
+    % Définition des styles pour les noeuds
+    \tikzstyle{node_style} = [circle, draw=vscodeBlue, fill=white, thick, minimum size=1cm, inner sep=2pt, font=\small]
+    \tikzstyle{time_style} = [font=\small\color{gray}]
+
+    % Les axes de temps (Placés plus haut à y=4.5 pour éviter le chevauchement)
+    \node[time_style] at (0, 4.5) {Aujourd'hui ($t=0$)};
+    \node[time_style] at (4, 4.5) {Mi-journée ($t=0,5$)};
+    \node[time_style] at (8, 4.5) {Demain ($t=1$)};
+
+    % Placement des noeuds
+    % t=0
+    \node[node_style] (S0) at (0, 0) {100};
+
+    % t=0.5
+    \node[node_style] (D) at (4, 1.5) {105};
+    \node[node_style] (E) at (4, -1.5) {95};
+
+    % t=1 (Le noeud A est à y=3)
+    \node[node_style] (A) at (8, 3) {110};
+    \node[node_style] (C) at (8, 0) {100};
+    \node[node_style] (B) at (8, -3) {90};
+
+    % Dessin des flèches
+    \draw[->, thick, vscodeBlue] (S0) -- (D) node[midway, above] {Hausse};
+    \draw[->, thick, vscodeBlue] (S0) -- (E) node[midway, below] {Baisse};
+
+    \draw[->, thick, vscodeBlue] (D) -- (A);
+    \draw[->, thick, vscodeBlue] (D) -- (C);
+    
+    \draw[->, thick, vscodeBlue] (E) -- (C);
+    \draw[->, thick, vscodeBlue] (E) -- (B);
+    
+    % Noms des états à côté des noeuds finaux
+    \node[right=0.2cm of A, font=\small] {État A};
+    \node[right=0.2cm of C, font=\small] {État C};
+    \node[right=0.2cm of B, font=\small] {État B};
+    
+    % Noms des états intermédiaires
+    \node[above=0.2cm of D, font=\small] {Nœud D};
+    \node[below=0.2cm of E, font=\small] {Nœud E};
+
+\end{tikzpicture}
+\end{center}
+\vspace{0.5cm}
+
+\begin{remarquebox}[Le retour à la complétude du marché]
+Ce découpage temporel est une avancée théorique majeure. En regardant l'arbre globalement à t=1, nous avons bien trois états finaux possibles (110, 100, 90). Cependant, si nous nous plaçons à n'importe quel nœud spécifique de l'arbre, il n'y a que deux chemins possibles pour l'étape suivante. 
+Le marché est donc localement complet à chaque nœud. Nous pourrons utiliser nos techniques d'évaluation (Couverture ou Risque-Neutre) à chaque intersection pour déduire un prix exact, en travaillant à rebours depuis l'échéance finale jusqu'à aujourd'hui.
+\end{remarquebox}
+

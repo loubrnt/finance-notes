@@ -1,25 +1,28 @@
 Directory structure:
 └── finance-notes/
-    ├── main.synctex(busy)
+    ├── CLAUDE.md
     ├── main.tex
     ├── notes.txt
     ├── .gitingestignore
     └── finance/
         ├── fsec1/
-        │   ├── course.tex
+        │   ├── course1.tex
         │   ├── exercises.tex
         │   └── solutions.tex
         ├── fsec2/
-        │   ├── course.tex
+        │   ├── course1.tex
         │   ├── exercises.tex
         │   └── solutions.tex
         └── fsec3/
-            └── course.tex
+            ├── course1.tex
+            ├── course2.tex
+            └── course3.tex
 
 ================================================
-FILE: main.synctex(busy)
+FILE: CLAUDE.md
 ================================================
-[Binary file]
+Ne jamais mettre de texte en gras
+ne jamais utiliser de tirets de coubertin
 
 
 ================================================
@@ -287,58 +290,60 @@ FILE: main.tex
 \tableofcontents 
 \newpage
 
-\input{maths/msec1/course.tex}
-\input{maths/msec1/exercises.tex}
-\input{maths/msec1/solutions.tex}
+% \input{maths/msec1/course.tex}
+% \input{maths/msec1/exercises.tex}
+% \input{maths/msec1/solutions.tex}
 
-\input{maths/msec2/course.tex}
-\input{maths/msec2/exercises.tex}
-\input{maths/msec2/solutions.tex}
+% \input{maths/msec2/course.tex}
+% \input{maths/msec2/exercises.tex}
+% \input{maths/msec2/solutions.tex}
 
-\input{maths/msec3/course.tex}
-\input{maths/msec3/exercises.tex}
-\input{maths/msec3/solutions.tex}
+% \input{maths/msec3/course.tex}
+% \input{maths/msec3/exercises.tex}
+% \input{maths/msec3/solutions.tex}
 
-\input{maths/msec4/course.tex}
-\input{maths/msec4/exercises.tex}
-\input{maths/msec4/solutions.tex}
+% \input{maths/msec4/course.tex}
+% \input{maths/msec4/exercises.tex}
+% \input{maths/msec4/solutions.tex}
 
-\input{maths/msec5/course.tex}
-\input{maths/msec5/exercises.tex}
-\input{maths/msec5/solutions.tex}
+% \input{maths/msec5/course.tex}
+% \input{maths/msec5/exercises.tex}
+% \input{maths/msec5/solutions.tex}
 
-\input{maths/msec6/course.tex}
-\input{maths/msec6/exercises.tex}
-\input{maths/msec6/solutions.tex}
+% \input{maths/msec6/course.tex}
+% \input{maths/msec6/exercises.tex}
+% \input{maths/msec6/solutions.tex}
 
-\input{maths/msec7/course.tex}
-\input{maths/msec7/exercises.tex}
-\input{maths/msec7/solutions.tex}
+% \input{maths/msec7/course.tex}
+% \input{maths/msec7/exercises.tex}
+% \input{maths/msec7/solutions.tex}
 
-\input{maths/msec8/course.tex}
-\input{maths/msec8/exercises.tex}
-\input{maths/msec8/solutions.tex}
+% \input{maths/msec8/course.tex}
+% \input{maths/msec8/exercises.tex}
+% \input{maths/msec8/solutions.tex}
 
-\input{maths/msec9/course.tex}
-\input{maths/msec9/exercises.tex}
-\input{maths/msec9/solutions.tex}
+% \input{maths/msec9/course.tex}
+% \input{maths/msec9/exercises.tex}
+% \input{maths/msec9/solutions.tex}
 
-\input{maths/msec10/course.tex}
-\input{maths/msec10/exercises.tex}
-\input{maths/msec10/solutions.tex}
+% \input{maths/msec10/course.tex}
+% \input{maths/msec10/exercises.tex}
+% \input{maths/msec10/solutions.tex}
 
 
-\input{finance/msec1/course.tex}
-\input{finance/msec1/exercises.tex}
-\input{finance/msec1/solutions.tex}
+\input{finance/fsec1/course1.tex}
+\input{finance/fsec1/exercises.tex}
+\input{finance/fsec1/solutions.tex}
 
-\input{finance/msec2/course.tex}
-\input{finance/msec2/exercises.tex}
-\input{finance/msec2/solutions.tex}
+\input{finance/fsec2/course1.tex}
+\input{finance/fsec2/exercises.tex}
+\input{finance/fsec2/solutions.tex}
 
-\input{finance/msec3/course.tex}
-\input{finance/msec3/exercises.tex}
-\input{finance/msec3/solutions.tex}
+\input{finance/fsec3/course1.tex}
+\input{finance/fsec3/course2.tex}
+\input{finance/fsec3/course3.tex}
+% \input{finance/fsec3/exercises.tex}
+% \input{finance/fsec3/solutions.tex}
 
 \end{document}
 
@@ -356,26 +361,414 @@ maths
 
 
 ================================================
-FILE: finance/fsec1/course.tex
+FILE: finance/fsec1/course1.tex
 ================================================
-%to be written
+\newpage
+\section{Fondements et Introduction aux Options}
+
+\subsection{L'Environnement Financier de Base}
+
+\begin{intuitionbox}[La valeur temporelle de l'argent]
+Un principe fondamental en finance stipule qu'un euro aujourd'hui vaut plus qu'un euro demain. Ce postulat repose sur le fait que l'argent disponible aujourd'hui peut être investi pour générer un rendement. Pour comparer des flux financiers se produisant à des dates différentes, nous devons utiliser un taux d'intérêt pour "déplacer" ces montants dans le temps.
+\end{intuitionbox}
+
+\begin{definitionbox}[Le Taux Sans Risque et la Composition Continue]
+Le \textbf{taux sans risque} (noté $r$) est le taux de rendement d'un investissement pour lequel il n'y a absolument aucun risque de défaut (généralement modélisé par les obligations d'États très solides). 
+
+En finance de marché moderne, on utilise systématiquement la \textbf{composition continue}. Si l'on place un capital $C_0$ à un taux continu $r$ pendant une durée $T$ (exprimée en années), sa valeur future $C_T$ (capitalisation) s'écrit :
+\begin{equation*}
+    C_T = C_0 e^{rT}
+\end{equation*}
+À l'inverse, pour connaître la valeur aujourd'hui (actualisation) d'un montant $C_T$ que l'on recevra dans $T$ années :
+\begin{equation*}
+    C_0 = C_T e^{-rT}
+\end{equation*}
+\end{definitionbox}
+
+\begin{definitionbox}[L'Actif Sous-jacent]
+Un produit dérivé est un instrument financier dont la valeur dépend (dérive) du prix d'un autre actif, appelé \textbf{actif sous-jacent} (noté $S$). Il peut s'agir d'une action, d'un indice boursier, d'une devise ou d'une matière première. 
+On note $S_0$ le prix au comptant (Spot) aujourd'hui, et $S_T$ son prix à une date future $T$.
+\end{definitionbox}
+
+\subsection{Qu'est-ce qu'une Option ?}
+
+\begin{intuitionbox}[Le concept d'assurance]
+Une option fonctionne exactement comme un contrat d'assurance. Vous payez une prime aujourd'hui pour avoir le droit (mais non l'obligation) d'être protégé contre un événement futur (par exemple, la baisse d'une action ou l'explosion de son prix). Si l'événement ne se produit pas, vous perdez votre prime, mais si l'événement se produit, l'option vous indemnise.
+\end{intuitionbox}
+
+\begin{definitionbox}[Définition formelle d'une option]
+Une option est un contrat qui confère à son acheteur le \textbf{droit}, mais non l'obligation, d'acheter ou de vendre un actif sous-jacent à un prix fixé à l'avance, pendant une période donnée ou à une date précise.
+Les caractéristiques fondamentales sont :
+\begin{itemize}[label=$\rightarrow$]
+    \item \textbf{Le prix d'exercice (Strike - noté $K$)} : Le prix auquel la transaction future se fera si l'option est exercée.
+    \item \textbf{L'échéance (Maturité - notée $T$)} : La date d'expiration du contrat.
+    \item \textbf{La Prime (Premium)} : Le prix qu'il faut payer aujourd'hui pour acheter cette option.
+\end{itemize}
+\end{definitionbox}
+
+\begin{remarquebox}[Options Européennes vs Américaines]
+Il existe deux grands "styles" d'options qui définissent quand l'acheteur peut exercer son droit :
+\begin{itemize}[label=$\cdot$]
+    \item \textbf{Option Européenne} : L'exercice ne peut se faire \textit{qu'à la date d'échéance} exacte $T$.
+    \item \textbf{Option Américaine} : L'exercice peut se faire \textit{à tout moment} entre aujourd'hui et la date d'échéance $T$.
+\end{itemize}
+Dans cette introduction, nous nous concentrerons sur les flux à l'échéance (options européennes).
+\end{remarquebox}
+
+\subsection{L'Option d'Achat (Call)}
+
+\begin{definitionbox}[Le Call]
+Un \textbf{Call} donne le droit d'\textbf{acheter} l'actif sous-jacent au prix d'exercice $K$.
+L'acheteur du Call anticipe une \textit{hausse} du marché. Il fige son prix d'achat à $K$.
+\end{definitionbox}
+
+\begin{theorembox}[Flux final (Payoff) et Profit d'un Call]
+À l'échéance $T$, le flux généré par la détention d'un Call (son Payoff) dépend du prix final du sous-jacent $S_T$ :
+\begin{itemize}[label=$\rightarrow$]
+    \item Si $S_T > K$ : Le droit d'acheter à $K$ est intéressant car on peut revendre immédiatement l'actif sur le marché à $S_T$. On exerce l'option. Gain = $S_T - K$.
+    \item Si $S_T \leq K$ : Il est moins cher d'acheter sur le marché directement à $S_T$ plutôt qu'à $K$. On n'exerce pas l'option. Gain = $0$.
+\end{itemize}
+La formule mathématique du Payoff est donc :
+\begin{equation*}
+    \text{Payoff du Call} = \max(S_T - K, 0)
+\end{equation*}
+Le \textbf{Profit} net de l'investisseur prend en compte le coût initial de l'option (la Prime $C_0$) :
+\begin{equation*}
+    \text{Profit} = \max(S_T - K, 0) - C_0
+\end{equation*}
+\textit{(Note : Pour simplifier, nous ignorons ici la capitalisation de la prime jusqu'en T).}
+\end{theorembox}
+
+\begin{examplebox}[Mécanique du Call]
+Vous achetez un Call sur l'action Total avec un Strike $K = 50$ €, pour une prime de $3$ €.
+\begin{itemize}[label=$\cdot$]
+    \item Cas 1 : L'action monte à $60$ €. Vous exercez le droit d'acheter à $50$ €. Vous gagnez $10$ € (Payoff). Votre profit net est $10 - 3 = 7$ €.
+    \item Cas 2 : L'action stagne à $40$ €. Vous n'exercez pas le droit d'acheter à $50$ € (vous l'achèteriez à $40$ € sur le marché). Payoff = $0$ €. Vous perdez votre prime, profit net = $-3$ €.
+\end{itemize}
+\end{examplebox}
+
+\subsection{L'Option de Vente (Put)}
+
+\begin{definitionbox}[Le Put]
+Un \textbf{Put} donne le droit de \textbf{vendre} l'actif sous-jacent au prix d'exercice $K$.
+L'acheteur du Put anticipe une \textit{baisse} du marché. Il fige son prix de vente à $K$.
+\end{definitionbox}
+
+\begin{theorembox}[Flux final (Payoff) et Profit d'un Put]
+À l'échéance $T$, pour le détenteur d'un Put :
+\begin{itemize}[label=$\rightarrow$]
+    \item Si $S_T < K$ : Le droit de vendre à $K$ est intéressant car le prix de marché est plus bas. On exerce l'option. Gain = $K - S_T$.
+    \item Si $S_T \geq K$ : On préfère vendre sur le marché directement à $S_T$. On n'exerce pas l'option. Gain = $0$.
+\end{itemize}
+La formule mathématique du Payoff est :
+\begin{equation*}
+    \text{Payoff du Put} = \max(K - S_T, 0)
+\end{equation*}
+Le profit net, en tenant compte de la prime payée $P_0$, est :
+\begin{equation*}
+    \text{Profit} = \max(K - S_T, 0) - P_0
+\end{equation*}
+\end{theorembox}
+
+\subsection{Positions et Asymétrie des Risques}
+
+\begin{intuitionbox}[Le jeu à somme nulle]
+Les marchés d'options sont un jeu à somme nulle. Pour qu'une personne puisse acheter un Call (Position Longue), une autre personne doit lui vendre ce Call (Position Courte). Le profil de gain de l'acheteur est exactement l'inverse (le miroir) du profil de perte du vendeur.
+\end{intuitionbox}
+
+\begin{definitionbox}[Les 4 positions fondamentales]
+Sur le marché des options, un acteur peut prendre 4 positions distinctes :
+\begin{enumerate}
+    \item \textbf{Long Call (Achat de Call)} : Parie à la hausse. Gain potentiel illimité, perte maximale limitée à la prime payée.
+    \item \textbf{Short Call (Vente de Call)} : Parie à la stagnation/baisse. Gain maximal limité à la prime reçue, perte potentielle \textit{illimitée} (très risqué).
+    \item \textbf{Long Put (Achat de Put)} : Parie à la baisse. Gain potentiel très important (jusqu'à ce que l'action vaille 0), perte maximale limitée à la prime.
+    \item \textbf{Short Put (Vente de Put)} : Parie à la stagnation/hausse. Gain maximal limité à la prime, perte potentielle très importante (si l'action chute à 0).
+\end{enumerate}
+\end{definitionbox}
+
+\begin{definitionbox}[Le statut (Moneyness) de l'option]
+Le statut d'une option décrit si elle a une valeur intrinsèque immédiate (si on l'exerçait tout de suite) par rapport au prix actuel du sous-jacent $S$ :
+\begin{itemize}[label=$\cdot$]
+    \item \textbf{Dans la monnaie (In The Money - ITM)} : L'exercice immédiat serait profitable.
+        (Pour un Call : $S > K$ / Pour un Put : $S < K$)
+    \item \textbf{Hors de la monnaie (Out of The Money - OTM)} : L'exercice immédiat ne serait pas intéressant.
+        (Pour un Call : $S < K$ / Pour un Put : $S > K$)
+    \item \textbf{À la monnaie (At The Money - ATM)} : Le prix de l'actif est exactement égal au strike ($S = K$).
+\end{itemize}
+\end{definitionbox}
 
 
 ================================================
 FILE: finance/fsec1/exercises.tex
 ================================================
-%to be written
+%to be written\subsection{Exercices}
+
+\begin{exercicebox}[Exercice 1 : Capitalisation continue]
+Vous placez la somme de $10 000$ € sur un compte offrant un taux d'intérêt sans risque composé en continu de $4\%$ par an. 
+Quelle sera la valeur exacte de votre capital dans 3 ans ?
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 2 : Actualisation continue]
+Vous êtes certain de recevoir un flux de $5 000$ € dans 6 mois (soit $0,5$ année). Le taux d'intérêt continu sur le marché est de $3\%$ par an. 
+Quelle est la valeur actuelle (la valeur aujourd'hui) de ce flux financier ?
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 3 : Taux annuel effectif et taux continu]
+Une banque vous propose un placement avec un rendement garanti de $5,127\%$ par an (taux annuel effectif). 
+Quel est le taux d'intérêt composé en continu $r$ qui correspond exactement à ce taux effectif ?
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 4 : Payoff d'un Call]
+Vous possédez une option d'achat (Call) de prix d'exercice $K = 120$ €. À l'échéance, le prix de l'action sous-jacente est $S_T = 135$ €. 
+Quel est le flux final (Payoff) généré par cette option ? Allez-vous l'exercer ?
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 5 : Payoff d'un Put]
+Vous détenez une option de vente (Put) avec un Strike $K = 80$ €. À l'expiration, l'action cote $S_T = 85$ €. 
+Quel est le Payoff de ce Put ? L'option est-elle exercée ?
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 6 : Profit d'une position Long Call]
+Vous avez acheté un Call de Strike $100$ € pour une prime de $5$ €. À l'échéance, le sous-jacent vaut $112$ €. 
+Calculez votre Payoff, puis déduisez-en votre profit net (en ignorant la valeur temporelle de la prime).
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 7 : Profit d'une position Short Call]
+En reprenant les données de l'exercice 6, placez-vous du côté du \textit{vendeur} de cette option (Short Call). Le vendeur a encaissé la prime de $5$ € au départ. À l'échéance, l'action vaut $112$ €. 
+Calculez le flux final que le vendeur doit payer, puis son profit net global.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 8 : Profit d'une position Long Put]
+Vous achetez un Put de Strike $K = 50$ € pour une prime de $4$ €. Le jour de l'échéance, la société annonce de mauvais résultats et l'action s'effondre à $30$ €. 
+Calculez votre profit net sur cette opération.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 9 : Profit d'une position Short Put]
+Vous vendez un Put de Strike $K = 200$ € et encaissez immédiatement une prime de $10$ €. À l'échéance, l'action cote $185$ €. 
+L'acheteur exerce-t-il son option contre vous ? Quel est votre profit (ou perte) net ?
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 10 : Statut d'un Call (Moneyness)]
+L'action Apple cote actuellement $175$ \$. Vous observez trois Calls européens sur le marché avec des Strikes différents : $K_1 = 160$ \$, $K_2 = 175$ \$, et $K_3 = 190$ \$. 
+Déterminez le statut (ITM, OTM, ou ATM) de chacune de ces trois options aujourd'hui.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 11 : Statut d'un Put (Moneyness)]
+L'action LVMH cote aujourd'hui $800$ €. Vous analysez trois Puts de Strikes respectifs : $K_A = 750$ €, $K_B = 800$ €, et $K_C = 850$ €. 
+Indiquez pour chacun s'il est Dans la monnaie (ITM), À la monnaie (ATM) ou Hors de la monnaie (OTM).
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 12 : Point mort (Break-even) d'un Call]
+Vous achetez un Call de Strike $K = 60$ € pour une prime de $3,50$ €. 
+À quel prix exact doit se trouver l'action à l'échéance pour que votre profit net soit exactement de $0$ € (votre "point mort") ?
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 13 : Point mort (Break-even) d'un Put]
+Vous achetez un Put de Strike $K = 45$ € pour une prime de $2$ €. 
+Déterminez le prix du sous-jacent à l'échéance qui vous permet de rembourser exactement votre investissement initial.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 14 : Profil de perte maximale (Acheteur)]
+Vous achetez $10$ Calls de Strike $K = 100$ €. La prime unitaire est de $6$ €. 
+Quel est le montant maximum que vous pouvez perdre sur cette stratégie, quelle que soit l'évolution du marché ?
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 15 : Profil de perte potentielle (Vendeur)]
+Vous vendez à découvert (Short Call) $10$ Calls de Strike $K = 100$ €. La prime unitaire encaissée est de $6$ €. 
+Si l'action, suite à une OPA exceptionnelle, monte à $250$ € à l'échéance, quelle sera votre perte nette totale ? Quelle est votre perte maximale théorique sur cette position ?
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 16 : Combinaison de flux - Call Synthétique]
+Vous construisez le portefeuille suivant aujourd'hui : vous achetez 1 action à $S_0 = 100$ € et vous achetez 1 Put de Strike $K = 100$ €.
+Écrivez mathématiquement la valeur de ce portefeuille à l'échéance $T$ en fonction de $S_T$. Montrez que ce profil de flux ressemble fortement à un produit dérivé bien connu (Stratégie dite du "Protective Put").
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 17 : Stratégie Straddle (Achat de volatilité)]
+Un investisseur anticipe un fort mouvement sur une action (actuellement à $100$ €), mais il ignore la direction. Il achète simultanément 1 Call de Strike $100$ (Prime = 5 €) et 1 Put de Strike $100$ (Prime = 5 €). Le coût total est donc de $10$ €.
+Calculez le Payoff global de ce portefeuille si l'action finit à $120$ €. Calculez-le si l'action finit à $80$ €.
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 18 : Points morts du Straddle]
+En reprenant la stratégie de l'Exercice 17 (coût total = $10$ €, Strike commun = $100$ €), déterminez les deux points morts (les prix à l'échéance pour lesquels le profit net est de zéro).
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 19 : Prime et Moneyness]
+L'action X cote $50$ €. On vous propose un Call de Strike $K = 40$ € au prix de $8$ €. 
+Démontrez de manière logique pourquoi ce prix est absurde et expliquez la notion de valeur intrinsèque (sans utiliser l'actualisation).
+\end{exercicebox}
+
+\begin{exercicebox}[Exercice 20 : Style Américain vs Européen]
+Pourquoi, toutes choses égales par ailleurs (même sous-jacent, même Strike, même échéance), une option Américaine coûtera-t-elle toujours au moins aussi cher (sinon plus) qu'une option Européenne équivalente ?
+\end{exercicebox}
 
 
 ================================================
 FILE: finance/fsec1/solutions.tex
 ================================================
-%to be written
+%to be written\subsection{Corrigés des exercices}
+
+\begin{correctionbox}[Corrigé de l'exercice 1 : Capitalisation continue]
+Formule de capitalisation continue : $C_T = C_0 e^{rT}$.
+Ici, $C_0 = 10 000$, $r = 0,04$ et $T = 3$.
+\begin{equation*}
+    C_T = 10 000 \times e^{0,04 \times 3} = 10 000 \times e^{0,12} \approx 10 000 \times 1,12749 = 11 274,97 \text{ €}
+\end{equation*}
+Dans 3 ans, le capital sera de 11 274,97 €.
+\end{correctionbox}
+
+\begin{correctionbox}[Corrigé de l'exercice 2 : Actualisation continue]
+Formule d'actualisation continue : $C_0 = C_T e^{-rT}$.
+Ici, $C_T = 5 000$, $r = 0,03$ et $T = 0,5$.
+\begin{equation*}
+    C_0 = 5 000 \times e^{-0,03 \times 0,5} = 5 000 \times e^{-0,015} \approx 5 000 \times 0,98511 = 4 925,56 \text{ €}
+\end{equation*}
+La valeur actuelle de ce flux est de 4 925,56 €.
+\end{correctionbox}
+
+\begin{correctionbox}[Corrigé de l'exercice 3 : Taux équivalent]
+Soit $R$ le taux effectif annuel (ici $5,127\% = 0,05127$). Un euro investi donne $1 + R$ en un an.
+Avec le taux continu $r$, un euro investi donne $e^{r \times 1}$. 
+On pose l'égalité : $e^r = 1 + R$.
+Pour isoler $r$, on applique le logarithme népérien ($\ln$) :
+\begin{equation*}
+    r = \ln(1 + R) = \ln(1,05127) \approx 0,05
+\end{equation*}
+Le taux continu correspondant est très exactement de $5\%$.
+\end{correctionbox}
+
+\begin{correctionbox}[Corrigé de l'exercice 4 : Payoff d'un Call]
+La formule du Payoff d'un Call est $\max(S_T - K, 0)$.
+Ici, $S_T = 135$ et $K = 120$.
+\begin{equation*}
+    \text{Payoff} = \max(135 - 120, 0) = \max(15, 0) = 15 \text{ €}
+\end{equation*}
+Oui, l'option est exercée car le prix du marché est supérieur au Strike. Le droit d'acheter à 120 ce qui vaut 135 a une valeur de 15 €.
+\end{correctionbox}
+
+\begin{correctionbox}[Corrigé de l'exercice 5 : Payoff d'un Put]
+La formule du Payoff d'un Put est $\max(K - S_T, 0)$.
+Ici, $S_T = 85$ et $K = 80$.
+\begin{equation*}
+    \text{Payoff} = \max(80 - 85, 0) = \max(-5, 0) = 0 \text{ €}
+\end{equation*}
+L'option n'est pas exercée. Il est inutile d'utiliser le droit de vendre à 80 € alors qu'on peut vendre à 85 € directement sur le marché.
+\end{correctionbox}
+
+\begin{correctionbox}[Corrigé de l'exercice 6 : Profit d'un Long Call]
+1. Calcul du Payoff à l'échéance : $\max(112 - 100, 0) = 12$ €.
+2. Calcul du profit : Payoff - Prime payée.
+Profit $= 12 - 5 = 7$ €. L'opération est gagnante.
+\end{correctionbox}
+
+\begin{correctionbox}[Corrigé de l'exercice 7 : Profit d'un Short Call]
+Le vendeur du Call a une position miroir par rapport à l'acheteur.
+1. L'acheteur exerce son option. Le vendeur est \textit{obligé} de lui vendre l'action à $100$ € alors qu'elle vaut $112$ € sur le marché. Le vendeur subit une sortie de trésorerie (Payoff négatif) de $-12$ €.
+2. Profit net : Le vendeur a encaissé $5$ € au départ. Son profit est donc $5 - 12 = -7$ €.
+Il s'agit bien d'un jeu à somme nulle : ce que gagne l'acheteur (+7), le vendeur le perd (-7).
+\end{correctionbox}
+
+\begin{correctionbox}[Corrigé de l'exercice 8 : Profit d'un Long Put]
+1. Calcul du Payoff : L'action s'effondrant à $30$ €, le droit de vendre à $50$ € vaut $\max(50 - 30, 0) = 20$ €.
+2. Calcul du profit : Payoff - Prime = $20 - 4 = 16$ €.
+\end{correctionbox}
+
+\begin{correctionbox}[Corrigé de l'exercice 9 : Profit d'un Short Put]
+1. À l'échéance, $S_T = 185$ et $K = 200$. L'acheteur du Put a intérêt à vendre à 200. Il exerce donc l'option.
+2. Le vendeur du Put est forcé d'acheter à 200 € ce qui ne vaut que 185 €. Il subit une perte à l'exercice de $185 - 200 = -15$ €.
+3. Son profit net intègre la prime reçue initialement (+10 €) : Profit = $10 - 15 = -5$ €.
+\end{correctionbox}
+
+\begin{correctionbox}[Corrigé de l'exercice 10 : Statut d'un Call (Moneyness)]
+Pour un Call, l'option est ITM si $S > K$, ATM si $S=K$, OTM si $S < K$.
+Le sous-jacent $S = 175$ \$.
+\begin{itemize}[label=$\cdot$]
+    \item $K_1 = 160$ \$ : $175 > 160 \implies$ \textbf{Dans la monnaie (ITM)}.
+    \item $K_2 = 175$ \$ : $175 = 175 \implies$ \textbf{À la monnaie (ATM)}.
+    \item $K_3 = 190$ \$ : $175 < 190 \implies$ \textbf{Hors de la monnaie (OTM)}.
+\end{itemize}
+\end{correctionbox}
+
+\begin{correctionbox}[Corrigé de l'exercice 11 : Statut d'un Put (Moneyness)]
+Pour un Put, c'est l'inverse : l'option est ITM si le prix de vente garanti est supérieur au marché ($K > S$).
+Le sous-jacent $S = 800$ €.
+\begin{itemize}[label=$\cdot$]
+    \item $K_A = 750$ € : $750 < 800 \implies$ \textbf{Hors de la monnaie (OTM)}.
+    \item $K_B = 800$ € : $800 = 800 \implies$ \textbf{À la monnaie (ATM)}.
+    \item $K_C = 850$ € : $850 > 800 \implies$ \textbf{Dans la monnaie (ITM)}.
+\end{itemize}
+\end{correctionbox}
+
+\begin{correctionbox}[Corrigé de l'exercice 12 : Point mort d'un Call]
+Le profit est nul si le Payoff couvre exactement la prime payée ($3,50$ €).
+Pour un Call, on a besoin que l'action monte au-dessus du Strike. 
+Point mort $= K + \text{Prime} = 60 + 3,50 = 63,50$ €.
+Si l'action clôture à 63,50 €, le Payoff est de 3,50 €, ce qui rembourse la prime.
+\end{correctionbox}
+
+\begin{correctionbox}[Corrigé de l'exercice 13 : Point mort d'un Put]
+Pour un Put, il faut que l'action baisse suffisamment en dessous du Strike pour rembourser la prime.
+Point mort $= K - \text{Prime} = 45 - 2 = 43$ €.
+Si l'action clôture à 43 €, le droit de vendre à 45 € a une valeur de 2 €, couvrant exactement le coût initial.
+\end{correctionbox}
+
+\begin{correctionbox}[Corrigé de l'exercice 14 : Perte maximale d'un acheteur]
+L'acheteur d'une option (Long position) a un risque strictement limité. Au pire, l'option expire hors de la monnaie et ne vaut rien (Payoff = 0). 
+La perte maximale correspond donc à la prime totale payée aujourd'hui.
+Perte max $= 10 \times 6 \text{ €} = 60$ €.
+\end{correctionbox}
+
+\begin{correctionbox}[Corrigé de l'exercice 15 : Perte potentielle d'un vendeur]
+Si l'action monte à 250 €, le Payoff unitaire du Call est $\max(250 - 100, 0) = 150$ €.
+Le vendeur doit payer 150 € par option.
+Profit unitaire = Prime reçue - Payoff = $6 - 150 = -144$ €.
+Pour 10 options, la perte nette totale est de $-1 440$ €.
+\textbf{Perte maximale théorique} : L'action peut théoriquement monter à l'infini. La perte potentielle d'un vendeur de Call "nu" (sans posséder l'action) est donc \textbf{illimitée}.
+\end{correctionbox}
+
+\begin{correctionbox}[Corrigé de l'exercice 16 : Combinaison de flux]
+Valeur finale du portefeuille = Valeur de l'action + Payoff du Put.
+$V_T = S_T + \max(100 - S_T, 0)$.
+\begin{itemize}[label=$\cdot$]
+    \item Si $S_T \geq 100$ : Le Put vaut $0$. $V_T = S_T$.
+    \item Si $S_T < 100$ : Le Put vaut $100 - S_T$. $V_T = S_T + (100 - S_T) = 100$.
+\end{itemize}
+En résumé, $V_T = \max(S_T, 100)$. Ce profil garantit un plancher à 100 tout en gardant tout le potentiel de hausse. Ce profil est équivalent à celui de l'achat d'un Call (à la constante du Strike près, justifiant la parité Call-Put).
+\end{correctionbox}
+
+\begin{correctionbox}[Corrigé de l'exercice 17 : Stratégie Straddle]
+Le Payoff global est la somme du Payoff du Call et du Payoff du Put.
+\begin{itemize}[label=$\cdot$]
+    \item Si $S_T = 120$ : Call = $\max(120 - 100, 0) = 20$. Put = $\max(100 - 120, 0) = 0$. Payoff total = $20$.
+    \item Si $S_T = 80$ : Call = $0$. Put = $\max(100 - 80, 0) = 20$. Payoff total = $20$.
+\end{itemize}
+Dans les deux cas de forte volatilité, l'investisseur gagne 20, pour un coût initial de 10 (Profit net de +10).
+\end{correctionbox}
+
+\begin{correctionbox}[Corrigé de l'exercice 18 : Points morts du Straddle]
+Pour rembourser la prime totale de 10 €, il faut que le Payoff du Call soit de 10, OU que le Payoff du Put soit de 10 (ils ne peuvent pas être exercés en même temps).
+\begin{itemize}[label=$\cdot$]
+    \item Point mort à la hausse : $K + \text{Prime totale} = 100 + 10 = 110$ €.
+    \item Point mort à la baisse : $K - \text{Prime totale} = 100 - 10 = 90$ €.
+\end{itemize}
+Si l'action finit entre 90 et 110, la stratégie est perdante.
+\end{correctionbox}
+
+\begin{correctionbox}[Corrigé de l'exercice 19 : Prime et Moneyness]
+L'action vaut aujourd'hui 50 €. Le Call de Strike 40 donne le droit d'acheter l'action à 40 €. Si l'on pouvait exercer ce droit tout de suite, il rapporterait immédiatement $50 - 40 = 10$ €.
+C'est ce qu'on appelle la \textbf{valeur intrinsèque} immédiate.
+Si le Call est vendu à 8 €, un opérateur de marché pourrait l'acheter pour 8 €, l'exercer pour acheter l'action à 40 € et la revendre immédiatement sur le marché à 50 €. Il ferait un profit immédiat sans risque de $50 - 40 - 8 = 2$ €. Le prix de 8 € est donc une anomalie (opportunité d'arbitrage). Le prix d'une option ne peut jamais être inférieur à sa valeur intrinsèque.
+\end{correctionbox}
+
+\begin{correctionbox}[Corrigé de l'exercice 20 : Style Américain vs Européen]
+Une option Américaine confère exactement les mêmes droits qu'une option Européenne (exercer le droit à la date T), mais elle y ajoute la possibilité d'exercer \textit{à n'importe quel moment avant} la date T.
+En finance, une liberté (ou un droit) supplémentaire ne peut pas avoir une valeur négative. Par conséquent, la flexibilité offerte par l'option Américaine fait qu'elle doit valoir au moins autant que l'Européenne, et potentiellement plus si l'exercice anticipé s'avère optimal (par exemple, juste avant le détachement d'un gros dividende).
+\end{correctionbox}
 
 
 ================================================
-FILE: finance/fsec2/course.tex
+FILE: finance/fsec2/course1.tex
 ================================================
+\newpage
 \section{Méthodologies d'évaluation et Arbitrage}
 
 \subsection{La couverture en Delta (Delta Hedging)}
@@ -1075,7 +1468,7 @@ $F = S_0 e^{(r + u - c)T}$.
 
 
 ================================================
-FILE: finance/fsec3/course.tex
+FILE: finance/fsec3/course1.tex
 ================================================
 \newpage
 
@@ -1389,6 +1782,13 @@ L'état C (100) est atteint de deux manières différentes : une hausse suivie d
 Ce découpage temporel est une avancée théorique majeure. En regardant l'arbre globalement à t=1, nous avons bien trois états finaux possibles (110, 100, 90). Cependant, si nous nous plaçons à n'importe quel nœud spécifique de l'arbre, il n'y a que deux chemins possibles pour l'étape suivante. 
 Le marché est donc localement complet à chaque nœud. Nous pourrons utiliser nos techniques d'évaluation (Couverture ou Risque-Neutre) à chaque intersection pour déduire un prix exact, en travaillant à rebours depuis l'échéance finale jusqu'à aujourd'hui.
 \end{remarquebox}
+
+
+
+
+================================================
+FILE: finance/fsec3/course2.tex
+================================================
 
 \subsection{Évaluation par Couverture dans un Arbre à Deux Périodes}
 
@@ -1717,6 +2117,11 @@ La formule obtenue ici (le modèle Normal) suppose que le prix de l'actif suit u
 
 \newpage
 
+
+================================================
+FILE: finance/fsec3/course3.tex
+================================================
+
 \subsection{L'Intégration des Taux d'Intérêt}
 
 \begin{intuitionbox}[La valeur temporelle de l'argent]
@@ -1825,5 +2230,227 @@ Il ne reste plus qu'à actualiser cette espérance au taux sans risque continu s
 Le juste prix de cette option de vente est de 3,04 €.
 \end{examplebox}
 
+\subsection{Le Modèle Lognormal : Comportement dans le Monde Réel}
 
+\begin{intuitionbox}[La correction du modèle Normal]
+Le modèle arithmétique précédent présentait un défaut rédhibitoire en finance : en soustrayant des variations fixes, le prix de l'actif pouvait mathématiquement devenir négatif. Pour y remédier, nous ne modélisons plus le prix de l'actif de manière additive, mais nous modélisons les variations de son logarithme naturel. L'exponentielle d'un nombre réel (même négatif) étant toujours strictement positive, ce changement de variable garantit que le prix de l'action ne tombera jamais sous zéro.
+\end{intuitionbox}
+
+\begin{definitionbox}[Dérive, Volatilité et Paramétrage local]
+Plaçons-nous dans le monde réel (historique) sur une période totale T. 
+Nous définissons deux paramètres constants :
+\begin{itemize}[label=$\rightarrow$]
+    \item La dérive $\mu$ (Drift) : le taux de croissance moyen de l'actif. Dans le monde réel, ce taux est supérieur au taux sans risque r pour compenser le risque assumé par l'investisseur.
+    \item La volatilité $\sigma$ : l'écart-type mesurant l'amplitude des fluctuations.
+\end{itemize}
+Nous découpons la période T en N étapes régulières. La durée d'une étape est donc $\Delta t = \frac{T}{N}$.
+Pour que la moyenne et la variance globales sur la période T soient respectivement $\mu T$ et $\sigma^2 T$, les lois des probabilités (somme de variables indépendantes) imposent qu'à chaque petite étape $\Delta t$, la moyenne locale soit $\mu \Delta t$ et la variance locale soit $\sigma^2 \Delta t$.
+\end{definitionbox}
+
+\begin{examplebox}[Détail mathématique de l'accumulation des prix]
+Soit une variable aléatoire $Z_j$ valant $+1$ ou $-1$ avec une probabilité de $0,5$. Son espérance est nulle et sa variance est unitaire.
+La variation du logarithme du prix entre l'étape $j-1$ et l'étape $j$ est modélisée par l'équation suivante :
+\begin{equation*}
+    \log(S_j) - \log(S_{j-1}) = \mu \Delta t + \sigma \sqrt{\Delta t} Z_j
+\end{equation*}
+Pour trouver le prix à l'échéance T (qui correspond à la dernière étape N), nous écrivons cette équation pour toutes les étapes successives :
+\begin{align*}
+    \log(S_1) - \log(S_0) &= \mu \Delta t + \sigma \sqrt{\Delta t} Z_1 \\
+    \log(S_2) - \log(S_1) &= \mu \Delta t + \sigma \sqrt{\Delta t} Z_2 \\
+    \log(S_3) - \log(S_2) &= \mu \Delta t + \sigma \sqrt{\Delta t} Z_3 \\
+    &\dots \\
+    \log(S_N) - \log(S_{N-1}) &= \mu \Delta t + \sigma \sqrt{\Delta t} Z_N
+\end{align*}
+Additionnons verticalement toutes ces équations. Sur la partie gauche, chaque terme positif s'annule avec le terme négatif de la ligne suivante. C'est le principe d'une somme télescopique. Seuls le tout dernier terme et le tout premier terme survivent :
+\begin{equation*}
+    \log(S_N) - \log(S_0) = \sum_{j=1}^{N} \left( \mu \Delta t \right) + \sum_{j=1}^{N} \left( \sigma \sqrt{\Delta t} Z_j \right)
+\end{equation*}
+Puisque $\mu \Delta t$ est une constante répétée N fois, la première somme devient $N \mu \Delta t$. Or, comme $\Delta t = \frac{T}{N}$, alors $N \Delta t = T$. L'équation se simplifie ainsi :
+\begin{equation*}
+    \log(S_N) = \log(S_0) + \mu T + \sigma \sqrt{\Delta t} \sum_{j=1}^{N} Z_j
+\end{equation*}
+\end{examplebox}
+
+\begin{theorembox}[Passage à la limite continue et Distribution Lognormale]
+Pour observer le modèle en temps continu, nous devons faire tendre le nombre de pas N vers l'infini. 
+Remplaçons $\Delta t$ par $\frac{T}{N}$ dans le terme aléatoire de l'équation précédente :
+\begin{equation*}
+    \sigma \sqrt{\frac{T}{N}} \sum_{j=1}^{N} Z_j = \sigma \frac{\sqrt{T}}{\sqrt{N}} \sum_{j=1}^{N} Z_j = \sigma \sqrt{T} \left( \frac{1}{\sqrt{N}} \sum_{j=1}^{N} Z_j \right)
+\end{equation*}
+Les variables $Z_j$ ont une espérance $\mu_Z = 0$ et un écart-type $\sigma_Z = 1$. Le terme entre parenthèses est donc exactement la formule centrée-réduite du Théorème Central Limite. Lorsque N tend vers l'infini, ce bloc converge vers une variable aléatoire suivant une loi Normale standard, notée $\mathcal{N}(0,1)$.
+
+À la limite continue, l'équation algébrique du logarithme devient :
+\begin{equation*}
+    \log(S_T) = \log(S_0) + \mu T + \sigma \sqrt{T} \mathcal{N}(0,1)
+\end{equation*}
+Pour retrouver le prix final de l'actif, nous appliquons la fonction exponentielle des deux côtés de l'égalité :
+\begin{align*}
+    \exp(\log(S_T)) &= \exp\left( \log(S_0) + \mu T + \sigma \sqrt{T} \mathcal{N}(0,1) \right) \\
+    S_T &= \exp(\log(S_0)) \times \exp\left( \mu T + \sigma \sqrt{T} \mathcal{N}(0,1) \right) \\
+    S_T &= S_0 e^{\mu T + \sigma \sqrt{T} \mathcal{N}(0,1)}
+\end{align*}
+Puisque le logarithme de $S_T$ suit une distribution Normale, on conclut mathématiquement que le prix de l'actif $S_T$ suit une distribution Lognormale.
+\end{theorembox}
+
+\subsection{Le Comportement dans le Monde Risque-Neutre}
+
+\begin{intuitionbox}[La disparition de la subjectivité]
+Pour évaluer des options, la distribution du prix de l'actif dans le monde réel (historique, gouverné par la dérive $\mu$) n'est pas le facteur déterminant. Comme nous l'avons vu dans les modèles binomiaux, les probabilités de hausse ou de baisse n'affectent pas le prix d'arbitrage. Seule compte la distribution de l'actif sous la probabilité risque-neutre.
+Pour passer en temps continu, nous devons comprendre comment se comporte cette probabilité risque-neutre $p$ lorsque le pas de temps $\Delta t$ devient infinitésimal.
+\end{intuitionbox}
+
+\begin{proofbox}[Dérivation de la probabilité risque-neutre limite]
+Rappelons que dans notre arbre, le prix de l'actif passe de $S$ à $S \cdot u$ (hausse) ou $S \cdot d$ (baisse). D'après la modélisation lognormale précédente, sur un intervalle $\Delta t$, les facteurs de hausse et de baisse intègrent la vraie dérive $\mu$ :
+\begin{equation*}
+    u = e^{\mu \Delta t + \sigma \sqrt{\Delta t}} \quad \text{et} \quad d = e^{\mu \Delta t - \sigma \sqrt{\Delta t}}
+\end{equation*}
+La formule de la probabilité risque-neutre $p$ est :
+\begin{equation*}
+    p = \frac{e^{r\Delta t} - d}{u - d} = \frac{e^{r\Delta t} - e^{\mu \Delta t - \sigma \sqrt{\Delta t}}}{e^{\mu \Delta t + \sigma \sqrt{\Delta t}} - e^{\mu \Delta t - \sigma \sqrt{\Delta t}}}
+\end{equation*}
+Pour analyser cette fraction lorsque $\Delta t \to 0$, factorisons par $e^{\mu \Delta t}$ au numérateur et au dénominateur :
+\begin{equation*}
+    p = \frac{e^{(r-\mu)\Delta t} - e^{-\sigma \sqrt{\Delta t}}}{e^{\sigma \sqrt{\Delta t}} - e^{-\sigma \sqrt{\Delta t}}}
+\end{equation*}
+Utilisons le développement limité (série de Taylor) de la fonction exponentielle : $e^x \approx 1 + x + \frac{x^2}{2} + \mathcal{O}(x^3)$.
+\begin{itemize}[label=$\cdot$]
+    \item \textbf{Le Dénominateur :} $e^{\sigma \sqrt{\Delta t}} - e^{-\sigma \sqrt{\Delta t}} \approx \left(1 + \sigma \sqrt{\Delta t}\right) - \left(1 - \sigma \sqrt{\Delta t}\right) = 2\sigma \sqrt{\Delta t}$
+    \item \textbf{Le Numérateur :} 
+    $e^{(r-\mu)\Delta t} \approx 1 + (r-\mu)\Delta t$ \\
+    $e^{-\sigma \sqrt{\Delta t}} \approx 1 - \sigma \sqrt{\Delta t} + \frac{\sigma^2}{2}\Delta t$ \\
+    La différence donne : $\sigma \sqrt{\Delta t} + \left(r - \mu - \frac{\sigma^2}{2}\right)\Delta t$
+\end{itemize}
+En divisant le numérateur approximé par le dénominateur approximé ($2\sigma \sqrt{\Delta t}$), nous obtenons la valeur asymptotique de $p$ :
+\begin{equation*}
+    p \approx \frac{1}{2} + \frac{r - \mu - \frac{1}{2}\sigma^2}{2\sigma}\sqrt{\Delta t}
+\end{equation*}
+\end{proofbox}
+
+\begin{remarquebox}[L'ajustement pour la prime de risque]
+Ce résultat est fascinant. La probabilité de hausse dans le monde risque-neutre n'est plus exactement $\frac{1}{2}$. Elle est ajustée par un terme proportionnel à la différence entre le taux sans risque $r$ et la croissance réelle de l'actif $\mu$. Cet ajustement est précisément ce qui compense l'absence de prime de risque dans notre monde théorique d'évaluation.
+\end{remarquebox}
+
+\begin{theorembox}[La Magie de l'Évaluation : La disparition de $\mu$]
+Voyons l'impact de ce nouveau $p$ sur le comportement limite du logarithme du prix de l'actif. 
+À chaque étape, l'actif varie selon une variable aléatoire $\tilde{Z}$ qui vaut $+1$ (avec probabilité $p$) ou $-1$ (avec probabilité $1-p$).
+L'espérance de ce petit saut n'est plus zéro :
+\begin{equation*}
+    \mathbb{E}[\tilde{Z}] = (+1)p + (-1)(1-p) = 2p - 1 = \left( \frac{r - \mu - \frac{1}{2}\sigma^2}{\sigma} \right) \sqrt{\Delta t}
+\end{equation*}
+Rappelons l'équation globale du log-prix après $N$ étapes (où $T = N \Delta t$) :
+\begin{equation*}
+    \log(S_T) = \log(S_0) + \mu T + \sigma \sqrt{\Delta t} \sum_{j=1}^{N} \tilde{Z}_j
+\end{equation*}
+Calculons l'espérance de $\log(S_T)$ sous la probabilité risque-neutre :
+\begin{align*}
+    \mathbb{E}^{RN}[\log(S_T)] &= \log(S_0) + \mu T + \sigma \sqrt{\Delta t} \cdot N \cdot \mathbb{E}[\tilde{Z}] \\
+    &= \log(S_0) + \mu T + \sigma \sqrt{\Delta t} \cdot \frac{T}{\Delta t} \cdot \left( \frac{r - \mu - \frac{1}{2}\sigma^2}{\sigma} \right) \sqrt{\Delta t} \\
+    &= \log(S_0) + \mu T + T \left( r - \mu - \frac{1}{2}\sigma^2 \right) \\
+    &= \log(S_0) + \left( r - \frac{1}{2}\sigma^2 \right) T
+\end{align*}
+\textbf{Le paramètre $\mu$ s'est mathématiquement annulé !} Dans le monde risque-neutre, la vraie dérive de l'actif ne joue absolument aucun rôle. L'espérance du prix final garantit que $\mathbb{E}^{RN}[S_T] = S_0 e^{rT}$, rendant le rendement espéré de l'action strictement égal au taux sans risque.
+\end{theorembox}
+
+\subsection{La Formule de Black-Scholes}
+
+\begin{intuitionbox}[L'intégration finale]
+Puisque le modèle converge (par le Théorème Central Limite) vers une loi normale continue, nous connaissons désormais parfaitement la distribution du logarithme du prix sous probabilité risque-neutre : il suit une loi Normale de moyenne $\log(S_0) + (r - \frac{1}{2}\sigma^2)T$ et de variance $\sigma^2 T$.
+Le prix de toute option est l'espérance risque-neutre actualisée de son flux final. Au lieu de calculer un arbre, il suffit de calculer l'intégrale de ce flux pondéré par la densité de cette loi Lognormale.
+\end{intuitionbox}
+
+\begin{definitionbox}[Les formules de Black-Scholes (1973)]
+Pour une option d'achat (Call) européenne de prix d'exercice $K$ et de maturité $T$, la résolution de l'intégrale $e^{-rT} \mathbb{E}^{RN}[\max(S_T - K, 0)]$ aboutit à la célèbre formule fermée de Black-Scholes :
+\begin{equation}
+    C(S_0, K, \sigma, r, T) = S_0 \mathcal{N}(d_1) - K e^{-rT} \mathcal{N}(d_2)
+\end{equation}
+Où les termes $d_1$ et $d_2$ sont définis par :
+\begin{align*}
+    d_1 &= \frac{\log\left(\frac{S_0}{K}\right) + \left(r + \frac{1}{2}\sigma^2\right)T}{\sigma \sqrt{T}} \\
+    d_2 &= d_1 - \sigma \sqrt{T} = \frac{\log\left(\frac{S_0}{K}\right) + \left(r - \frac{1}{2}\sigma^2\right)T}{\sigma \sqrt{T}}
+\end{align*}
+Et où $\mathcal{N}(x)$ représente la fonction de répartition (cumulative) de la loi Normale standard :
+\begin{equation*}
+    \mathcal{N}(x) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{x} e^{-\frac{s^2}{2}} ds
+\end{equation*}
+
+Par la relation de parité Call-Put, le prix d'une option de vente (Put) européenne s'en déduit immédiatement :
+\begin{equation}
+    P(S_0, K, \sigma, r, T) = -S_0 \mathcal{N}(-d_1) + K e^{-rT} \mathcal{N}(-d_2)
+\end{equation}
+\end{definitionbox}
+
+\subsection{Approximation Linéaire : La Règle d'Or du Trader}
+
+\begin{intuitionbox}[La simplification visuelle]
+La formule de Black-Scholes peut sembler opaque. Cependant, si l'on trace le prix d'une option "à la monnaie" (lorsque le Strike est proche du prix actuel) en fonction de la volatilité, la courbe obtenue est une ligne droite presque parfaite. Cette linéarité remarquable permet d'extraire une formule d'approximation mentale extraordinairement puissante pour les salles de marché.
+\end{intuitionbox}
+
+\begin{proofbox}[Dérivation de l'approximation à la monnaie (ATM)]
+Considérons une option exactement à la monnaie au sens du prix "Forward", c'est-à-dire $K = S_0 e^{rT}$. 
+Injectons ce $K$ dans le terme $\log(S_0/K)$ de la formule de $d_1$ :
+\begin{equation*}
+    \log\left(\frac{S_0}{S_0 e^{rT}}\right) = \log(e^{-rT}) = -rT
+\end{equation*}
+Le paramètre $d_1$ se simplifie grandement :
+\begin{equation*}
+    d_1 = \frac{-rT + rT + \frac{1}{2}\sigma^2 T}{\sigma \sqrt{T}} = \frac{1}{2}\sigma \sqrt{T} \quad \text{et par conséquent} \quad d_2 = -\frac{1}{2}\sigma \sqrt{T}
+\end{equation*}
+La valeur du Call devient :
+\begin{equation*}
+    C = S_0 \left( \mathcal{N}\left(\frac{1}{2}\sigma\sqrt{T}\right) - \mathcal{N}\left(-\frac{1}{2}\sigma\sqrt{T}\right) \right)
+\end{equation*}
+Utilisons le développement de Taylor de la fonction de répartition $\mathcal{N}(x)$ autour de zéro :
+$\mathcal{N}(x) \approx \mathcal{N}(0) + \mathcal{N}'(0)x$.
+Sachant que la dérivée $\mathcal{N}'(0)$ est simplement la densité au centre de la courbe en cloche $\frac{1}{\sqrt{2\pi}}$, les termes pairs s'annulent et nous obtenons :
+\begin{equation*}
+    C \approx S_0 \left( 2 \times \frac{1}{\sqrt{2\pi}} \times \frac{1}{2}\sigma\sqrt{T} \right) = \frac{S_0 \sigma \sqrt{T}}{\sqrt{2\pi}}
+\end{equation*}
+Étant donné que $1 / \sqrt{2\pi} \approx 0,3989$, on l'arrondit à $0,4$.
+\end{proofbox}
+
+\begin{theorembox}[Formule de calcul mental de Brenner-Subrahmanyam (1988)]
+Pour une option à la monnaie (Call ou Put, par parité), la valeur de l'option est donnée par l'approximation linéaire extrêmement précise :
+\begin{equation}
+    Prix_{ATM} \approx 0,4 \cdot S_0 \cdot \sigma \cdot \sqrt{T}
+\end{equation}
+\end{theorembox}
+
+\begin{examplebox}[Application de l'approximation mentale]
+Imaginons qu'une action cote aujourd'hui 100 €. La volatilité implicite du marché est de 10\% ($\sigma = 0,10$). Nous voulons pricer un Call de Strike 100 à échéance de 3 mois ($T = 0,25$ année). Le taux d'intérêt est nul.
+
+\textbf{Calcul mental via l'approximation :}
+\begin{equation*}
+    C \approx 0,4 \times 100 \times 0,10 \times \sqrt{0,25} = 0,4 \times 10 \times 0,5 = 2\text{ €}
+\end{equation*}
+
+\textbf{Calcul exact par Black-Scholes :}
+\begin{equation*}
+    C = 100 \cdot \mathcal{N}(0,05) - 100 \cdot \mathcal{N}(-0,05) \approx 1,995\text{ €}
+\end{equation*}
+L'erreur de cette règle mentale de "coin de table" est inférieure à 1\% ! Elle révèle élégamment que la valeur d'une option ATM rémunère exclusivement le risque (la volatilité mesurée par l'écart-type proportionnel à la racine du temps).
+\end{examplebox}
+
+\subsection{Retour à la Couverture : Le Delta en Temps Continu}
+
+\begin{intuitionbox}[Fermeture de la boucle théorique]
+Nous avons déduit le prix sans arbitrage (Black-Scholes) via la méthode probabiliste (évaluation risque-neutre). Cependant, le fondement de notre cours est que la méthode risque-neutre et la méthode par couverture (Hedging) produisent exactement le même prix, car elles découlent toutes deux de la loi du prix unique sur un marché complet. 
+Si ce prix est valide, il doit exister un portefeuille de couverture parfait en temps continu.
+\end{intuitionbox}
+
+\begin{theorembox}[La dérivation du Delta]
+Rappelons l'argument de l'arbre binomial : nous répliquons l'obligation sans risque en détenant un portefeuille $\Pi$ composé d'une option vendue ($-C$) et d'une quantité $\Delta$ d'actions achetées ($\Delta \cdot S$). 
+La valeur de notre portefeuille est :
+\begin{equation*}
+    \Pi = -C(S, t) + \Delta \cdot S
+\end{equation*}
+Pour que ce portefeuille soit "sans risque" à un instant infinitésimal donné, sa valeur doit être totalement immunisée contre de très petites variations de l'action $S$. Mathématiquement, cela signifie que le taux de variation du portefeuille par rapport au prix de l'action doit être nul :
+\begin{equation*}
+    \frac{\partial \Pi}{\partial S} = -\frac{\partial C}{\partial S} + \Delta = 0
+\end{equation*}
+La seule quantité d'actions qui permet d'annuler ce risque (et donc d'empêcher tout arbitrage) est :
+\begin{equation*}
+    \Delta = \frac{\partial C}{\partial S}(S, t)
+\end{equation*}
+Ainsi, pour se couvrir de manière parfaite, le trader doit détenir à chaque instant une fraction d'action exactement égale à la dérivée première de la formule de valorisation par rapport au sous-jacent. Étant donné que cette dérivée change continuellement selon le prix de l'action $S$ et le temps écoulé $t$, le trader est contraint de rééquilibrer son portefeuille en permanence : c'est la naissance de la \textbf{Couverture Dynamique en temps continu (Delta Hedging)}.
+\end{theorembox}
 
