@@ -1,104 +1,123 @@
 \subsection{Passage à la Limite Continue : L'Ajustement Risque-Neutre}
 
 \begin{intuitionbox}[La correction de la probabilité]
-Dans la section précédente, nous avons établi que le logarithme du prix de l'action suit une trajectoire modélisée par l'équation \ref{eq:fsec3-log_sn}, incluant une dérive historique $\mu$. Or, l'évaluation d'options requiert de basculer dans le monde risque-neutre. Pour ce faire, nous devons recalculer la probabilité risque-neutre $p$ (définie à l'équation \ref{eq:fsec3-proba_rn_taux}) en y injectant les paramètres de notre modèle lognormal à chaque micro-étape $\Delta t$, puis observer son comportement lorsque $\Delta t$ tend vers zéro.
+Dans la section précédente, nous avons établi que le logarithme du prix de l'action suit une trajectoire modélisée par l'équation \ref{eq:fsec3-log_sn}, incluant une dérive historique $\mu$. Cette dérive reflète la croissance réelle espérée par les investisseurs. Or, l'évaluation d'options requiert de basculer dans le monde risque-neutre, un monde théorique où tout actif croît au taux sans risque $r$. 
+
+Pour opérer cette bascule, nous ne modifions pas la taille des sauts de l'action, mais nous allons truquer les probabilités de la pièce que nous lançons à chaque étape. Nous devons recalculer la probabilité risque-neutre $p$ définie à l'équation \ref{eq:fsec3-proba_rn_taux} en y injectant les paramètres de notre modèle lognormal, puis observer son comportement lorsque le temps entre deux sauts, noté $\Delta t$, devient microscopique.
 \end{intuitionbox}
 
-\begin{proofbox}[Développement asymptotique de la probabilité risque-neutre]
+\begin{proofbox}[Développement algébrique détaillé de la probabilité]
 Rappelons les valeurs de l'action à l'étape suivante dans le modèle lognormal :
 \begin{equation}
     \label{eq:fsec3-up_down_lognormal}
     S_+ = S_0 e^{\mu \Delta t + \sigma \sqrt{\Delta t}} \quad \text{et} \quad S_- = S_0 e^{\mu \Delta t - \sigma \sqrt{\Delta t}}
 \end{equation}
-En injectant ces valeurs dans la formule de la probabilité risque-neutre $p = \frac{S_0 e^{r\Delta t} - S_-}{S_+ - S_-}$, et en simplifiant par $S_0$, nous obtenons :
+En injectant ces valeurs dans la formule de la probabilité risque-neutre $p = \frac{S_0 e^{r\Delta t} - S_-}{S_+ - S_-}$, nous pouvons immédiatement simplifier par $S_0$ au numérateur et au dénominateur :
 \begin{equation}
     \label{eq:fsec3-p_brut}
     p = \frac{e^{r\Delta t} - e^{\mu \Delta t - \sigma \sqrt{\Delta t}}}{e^{\mu \Delta t + \sigma \sqrt{\Delta t}} - e^{\mu \Delta t - \sigma \sqrt{\Delta t}}}
 \end{equation}
-Pour faciliter le passage à la limite, nous factorisons le numérateur et le dénominateur par $e^{\mu \Delta t}$ :
+Pour rendre cette fraction manipulable, nous allons factoriser le haut et le bas par le terme $e^{\mu \Delta t}$. En divisant les exposants, nous obtenons :
 \begin{equation}
     \label{eq:fsec3-p_factorise}
     p = \frac{e^{(r-\mu)\Delta t} - e^{-\sigma \sqrt{\Delta t}}}{e^{\sigma \sqrt{\Delta t}} - e^{-\sigma \sqrt{\Delta t}}}
 \end{equation}
-Nous devons à présent utiliser les développements limités (séries de Taylor) de la fonction exponentielle au voisinage de zéro : $e^x = 1 + x + \frac{x^2}{2} + \mathcal{O}(x^3)$. Les termes en $\mathcal{O}$ désignent le reste de Landau (les quantités négligeables d'ordre supérieur).
 
-Analysons d'abord le dénominateur :
+Puisque nous voulons observer ce qui se passe quand $\Delta t$ tend vers zéro, nous devons utiliser les développements limités (séries de Taylor) de la fonction exponentielle au voisinage de zéro. La formule générale est $e^x = 1 + x + \frac{x^2}{2} + \mathcal{O}(x^3)$. Les notations de Landau, avec la lettre $\mathcal{O}$, nous permettent de regrouper tous les termes résiduels minuscules qui disparaîtront à la limite.
+
+Commençons par décortiquer le dénominateur de notre fraction pas à pas :
 \begin{equation}
     \label{eq:fsec3-denominateur_taylor}
     e^{\sigma \sqrt{\Delta t}} - e^{-\sigma \sqrt{\Delta t}} = \left( 1 + \sigma \sqrt{\Delta t} + \frac{\sigma^2 \Delta t}{2} \right) - \left( 1 - \sigma \sqrt{\Delta t} + \frac{\sigma^2 \Delta t}{2} \right) + \mathcal{O}(\Delta t^{3/2})
 \end{equation}
-Les termes constants (1) et les termes en $\Delta t$ s'annulent, il reste :
+Dans cette soustraction, les chiffres $1$ s'annulent. De même, les termes en $\frac{\sigma^2 \Delta t}{2}$ s'annulent parfaitement. Il ne reste que l'addition des racines :
 \begin{equation}
     \label{eq:fsec3-denominateur_simplifie}
-    2 \sigma \sqrt{\Delta t} + \mathcal{O}(\Delta t^{3/2}) = 2 \sigma \sqrt{\Delta t} (1 + \mathcal{O}(\Delta t))
+    \sigma \sqrt{\Delta t} - (-\sigma \sqrt{\Delta t}) = 2 \sigma \sqrt{\Delta t} + \mathcal{O}(\Delta t^{3/2})
 \end{equation}
-Son inverse, en utilisant $(1+x)^{-1} = 1 - x + \mathcal{O}(x^2)$, s'écrit donc :
-\begin{equation}
-    \label{eq:fsec3-inverse_denom}
-    \frac{1}{2 \sigma \sqrt{\Delta t}} (1 + \mathcal{O}(\Delta t))
-\end{equation}
+Nous pouvons factoriser ce résultat pour préparer la division : $2 \sigma \sqrt{\Delta t} (1 + \mathcal{O}(\Delta t))$.
 
-Analysons ensuite le numérateur :
+Décortiquons ensuite le numérateur avec la même rigueur :
 \begin{equation}
     \label{eq:fsec3-numerateur_taylor}
     e^{(r-\mu)\Delta t} - e^{-\sigma \sqrt{\Delta t}} = \left( 1 + (r-\mu)\Delta t \right) - \left( 1 - \sigma \sqrt{\Delta t} + \frac{\sigma^2 \Delta t}{2} \right) + \mathcal{O}(\Delta t^{3/2})
 \end{equation}
-En regroupant les termes selon la puissance de $\Delta t$ :
+Ici encore, les chiffres $1$ s'annulent. En regroupant les termes restants par ordre d'importance (d'abord la racine, puis le temps simple), nous trouvons :
 \begin{equation}
     \label{eq:fsec3-numerateur_simplifie}
     \sigma \sqrt{\Delta t} + \left( r - \mu - \frac{1}{2}\sigma^2 \right)\Delta t + \mathcal{O}(\Delta t^{3/2})
 \end{equation}
 
-En multipliant le numérateur (équation \ref{eq:fsec3-numerateur_simplifie}) par l'inverse du dénominateur (équation \ref{eq:fsec3-inverse_denom}), nous obtenons la probabilité risque-neutre asymptotique :
+Il ne nous reste plus qu'à diviser notre numérateur (équation \ref{eq:fsec3-numerateur_simplifie}) par notre dénominateur (équation \ref{eq:fsec3-denominateur_simplifie}). Séparons la division en deux blocs pour plus de clarté :
+\begin{equation}
+    \label{eq:fsec3-division_detaillee}
+    p \approx \frac{\sigma \sqrt{\Delta t}}{2 \sigma \sqrt{\Delta t}} + \frac{\left( r - \mu - \frac{1}{2}\sigma^2 \right)\Delta t}{2 \sigma \sqrt{\Delta t}}
+\end{equation}
+Le premier bloc se simplifie intégralement et donne $\frac{1}{2}$. 
+Dans le second bloc, la division de $\Delta t$ par $\sqrt{\Delta t}$ fait apparaître un $\sqrt{\Delta t}$ au numérateur. Nous obtenons ainsi notre formule asymptotique finale :
 \begin{equation}
     \label{eq:fsec3-proba_rn_taylor}
-    p = \frac{1}{2} \left[ 1 + \left( \frac{r - \mu - \frac{1}{2}\sigma^2}{\sigma} \right) \sqrt{\Delta t} \right] + \mathcal{O}(\Delta t)
+    p = \frac{1}{2} + \frac{1}{2} \left( \frac{r - \mu - \frac{1}{2}\sigma^2}{\sigma} \right) \sqrt{\Delta t} + \mathcal{O}(\Delta t)
 \end{equation}
 \end{proofbox}
 
+\begin{intuitionbox}[La magie de la nouvelle probabilité]
+L'équation \ref{eq:fsec3-proba_rn_taylor} est fascinante. Elle nous dit que dans le monde risque-neutre, la probabilité que l'action monte n'est pas exactement de cinquante pour cent. Elle est égale à $0,5$ plus un minuscule ajustement. 
+Cet ajustement a une mission mathématique précise : si le taux de la banque $r$ est différent de la croissance historique $\mu$, ce petit déséquilibre de la pièce va artificiellement pousser l'action vers le haut ou vers le bas pour forcer sa croissance à s'aligner exactement sur celle du compte bancaire.
+\end{intuitionbox}
+
 \begin{theorembox}[L'Ajustement de Convexité et la Disparition de la Dérive]
-Si l'on définit la variable aléatoire $\tilde{Z}_j$ valant $+1$ avec probabilité $p$ et $-1$ avec probabilité $1-p$, son espérance n'est plus strictement nulle. Notons $\nu$ cette nouvelle espérance :
+Pour voir ce mécanisme à l'œuvre sur la durée totale du contrat $T$, définissons la variable aléatoire $\tilde{Z}_j$ de notre pièce truquée. Elle vaut $+1$ avec la probabilité $p$ et $-1$ avec la probabilité $1-p$.
+Calculons son espérance mathématique, que nous noterons $\nu$ :
 \begin{equation}
     \label{eq:fsec3-esperance_zj}
-    \nu = 1(p) + (-1)(1-p) = 2p - 1 = \left( \frac{r - \mu - \frac{1}{2}\sigma^2}{\sigma} \right) \sqrt{\Delta t} + \mathcal{O}(\Delta t)
+    \nu = (+1)(p) + (-1)(1-p) = 2p - 1
 \end{equation}
-Sa variance, donnée par $1 - \nu^2$, est égale à $1 - \mathcal{O}(\Delta t)$, ce qui reste très proche de 1.
+En remplaçant $p$ par la formule que nous venons de démontrer, le chiffre $1$ s'annule avec le terme $\frac{1}{2} \times 2$. L'espérance d'un micro-saut est donc :
+\begin{equation}
+    \label{eq:fsec3-nu_resultat}
+    \nu = \left( \frac{r - \mu - \frac{1}{2}\sigma^2}{\sigma} \right) \sqrt{\Delta t}
+\end{equation}
 
-Reprenons l'équation d'accumulation temporelle du logarithme du prix (\ref{eq:fsec3-log_sn}) avec $N$ pas de temps et remplaçons l'espérance des variables $Z_j$ par leur nouvelle espérance risque-neutre $\nu$ :
+Reprenons maintenant l'équation d'accumulation temporelle du logarithme du prix (\ref{eq:fsec3-log_sn}). Nous additionnons la valeur initiale, la dérive historique, et l'ensemble des $N$ petits sauts. Calculons l'espérance totale sous notre nouvelle probabilité :
 \begin{equation}
     \label{eq:fsec3-esperance_somme_log}
-    \mathbb{E}^{RN}[\log(S_T)] = \log(S_0) + \mu T + \sigma \sqrt{\frac{T}{N}} (N \times \nu)
+    \mathbb{E}^{RN}[\log(S_T)] = \log(S_0) + \mu T + \sigma \sqrt{\Delta t} \times (N \times \nu)
 \end{equation}
-En remplaçant $\nu$ par sa valeur approchée (équation \ref{eq:fsec3-esperance_zj}) et en utilisant le fait que $\Delta t = T / N$ :
+Remplaçons $\nu$ par son expression (équation \ref{eq:fsec3-nu_resultat}) :
 \begin{equation}
-    \label{eq:fsec3-calcul_drift_rn}
-    \mathbb{E}^{RN}[\log(S_T)] = \log(S_0) + \mu T + \sigma \sqrt{\frac{T}{N}} \times N \times \left( \frac{r - \mu - \frac{1}{2}\sigma^2}{\sigma} \sqrt{\frac{T}{N}} \right)
+    \label{eq:fsec3-calcul_drift_etape1}
+    \mathbb{E}^{RN}[\log(S_T)] = \log(S_0) + \mu T + \sigma \sqrt{\Delta t} \times N \times \left( \frac{r - \mu - \frac{1}{2}\sigma^2}{\sigma} \right) \sqrt{\Delta t}
 \end{equation}
-Les termes $\sigma$ et $\sqrt{T/N}$ se simplifient parfaitement, annulant au passage la dérive historique $\mu$ :
+La beauté de la modélisation apparaît lors des simplifications. La volatilité $\sigma$ au numérateur s'annule avec celle du dénominateur. Les deux racines $\sqrt{\Delta t}$ se multiplient pour former un simple $\Delta t$. Nous obtenons le bloc $N \times \Delta t$. Sachant par définition que la multiplication du nombre d'étapes par la durée d'une étape donne la durée totale $T$, l'équation devient :
+\begin{equation}
+    \label{eq:fsec3-calcul_drift_etape2}
+    \mathbb{E}^{RN}[\log(S_T)] = \log(S_0) + \mu T + T \left( r - \mu - \frac{1}{2}\sigma^2 \right)
+\end{equation}
+En développant la parenthèse, le terme $\mu T$ positif annule parfaitement le terme $-\mu T$ négatif. Il nous reste l'équation fondamentale de la dynamique risque-neutre :
 \begin{equation}
     \label{eq:fsec3-limite_log_st}
     \mathbb{E}^{RN}[\log(S_T)] = \log(S_0) + \left( r - \frac{1}{2}\sigma^2 \right) T
 \end{equation}
-L'application du Théorème Central Limite confirme que la variance converge vers $\sigma^2 T$. À la limite continue, la distribution risque-neutre de l'actif obéit à la dynamique suivante :
-\begin{equation}
-    \label{eq:fsec3-st_risque_neutre}
-    S_T = S_0 \exp\left[ \left( r - \frac{1}{2}\sigma^2 \right)T + \sigma \sqrt{T} \mathcal{N}(0,1) \right]
-\end{equation}
 \end{theorembox}
 
-\begin{remarquebox}[L'Élimination du Risque]
-Le résultat de l'équation \ref{eq:fsec3-limite_log_st} est un jalon fondamental en finance. Il prouve mathématiquement que les croyances des investisseurs sur la direction du marché (la prime de risque incorporée dans $\mu$) disparaissent intégralement des modèles d'évaluation de produits dérivés. Le terme $-\frac{1}{2}\sigma^2$ est connu sous le nom d'ajustement de convexité (ou correction d'Itô).
+\begin{remarquebox}[L'Élimination du Risque et le Frein de la Volatilité]
+Ce résultat algébrique nous enseigne deux concepts financiers capitaux.
+Premièrement, la variable $\mu$ a totalement disparu. Le prix d'une option est donc strictement indépendant de ce que pensent les investisseurs de la direction future de l'action. 
+Deuxièmement, le taux de croissance du logarithme n'est pas le taux sans risque $r$, mais $r$ amputé de la moitié de la variance. Ce terme $-\frac{1}{2}\sigma^2$ s'appelle le frein de la volatilité ou l'ajustement de convexité (le Lemme d'Itô). En finance, à cause de la capitalisation géométrique, la fluctuation des prix érode toujours le rendement moyen d'un investissement.
 \end{remarquebox}
 
 \subsection{La Formule de Black-Scholes et l'Approximation À La Monnaie}
 
 \begin{definitionbox}[La Formule de Black-Scholes-Merton]
-En injectant la distribution obtenue à l'équation \ref{eq:fsec3-st_risque_neutre} dans l'intégrale d'évaluation risque-neutre (équation \ref{eq:fsec3-integrale_continue}), la résolution analytique exacte pour une option d'achat (Call) donne naissance à la célèbre formule de Black-Scholes (1973) :
+L'application du Théorème Central Limite confirme que le terme aléatoire résiduel converge vers une loi normale standard $\mathcal{N}(0,1)$. Le prix futur s'écrit donc $S_T = S_0 \exp\left[ (r - \frac{1}{2}\sigma^2)T + \sigma \sqrt{T} \mathcal{N}(0,1) \right]$.
+
+En injectant cette distribution dans l'intégrale d'évaluation (équation \ref{eq:fsec3-integrale_continue}), la résolution analytique exacte pour une option d'achat (Call) donne naissance à la célèbre formule de Black-Scholes de 1973 :
 \begin{equation}
     \label{eq:fsec3-black_scholes_call}
     C(S_0, K, \sigma, r, T) = S_0 \mathcal{N}(d_1) - K e^{-rT} \mathcal{N}(d_2)
 \end{equation}
-Où $\mathcal{N}(x)$ représente la fonction de répartition de la loi Normale standard $\frac{1}{\sqrt{2\pi}} \int_{-\infty}^{x} e^{-s^2/2} ds$, et où les paramètres $d_1$ et $d_2$ sont définis par :
+Où $\mathcal{N}(x)$ représente la fonction de répartition de la loi Normale $\frac{1}{\sqrt{2\pi}} \int_{-\infty}^{x} e^{-s^2/2} ds$, et où les paramètres mesurant les distances standardisées sont :
 \begin{equation}
     \label{eq:fsec3-bs_d1}
     d_1 = \frac{\log\left(\frac{S_0}{K}\right) + \left( r + \frac{1}{2}\sigma^2 \right)T}{\sigma \sqrt{T}}
@@ -115,49 +134,57 @@ La formule pour l'option de vente (Put) se déduit immédiatement par la relatio
 \end{definitionbox}
 
 \begin{examplebox}[L'Approximation Mentale : Le Prix À La Monnaie]
-La complexité de la formule de Black-Scholes la rend difficile à manipuler sans ordinateur. Toutefois, si l'on considère une option dite \textit{At-The-Forward-Money}, où le prix d'exercice est égal au prix forward théorique (rappel de l'équation \ref{eq:fsec2-forward_theorique} avec dividendes nuls : $K = S_0 e^{rT}$), le terme logarithmique $\log(S_0/K)$ devient $-rT$.
+La complexité des intégrales de la loi Normale rend cette formule impossible à calculer de tête. Toutefois, une astuce mathématique permet aux opérateurs de marché d'obtenir une valeur instantanée.
 
-En réinjectant cette simplification dans $d_1$, on obtient $d_1 = \frac{1}{2}\sigma \sqrt{T}$ et $d_2 = -\frac{1}{2}\sigma \sqrt{T}$.
-L'équation \ref{eq:fsec3-black_scholes_call} se simplifie alors considérablement :
+Considérons une option dont le prix d'exercice correspond exactement à l'anticipation neutre au risque du marché (le prix forward théorique vu à l'équation \ref{eq:fsec2-forward_theorique}). Si l'on pose $K = S_0 e^{rT}$, la fraction $\frac{S_0}{K}$ vaut $e^{-rT}$.
+Le logarithme naturel annule l'exponentielle, ce qui donne $\log(S_0/K) = -rT$.
+
+En réinjectant cette simplification dans le numérateur de $d_1$, le terme $-rT$ annule le terme $+rT$. Il ne reste que la moitié de la variance. La formule de $d_1$ s'effondre pour devenir une simple division :
+\begin{equation}
+    \label{eq:fsec3-d1_simplifie}
+    d_1 = \frac{\frac{1}{2}\sigma^2 T}{\sigma \sqrt{T}} = \frac{1}{2}\sigma \sqrt{T}
+\end{equation}
+Et logiquement, $d_2$ devient symétrique : $d_2 = \frac{1}{2}\sigma \sqrt{T} - \sigma \sqrt{T} = -\frac{1}{2}\sigma \sqrt{T}$.
+
+L'équation \ref{eq:fsec3-black_scholes_call} peut alors s'écrire sous une forme miroir très élégante :
 \begin{equation}
     \label{eq:fsec3-call_atm_intermediaire}
     C = S_0 \left[ \mathcal{N}\left( \frac{1}{2}\sigma \sqrt{T} \right) - \mathcal{N}\left( -\frac{1}{2}\sigma \sqrt{T} \right) \right]
 \end{equation}
 
-Appliquons le théorème de Taylor sur la fonction de répartition $\mathcal{N}(x)$ autour de zéro : $\mathcal{N}(x) = \mathcal{N}(0) + \mathcal{N}'(0)x + \mathcal{O}(x^3)$.
-En observant que les termes pairs s'annulent lors de la soustraction $\mathcal{N}(x) - \mathcal{N}(-x) = 2 \mathcal{N}'(0)x + \mathcal{O}(x^3)$, et sachant que la dérivée $\mathcal{N}'(0) = \frac{1}{\sqrt{2\pi}}$, l'écart de nos deux probabilités devient :
+Pour résoudre ce crochet sans calculatrice, appliquons le théorème de Taylor sur la fonction de répartition $\mathcal{N}(x)$ autour de la valeur zéro. L'approximation linéaire de la courbe en cloche s'écrit $\mathcal{N}(x) \approx \mathcal{N}(0) + \mathcal{N}'(0)x$.
+Sachant que $\mathcal{N}(0)$ vaut $0,5$ et que la dérivée au centre $\mathcal{N}'(0)$ vaut $\frac{1}{\sqrt{2\pi}}$, effectuons la soustraction demandée par le crochet :
 \begin{equation}
-    \label{eq:fsec3-taylor_normale}
-    2 \times \frac{1}{\sqrt{2\pi}} \times \left( \frac{1}{2}\sigma \sqrt{T} \right) = \frac{\sigma \sqrt{T}}{\sqrt{2\pi}}
+    \label{eq:fsec3-soustraction_taylor}
+    \left( 0,5 + \frac{x}{\sqrt{2\pi}} \right) - \left( 0,5 - \frac{x}{\sqrt{2\pi}} \right) = \frac{2x}{\sqrt{2\pi}}
 \end{equation}
-
-Sachant que $\frac{1}{\sqrt{2\pi}} \approx 0,3989 \approx 0,4$, nous obtenons l'une des approximations les plus célèbres et utiles dans les salles de marchés pour évaluer le prix d'une option \textit{À La Monnaie} :
+En remplaçant $x$ par notre valeur $\frac{1}{2}\sigma \sqrt{T}$, le chiffre $2$ annule la fraction $\frac{1}{2}$. Il ne reste plus que la formule de la volatilité divisée par la racine de deux pi. Puisque $\frac{1}{\sqrt{2\pi}}$ vaut environ $0,3989$ (que l'on arrondit à $0,4$), nous aboutissons à l'approximation magistrale :
 \begin{equation}
     \label{eq:fsec3-approximation_atm}
-    C \approx 0,4 \, S_0 \, \sigma \sqrt{T}
+    C \approx 0,4 \times S_0 \times \sigma \times \sqrt{T}
 \end{equation}
-Par l'argument de la parité, cette approximation élégante s'applique tout autant au Call qu'au Put.
+Grâce à la symétrie de la parité Call-Put à ce point précis, cette approximation mentale fonctionne à l'identique pour évaluer un Put.
 \end{examplebox}
 
 \subsection{La Dérivée Partielle : Le Delta en Temps Continu}
 
-\begin{intuitionbox}[Vers les Lettres Grecques]
-Dans la section d'introduction à l'arbre binomial (équation \ref{eq:fsec3-couverture_delta}), nous avons défini le Delta ($\Delta$) comme la quantité discrète d'actions nécessaires pour immuniser le portefeuille contre un changement de prix $S$. 
-Au fil de ce chapitre, en faisant tendre $\Delta t$ vers zéro, la variation discrète des prix devient infinitésimale.
-Considérons le portefeuille de couverture $\Pi$ composé de la vente d'un Call et de l'achat de $\Delta$ actions : $\Pi = -C(S,t) + \Delta \times S$.
+\begin{intuitionbox}[L'immunisation infinitésimale]
+Dans la section d'introduction à l'arbre binomial (équation \ref{eq:fsec3-couverture_delta}), nous avons défini le Delta ($\Delta$) comme la quantité discrète d'actions à détenir pour se protéger d'un saut de prix. 
+Lorsque l'on bascule dans le modèle de Black-Scholes, la notion de saut disparaît au profit d'un flux continu. L'immunisation ne consiste plus à égaliser deux scénarios futurs, mais à s'assurer que la valeur de notre portefeuille reste totalement plate face à une variation instantanée et microscopique du marché.
 \end{intuitionbox}
 
 \begin{theorembox}[Le Delta Continu]
-Pour qu'un portefeuille soit parfaitement immunisé aux micro-variations du marché dans un environnement en temps continu, son taux de variation instantané par rapport au prix de l'actif sous-jacent doit être nul.
-Mathématiquement, on impose que la dérivée de la valeur du portefeuille par rapport à $S$ s'annule :
+Considérons le portefeuille de couverture $\Pi$ composé de la vente d'une option d'achat (pour une valeur $-C(S,t)$) et de l'achat de $\Delta$ actions (pour une valeur $\Delta \times S$). La valeur du portefeuille s'écrit $\Pi = -C(S,t) + \Delta \times S$.
+
+Pour que ce portefeuille soit parfaitement couvert en temps continu, son taux de variation instantané par rapport au prix de l'actif sous-jacent doit être nul. Mathématiquement, on impose que la dérivée partielle de la valeur du portefeuille par rapport à $S$ s'annule :
 \begin{equation}
     \label{eq:fsec3-derivee_portefeuille}
     \frac{\partial \Pi}{\partial S} = -\frac{\partial C}{\partial S}(S, t) + \Delta = 0
 \end{equation}
-L'unique quantité $\Delta$ qui permet de réaliser cette couverture parfaite en temps continu est donc la dérivée partielle première de la formule de l'option :
+L'unique quantité $\Delta$ permettant de réaliser cette couverture parfaite est donc la pente géométrique de la courbe de l'option :
 \begin{equation}
     \label{eq:fsec3-delta_continu}
     \Delta = \frac{\partial C}{\partial S}
 \end{equation}
-Ce ratio, issu de la formule de Black-Scholes, dépend à la fois du prix instantané $S$ et du temps $t$. Son calcul exige par conséquent un réajustement permanent du portefeuille : c'est la couverture dynamique continue.
+Ce ratio varie en permanence en fonction de l'évolution du prix de l'action et de l'écoulement du temps. La gestion de ce risque exige de vendre et d'acheter des actions continuellement pour maintenir l'équation à zéro, ce qui constitue la définition formelle de la couverture dynamique.
 \end{theorembox}
