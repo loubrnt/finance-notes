@@ -324,19 +324,18 @@ maths
 ================================================
 FILE: finance/fsec1/course1.tex
 ================================================
-\newpage
+
 \section{Fondements et Introduction aux Options}
 
 \subsection{L'Environnement Financier de Base}
 
-\begin{intuitionbox}[La valeur temporelle de l'argent]
 Un principe fondamental en finance stipule qu'un euro aujourd'hui vaut plus qu'un euro demain. Ce postulat repose sur le fait que l'argent disponible aujourd'hui peut être investi pour générer un rendement. Pour comparer des flux financiers se produisant à des dates différentes, nous devons utiliser un taux d'intérêt pour "déplacer" ces montants dans le temps.
-\end{intuitionbox}
 
-\begin{definitionbox}[Le Taux Sans Risque et la Composition Continue]
-Le \textbf{taux sans risque} (noté $r$) est le taux de rendement d'un investissement pour lequel il n'y a absolument aucun risque de défaut (généralement modélisé par les obligations d'États très solides). 
+\begin{definitionbox}[Le Taux Sans Risque]
+Le taux sans risque (noté $r$) est le taux de rendement d'un investissement pour lequel il n'y a absolument aucun risque de défaut (généralement modélisé par les obligations d'États très solides). 
+\end{definitionbox}
 
-En finance de marché moderne, on utilise systématiquement la \textbf{composition continue}. Si l'on place un capital $C_0$ à un taux continu $r$ pendant une durée $T$ (exprimée en années), sa valeur future $C_T$ (capitalisation) s'écrit :
+En finance de marché moderne, on utilise systématiquement la composition continue. Si l'on place un capital $C_0$ à un taux continu $r$ pendant une durée $T$ (exprimée en années), sa valeur future $C_T$ (capitalisation) s'écrit :
 \begin{equation}
     \label{eq:fsec1-capitalisation}
     C_T = C_0 e^{rT}
@@ -346,34 +345,31 @@ En finance de marché moderne, on utilise systématiquement la \textbf{compositi
     \label{eq:fsec1-actualisation}
     C_0 = C_T e^{-rT}
 \end{equation}
-\end{definitionbox}
 
 \begin{definitionbox}[L'Actif Sous-jacent]
-Un produit dérivé est un instrument financier dont la valeur dépend (dérive) du prix d'un autre actif, appelé \textbf{actif sous-jacent} (noté $S$). Il peut s'agir d'une action, d'un indice boursier, d'une devise ou d'une matière première. 
+Un produit dérivé est un instrument financier dont la valeur dépend (dérive) du prix d'un autre actif, appelé actif sous-jacent (noté $S$). Il peut s'agir d'une action, d'un indice boursier, d'une devise ou d'une matière première. 
 On note $S_0$ le prix au comptant (Spot) aujourd'hui, et $S_T$ son prix à une date future $T$.
 \end{definitionbox}
 
 \subsection{Qu'est-ce qu'une Option ?}
 
-\begin{intuitionbox}[Le concept d'assurance]
 Une option fonctionne exactement comme un contrat d'assurance. Vous payez une prime aujourd'hui pour avoir le droit (mais non l'obligation) d'être protégé contre un événement futur (par exemple, la baisse d'une action ou l'explosion de son prix). Si l'événement ne se produit pas, vous perdez votre prime, mais si l'événement se produit, l'option vous indemnise.
-\end{intuitionbox}
 
 \begin{definitionbox}[Définition formelle d'une option]
-Une option est un contrat qui confère à son acheteur le \textbf{droit}, mais non l'obligation, d'acheter ou de vendre un actif sous-jacent à un prix fixé à l'avance, pendant une période donnée ou à une date précise.
+Une option est un contrat qui confère à son acheteur le droit, mais non l'obligation, d'acheter ou de vendre un actif sous-jacent à un prix fixé à l'avance, pendant une période donnée ou à une date précise.
 Les caractéristiques fondamentales sont :
 \begin{itemize}[label=$\rightarrow$]
-    \item \textbf{Le prix d'exercice (Strike - noté $K$)} : Le prix auquel la transaction future se fera si l'option est exercée.
-    \item \textbf{L'échéance (Maturité - notée $T$)} : La date d'expiration du contrat.
-    \item \textbf{La Prime (Premium)} : Le prix qu'il faut payer aujourd'hui pour acheter cette option.
+    \item Le prix d'exercice (Strike, noté $K$) : Le prix auquel la transaction future se fera si l'option est exercée.
+    \item L'échéance (Maturité, notée $T$) : La date d'expiration du contrat.
+    \item La Prime (Premium) : Le prix qu'il faut payer aujourd'hui pour acheter cette option.
 \end{itemize}
 \end{definitionbox}
 
 \begin{remarquebox}[Options Européennes vs Américaines]
 Il existe deux grands "styles" d'options qui définissent quand l'acheteur peut exercer son droit :
 \begin{itemize}[label=$\cdot$]
-    \item \textbf{Option Européenne} : L'exercice ne peut se faire \textit{qu'à la date d'échéance} exacte $T$.
-    \item \textbf{Option Américaine} : L'exercice peut se faire \textit{à tout moment} entre aujourd'hui et la date d'échéance $T$.
+    \item Option Européenne : L'exercice ne peut se faire \textit{qu'à la date d'échéance} exacte $T$.
+    \item Option Américaine : L'exercice peut se faire \textit{à tout moment} entre aujourd'hui et la date d'échéance $T$.
 \end{itemize}
 Dans cette introduction, nous nous concentrerons sur les flux à l'échéance (options européennes).
 \end{remarquebox}
@@ -381,11 +377,10 @@ Dans cette introduction, nous nous concentrerons sur les flux à l'échéance (o
 \subsection{L'Option d'Achat (Call)}
 
 \begin{definitionbox}[Le Call]
-Un \textbf{Call} donne le droit d'\textbf{acheter} l'actif sous-jacent au prix d'exercice $K$.
+Un Call donne le droit d'acheter l'actif sous-jacent au prix d'exercice $K$.
 L'acheteur du Call anticipe une \textit{hausse} du marché. Il fige son prix d'achat à $K$.
 \end{definitionbox}
 
-\begin{theorembox}[Flux final (Payoff) et Profit d'un Call]
 À l'échéance $T$, le flux généré par la détention d'un Call (son Payoff) dépend du prix final du sous-jacent $S_T$ :
 \begin{itemize}[label=$\rightarrow$]
     \item Si $S_T > K$ : Le droit d'acheter à $K$ est intéressant car on peut revendre immédiatement l'actif sur le marché à $S_T$. On exerce l'option. Gain = $S_T - K$.
@@ -396,13 +391,12 @@ La formule mathématique du Payoff est donc :
     \label{eq:fsec1-payoff_call}
     \text{Payoff du Call} = \max(S_T - K, 0)
 \end{equation}
-Le \textbf{Profit} net de l'investisseur prend en compte le coût initial de l'option (la Prime $C_0$) :
+Le Profit net de l'investisseur prend en compte le coût initial de l'option (la Prime $C_0$) :
 \begin{equation}
     \label{eq:fsec1-profit_call}
     \text{Profit} = \max(S_T - K, 0) - C_0
 \end{equation}
 \textit{(Note : Pour simplifier, nous ignorons ici la capitalisation de la prime jusqu'en T).}
-\end{theorembox}
 
 \begin{examplebox}[Mécanique du Call]
 Vous achetez un Call sur l'action Total avec un Strike $K = 50$ €, pour une prime de $3$ €.
@@ -415,11 +409,10 @@ Vous achetez un Call sur l'action Total avec un Strike $K = 50$ €, pour une pr
 \subsection{L'Option de Vente (Put)}
 
 \begin{definitionbox}[Le Put]
-Un \textbf{Put} donne le droit de \textbf{vendre} l'actif sous-jacent au prix d'exercice $K$.
+Un Put donne le droit de vendre l'actif sous-jacent au prix d'exercice $K$.
 L'acheteur du Put anticipe une \textit{baisse} du marché. Il fige son prix de vente à $K$.
 \end{definitionbox}
 
-\begin{theorembox}[Flux final (Payoff) et Profit d'un Put]
 À l'échéance $T$, pour le détenteur d'un Put :
 \begin{itemize}[label=$\rightarrow$]
     \item Si $S_T < K$ : Le droit de vendre à $K$ est intéressant car le prix de marché est plus bas. On exerce l'option. Gain = $K - S_T$.
@@ -435,32 +428,29 @@ Le profit net, en tenant compte de la prime payée $P_0$, est :
     \label{eq:fsec1-profit_put}
     \text{Profit} = \max(K - S_T, 0) - P_0
 \end{equation}
-\end{theorembox}
 
 \subsection{Positions et Asymétrie des Risques}
 
-\begin{intuitionbox}[Le jeu à somme nulle]
 Les marchés d'options sont un jeu à somme nulle. Pour qu'une personne puisse acheter un Call (Position Longue), une autre personne doit lui vendre ce Call (Position Courte). Le profil de gain de l'acheteur est exactement l'inverse (le miroir) du profil de perte du vendeur.
-\end{intuitionbox}
 
 \begin{definitionbox}[Les 4 positions fondamentales]
 Sur le marché des options, un acteur peut prendre 4 positions distinctes :
 \begin{enumerate}
-    \item \textbf{Long Call (Achat de Call)} : Parie à la hausse. Gain potentiel illimité, perte maximale limitée à la prime payée.
-    \item \textbf{Short Call (Vente de Call)} : Parie à la stagnation/baisse. Gain maximal limité à la prime reçue, perte potentielle \textit{illimitée} (très risqué).
-    \item \textbf{Long Put (Achat de Put)} : Parie à la baisse. Gain potentiel très important (jusqu'à ce que l'action vaille 0), perte maximale limitée à la prime.
-    \item \textbf{Short Put (Vente de Put)} : Parie à la stagnation/hausse. Gain maximal limité à la prime, perte potentielle très importante (si l'action chute à 0).
+    \item Long Call (Achat de Call) : Parie à la hausse. Gain potentiel illimité, perte maximale limitée à la prime payée.
+    \item Short Call (Vente de Call) : Parie à la stagnation/baisse. Gain maximal limité à la prime reçue, perte potentielle \textit{illimitée} (très risqué).
+    \item Long Put (Achat de Put) : Parie à la baisse. Gain potentiel très important (jusqu'à ce que l'action vaille 0), perte maximale limitée à la prime.
+    \item Short Put (Vente de Put) : Parie à la stagnation/hausse. Gain maximal limité à la prime, perte potentielle très importante (si l'action chute à 0).
 \end{enumerate}
 \end{definitionbox}
 
 \begin{definitionbox}[Le statut (Moneyness) de l'option]
 Le statut d'une option décrit si elle a une valeur intrinsèque immédiate (si on l'exerçait tout de suite) par rapport au prix actuel du sous-jacent $S$ :
 \begin{itemize}[label=$\cdot$]
-    \item \textbf{Dans la monnaie (In The Money - ITM)} : L'exercice immédiat serait profitable.
+    \item Dans la monnaie (In The Money, ITM) : L'exercice immédiat serait profitable.
         (Pour un Call : $S > K$ / Pour un Put : $S < K$)
-    \item \textbf{Hors de la monnaie (Out of The Money - OTM)} : L'exercice immédiat ne serait pas intéressant.
+    \item Hors de la monnaie (Out of The Money, OTM) : L'exercice immédiat ne serait pas intéressant.
         (Pour un Call : $S < K$ / Pour un Put : $S > K$)
-    \item \textbf{À la monnaie (At The Money - ATM)} : Le prix de l'actif est exactement égal au strike ($S = K$).
+    \item À la monnaie (At The Money, ATM) : Le prix de l'actif est exactement égal au strike ($S = K$).
 \end{itemize}
 \end{definitionbox}
 
@@ -735,323 +725,7 @@ En finance, une liberté (ou un droit) supplémentaire ne peut pas avoir une val
 ================================================
 FILE: finance/fsec2/course1.tex
 ================================================
-\newpage
-\section{Méthodologies d'évaluation et Arbitrage}
-
-\subsection{La couverture en Delta (Delta Hedging)}
-
-\begin{intuitionbox}[Le principe de base]
-Sous certaines hypothèses sur le comportement d'une action, il est possible de déterminer le "juste prix" d'une option. L'idée fondamentale repose sur le fait que la valeur d'une option dépend principalement de deux facteurs :
-\begin{itemize}[label=$\rightarrow$]
-    \item Le temps restant avant l'expiration.
-    \item Le prix actuel de l'action sous-jacente.
-\end{itemize}
-Si l'on sait comment le prix de l'option varie en fonction du prix de l'action, on connaît son taux de variation. En termes mathématiques, il s'agit de la dérivée du prix de l'option par rapport au prix de l'action. En finance mathématique, ce taux de variation est appelé le Delta.
-\end{intuitionbox}
-
-\begin{definitionbox}[Le Delta ($\Delta$)]
-Le Delta d'une option mesure la sensibilité de son prix par rapport aux variations du prix de l'action sous-jacente. 
-Par exemple, si le Delta est de $0,5$, cela signifie que pour une augmentation de 1~€ du prix de l'action, le prix de l'option augmentera d'environ 0,50~€.
-\end{definitionbox}
-
-\begin{examplebox}[Création d'un portefeuille couvert (sans risque)]
-Imaginons un opérateur de marché qui vend une option. Il est exposé au risque si le prix de l'action bouge en sa défaveur. Pour neutraliser ce risque, il va construire le portefeuille suivant :
-\begin{itemize}[label=$\rightarrow$]
-    \item Il a vendu une option (position courte : $-1$ option).
-    \item Il achète en couverture une quantité d'actions exactement égale au Delta ($\Delta$ actions).
-\end{itemize}
-Le taux de variation global de ce portefeuille devient alors zéro. Si le prix de l'action varie légèrement, la perte (ou le gain) sur les actions détenues sera exactement compensée par le gain (ou la perte) sur l'option vendue. Mathématiquement, on a éliminé tout le risque du portefeuille.
-\end{examplebox}
-
-\begin{remarquebox}[Couverture dynamique et modèle de Black-Scholes]
-Le point crucial est que le Delta n'est pas constant : dès que le prix de l'action change, le taux de variation (le Delta) change également. La quantité d'actions détenues dans le portefeuille doit donc être ajustée en permanence. C'est ce qu'on appelle la couverture dynamique (\textit{dynamic hedging}).
-
-Si l'on suppose qu'il est possible de réajuster ce portefeuille \textit{en continu}, on obtient un portefeuille dont la valeur est totalement prévisible et sans risque. Selon les lois de l'arbitrage, un portefeuille sans risque doit rapporter exactement le taux d'intérêt sans risque. C'est cet argument logique strict qui permet de déduire le prix exact de l'option, appelé le prix de Black-Scholes, point de départ de toute la finance mathématique moderne.
-\end{remarquebox}
-
-\subsection{Exemple pratique et intuitif : Déduction du prix par l'arbitrage}
-
-\begin{examplebox}[Le décor du modèle simplifié binomial]
-Pour comprendre la logique fondamentale du \textit{Delta Hedging} sans les mathématiques complexes, utilisons un scénario simple où le temps s'arrête "demain" :
-\begin{itemize}[label=$\rightarrow$]
-    \item L'action aujourd'hui : Elle vaut 100~€.
-    \item L'action demain (à l'expiration) : Elle ne peut faire que deux choses : monter à 120~€ ou baisser à 80~€.
-    \item L'option : Vous vendez une option d'achat (\textit{Call}) donnant le droit d'acheter l'action à 100~€ demain.
-    \item Le taux sans risque : La banque (ou l'État) propose un taux d'intérêt garanti de 5\%.
-\end{itemize}
-La grande question : À quel prix exact devez-vous vendre cette option aujourd'hui pour être sûr de ne pas perdre d'argent, ni d'offrir une opportunité d'arbitrage ("d'argent gratuit") au marché ?
-\end{examplebox}
-
-\newpage
-
-\begin{intuitionbox}[Le raisonnement pas à pas]
-Étape 1 : Calculer le Delta\\
-Que vaudra l'option demain dans nos deux scénarios ?
-\begin{itemize}[label=$\rightarrow$]
-    \item Si l'action monte à 120~€ : L'option vaut 20~€ (le droit d'acheter à 100 ce qui vaut 120).
-    \item Si l'action baisse à 80~€ : L'option vaut 0~€ (personne n'exerce le droit d'acheter à 100 ce qui vaut 80).
-\end{itemize}
-L'écart potentiel de l'action est de 40~€ (de 80 à 120). L'écart potentiel de l'option est de 20~€ (de 0 à 20). \\
-Le Delta est le rapport entre les deux : $20 / 40 = 0,5$. \\
-Le Delta est donc de 0,5. L'option bouge deux fois moins vite que l'action.
-
-\vspace{0.4cm}
-Étape 2 : Créer le portefeuille "Sans Risque"\\
-Puisque vous avez vendu 1 option (vous êtes en danger si l'action monte), vous vous couvrez en achetant 0,5 action (la valeur du Delta).
-Combien d'argent sortez-vous de votre poche aujourd'hui pour construire cela ?
-\begin{itemize}[label=$\rightarrow$]
-    \item Achat d'une demi-action à 100~€ : -50~€
-    \item Vente de l'option : + Prix de l'option (notre inconnue)
-\end{itemize}
-Votre investissement net initial aujourd'hui est donc : 50~€ - Prix de l'option.
-
-\vspace{0.4cm}
-Étape 3 : Que se passe-t-il demain ? (La "Magie")\\
-Regardons la valeur de ce portefeuille dans les deux scénarios finaux :
-\begin{itemize}[label=$\rightarrow$]
-    \item Scénario A (L'action explose à 120~€) :
-    \begin{itemize}[label=$\cdot$]
-        \item Votre demi-action vaut $0,5 \times 120 = +60$~€.
-        \item L'acheteur exerce son option, vous lui devez -20~€.
-        \item Valeur totale dans votre poche : $60 - 20 = 40$~€.
-    \end{itemize}
-    \vspace{0.2cm}
-    \item Scénario B (L'action s'effondre à 80~€) :
-    \begin{itemize}[label=$\cdot$]
-        \item Votre demi-action vaut $0,5 \times 80 = +40$~€.
-        \item L'option expire sans valeur, vous ne devez rien (0~€).
-        \item Valeur totale dans votre poche : $40 - 0 = 40$~€.
-    \end{itemize}
-\end{itemize}
-Constat incroyable : Quoi qu'il arrive, vous aurez exactement 40~€ demain. Vous avez créé un investissement garanti à 100\%, c'est-à-dire strictement sans risque.
-
-\vspace{0.4cm}
-Étape 4 : Le principe de Non-Arbitrage\\
-Puisque vous êtes certain d'avoir 40~€ demain, cet investissement est identique à un placement bancaire garanti à 5\%. \\
-Combien devez-vous placer à la banque aujourd'hui pour obtenir 40~€ demain ? \\
-La réponse s'obtient par actualisation : $40 / 1,05 \approx 38,10$~€.
-
-La finance moderne repose sur une règle d'or : deux investissements qui rapportent exactement la même chose sans risque doivent coûter le même prix aujourd'hui. La création de votre portefeuille DOIT donc vous coûter exactement 38,10~€.
-
-\vspace{0.4cm}
-Conclusion : Déduction du juste prix de l'option\\
-Reprenons la formule de notre investissement à l'Étape 2 : \\
-Investissement aujourd'hui = 50~€ - Prix de l'option.
-
-Puisque cet investissement doit valoir 38,10~€, il suffit de résoudre l'équation :\\
-$50 - \text{Prix de l'option} = 38,10$ \\
-Prix de l'option = 11,90~€
-\end{intuitionbox}
-
-\newpage
-
-\begin{remarquebox}[Généralisation aux options en dehors de la monnaie (OTM)]
-Cette logique de couverture fonctionne avec absolument n'importe quel Strike (ainsi qu'avec des \textit{Puts}). Puisque le prix de l'option est mathématiquement lié à celui de l'action, il existera toujours un ratio exact (le Delta) permettant d'annuler le risque.
-
-Prenons le même scénario, mais avec un \textit{Call} de Strike 110~€ :
-\begin{itemize}[label=$\rightarrow$]
-    \item Nouveau Delta : Si l'action monte à 120~€, l'option vaut 10~€. Si elle baisse à 80~€, l'option vaut 0~€. \\
-    Le Delta devient donc $10 / 40 = 0,25$.
-    \item Nouveau Portefeuille : Vous vendez l'option et achetez 0,25 action (soit un investissement de 25~€ sur les actions).
-    \item La Magie à l'expiration : 
-    \begin{itemize}[label=$\cdot$]
-        \item Si 120~€ : Vos 0,25 actions valent 30~€. Vous devez 10~€ à l'acheteur. Reste : 20~€.
-        \item Si 80~€ : Vos 0,25 actions valent 20~€. L'option expire à 0~€. Reste : 20~€.
-    \end{itemize}
-\end{itemize}
-Conclusion : Quoi qu'il arrive, la valeur finale est figée à 20~€. Le portefeuille est toujours parfaitement couvert et sans risque. On peut alors appliquer la même logique d'actualisation à 5\% pour déduire le prix exact de ce Call à 110~€.
-\end{remarquebox}
-
-\subsection{Évaluation des contrats Forward et Coût de Détention}
-
-\begin{intuitionbox}[L'intuition fondamentale : La stratégie de "Cash and Carry"]
-Pour déterminer le juste prix d'un contrat Forward (le prix auquel on s'engage à vendre un actif dans le futur), on utilise un raisonnement d'absence d'opportunité d'arbitrage (AOA). L'idée est de simuler la vente future en construisant aujourd'hui une stratégie qui ne nous coûte strictement rien au départ. 
-
-Imaginons que l'on veuille s'engager à vendre une action dans un an à un prix fixé aujourd'hui. Pour être certain de pouvoir livrer l'action sans subir les variations du marché, on l'achète aujourd'hui. Le mécanisme repose sur trois étapes :
-\begin{enumerate}
-    \item À l'origine ($t=0$) : N'ayant pas de capital à mobiliser, on emprunte l'argent à la banque pour acheter l'actif. Le flux de trésorerie initial est parfaitement nul.
-    \item Pendant la durée du contrat : On est propriétaire légal de l'action, on encaisse donc ses dividendes réguliers. En parallèle, notre dette à la banque s'alourdit des intérêts au taux sans risque.
-    \item À l'échéance ($T$) : On livre l'actif à l'acheteur au prix convenu. Pour qu'il n'y ait pas d'arbitrage (ni gain magique, ni perte), ce prix de vente doit correspondre exactement au montant qu'il nous reste à rembourser à la banque, une fois les dividendes déduits. 
-\end{enumerate}
-\end{intuitionbox}
-
-\begin{proofbox}[L'argument de non-arbitrage pas à pas]
-Traduisons cette intuition mathématiquement pour une action valant $S_0$, avec un taux sans risque $r$ et un taux de dividende continu $d$.
-Construisons notre portefeuille à coût zéro aujourd'hui :
-\begin{itemize}[label=$\rightarrow$]
-    \item Sachant que l'action verse un dividende continu $d$ que nous allons réinvestir en achetant des fractions d'actions, nous n'avons pas besoin d'acheter 1 action entière aujourd'hui. Il suffit d'en acheter une fraction égale à $e^{-dT}$.
-    \item Pour financer cet achat, on emprunte exactement la somme nécessaire : $e^{-dT} S_0$.
-\end{itemize}
-Que se passe-t-il à l'échéance $T$ ?
-\begin{itemize}[label=$\rightarrow$]
-    \item La fraction d'actif $e^{-dT}$ a généré des dividendes continus. Grâce au réinvestissement, nous possédons désormais exactement $1$ actif complet.
-    \item La debt initiale a accumulé des intérêts au taux $r$. Le montant à rembourser est de : $e^{-dT} S_0 \times e^{rT} = S_0 e^{(r-d)T}$.
-\end{itemize}
-Pour que l'opération soit neutre, le contrat Forward doit nous permettre de vendre l'actif à un prix $K$ qui couvre exactement cette dette finale. Le "juste prix" est donc $K = S_0 e^{(r-d)T}$. Toute différence permettrait un arbitrage sans risque.
-\end{proofbox}
-
-\newpage
-
-\begin{theorembox}[Valeur et Prix théorique d'un contrat Forward]
-Si un actif liquide s'échange aujourd'hui au prix $S_0$, avec un taux de dividende continu $d$ et un taux d'intérêt sans risque composé en continu $r$, alors le prix forward théorique $F$ (le prix d'exercice qui annule la valeur du contrat à l'origine) est :
-\begin{equation}
-    \label{eq:fsec2-forward_theorique}
-    F = S_0 e^{(r-d)T}
-\end{equation}
-Si l'on possède déjà un contrat forward s'engageant à acheter cet actif à un prix d'exercice arbitraire $K$ à l'échéance $T$, la valeur $V$ de ce contrat aujourd'hui est la différence actualisée entre le prix forward actuel et le prix d'exercice $K$ :
-\begin{equation}
-    \label{eq:fsec2-forward_valeur}
-    V = e^{-rT} (S_0 e^{(r-d)T} - K)
-\end{equation}
-\end{theorembox}
-
-\begin{examplebox}[Exemple 1 : Prix théorique vs Valeur en cours]
-Considérons une action $S_0 = 100$, avec $r = 0,05$ et $d = 0,02$ sur une durée $T = 1$.
-
-1. Le prix forward juste fixé aujourd'hui :
-\begin{equation}
-    \label{eq:fsec2-ex_forward_calc}
-    F = 100 \times e^{(0,05 - 0,02) \times 1} = 100 \times e^{0,03} \approx 103,05
-\end{equation}
-
-2. La valeur d'un contrat en cours :
-Imaginons que vous ayez signé un contrat (il y a quelques mois) pour acheter cette action à $K = 100$ dans un an :
-\begin{itemize}[label=$\rightarrow$]
-    \item À l'échéance, vous paierez $100$ pour un actif dont le prix de livraison équitable aujourd'hui est évalué à $103,05$. Vous faites donc une "bonne affaire" de $3,05$.
-    \item La valeur de ce contrat aujourd'hui est ce gain futur actualisé : 
-    $V = e^{-0,05} \times (103,05 - 100) \approx 2,90$.
-\end{itemize}
-\end{examplebox}
-
-\begin{examplebox}[Exemple 2 : Opportunité d'arbitrage en cas de "Mispricing"]
-Reprenons les mêmes données ($S_0 = 100$, $r = 0,05$, $d = 0,02$, donc $F_{\text{théorique}} \approx 103,05$) et analysons une anomalie de marché.
-
-Cas d'une surévaluation du marché ($F_{\text{marché}} = 105$) :
-Le prix proposé par le marché est trop élevé par rapport au prix théorique d'absence d'arbitrage. Un arbitrageur va exécuter une stratégie de \textit{Cash and Carry} pour capturer un gain certain :
-\begin{itemize}[label=$\rightarrow$]
-    \item À $t = 0$ (Flux de trésorerie net = $0$) : 
-    \begin{itemize}[label=$\cdot$]
-        \item Vendre (position courte) le contrat Forward au prix surévalué de $105$ €.
-        \item Emprunter la somme de $100 \times e^{-0,02 \times 1} \approx 98,02$ € à la banque au taux sans risque de $5\%$.
-        \item Acheter immédiatement la fraction $e^{-0,02}$ d'action au prix spot.
-    \end{itemize}
-    \item À l'échéance $T = 1$ :
-    \begin{itemize}[label=$\cdot$]
-        \item Grâce au réinvestissement des dividendes continus, la fraction d'action est devenue exactement $1$ action entière.
-        \item Livrer cette action pour honorer le contrat Forward et recevoir les $105$ € du marché.
-        \item Rembourser l'emprunt bancaire avec les intérêts accumulés : $98,02 \times e^{0,05 \times 1} \approx 103,05$ €.
-    \end{itemize}
-    \item Gain d'arbitrage net à $T = 1$ : 
-    \begin{equation}
-        \label{eq:fsec2-ex_arbitrage_profit}
-        \text{Profit} = 105 - 103,05 = 1,95 \text{ €}
-    \end{equation}
-\end{itemize}
-L'arbitrageur encaisse $1,95$ € de profit pur sans risque et sans aucun capital initial. L'activité de tous les arbitrageurs vendant le forward à ce prix va exercer une pression baissière sur $F_{\text{marché}}$ jusqu'à ce qu'il s'aligne sur le prix théorique de $103,05$.
-\end{examplebox}
-
-\newpage
-
-\subsection{Parité Call-Put et bornes sur les prix d'options}
-
-\begin{theorembox}[Parité Call-Put]
-Si une option d'achat (Call) de prix $C$, une option de vente (Put) de prix $P$ et un contrat forward de valeur $V$ possèdent le même prix d'exercice $K$ et la même échéance $T$, alors :
-\begin{equation}
-    \label{eq:fsec2-parite_call_put}
-    C - P = V
-\end{equation}
-En utilisant la définition de la valeur d'un contrat forward, nous avons :
-\begin{equation}
-    \label{eq:fsec2-parite_dev}
-    C - P = e^{-rT} (S_0 e^{(r-d)T} - K)
-\end{equation}
-\end{theorembox}
-
-\begin{proofbox}[Justification par les flux finaux (Payoffs)]
-Pour démontrer logiquement cette égalité, il suffit de comparer ce que rapportent ces instruments à l'échéance finale $T$ :
-\begin{itemize}[label=$\rightarrow$]
-    \item Le Call donne le droit d'acheter à $K$, son flux final est $\max(S_T - K, 0)$.
-    \item Le Put donne le droit de vendre à $K$, son flux final est $\max(K - S_T, 0)$.
-\end{itemize}
-Si l'on construit un portefeuille où l'on achète un Call et l'on vend un Put en même temps ($C - P$), la valeur de ce portefeuille à l'échéance sera exactement :
-\begin{equation}
-    \label{eq:fsec2-parite_payoff}
-    \max(S_T - K, 0) - \max(K - S_T, 0) = S_T - K
-\end{equation}
-Parallèlement, un contrat Forward avec un prix d'exercice $K$ nous engage fermement à acheter l'actif à $K$. À l'échéance, la valeur de cet engagement est exactement $S_T - K$.
-
-Puisque le portefeuille composé d'options ($C - P$) et le contrat Forward ($V$) produisent exactement le même flux financier final, quelle que soit la valeur que prendra l'actif $S_T$, le principe d'absence d'opportunité d'arbitrage impose qu'ils aient obligatoirement le même prix de départ. On retrouve ainsi $C - P = V$.
-\end{proofbox}
-
-\begin{definitionbox}[États d'une option]
-Une option est qualifiée selon la position du prix de l'actif par rapport au prix d'exercice $K$ :
-\begin{itemize}[label=$\rightarrow$]
-    \item Dans la monnaie (In-the-money) : l'option aurait une valeur positive si elle était exercée à l'échéance avec le prix actuel.
-    \item En dehors de la monnaie (Out-of-the-money) : l'option n'aurait aucune valeur dans les mêmes conditions.
-    \item À la monnaie (At-the-money) : le prix de l'actif est égal au prix d'exercice.
-\end{itemize}
-Il existe également le concept d'At-the-forward, où le prix d'exercice $K$ est égal au prix forward de l'actif. À ce point précis, la valeur du contrat forward est de $0$, ce qui implique que $C = P$.
-\end{definitionbox}
-
-\begin{intuitionbox}[Indépendance vis-à-vis des anticipations]
-Un résultat fondamental de la finance mathématique est que nos vues subjectives sur la valeur future moyenne de l'actif n'affectent pas le prix des options. Si nous pensons que le prix a plus de chances de finir au-dessus du prix forward, nous pourrions être tentés de dire que le Call devrait valoir plus que le Put. Cependant, la parité Call-Put montre que si $K$ est égal au prix forward, le Call et le Put doivent avoir exactement la même valeur pour éviter tout arbitrage, quelles que soient les croyances sur la direction du marché.
-\end{intuitionbox}
-
-\begin{theorembox}[Bornes sur le prix d'un Call]
-Pour une action ne versant pas de dividendes ($d = 0$), le prix d'un Call européen $C_0$ est encadré par le prix actuel de l'action $S_0$ et sa valeur intrinsèque actualisée. Soit $Z_0 = e^{-rT}$ le prix d'un zéro-coupon :
-\begin{equation}
-    \label{eq:fsec2-bornes_call}
-    S_0 > C_0 > S_0 - K Z_0
-\end{equation}
-Si les taux d'intérêt sont non négatifs ($r \geq 0$), alors $Z_0 \leq 1$, ce qui implique que le Call vaut toujours plus que sa valeur d'exercice immédiate : $C_0 > S_0 - K$.
-\end{theorembox}
-
-\newpage
-
-\begin{proofbox}[Preuve des bornes]
-La borne supérieure $S_0 > C_0$ découle du fait qu'à l'échéance, l'option vaut $\max(S_T - K, 0)$, ce qui est toujours inférieur ou égal au prix de l'action $S_T$. Par le théorème de monotonicité, cette relation doit être vraie à $t = 0$.
-
-Pour la borne inférieure, considérons un portefeuille composé d'une option Call et de $K$ obligations zéro-coupon. À l'échéance $T$ :
-\begin{itemize}[label=$\rightarrow$]
-    \item Si $S_T > K$ : on exerce l'option pour $K$ et on possède l'action qui vaut $S_T$.
-    \item Si $S_T \leq K$ : l'option vaut $0$ et on possède les $K$ de l'obligation.
-\end{itemize}
-La valeur finale est $\max(S_T, K)$, ce qui est toujours supérieur ou égal à $S_T$. À l'origine, le portefeuille $C_0 + K Z_0$ doit donc valoir plus que l'action $S_0$. En réarrangeant, on obtient $C_0 > S_0 - K Z_0$.
-\end{proofbox}
-
-\begin{theorembox}[Bornes sur le prix d'un Put]
-Pour une action ne versant pas de dividendes ($d = 0$), le prix d'un Put européen $P_0$ est encadré par la valeur actuelle du prix d'exercice et sa valeur intrinsèque actualisée :
-\begin{equation}
-    \label{eq:fsec2-bornes_put}
-    K Z_0 > P_0 > K Z_0 - S_0
-\end{equation}
-Où $Z_0 = e^{-rT}$ est le prix d'un zéro-coupon.
-\end{theorembox}
-
-\begin{proofbox}[Preuve des bornes du Put]
-La borne supérieure $P_0 < K Z_0$ découle du fait qu'à l'échéance, le payoff $\max(K - S_T, 0)$ est strictement inférieur ou égal à $K$. À l'origine, le Put doit donc valoir moins que la valeur actualisée de $K$.
-
-Pour la borne inférieure, on utilise la parité Call-Put ($C_0 - P_0 = S_0 - K Z_0$) combinée au fait que $C_0 \ge 0$. En réarrangeant :
-\begin{equation}
-    \label{eq:fsec2-bornes_put_proof}
-    P_0 = C_0 + K Z_0 - S_0 \ge K Z_0 - S_0
-\end{equation}
-Puisque le prix d'une option est toujours non négatif, on obtient $P_0 \ge \max(K Z_0 - S_0, 0)$.
-\end{proofbox}
-
-\begin{theorembox}[Non-optimalité de l'exercice anticipé]
-Pour une action ne versant pas de dividendes, il n'est jamais optimal d'exercer une option d'achat (Call) américaine avant son échéance. Par conséquent, un Call américain a la même valeur qu'un Call européen :
-\begin{equation}
-    \label{eq:fsec2-call_americain}
-    C_{\text{américain}} = C_{\text{européen}}
-\end{equation}
-\end{theorembox}
-
-\begin{intuitionbox}[L'explication par les bornes]
-Nous avons démontré que si $r \ge 0$, alors $C_0 > S_0 - K$. 
-Si un investisseur décide d'exercer son Call américain immédiatement, il reçoit la valeur intrinsèque immédiate : $S_0 - K$.
-Or, en vendant le Call sur le marché, il obtient sa valeur de marché $C_0$, qui est strictement supérieure à $S_0 - K$. L'investisseur a donc toujours intérêt à vendre l'option plutôt qu'à l'exercer. De plus, exercer par anticipation revient à payer le prix d'exercice $K$ immédiatement au lieu de conserver cette trésorerie rémunérée au taux sans risque jusqu'à l'échéance.
-\end{intuitionbox}
+[Binary file]
 
 
 ================================================
@@ -1198,8 +872,6 @@ La formule discrète du Delta est $\Delta = \frac{C_u - C_d}{S_u - S_d}$.
 Le Delta est de $0,5$.
 \end{correctionbox}
 
-\newpage
-
 \begin{correctionbox}[Corrigé de l'exercice 2 : Couverture statique et non-arbitrage]
 1. Construction du portefeuille :\\
 Aujourd'hui, nous vendons 1 Call (prix $C_0$) et achetons $\Delta = 0,5$ action. 
@@ -1277,8 +949,6 @@ $V = S_t - K e^{-rT_{restant}}$
 La valeur du contrat est de 10,02 €.
 \end{correctionbox}
 
-\newpage
-
 \begin{correctionbox}[Corrigé de l'exercice 8 : Cash-and-Carry]
 1. Prix théorique :\\
 $F_{th} = 200 \times e^{0,02 \times 1} \approx 204,04$ €. Le marché cote 210 €, le Forward est donc surévalué.
@@ -1348,8 +1018,6 @@ Le portefeuille B voit son action détacher un dividende en $t$, réinvesti au t
 \end{equation*}
 \end{correctionbox}
 
-\newpage
-
 \begin{correctionbox}[Corrigé de l'exercice 12 : Risque de la couverture dynamique]
 Le Delta $\Delta$ correspond à la pente de la tangente de la courbe du prix de l'option. Or, cette courbe n'est pas linéaire (elle est convexe). Si l'on ne rééquilibre qu'une fois par semaine, le cours de l'action va s'éloigner du point de tangence initial. La variation réelle du prix de l'option ne correspondra plus à l'approximation linéaire fournie par le Delta.
 Ce risque lié à la courbure s'appelle le Gamma. Le portefeuille subit une erreur de discrétisation (coût de rééquilibrage non permanent) qui introduit un risque directionnel temporaire.
@@ -1418,8 +1086,6 @@ Si, à tout instant, le Put est exercé par son détenteur, B vaut $K - S + S = 
 $C_{am} + K \ge P_{am} + S_0 \implies C_{am} - P_{am} \ge S_0 - K$.
 \end{correctionbox}
 
-\newpage
-
 \begin{correctionbox}[Corrigé de l'exercice 19 : Convexité]
 Posons un troisième Strike $K_3 = \lambda K_1 + (1-\lambda) K_2$.
 Construisons un portefeuille en achetant $\lambda$ Call $K_1$, $(1-\lambda)$ Call $K_2$, et en vendant 1 Call $K_3$.
@@ -1448,43 +1114,36 @@ $F = S_0 e^{(r + u - c)T}$.
 ================================================
 FILE: finance/fsec3/course1.tex
 ================================================
-\newpage
+
 
 \section{Arbres Binomiaux et Évaluation d'Options}
 
 \subsection{Le Modèle à une Période (L'Univers à Deux États)}
 
-\begin{intuitionbox}[Le concept de l'arbre]
 Pour évaluer une option classique (vanille), une méthode redoutablement efficace consiste à modéliser les mouvements de l'actif sous-jacent à l'aide d'un arbre. Nous commençons par une situation hautement stylisée (un seul pas de temps, deux états futurs possibles) afin de comprendre la mécanique fondamentale de l'absence d'arbitrage, avant de généraliser.
-\end{intuitionbox}
 
-\begin{definitionbox}[Le cadre du modèle binomial simple]
 Considérons un univers simplifié avec les paramètres suivants :
 \begin{itemize}[label=$\rightarrow$]
-    \item \textbf{Taux d'intérêt} : Pour simplifier, nous supposons qu'il est nul ($r = 0$).
-    \item \textbf{Actif sous-jacent ($S$)} : Son prix actuel est $S_0 = 100$. Demain, il ne peut prendre que deux valeurs :
+    \item Taux d'intérêt : Pour simplifier, nous supposons qu'il est nul ($r = 0$).
+    \item Actif sous-jacent ($S$) : Son prix actuel est $S_0 = 100$. Demain, il ne peut prendre que deux valeurs :
     \begin{itemize}[label=$\cdot$]
         \item État "Up" (Hausse) : $S_u = 110$
         \item État "Down" (Baisse) : $S_d = 90$
     \end{itemize}
-    \item \textbf{Option d'achat (Call)} : Prix d'exercice $K = 100$.
+    \item Option d'achat (Call) : Prix d'exercice $K = 100$.
     \begin{itemize}[label=$\cdot$]
         \item Flux en cas de Hausse : $\max(110 - 100, 0) = 10$
         \item Flux en cas de Baisse : $\max(90 - 100, 0) = 0$
     \end{itemize}
 \end{itemize}
-\end{definitionbox}
 
 \subsection{Tarification par Couverture (Hedging)}
 
-\begin{intuitionbox}[L'élimination de l'incertitude]
 En tant que vendeur de cette option, nous sommes exposés à un risque : perdre 10 si l'état "Up" se réalise, et ne rien perdre dans l'état "Down". La stratégie de couverture consiste à construire un portefeuille aujourd'hui (composé de l'actif sous-jacent et de l'option) dont la valeur de demain sera strictement identique, quel que soit l'état du monde qui se réalise.
-\end{intuitionbox}
 
-\begin{proofbox}[Détermination du prix sans arbitrage par la couverture]
 Sans connaître l'avenir, nous achetons une quantité fixe $\delta$ d'actions aujourd'hui. Soit $Opt_0$ la valeur de l'option aujourd'hui.
 \begin{itemize}[label=$\rightarrow$]
-    \item \textbf{Valeur du portefeuille aujourd'hui} : $\Pi_0 = 100\delta - Opt_0$
+    \item Valeur du portefeuille aujourd'hui : $\Pi_0 = 100\delta - Opt_0$
 \end{itemize}
 Regardons la valeur de ce portefeuille demain dans les deux états :
 \begin{itemize}[label=$\rightarrow$]
@@ -1492,7 +1151,7 @@ Regardons la valeur de ce portefeuille demain dans les deux états :
     \item Dans l'état "Down" : $\Pi_d = 90\delta$
 \end{itemize}
 
-\textbf{Étape 1 : Couverture du risque (Delta)}\\
+Étape 1 : Couverture du risque (Delta)\\
 Pour éliminer toute incertitude, le portefeuille doit valoir la même chose dans les deux états ($\Pi_u = \Pi_d$) :
 \begin{equation}
     \label{eq:fsec3-couverture_delta}
@@ -1500,95 +1159,75 @@ Pour éliminer toute incertitude, le portefeuille doit valoir la même chose dan
 \end{equation}
 En détenant une demi-action, notre portefeuille vaudra demain exactement $90 \times (0,5) = 45$, quoi qu'il arrive.
 
-\textbf{Étape 2 : Application du principe de non-arbitrage}\\
+Étape 2 : Application du principe de non-arbitrage\\
 Puisque le taux d'intérêt est nul ($r=0$) et que notre portefeuille est sans risque, sa valeur aujourd'hui doit être exactement égale à sa valeur de demain :
 \begin{equation}
     \label{eq:fsec3-couverture_prix}
     \Pi_0 = 45 \implies 100(0,5) - Opt_0 = 45 \implies 50 - Opt_0 = 45 \implies Opt_0 = 5
 \end{equation}
 Le prix unique et sans arbitrage de l'option est de $5$.
-\end{proofbox}
 
-\begin{remarquebox}[L'absence des probabilités]
 Le point le plus remarquable de ce raisonnement est que les probabilités n'interviennent nulle part. Peu importe qu'il y ait 90\% ou 10\% de chances que l'action monte : l'argument de couverture reste parfaitement valide. La seule condition imposée aux probabilités réelles est qu'elles ne soient ni $0$ ni $1$ (car une probabilité de $1$ de voir l'action monte plus vite que le taux sans risque créerait une opportunité d'arbitrage immédiate).
-\end{remarquebox}
 
-\newpage
+
 
 \subsection{L'Évaluation Risque-Neutre}
 
-\begin{intuitionbox}[L'approche probabiliste]
 Que se passe-t-il si nous essayons d'évaluer l'option en utilisant une espérance mathématique ? Pour que cette approche donne le même résultat que notre méthode de couverture (qui est infaillible), nous devons inventer un monde théorique où les investisseurs sont neutres au risque. Dans ce monde, le rendement attendu de l'action est égal au taux sans risque.
-\end{intuitionbox}
 
-\begin{theorembox}[Probabilité Risque-Neutre]
 Pour retrouver le prix d'arbitrage, on définit une probabilité fictive $p$ (pour l'état "Up") et $1-p$ (pour l'état "Down"), telle que l'espérance de la valeur future de l'action soit exactement égale à sa valeur actuelle (car $r=0$) :
 \begin{equation}
     \label{eq:fsec3-esperance_s0}
     \mathbb{E}[S_1] = S_0
 \end{equation}
-\end{theorembox}
 
-\begin{examplebox}[Calcul du prix via la probabilité risque-neutre]
-\textbf{Étape 1 : Trouver la probabilité $p$}\\
+Calcul du prix via la probabilité risque-neutre :
+
+Étape 1 : Trouver la probabilité $p$\\
 Posons l'équation d'espérance de l'action :
 \begin{equation}
     \label{eq:fsec3-proba_rn_calc}
     110p + 90(1-p) = 100 \implies 20p + 90 = 100 \implies 20p = 10 \implies p = \frac{1}{2}
 \end{equation}
 
-\textbf{Étape 2 : Évaluer l'option}\\
+Étape 2 : Évaluer l'option\\
 Dans ce monde risque-neutre, la valeur de l'option aujourd'hui est simplement l'espérance mathématique de ses flux futurs :
 \begin{equation}
     \label{eq:fsec3-esperance_opt}
     Opt_0 = \mathbb{E}[Flux] = p \times 10 + (1-p) \times 0 = \frac{1}{2}(10) + \frac{1}{2}(0) = 5
 \end{equation}
 Nous retrouvons exactement le prix d'arbitrage calculé précédemment, mais avec un calcul beaucoup plus direct.
-\end{examplebox}
 
 \subsection{Généralisation et Théorie des Martingales}
 
-\begin{examplebox}[Généralisation algébrique]
 Considérons un produit dérivé générique payant $a + \beta$ dans l'état "Up" et $a$ dans l'état "Down".
 \begin{itemize}[label=$\rightarrow$]
-    \item \textbf{Par couverture} : On égalise les états pour trouver $\delta$ : $110\delta - (a + \beta) = 90\delta - a \implies \delta = \frac{\beta}{20}$. La valeur future garantie est $90(\frac{\beta}{20}) - a = 4,5\beta - a$. L'équation de non-arbitrage donne : $100(\frac{\beta}{20}) - Opt_0 = 4,5\beta - a \implies Opt_0 = a + 0,5\beta$.
-    \item \textbf{Par risque-neutre} : L'espérance avec $p=0,5$ donne immédiatement $\mathbb{E}[Opt] = 0,5(a + \beta) + 0,5(a) = a + 0,5\beta$.
+    \item Par couverture : On égalise les états pour trouver $\delta$ : $110\delta - (a + \beta) = 90\delta - a \implies \delta = \frac{\beta}{20}$. La valeur future garantie est $90(\frac{\beta}{20}) - a = 4,5\beta - a$. L'équation de non-arbitrage donne : $100(\frac{\beta}{20}) - Opt_0 = 4,5\beta - a \implies Opt_0 = a + 0,5\beta$.
+    \item Par risque-neutre : L'espérance avec $p=0,5$ donne immédiatement $\mathbb{E}[Opt] = 0,5(a + \beta) + 0,5(a) = a + 0,5\beta$.
 \end{itemize}
 L'approche risque-neutre est considérablement plus simple à manipuler mathématiquement.
-\end{examplebox}
 
 \begin{theorembox}[Propriété de Martingale et Absence d'Arbitrage]
-Pourquoi la tarification risque-neutre fonctionne-t-elle ? Une fois la probabilité $p$ fixée de manière à ce que $\mathbb{E}[S] = S_0$, l'opérateur espérance étant linéaire, cette relation s'applique à toute combinaison d'instruments sur le marché.
+Une fois la probabilité $p$ fixée de manière à ce que $\mathbb{E}[S] = S_0$, l'opérateur espérance étant linéaire, cette relation s'applique à toute combinaison d'instruments sur le marché.
 Si l'on note $B$ l'actif sans risque, on obtient le système suivant :
 \begin{align*}
     \mathbb{E}[B_1] &= B_0 \\
     \mathbb{E}[S_1] &= S_0 \\
     \mathbb{E}[Opt_1] &= Opt_0
 \end{align*}
-La valeur actuelle de \textbf{tout} instrument est l'espérance de sa valeur future. Si un portefeuille vaut zéro aujourd'hui, son espérance future est zéro. Il est donc impossible que ce portefeuille soit toujours positif sans pouvoir être négatif : l'arbitrage est structurellement impossible sous cette probabilité.
+La valeur actuelle de tout instrument est l'espérance de sa valeur future. Si un portefeuille vaut zéro aujourd'hui, son espérance future est zéro. Il est donc impossible que ce portefeuille soit toujours positif sans pouvoir être négatif : l'arbitrage est structurellement impossible sous cette probabilité.
 \end{theorembox}
 
-\begin{remarquebox}[Unicité du prix]
-Les deux arguments (couverture et risque-neutre) fonctionnent en sens inverse :
-\begin{itemize}[label=$\rightarrow$]
-    \item L'argument risque-neutre montre qu'un prix précis est exempt d'arbitrage (il fixe une borne inférieure).
-    \item L'argument par couverture montre que tous les autres prix peuvent être arbitrés (il fixe une borne supérieure).
-\end{itemize}
-Dans notre modèle binomial, ces deux bornes coïncident parfaitement. Le marché est dit "complet", et nous sommes laissés avec un prix d'arbitrage unique.
-\end{remarquebox}
+Les deux arguments (couverture et risque-neutre) fonctionnent en sens inverse : l'argument risque-neutre montre qu'un prix précis est exempt d'arbitrage (il fixe une borne inférieure), tandis que l'argument par couverture montre que tous les autres prix peuvent être arbitrés (il fixe une borne supérieure). Dans notre modèle binomial, ces deux bornes coïncident parfaitement. Le marché est dit "complet", et nous sommes laissés avec un prix d'arbitrage unique.
 
 \subsection{La Tarification par Réplication}
 
-\begin{intuitionbox}[La Loi du Prix Unique et la Réplication]
 Il existe une troisième manière d'interpréter le prix d'arbitrage d'une option. Au lieu de vendre l'option et de nous couvrir, nous pouvons chercher à fabriquer un clone financier de cette option.
 Si nous parvenons à construire un portefeuille composé d'actions et d'emprunts qui génère strictement les mêmes flux que l'option dans tous les états futurs possibles, le principe d'absence d'arbitrage impose que le coût de construction de ce portefeuille aujourd'hui soit exactement égal au prix de l'option.
-\end{intuitionbox}
 
-\begin{remarquebox}[L'argument géométrique]
 Pourquoi est-il toujours possible de cloner l'option dans notre modèle ? 
 La valeur d'un portefeuille d'actions et d'obligations à l'échéance est une fonction affine du prix de l'action, soit Valeur = Delta fois le prix de l'action + Montant obligataire. Graphiquement, c'est une ligne droite.
 L'option définit deux points cibles à atteindre : son flux en cas de hausse, et son flux en cas de baisse. Or, par deux points, il passe une et une seule droite. Il existe donc une combinaison unique et exacte d'actions et d'emprunt qui réplique parfaitement l'option.
-\end{remarquebox}
 
 \begin{examplebox}[Réplication d'un Call sur Apple Inc.]
 Imaginons que nous voulions évaluer une option d'achat (Call) sur l'action Apple (ticker : AAPL).
@@ -1633,23 +1272,18 @@ Coût net = 0,5 fois 200 \$ - 90 \$ = 100 \$ - 90 \$ = 10 \$.
 Le clone parfait coûte 10 \$. Par conséquent, le prix d'arbitrage de l'option Call AAPL sur le marché doit être très exactement de 10 \$.
 \end{examplebox}
 
-\begin{theorembox}[Symétrie de la réplication]
 Sur un marché complet, l'action, l'obligation sans risque et l'option sont structurellement liés. L'équation de valorisation peut être manipulée algébriquement pour répliquer n'importe quel instrument à partir des deux autres :
 \begin{itemize}[label=$\rightarrow$]
     \item Hedging : Action possédée + Option vendue permet de générer des flux identiques à une Obligation sans risque.
     \item Réplication : Action possédée + Obligation empruntée permet de générer des flux identiques à une Option d'achat.
     \item Synthèse d'actif : Option achetée + Obligation détenue permet de générer des flux identiques à une Action.
 \end{itemize}
-\end{theorembox}
 
 \subsection{Les Limites du Modèle : Le Marché Incomplet}
 
-\begin{intuitionbox}[L'ajout d'un troisième état]
 Le modèle binomial à deux états est parfait mathématiquement, mais irréaliste économiquement. Pour s'approcher de la réalité, supposons un instant que l'action (actuellement à 100) puisse prendre trois valeurs demain : monter à 110 (A), stagner à 100 (C), ou baisser à 90 (B). Le Call a toujours un Strike de 100.
 Essayons d'appliquer nos méthodes de valorisation à cet univers à trois états.
-\end{intuitionbox}
 
-\begin{proofbox}[L'échec de la couverture et l'apparition d'inégalités]
 Tentons de nous couvrir en vendant l'option et en achetant une quantité y d'actions. Notre portefeuille demain vaudra :
 \begin{itemize}[label=$\cdot$]
     \item État A (110) : $110y - 10$
@@ -1663,10 +1297,8 @@ Si nous utilisons le ratio y = 0,5 du modèle précédent, notre portefeuille va
     100(0,5) - Opt_0 \ge 45 \implies Opt_0 \le 5
 \end{equation}
 L'argument d'arbitrage ne donne plus un prix exact, mais une borne supérieure.
-\end{proofbox}
 
-\begin{examplebox}[L'échec de la probabilité risque-neutre unique]
-Cherchons une probabilité risque-neutre telle que l'espérance de l'action demain soit 100.
+Cherchons maintenant une probabilité risque-neutre telle que l'espérance de l'action demain soit 100.
 Soit $P_A, P_B, P_C$ les probabilités des trois états.
 \begin{equation}
     \label{eq:fsec3-esperance_incomplet}
@@ -1680,29 +1312,21 @@ Le prix de l'option étant son espérance, nous avons :
     Opt_0 = 10 \times p + 0 \times P_C + 0 \times P_B = 10p
 \end{equation}
 Puisque p est compris entre 0 et 0,5, le prix du Call est un intervalle compris entre 0 et 5.
-\end{examplebox}
 
-\begin{theorembox}[Définition d'un Marché Incomplet]
-Le modèle à trois états illustre le concept fondamental de marché incomplet. Un marché est incomplet lorsqu'il y a plus d'états futurs du monde que d'actifs financiers indépendants permettant de s'y couvrir.
-Dans un tel marché :
+Ce modèle à trois états illustre le concept fondamental de marché incomplet. Un marché est incomplet lorsqu'il y a plus d'états futurs du monde que d'actifs financiers indépendants permettant de s'y couvrir. Dans un tel marché :
 \begin{itemize}[label=$\rightarrow$]
     \item La réplication parfaite d'un produit dérivé est impossible.
     \item L'absence d'opportunité d'arbitrage ne suffit plus à fixer un prix unique.
     \item Les mathématiques ne fournissent qu'un intervalle de prix exempts d'arbitrage (ici [0, 5]).
 \end{itemize}
 Le prix exact qui sera négocié sur le marché ne dépendra plus d'une équation, mais des préférences au risque et de la psychologie des acteurs du marché.
-\end{theorembox}
 
 \subsection{Modèle à Plusieurs Périodes}
 
-\begin{intuitionbox}[L'astuce du temps continu pour sauver le modèle]
-Nous venons de voir qu'ajouter un troisième état final (stagnation à 100) détruit l'unicité du prix et rend le marché incomplet. 
-Pour modéliser des mouvements de prix réalistes sans perdre la puissance mathématique de l'arbitrage, la solution consiste à découper le temps. Si nous supposons que les prix évoluent de manière continue, l'action ne fait pas un grand saut en une journée, elle fait plusieurs petits sauts successifs.
-\end{intuitionbox}
+Nous venons de voir qu'ajouter un troisième état final (stagnation à 100) détruit l'unicité du prix et rend le marché incomplet. Pour modéliser des mouvements de prix réalistes sans perdre la puissance mathématique de l'arbitrage, la solution consiste à découper le temps. Si nous supposons que les prix évoluent de manière continue, l'action ne fait pas un grand saut en une journée, elle fait plusieurs petits sauts successifs.
 
-\newpage
 
-\begin{examplebox}[Construction d'un arbre binomial à deux pas]
+
 Plutôt que d'envisager une variation de plus ou moins 10 sur une journée entière, nous découpons la journée en deux demi-journées, avec des variations de plus ou moins 5.
 \begin{itemize}[label=$\rightarrow$]
     \item Instant initial (t = 0) : L'action vaut 100.
@@ -1714,7 +1338,6 @@ Plutôt que d'envisager une variation de plus ou moins 10 sur une journée enti�
     \end{itemize}
 \end{itemize}
 L'état C (100) est atteint de deux manières différentes : une hausse suivie d'une baisse, ou une baisse suivie d'une hausse. C'est ce que l'on appelle un arbre recombinant.
-\end{examplebox}
 
 \vspace{0.5cm}
 \begin{center}
@@ -1764,10 +1387,7 @@ L'état C (100) est atteint de deux manières différentes : une hausse suivie d
 \end{center}
 \vspace{0.5cm}
 
-\begin{remarquebox}[Le retour à la complétude du marché]
-Ce découpage temporel est une avancée théorique majeure. En regardant l'arbre globalement à t=1, nous avons bien trois états finaux possibles (110, 100, 90). Cependant, si nous nous plaçons à n'importe quel nœud spécifique de l'arbre, il n'y a que deux chemins possibles pour l'étape suivante. 
-Le marché est donc localement complet à chaque nœud. Nous pourrons utiliser nos techniques d'évaluation (Couverture ou Risque-Neutre) à chaque intersection pour déduire un prix exact, en travaillant à rebours depuis l'échéance finale jusqu'à aujourd'hui.
-\end{remarquebox}
+Ce découpage temporel est une avancée théorique majeure. En regardant l'arbre globalement à t=1, nous avons bien trois états finaux possibles (110, 100, 90). Cependant, si nous nous plaçons à n'importe quel nœud spécifique de l'arbre, il n'y a que deux chemins possibles pour l'étape suivante. Le marché est donc localement complet à chaque nœud. Nous pourrons utiliser nos techniques d'évaluation (Couverture ou Risque-Neutre) à chaque intersection pour déduire un prix exact, en travaillant à rebours depuis l'échéance finale jusqu'à aujourd'hui.
 
 
 ================================================
@@ -1775,13 +1395,8 @@ FILE: finance/fsec3/course2.tex
 ================================================
 \subsection{Évaluation par Couverture dans un Arbre à Deux Périodes}
 
-\begin{intuitionbox}[Le principe d'induction rétrograde]
-Pour calculer la valeur de l'option aujourd'hui, nous devons procéder à l'envers (calcul à rebours). Puisque le marché est complet à chaque nœud, nous pouvons appliquer notre argument de couverture locale. Nous calculons d'abord la valeur de l'option à la mi-journée (nœuds D et E) en utilisant les flux finaux (nœuds A, B et C). Une fois ces valeurs intermédiaires connues, nous recommençons l'opération pour trouver la valeur initiale à t=0.
-\end{intuitionbox}
+Pour calculer la valeur de l'option aujourd'hui, nous devons procéder à l'envers (calcul à rebours). Puisque le marché est complet à chaque nœud, nous pouvons appliquer notre argument de couverture locale par induction rétrograde. Nous calculons d'abord la valeur de l'option à la mi-journée (nœuds D et E) en utilisant les flux finaux (nœuds A, B et C). Une fois ces valeurs intermédiaires connues, nous recommençons l'opération pour trouver la valeur initiale à t=0.
 
-\newpage
-
-\begin{examplebox}[Calcul pas à pas par couverture (Delta Hedging)]
 Considérons notre option d'achat (Call) de prix d'exercice K = 100. Son profil de flux à l'échéance (t=1) est : 10 en A, 0 en C, 0 en B. Le taux d'intérêt sans risque est toujours supposé nul.
 
 \begin{enumerate}[label=Étape \arabic* :, leftmargin=*]
@@ -1817,22 +1432,15 @@ Considérons notre option d'achat (Call) de prix d'exercice K = 100. Son profil 
     \end{itemize}
 
 \end{enumerate}
-\end{examplebox}
 
-\begin{remarquebox}[Couverture dynamique]
-Cet exemple démontre mathématiquement la notion de couverture dynamique évoquée précédemment. Remarquez que le delta (la quantité d'actions à détenir pour se couvrir) n'est pas constant. Il vaut 0,5 au début de la journée. Si l'action monte à 105, le vendeur de l'option devra ajuster son portefeuille en achetant 0,5 action supplémentaire pour que son delta passe à 1. La couverture parfaite exige un ajustement à chaque pas de temps.
-\end{remarquebox}
+Cet exemple démontre mathématiquement la notion de couverture dynamique. Remarquez que le delta (la quantité d'actions à détenir pour se couvrir) n'est pas constant. Il vaut 0,5 au début de la journée. Si l'action monte à 105, le vendeur de l'option devra ajuster son portefeuille en achetant 0,5 action supplémentaire pour que son delta passe à 1. La couverture parfaite exige un ajustement à chaque pas de temps.
 
 \subsection{Évaluation Risque-Neutre dans un Arbre à Deux Périodes}
 
-\begin{intuitionbox}[L'avantage de la méthode probabiliste]
-Bien que l'argument de couverture nous garantisse un prix mathématiquement parfait, les calculs de portefeuilles deviennent vite fastidieux. L'approche par la probabilité risque-neutre, bien que plus abstraite, est beaucoup plus simple à appliquer. Elle donnera toujours un résultat strictement identique à la méthode par couverture.
-Il existe deux manières de l'utiliser : en remontant l'arbre pas à pas (induction rétrograde), ou en calculant directement les probabilités globales d'atteindre chaque état final.
-\end{intuitionbox}
+Bien que l'argument de couverture nous garantisse un prix mathématiquement parfait, les calculs de portefeuilles deviennent vite fastidieux. L'approche par la probabilité risque-neutre, bien que plus abstraite, est beaucoup plus simple à appliquer. Elle donnera toujours un résultat strictement identique à la méthode par couverture. Il existe deux manières de l'utiliser : en remontant l'arbre pas à pas (induction rétrograde), ou en calculant directement les probabilités globales d'atteindre chaque état final.
 
-\newpage
+Méthode 1 : Calcul pas à pas (Induction rétrograde)
 
-\begin{examplebox}[Méthode 1 : Calcul pas à pas (Induction rétrograde)]
 Nous reprenons le même arbre. Le taux d'intérêt est nul, donc l'espérance du prix futur de l'action doit égaler son prix actuel à chaque nœud.
 
 \begin{enumerate}[label=Étape \arabic* :, leftmargin=*]
@@ -1859,11 +1467,10 @@ Nous reprenons le même arbre. Le taux d'intérêt est nul, donc l'espérance du
     \end{itemize}
 \end{enumerate}
 Le résultat est identique au prix d'arbitrage obtenu par la méthode de couverture en delta.
-\end{examplebox}
 
-\begin{examplebox}[Méthode 2 : Calcul par les probabilités globales des chemins]
-Plutôt que de calculer les valeurs intermédiaires de l'option, nous pouvons calculer directement la probabilité risque-neutre de nous retrouver dans chaque état final à t=1, puis calculer l'espérance finale en une seule fois.
-Sachant qu'à chaque nœud la probabilité de Hausse est de 1/2 :
+Méthode 2 : Calcul par les probabilités globales des chemins
+
+Plutôt que de calculer les valeurs intermédiaires de l'option, nous pouvons calculer directement la probabilité risque-neutre de nous retrouver dans chaque état final à t=1, puis calculer l'espérance finale en une seule fois. Sachant qu'à chaque nœud la probabilité de Hausse est de 1/2 :
 
 \begin{itemize}[label=$\cdot$]
     \item État A (Action à 110) : Il faut 2 hausses successives. Probabilité = 1/2 fois 1/2 = 1/4.
@@ -1875,27 +1482,14 @@ Calcul direct de l'espérance de l'option aujourd'hui :
 Opt(0) = 1/4(10) + 1/2(0) + 1/4(0) = 10/4 = 2,5.
 
 Cette méthode est extrêmement puissante car elle permet de sauter toutes les étapes intermédiaires de calcul.
-\end{examplebox}
 
-\begin{theorembox}[Généralisation et Tarification Dynamique]
-L'unique caractéristique qualitative cruciale de cet argument est qu'à chaque pas de temps, l'actif ne peut évoluer que vers deux nouvelles valeurs possibles. C'est ce qui garantit la complétude locale du marché.
-\begin{itemize}[label=$\rightarrow$]
-    \item Le nombre total de pas de temps n'a aucune importance mathématique. On peut subdiviser le temps en autant d'étapes que l'on souhaite (10, 100, 1000 étapes). Tant que l'arbre reste binomial à chaque nœud, le prix d'arbitrage sera unique.
-    \item L'interprétation par la réplication reste valide : le prix de l'option (2,5) est exactement la somme d'argent qu'il faut investir aujourd'hui pour fabriquer un clone parfait de l'option.
-    \item Ce clone nécessite un rééquilibrage continu. La quantité d'actions à détenir (le Delta) et le montant de cash (emprunt ou placement) changent à chaque nœud de l'arbre en fonction du temps et du prix de l'action. C'est l'essence même de la gestion de portefeuille dynamique.
-\end{itemize}
-\end{theorembox}
+L'unique caractéristique qualitative cruciale de cet argument est qu'à chaque pas de temps, l'actif ne peut évoluer que vers deux nouvelles valeurs possibles. C'est ce qui garantit la complétude locale du marché. Le nombre total de pas de temps n'a aucune importance mathématique. On peut subdiviser le temps en autant d'étapes que l'on souhaite (10, 100, 1000 étapes). Tant que l'arbre reste binomial à chaque nœud, le prix d'arbitrage sera unique. L'interprétation par la réplication reste valide : le prix de l'option est exactement la somme d'argent qu'il faut investir aujourd'hui pour fabriquer un clone parfait. Ce clone nécessitant un rééquilibrage continu, la quantité d'actions à détenir (le Delta) et le montant de cash changent à chaque nœud de l'arbre en fonction du temps et du prix de l'action.
 
 \subsection{Généralisation à N Périodes}
 
-\begin{intuitionbox}[La mécanique de l'arbre global]
-Il n'y a rien de magique dans un modèle à deux étapes. Tant que chaque nœud de l'arbre se divise exactement en deux branches, la logique d'induction rétrograde garantit un prix sans arbitrage unique, que l'arbre compte 2, 4 ou 10 000 étapes.
-Au lieu de calculer à rebours (nœud par nœud, couche par couche) depuis l'échéance finale jusqu'à aujourd'hui, nous pouvons directement calculer les probabilités globales d'atteindre chaque nœud final de l'arbre, puis faire l'espérance mathématique des flux finaux.
-\end{intuitionbox}
+Il n'y a rien de magique dans un modèle à deux étapes. Tant que chaque nœud de l'arbre se divise exactement en deux branches, la logique d'induction rétrograde garantit un prix sans arbitrage unique. Au lieu de calculer à rebours (nœud par nœud, couche par couche) depuis l'échéance finale jusqu'à aujourd'hui, nous pouvons directement calculer les probabilités globales d'atteindre chaque nœud final de l'arbre, puis faire l'espérance mathématique des flux finaux.
 
-\newpage
-
-\begin{examplebox}[Exemple d'un arbre à 4 pas de temps (Taux d'intérêt = 0)]
+Exemple d'un arbre à 4 pas de temps (Taux d'intérêt = 0) :
 Imaginons un arbre à 4 étapes, où le cours de l'action monte ou baisse de 2,5 à chaque pas. L'action part de 100 à t=0. 
 Puisque le taux d'intérêt est nul, la probabilité risque-neutre de hausse (p) est obligatoirement de 0,5 à chaque nœud pour maintenir l'espérance locale.
 Calculons la probabilité risque-neutre globale de chaque état final à la 4ème étape :
@@ -1924,7 +1518,6 @@ Tarification d'un Call de Strike 100 :
 Nous multiplions la probabilité de chaque état par la valeur intrinsèque du Call dans cet état.
 Opt(K=100) = (1/16) fois (110 - 100) + (1/4) fois (105 - 100) + 0 + 0 + 0
 Opt(K=100) = 10/16 + 5/4 = 10/16 + 20/16 = 30/16 = 15/8.
-\end{examplebox}
 
 \vspace{0.5cm}
 \begin{center}
@@ -1999,32 +1592,20 @@ Par conséquent, la valeur actuelle d'un produit dérivé qui génère un flux $
 \end{equation}
 \end{theorembox}
 
-\newpage
-
-\begin{intuitionbox}[Vers le temps continu et Black-Scholes]
-L'objectif ultime de cette modélisation mathématique n'est pas de calculer un arbre géant à la main, mais de comprendre ce qui se passe mathématiquement lorsque l'on fait tendre le nombre d'étapes $N$ vers l'infini. 
-Pour que la limite ait un sens mathématique et économique, il faudra réduire la taille de la variation de prix ($x$) au fur et à mesure que le nombre d'étapes ($N$) augmente, tout en préservant certaines propriétés de la volatilité de l'action. 
-C'est précisément ce passage à la limite qui nous fera basculer de l'arbre binomial discret au mouvement brownien continu, fondement du modèle de Black-Scholes.
-\end{intuitionbox}
+L'objectif ultime de cette modélisation mathématique n'est pas de calculer un arbre géant à la main, mais de comprendre ce qui se passe mathématiquement lorsque l'on fait tendre le nombre d'étapes $N$ vers l'infini. Pour que la limite ait un sens mathématique et économique, il faudra réduire la taille de la variation de prix ($x$) au fur et à mesure que le nombre d'étapes ($N$) augmente, tout en préservant certaines propriétés de la volatilité de l'action. C'est précisément ce passage à la limite qui nous fera basculer de l'arbre binomial discret au mouvement brownien continu, fondement du modèle de Black-Scholes.
 
 \subsection{Le Modèle Normal}
 
-\begin{intuitionbox}[La convergence et le calibrage de l'arbre]
 Pour obtenir un prix d'option infiniment précis, il faut découper le temps en intervalles de plus en plus petits, c'est-à-dire faire tendre le nombre de pas de temps vers l'infini. Cependant, nous ne pouvons pas conserver une variation de prix constante à chaque étape, sous peine de voir la volatilité finale exploser. Il faut que la taille du saut diminue à mesure que le nombre d'étapes augmente. La méthode exacte pour réduire cette taille définit la nature du modèle continu que nous obtiendrons à la limite.
-\end{intuitionbox}
 
-\begin{theorembox}[Calibrage de la moyenne et de la variance]
 Considérons un modèle simplifié où le taux d'intérêt est nul. L'actif a une valeur initiale $S_0$. L'échéance de l'option est $T$.
 Nous imposons deux contraintes statistiques fondamentales sur le prix de l'actif à l'échéance $T$ :
 \begin{itemize}[label=$\rightarrow$]
     \item L'espérance du prix final doit être égale au prix initial : $\mathbb{E}[S_T] = S_0$.
     \item La variance totale du prix final doit croître linéairement avec le temps : $Var(S_T) = \sigma^2 T$, où $\sigma$ représente la volatilité absolue.
 \end{itemize}
-\end{theorembox}
 
-\begin{definitionbox}[Détermination de la taille du saut]
-Nous divisons la durée totale $T$ en $N$ pas de temps réguliers. 
-Puisque les mouvements à chaque pas sont indépendants, la variance totale est la somme des variances locales. Pour obtenir une variance totale de $\sigma^2 T$ après $N$ pas, la variance de chaque micro-étape doit obligatoirement être de $\sigma^2 T / N$.
+Nous divisons la durée totale $T$ en $N$ pas de temps réguliers. Puisque les mouvements à chaque pas sont indépendants, la variance totale est la somme des variances locales. Pour obtenir une variance totale de $\sigma^2 T$ après $N$ pas, la variance de chaque micro-étape doit obligatoirement être de $\sigma^2 T / N$.
 
 Supposons qu'à chaque étape, l'actif monte d'un montant $+x_N$ ou baisse d'un montant $-x_N$ avec une probabilité équiprobable de $0,5$.
 L'espérance locale de ce mouvement est bien nulle : $0,5(x_N) + 0,5(-x_N) = 0$.
@@ -2036,11 +1617,8 @@ En égalisant cette variance locale avec notre cible, nous déduisons la taille 
     (x_N)^2 = \frac{\sigma^2 T}{N} \implies x_N = \sigma \sqrt{\frac{T}{N}}
 \end{equation}
 Le mouvement de l'actif à chaque étape doit donc être proportionnel à la racine carrée du pas de temps.
-\end{definitionbox}
 
-\begin{examplebox}[L'équation de la trajectoire discrète]
-Pour formaliser cette dynamique, introduisons une suite de variables aléatoires indépendantes $Z_i$. À l'étape $i$, $Z_i$ prend la valeur $+1$ ou $-1$, chacune avec une probabilité de $0,5$.
-Après $N$ étapes de temps, le prix de l'actif est la somme de son prix initial et de toutes ses variations :
+Pour formaliser cette dynamique, introduisons une suite de variables aléatoires indépendantes $Z_i$. À l'étape $i$, $Z_i$ prend la valeur $+1$ ou $-1$, chacune avec une probabilité de $0,5$. Après $N$ étapes de temps, le prix de l'actif est la somme de son prix initial et de toutes ses variations :
 \begin{equation}
     \label{eq:fsec3-prix_sn_discret}
     S_N = S_0 + \sigma \sqrt{\frac{T}{N}} \sum_{i=1}^{N} Z_i
@@ -2050,13 +1628,8 @@ Le prix sans arbitrage de l'option d'achat (qui verse un flux final $f(S_T)$) es
     \label{eq:fsec3-opt_sn_discret}
     Opt_0 = \mathbb{E}\left[ f\left( S_0 + \sigma \sqrt{\frac{T}{N}} \sum_{i=1}^{N} Z_i \right) \right]
 \end{equation}
-\end{examplebox}
 
-\begin{remarquebox}[L'appel au Théorème Central Limite]
-Le but de cette construction est d'étudier la limite de cette espérance lorsque $N$ tend vers l'infini. 
-Dans l'équation ci-dessus, le terme $\sum_{i=1}^{N} Z_i$ représente une somme de variables aléatoires indépendantes et identiquement distribuées, de moyenne nulle. Le Théorème Central Limite affirme que lorsqu'on normalise une telle somme par la racine carrée de $N$, sa distribution de probabilité converge irrémédiablement vers une loi Normale standard (la fameuse courbe en cloche de Gauss).
-Par conséquent, à la limite continue, le prix futur de l'action $S_T$ suivra une distribution Normale. Ce modèle arithmétique constitue les bases historiques posées par Louis Bachelier en 1900.
-\end{remarquebox}
+Le but de cette construction est d'étudier la limite de cette espérance lorsque $N$ tend vers l'infini. Dans l'équation ci-dessus, le terme $\sum_{i=1}^{N} Z_i$ représente une somme de variables aléatoires indépendantes et identiquement distribuées, de moyenne nulle. Le Théorème Central Limite affirme que lorsqu'on normalise une telle somme par la racine carrée de $N$, sa distribution de probabilité converge irrémédiablement vers une loi Normale standard (la fameuse courbe en cloche de Gauss). Par conséquent, à la limite continue, le prix futur de l'action $S_T$ suivra une distribution Normale. Ce modèle arithmétique constitue les bases historiques posées par Louis Bachelier en 1900.
 
 \subsection{Convergence vers l'Intégrale de Valorisation}
 
@@ -2075,17 +1648,13 @@ Alors, la distribution de la variable centrée et réduite :
 converge vers celle d'une variable aléatoire Gaussienne de moyenne 0 et de variance 1 lorsque $n$ tend vers l'infini.
 \end{theorembox}
 
-\begin{intuitionbox}[Application du TCL à notre modèle]
-Dans notre arbre binomial calibré, les variables aléatoires $Z_i$ prennent les valeurs $+1$ ou $-1$ avec probabilité $0,5$. Elles sont indépendantes, de moyenne nulle ($\mu = 0$) et de variance unitaire ($\sigma^2 = 1$).
-En appliquant le Théorème Central Limite, la somme de ces variables divisée par la racine du nombre de pas $N$ :
+Dans notre arbre binomial calibré, les variables aléatoires $Z_i$ prennent les valeurs $+1$ ou $-1$ avec probabilité $0,5$. Elles sont indépendantes, de moyenne nulle ($\mu = 0$) et de variance unitaire ($\sigma^2 = 1$). En appliquant le Théorème Central Limite, la somme de ces variables divisée par la racine du nombre de pas $N$ :
 \begin{equation}
     \label{eq:fsec3-tcl_app}
     \frac{1}{\sqrt{N}} \sum_{i=1}^{N} Z_i
 \end{equation}
 converge vers une distribution Gaussienne standard, notée $\mathcal{N}(0,1)$, de moyenne 0 et de variance 1, lorsque $N \to \infty$.
-\end{intuitionbox}
 
-\begin{definitionbox}[Le prix limite en temps continu]
 Le prix de l'actif après $N$ étapes était donné par :
 \begin{equation}
     \label{eq:fsec3-sn_limite}
@@ -2104,13 +1673,8 @@ Le prix converge vers l'intégrale suivante :
     Opt_0 = \mathbb{E}[f(S_T)] = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{+\infty} f(S_0 + \sigma \sqrt{T} x) e^{-\frac{x^2}{2}} dx
 \end{equation}
 Pour certains types de flux finaux, comme celui d'une option d'achat classique vanille où $f(S) = \max(S - K, 0)$, cette intégrale peut être résolue analytiquement pour obtenir une formule de prix explicite.
-\end{definitionbox}
 
-\begin{remarquebox}[Le modèle de Bachelier et ses limites]
 La formule obtenue ici (le modèle Normal) suppose que le prix de l'actif suit une loi Normale (arithmétique). Bien qu'élégante mathématiquement, cette modélisation pose un problème financier majeur : une variable régie par une loi Normale peut prendre des valeurs négatives. Or, le prix d'une action, du fait de la responsabilité limitée des actionnaires, ne peut jamais tomber sous zéro. C'est cette aberration économique qui a conduit les chercheurs à abandonner le modèle Normal de Bachelier au profit du modèle Lognormal (géométrique) pour construire la théorie moderne de Black-Scholes.
-\end{remarquebox}
-
-\newpage
 
 
 ================================================
@@ -2118,22 +1682,17 @@ FILE: finance/fsec3/course3.tex
 ================================================
 \subsection{L'Intégration des Taux d'Intérêt}
 
-\begin{intuitionbox}[La valeur temporelle de l'argent]
 Jusqu'à présent, le modèle supposait un taux d'intérêt nul. Dans la réalité, le capital possède une valeur temporelle. Nous introduisons un taux d'intérêt sans risque composé en continu, noté r. 
 Sur un intervalle de temps donné $\Delta t$, un placement bancaire de 1 euro croît au taux sans risque et vaudra $e^{r\Delta t}$ à la fin de la période. 
 L'action, valant $S_0$ initialement, prendra la valeur $S_+$ en cas de hausse, ou $S_-$ en cas de baisse.
-\end{intuitionbox}
 
-\begin{theorembox}[Condition d'absence d'opportunité d'arbitrage (AOA)]
 Pour qu'aucun arbitrage ne soit possible entre l'action et l'obligation sans risque, le rendement garanti de l'obligation doit impérativement se situer entre le pire et le meilleur scénario de l'action :
 \begin{equation}
     \label{eq:fsec3-aoa_taux}
     S_- < S_0 e^{r\Delta t} < S_+
 \end{equation}
 Si $S_0 e^{r\Delta t} > S_+$, un opérateur vendrait l'action à découvert pour tout placer à la banque et ferait un profit certain. Inversement, si le taux de la banque était inférieur au pire scénario $S_-$, l'opérateur emprunterait à l'infini pour acheter des actions sans aucun risque de perte.
-\end{theorembox}
 
-\begin{definitionbox}[La probabilité risque-neutre généralisée]
 La neutralité au risque impose que le rendement espéré de l'action soit exactement égal au rendement de l'actif sans risque. L'espérance de la valeur future de l'action n'est donc plus $S_0$, mais sa valeur capitalisée à la banque :
 \begin{equation}
     \label{eq:fsec3-esperance_taux}
@@ -2144,13 +1703,10 @@ En résolvant cette équation pour extraire p, nous obtenons la formule fondamen
     \label{eq:fsec3-proba_rn_taux}
     p = \frac{S_0 e^{r\Delta t} - S_-}{S_+ - S_-}
 \end{equation}
-Grâce à la condition d'AOA définie précédemment, cette fraction donnera toujours un résultat strictement compris entre 0 et 1.
-\end{definitionbox}
+Grâce à la condition d'absence d'opportunité d'arbitrage définie précédemment, cette fraction donnera toujours un résultat strictement compris entre 0 et 1.
 
-\begin{remarquebox}[Le concept d'Espérance Actualisée]
 Avec l'introduction du taux r, notre ancien argument d'évaluation directe s'effondre. L'espérance de l'obligation future n'est plus égale à sa valeur initiale, car 1 euro devient $e^{r\Delta t}$. 
-Pour conserver la validité de la theory de l'arbitrage, nous devons utiliser les prix actualisés. La règle d'or devient : la valeur initiale de n'importe quel portefeuille est égale à l'espérance de sa valeur future, divisée par le facteur de capitalisation de l'actif sans risque.
-\end{remarquebox}
+Pour conserver la validité de la théorie de l'arbitrage, nous devons utiliser les prix actualisés. La règle d'or devient : la valeur initiale de n'importe quel portefeuille est égale à l'espérance de sa valeur future, divisée par le facteur de capitalisation de l'actif sans risque.
 
 \begin{definitionbox}[Tarification de l'option avec taux d'intérêt]
 Le prix de l'option (Opt) aujourd'hui est l'espérance mathématique de son flux futur $f(S_{\Delta t})$ sous la probabilité risque-neutre p, le tout actualisé au taux sans risque :
@@ -2160,12 +1716,9 @@ Le prix de l'option (Opt) aujourd'hui est l'espérance mathématique de son flux
 \end{equation}
 \end{definitionbox}
 
-\begin{intuitionbox}[Conséquence sur la couverture dans les arbres à N périodes]
 Cette logique s'applique de manière itérative dans un arbre à multiples périodes. La méthode par couverture reste parfaitement valide : pour répliquer l'option, il faut investir à t=0 une somme dans l'action et le reste sur un compte bancaire rémunéré au taux r. 
 Au fur et à mesure que le nombre de pas de temps tend vers l'infini, la durée $\Delta t$ tend vers zéro. L'opérateur devra alors acheter et vendre l'action, tout en empruntant ou plaçant du cash de manière continue pour maintenir son clone parfait. C'est le principe fondateur de la couverture dynamique en temps continu.
-\end{intuitionbox}
 
-\newpage
 
 \begin{examplebox}[Application globale : Arbre à 3 périodes avec taux d'intérêt]
 Nous allons évaluer une option de vente (Put) européenne de prix d'exercice K = 100, arrivant à échéance dans 3 mois (T = 0,25 année). 
@@ -2177,7 +1730,7 @@ Les paramètres de notre modèle à 3 étapes sont les suivants :
     \item À chaque étape, l'action subit une variation multiplicative. Elle monte de 5\% ($u = 1,05$) ou baisse de 4,76\% ($d = 0,9524$, notons que $u \times d \approx 1$).
 \end{itemize}
 
-Étape 1 : Calcul de la probabilité risque-neutre (p)
+Étape 1 : Calcul de la probabilité risque-neutre (p)\\
 Nous appliquons la formule vue précédemment. À chaque nœud, l'action valant S évolue vers $S_+ = S \times u$ ou $S_- = S \times d$.
 \begin{equation}
     \label{eq:fsec3-ex_proba_rn}
@@ -2190,10 +1743,10 @@ Calculons le facteur de capitalisation sur un mois : $e^{0,05 \times (1/12)} \ap
 \end{equation}
 La probabilité de baisse est donc $1 - p = 0,4695$. Ces probabilités restent constantes sur tout l'arbre.
 
-Étape 2 : Construction de l'arbre des prix de l'action
-À t=0, $S_0 = 100$.
-À t=1 (1 mois) : Les prix possibles sont 105 et 95,24.
-À t=2 (2 mois) : Les prix possibles sont 110,25 (deux hausses), 100 (une hausse, une baisse) et 90,70 (deux baisses).
+Étape 2 : Construction de l'arbre des prix de l'action\\
+À t=0, $S_0 = 100$.\\
+À t=1 (1 mois) : Les prix possibles sont 105 et 95,24.\\
+À t=2 (2 mois) : Les prix possibles sont 110,25 (deux hausses), 100 (une hausse, une baisse) et 90,70 (deux baisses).\\
 À t=3 (3 mois) : Les 4 prix finaux possibles sont :
 \begin{itemize}[label=$\cdot$]
     \item 3 hausses : $110,25 \times 1,05 = 115,76$
@@ -2202,7 +1755,7 @@ La probabilité de baisse est donc $1 - p = 0,4695$. Ces probabilités restent c
     \item 3 baisses : $90,70 \times 0,9524 = 86,38$
 \end{itemize}
 
-Étape 3 : Évaluation des flux finaux de l'option (Put K=100) à t=3
+Étape 3 : Évaluation des flux finaux de l'option (Put K=100) à t=3\\
 Le payoff du Put est $\max(100 - S_3, 0)$.
 \begin{itemize}[label=$\cdot$]
     \item Pour $S_3 = 115,76$ : Put = 0
@@ -2211,7 +1764,7 @@ Le payoff du Put est $\max(100 - S_3, 0)$.
     \item Pour $S_3 = 86,38$ : Put = $100 - 86,38 = 13,62$
 \end{itemize}
 
-Étape 4 : Induction rétrograde et Actualisation
+Étape 4 : Induction rétrograde et Actualisation\\
 Pour trouver le prix du Put à t=0, nous utilisons la méthode probabiliste globale. Le nombre de chemins pour atteindre chaque nœud suit les coefficients binomiaux pour N=3 (1, 3, 3, 1). L'espérance totale des flux est calculée puis actualisée sur la durée totale T.
 \begin{equation}
     \label{eq:fsec3-ex_opt_calc}
@@ -2236,22 +1789,20 @@ Le juste prix de cette option de vente est de 3,04 €.
 
 \subsection{Le Modèle Lognormal : Comportement dans le Monde Réel}
 
-\begin{intuitionbox}[La correction du modèle Normal]
 Le modèle arithmétique précédent présentait un défaut rédhibitoire en finance : en soustrayant des variations fixes, le prix de l'actif pouvait mathématiquement devenir négatif. Pour y remédier, nous ne modélisons plus le prix de l'actif de manière additive, mais nous modélisons les variations de son logarithme naturel. L'exponentielle d'un nombre réel (même négatif) étant toujours strictement positive, ce changement de variable garantit que le prix de l'action ne tombera jamais sous zéro.
-\end{intuitionbox}
 
-\begin{definitionbox}[Dérive, Volatilité et Paramétrage local]
+\begin{definitionbox}[Dérive et Volatilité]
 Plaçons-nous dans le monde réel (historique) sur une période totale T. 
 Nous définissons deux paramètres constants :
 \begin{itemize}[label=$\cdot$]
     \item La dérive $\mu$ (Drift) : le taux de croissance moyen de l'actif. Dans le monde réel, ce taux est supérieur au taux sans risque r pour compenser le risque assumé par l'investisseur.
     \item La volatilité $\sigma$ : l'écart-type mesurant l'amplitude des fluctuations.
 \end{itemize}
-Nous découpons la période T en N étapes régulières. La durée d'une étape est donc $\Delta t = \frac{T}{N}$.
-Pour que la moyenne et la variance globales sur la période T soient respectivement $\mu T$ et $\sigma^2 T$, les lois des probabilités (somme de variables indépendantes) imposent qu'à chaque petite étape $\Delta t$, la moyenne locale soit $\mu \Delta t$ et la variance locale soit $\sigma^2 \Delta t$.
 \end{definitionbox}
 
-\begin{examplebox}[Détail mathématique de l'accumulation des prix]
+Nous découpons la période T en N étapes régulières. La durée d'une étape est donc $\Delta t = \frac{T}{N}$.
+Pour que la moyenne et la variance globales sur la période T soient respectivement $\mu T$ et $\sigma^2 T$, les lois des probabilités (somme de variables indépendantes) imposent qu'à chaque petite étape $\Delta t$, la moyenne locale soit $\mu \Delta t$ et la variance locale soit $\sigma^2 \Delta t$.
+
 Soit une variable aléatoire $Z_j$ valant $+1$ ou $-1$ avec une probabilité de $0,5$. Son espérance est nulle et sa variance est unitaire.
 La variation du logarithme du prix entre l'étape $j-1$ et l'étape $j$ est modélisée par l'équation suivante :
 \begin{equation}
@@ -2279,9 +1830,7 @@ Puisque $\mu \Delta t$ est une constante répétée N fois, la première somme d
     \label{eq:fsec3-log_sn}
     \log(S_N) = \log(S_0) + \mu T + \sigma \sqrt{\Delta t} \sum_{j=1}^{N} Z_j
 \end{equation}
-\end{examplebox}
 
-\begin{theorembox}[Passage à la limite continue et Distribution Lognormale]
 Pour observer le modèle en temps continu, nous devons faire tendre le nombre de pas N vers l'infini. 
 Remplaçons $\Delta t$ par $\frac{T}{N}$ dans le terme aléatoire de l'équation précédente :
 \begin{equation}
@@ -2304,7 +1853,13 @@ Pour retrouver le prix final de l'actif, nous appliquons la fonction exponentiel
     S_T &= S_0 e^{\mu T + \sigma \sqrt{T} \mathcal{N}(0,1)}
 \end{aligned}
 \end{equation}
-Puisque le logarithme de $S_T$ suit une distribution Normale, on conclut mathématiquement que le prix de l'actif $S_T$ suit une distribution Lognormale.
+
+\begin{theorembox}[Distribution Lognormale du prix]
+À la limite continue, sous la probabilité historique (réelle), le prix de l'actif $S_T$ suit une distribution Lognormale définie par :
+\begin{equation}
+    \label{eq:fsec3-theoreme_lognormale}
+    S_T = S_0 e^{\mu T + \sigma \sqrt{T} \mathcal{N}(0,1)}
+\end{equation}
 \end{theorembox}
 
 
@@ -2313,13 +1868,10 @@ FILE: finance/fsec3/course4.tex
 ================================================
 \subsection{Passage à la Limite Continue : L'Ajustement Risque-Neutre}
 
-\begin{intuitionbox}[La correction de la probabilité]
 Dans la section précédente, nous avons établi que le logarithme du prix de l'action suit une trajectoire modélisée par l'équation \ref{eq:fsec3-log_sn}, incluant une dérive historique $\mu$. Cette dérive reflète la croissance réelle espérée par les investisseurs. Or, l'évaluation d'options requiert de basculer dans le monde risque-neutre, un monde théorique où tout actif croît au taux sans risque $r$. 
 
 Pour opérer cette bascule, nous ne modifions pas la taille des sauts de l'action, mais nous allons truquer les probabilités de la pièce que nous lançons à chaque étape. Nous devons recalculer la probabilité risque-neutre $p$ définie à l'équation \ref{eq:fsec3-proba_rn_taux} en y injectant les paramètres de notre modèle lognormal, puis observer son comportement lorsque le temps entre deux sauts, noté $\Delta t$, devient microscopique.
-\end{intuitionbox}
 
-\begin{proofbox}[Développement algébrique détaillé de la probabilité]
 Rappelons les valeurs de l'action à l'étape suivante dans le modèle lognormal :
 \begin{equation}
     \label{eq:fsec3-up_down_lognormal}
@@ -2372,14 +1924,10 @@ Dans le second bloc, la division de $\Delta t$ par $\sqrt{\Delta t}$ fait appara
     \label{eq:fsec3-proba_rn_taylor}
     p = \frac{1}{2} + \frac{1}{2} \left( \frac{r - \mu - \frac{1}{2}\sigma^2}{\sigma} \right) \sqrt{\Delta t} + \mathcal{O}(\Delta t)
 \end{equation}
-\end{proofbox}
 
-\begin{intuitionbox}[La magie de la nouvelle probabilité]
 L'équation \ref{eq:fsec3-proba_rn_taylor} est fascinante. Elle nous dit que dans le monde risque-neutre, la probabilité que l'action monte n'est pas exactement de cinquante pour cent. Elle est égale à $0,5$ plus un minuscule ajustement. 
 Cet ajustement a une mission mathématique précise : si le taux de la banque $r$ est différent de la croissance historique $\mu$, ce petit déséquilibre de la pièce va artificiellement pousser l'action vers le haut ou vers le bas pour forcer sa croissance à s'aligner exactement sur celle du compte bancaire.
-\end{intuitionbox}
 
-\begin{theorembox}[L'Ajustement de Convexité et la Disparition de la Dérive]
 Pour voir ce mécanisme à l'œuvre sur la durée totale du contrat $T$, définissons la variable aléatoire $\tilde{Z}_j$ de notre pièce truquée. Elle vaut $+1$ avec la probabilité $p$ et $-1$ avec la probabilité $1-p$.
 Calculons son espérance mathématique, que nous noterons $\nu$ :
 \begin{equation}
@@ -2407,25 +1955,27 @@ La beauté de la modélisation apparaît lors des simplifications. La volatilit�
     \label{eq:fsec3-calcul_drift_etape2}
     \mathbb{E}^{RN}[\log(S_T)] = \log(S_0) + \mu T + T \left( r - \mu - \frac{1}{2}\sigma^2 \right)
 \end{equation}
-En développant la parenthèse, le terme $\mu T$ positif annule parfaitement le terme $-\mu T$ négatif. Il nous reste l'équation fondamentale de la dynamique risque-neutre :
+En développant la parenthèse, le terme $\mu T$ positif annule parfaitement le terme $-\mu T$ négatif. Il nous reste l'équation fondamentale de la dynamique risque-neutre.
+
+\begin{theorembox}[L'Ajustement de Convexité et la Disparition de la Dérive]
+À la limite continue, la dérive historique $\mu$ disparaît totalement de la dynamique d'évaluation. L'espérance du logarithme du prix de l'action sous la probabilité risque-neutre s'écrit :
 \begin{equation}
     \label{eq:fsec3-limite_log_st}
     \mathbb{E}^{RN}[\log(S_T)] = \log(S_0) + \left( r - \frac{1}{2}\sigma^2 \right) T
 \end{equation}
 \end{theorembox}
 
-\begin{remarquebox}[L'Élimination du Risque et le Frein de la Volatilité]
 Ce résultat algébrique nous enseigne deux concepts financiers capitaux.
 Premièrement, la variable $\mu$ a totalement disparu. Le prix d'une option est donc strictement indépendant de ce que pensent les investisseurs de la direction future de l'action. 
 Deuxièmement, le taux de croissance du logarithme n'est pas le taux sans risque $r$, mais $r$ amputé de la moitié de la variance. Ce terme $-\frac{1}{2}\sigma^2$ s'appelle le frein de la volatilité ou l'ajustement de convexité (le Lemme d'Itô). En finance, à cause de la capitalisation géométrique, la fluctuation des prix érode toujours le rendement moyen d'un investissement.
-\end{remarquebox}
 
 \subsection{La Formule de Black-Scholes et l'Approximation À La Monnaie}
 
-\begin{definitionbox}[La Formule de Black-Scholes-Merton]
 L'application du Théorème Central Limite confirme que le terme aléatoire résiduel converge vers une loi normale standard $\mathcal{N}(0,1)$. Le prix futur s'écrit donc $S_T = S_0 \exp\left[ (r - \frac{1}{2}\sigma^2)T + \sigma \sqrt{T} \mathcal{N}(0,1) \right]$.
 
-En injectant cette distribution dans l'intégrale d'évaluation (équation \ref{eq:fsec3-integrale_continue}), la résolution analytique exacte pour une option d'achat (Call) donne naissance à la célèbre formule de Black-Scholes de 1973 :
+En injectant cette distribution dans l'intégrale d'évaluation (équation \ref{eq:fsec3-integrale_continue}), la résolution analytique exacte pour une option d'achat (Call) donne naissance à la célèbre formule de Black-Scholes de 1973.
+
+\begin{theorembox}[La Formule de Black-Scholes-Merton]
 \begin{equation}
     \label{eq:fsec3-black_scholes_call}
     C(S_0, K, \sigma, r, T) = S_0 \mathcal{N}(d_1) - K e^{-rT} \mathcal{N}(d_2)
@@ -2444,10 +1994,9 @@ La formule pour l'option de vente (Put) se déduit immédiatement par la relatio
     \label{eq:fsec3-black_scholes_put}
     P(S_0, K, \sigma, r, T) = K e^{-rT} \mathcal{N}(-d_2) - S_0 \mathcal{N}(-d_1)
 \end{equation}
-\end{definitionbox}
+\end{theorembox}
 
-\begin{examplebox}[L'Approximation Mentale : Le Prix À La Monnaie]
-La complexité des intégrales de la loi Normale rend cette formule impossible à calculer de tête. Toutefois, une astuce mathématique permet aux opérateurs de marché d'obtenir une valeur instantanée.
+La complexité des intégrales de la loi Normale rend cette formule impossible à calculer de tête. Toutefois, une astuce mathématique permet aux opérateurs de marché d'obtenir une valeur instantanée pour le prix à la monnaie.
 
 Considérons une option dont le prix d'exercice correspond exactement à l'anticipation neutre au risque du marché (le prix forward théorique vu à l'équation \ref{eq:fsec2-forward_theorique}). Si l'on pose $K = S_0 e^{rT}$, la fraction $\frac{S_0}{K}$ vaut $e^{-rT}$.
 Le logarithme naturel annule l'exponentielle, ce qui donne $\log(S_0/K) = -rT$.
@@ -2477,16 +2026,12 @@ En remplaçant $x$ par notre valeur $\frac{1}{2}\sigma \sqrt{T}$, le chiffre $2$
     C \approx 0,4 \times S_0 \times \sigma \times \sqrt{T}
 \end{equation}
 Grâce à la symétrie de la parité Call-Put à ce point précis, cette approximation mentale fonctionne à l'identique pour évaluer un Put.
-\end{examplebox}
 
 \subsection{La Dérivée Partielle : Le Delta en Temps Continu}
 
-\begin{intuitionbox}[L'immunisation infinitésimale]
 Dans la section d'introduction à l'arbre binomial (équation \ref{eq:fsec3-couverture_delta}), nous avons défini le Delta ($\Delta$) comme la quantité discrète d'actions à détenir pour se protéger d'un saut de prix. 
 Lorsque l'on bascule dans le modèle de Black-Scholes, la notion de saut disparaît au profit d'un flux continu. L'immunisation ne consiste plus à égaliser deux scénarios futurs, mais à s'assurer que la valeur de notre portefeuille reste totalement plate face à une variation instantanée et microscopique du marché.
-\end{intuitionbox}
 
-\begin{theorembox}[Le Delta Continu]
 Considérons le portefeuille de couverture $\Pi$ composé de la vente d'une option d'achat (pour une valeur $-C(S,t)$) et de l'achat de $\Delta$ actions (pour une valeur $\Delta \times S$). La valeur du portefeuille s'écrit $\Pi = -C(S,t) + \Delta \times S$.
 
 Pour que ce portefeuille soit parfaitement couvert en temps continu, son taux de variation instantané par rapport au prix de l'actif sous-jacent doit être nul. Mathématiquement, on impose que la dérivée partielle de la valeur du portefeuille par rapport à $S$ s'annule :
@@ -2494,11 +2039,14 @@ Pour que ce portefeuille soit parfaitement couvert en temps continu, son taux de
     \label{eq:fsec3-derivee_portefeuille}
     \frac{\partial \Pi}{\partial S} = -\frac{\partial C}{\partial S}(S, t) + \Delta = 0
 \end{equation}
-L'unique quantité $\Delta$ permettant de réaliser cette couverture parfaite est donc la pente géométrique de la courbe de l'option :
+
+\begin{definitionbox}[Le Delta Continu]
+L'unique quantité $\Delta$ permettant de réaliser la couverture parfaite en temps continu est la pente géométrique de la courbe de l'option (sa dérivée partielle par rapport au sous-jacent) :
 \begin{equation}
     \label{eq:fsec3-delta_continu}
     \Delta = \frac{\partial C}{\partial S}
 \end{equation}
+\end{definitionbox}
+
 Ce ratio varie en permanence en fonction de l'évolution du prix de l'action et de l'écoulement du temps. La gestion de ce risque exige de vendre et d'acheter des actions continuellement pour maintenir l'équation à zéro, ce qui constitue la définition formelle de la couverture dynamique.
-\end{theorembox}
 
