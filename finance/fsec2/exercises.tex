@@ -1,121 +1,35 @@
 \subsection{Exercices}
 
-\begin{exercicebox}[Exercice 1 : Calcul de Delta simplifié]
-Une action s'échange aujourd'hui à 100 €. Vous anticipez qu'à l'échéance d'une option d'achat (Call) de prix d'exercice $K = 100$ €, le cours de l'action sera soit de 120 €, soit de 80 €.
-En appliquant la logique de variation relative, calculez le Delta ($\Delta$) de cette option.
-\end{exercicebox}
-
-\begin{exercicebox}[Exercice 2 : Couverture statique et non-arbitrage]
-En reprenant les données de l'Exercice 1, vous avez vendu 1 Call. Pour vous couvrir, vous achetez une quantité $\Delta$ d'actions. Le taux d'intérêt sans risque est garanti à 5\% sur la période.
-Déterminez le coût net initial de votre portefeuille, prouvez que sa valeur finale est sans risque, et déduisez-en par la règle de l'actualisation le prix juste du Call aujourd'hui.
-\end{exercicebox}
-
-\begin{exercicebox}[Exercice 3 : Prix d'un contrat Forward (sans dividendes)]
-Une action ne versant aucun dividende cote actuellement 150 €. Le taux d'intérêt sans risque, composé en continu, est de 3\% par an.
-Quel doit être le prix théorique d'un contrat Forward sur cette action, avec une échéance exacte dans 9 mois ?
-\end{exercicebox}
-
-\begin{exercicebox}[Exercice 4 : Prix d'un contrat Forward (avec dividendes continus)]
-Un indice boursier cote actuellement 4 000 points. Il génère un rendement de dividendes versés en continu au taux annuel $d = 2\%$. Le taux sans risque continu est $r = 4\%$.
-Calculez le prix théorique d'un contrat Forward sur cet indice pour une échéance à 6 mois.
-\end{exercicebox}
-
-\begin{exercicebox}[Exercice 5 : Application de la parité Call-Put]
-Pour une action s'échangeant à 80 €, ne versant pas de dividendes, on observe un Call européen de Strike $K = 80$ € et d'échéance 1 an qui cote 8,50 €. Le taux d'intérêt sans risque continu est de 5\% par an.
-Quel devrait être le prix exact d'un Put européen de mêmes caractéristiques (Strike 80, échéance 1 an) pour qu'il n'y ait pas d'opportunité d'arbitrage ?
-\end{exercicebox}
-
-\begin{exercicebox}[Exercice 6 : Vérification des bornes d'options]
-Une action cote 100 €. Le taux sans risque est nul. Un intermédiaire financier vous propose de lui acheter un Call européen de Strike $K = 95$ € à un prix de 3 €.
-Sans développer de calculs complexes, justifiez immédiatement pourquoi cette cotation viole les lois fondamentales de la finance.
-\end{exercicebox}
-
-\begin{exercicebox}[Exercice 7 : Valeur d'un contrat Forward en cours de vie]
-Il y a 6 mois, vous avez pris une position longue sur un contrat Forward à un an sur une action (ne versant pas de dividendes), avec un prix de livraison fixé à l'époque à 102 €. 
-Aujourd'hui, il reste 6 mois avant l'échéance. L'action cote 110 € et le taux sans risque continu est de 4\%. 
-Quelle est la valeur financière (en euros) de votre contrat Forward aujourd'hui ?
-\end{exercicebox}
-
-\begin{exercicebox}[Exercice 8 : Stratégie de Cash-and-Carry (Forward surévalué)]
-Une action cote 200 €. Le taux sans risque est de 2\% continu. Un contrat Forward à 1 an s'échange sur le marché au prix de 210 €.
-Calculez le prix théorique du Forward, puis détaillez pas à pas la stratégie d'arbitrage (flux initiaux et flux à l'échéance) permettant de verrouiller un profit sans risque. Quel est le montant exact de ce profit à l'échéance ?
-\end{exercicebox}
-
-\begin{exercicebox}[Exercice 9 : Reverse Cash-and-Carry (Forward sous-évalué)]
-Reprenez l'action de l'Exercice 8 (Spot = 200 €, $r=2\%$). Supposons que le contrat Forward à 1 an s'échange exceptionnellement à 195 €.
-Sachant que vous avez la possibilité de vendre l'action à découvert (Short-selling), détaillez la stratégie d'arbitrage "Reverse Cash-and-Carry" et démontrez mathématiquement le gain net final.
-\end{exercicebox}
-
-\begin{exercicebox}[Exercice 10 : Arbitrage sur la parité Call-Put]
+\targetExo{fsec2_ex1}
+\begin{exercicebox}[Exercice 1 : Arbitrage sur la parité Call-Put]
 Sur le marché, on observe les paramètres suivants : Spot $S_0 = 100$, Strike $K = 100$, Échéance $T = 1$ an, $r = 5\%$ (continu). Le Call cote $C = 10$ et le Put cote $P = 8$. L'action ne verse pas de dividendes.
 Montrez que ces prix violent la relation de parité. Définissez précisément le portefeuille à constituer aujourd'hui pour réaliser un profit d'arbitrage, et prouvez que le risque final est nul.
+\navToCorr{fsec2_ex1}
 \end{exercicebox}
 
-\begin{exercicebox}[Exercice 11 : Parité Call-Put avec dividendes discrets]
-Le cours établit la parité Call-Put pour un dividende continu ou nul. Supposons maintenant qu'une action de prix $S_0$ verse un dividende discret connu d'un montant $D$ à une date $t$ ($0 < t < T$).
-En utilisant un raisonnement strict de réplication de flux (payoffs) à l'échéance, démontrez quelle doit être la nouvelle équation de la parité Call-Put européenne à l'instant initial $t=0$.
-\end{exercicebox}
-
-\begin{exercicebox}[Exercice 12 : Risque de la couverture dynamique]
-Dans la théorie, le portefeuille couvert en Delta est sans risque car il est rééquilibré "en continu".
-Expliquez conceptuellement ce qui se passe si l'opérateur ne rééquilibre son portefeuille qu'une fois par semaine. D'où provient le risque résiduel ?
-\end{exercicebox}
-
-\begin{exercicebox}[Exercice 13 : Borne inférieure stricte du Call Européen]
+\targetExo{fsec2_ex2}
+\begin{exercicebox}[Exercice 2 : Borne inférieure stricte du Call Européen]
 En utilisant un portefeuille composé d'une option d'achat (Call européen), de l'action sous-jacente et d'un actif sans risque, démontrez rigoureusement que le prix du Call $C_0$ satisfait toujours l'inégalité :
 \begin{equation*}
     C_0 \geq \max(0, S_0 - K e^{-rT})
 \end{equation*}
+\navToCorr{fsec2_ex2}
 \end{exercicebox}
 
-\begin{exercicebox}[Exercice 14 : Borne inférieure stricte du Put Européen]
+\targetExo{fsec2_ex3}
+\begin{exercicebox}[Exercice 3 : Borne inférieure stricte du Put Européen]
 Par un raisonnement similaire à celui de l'exercice précédent, ou en utilisant la relation de parité Call-Put, démontrez rigoureusement que le prix d'un Put européen $P_0$ satisfait toujours :
 \begin{equation*}
     P_0 \geq \max(0, K e^{-rT} - S_0)
 \end{equation*}
+\navToCorr{fsec2_ex3}
 \end{exercicebox}
 
-\begin{exercicebox}[Exercice 15 : Monotonie des Calls par rapport au Strike]
-Soit deux options d'achat européennes (Calls) portant sur le même sous-jacent, ayant la même maturité $T$, mais des prix d'exercice respectifs $K_1$ et $K_2$, avec $K_1 < K_2$.
-Démontrez de manière rigoureuse, par un argument d'absence d'arbitrage sur les payoffs à l'échéance, que :
-\begin{equation*}
-    C_0(K_1) \geq C_0(K_2)
-\end{equation*}
-\end{exercicebox}
-
-\begin{exercicebox}[Exercice 16 : Inégalité stricte des écarts de Strike]
-Dans la continuité de l'Exercice 15 (avec $K_1 < K_2$), démontrez, en construisant un portefeuille combinant les deux Calls (un "Bull Spread"), que la différence de prix entre ces deux options est bornée supérieurement par la différence actualisée de leurs strikes :
+\targetExo{fsec2_ex4}
+\begin{exercicebox}[Exercice 4 : Inégalité stricte des écarts de Strike]
+Soit deux options d'achat européennes (Calls) de même maturité $T$ et de prix d'exercice respectifs $K_1$ et $K_2$ avec $K_1 < K_2$. Démontrez, en construisant un portefeuille combinant les deux Calls (un "Bull Spread"), que la différence de prix entre ces deux options est bornée supérieurement par la différence actualisée de leurs strikes :
 \begin{equation*}
     C_0(K_1) - C_0(K_2) \leq (K_2 - K_1)e^{-rT}
 \end{equation*}
-\end{exercicebox}
-
-\begin{exercicebox}[Exercice 17 : Preuve de la non-optimalité de l'exercice anticipé]
-Démontrez mathématiquement pourquoi il n'est jamais optimal d'exercer un Call américain avant l'échéance sur une action ne versant pas de dividendes. Déduisez-en la relation stricte entre $C_{américain}$ et $C_{européen}$.
-\end{exercicebox}
-
-\begin{exercicebox}[Exercice 18 : Parité Call-Put pour les options américaines]
-Puisque l'exercice anticipé est possible pour les options américaines, la parité Call-Put n'est plus une égalité stricte.
-En considérant une action ne versant pas de dividendes, démontrez que la relation se transforme en la double inégalité suivante :
-\begin{equation*}
-    S_0 - K \leq C_{am} - P_{am} \leq S_0 - K e^{-rT}
-\end{equation*}
-\end{exercicebox}
-
-\begin{exercicebox}[Exercice 19 : Convexité du prix d'une option par rapport au Strike]
-Prouvez que la fonction donnant le prix d'un Call $C_0(K)$ en fonction de son Strike $K$ est strictement convexe.
-Mathématiquement, vous devez démontrer que pour toute constante $\lambda \in [0, 1]$ et deux strikes $K_1, K_2$ :
-\begin{equation*}
-    C_0(\lambda K_1 + (1-\lambda)K_2) \leq \lambda C_0(K_1) + (1-\lambda)C_0(K_2)
-\end{equation*}
-\textit{Indice : Construisez un portefeuille "Butterfly Spread" et analysez son payoff à l'échéance.}
-\end{exercicebox}
-
-\begin{exercicebox}[Exercice 20 : Coûts de stockage et Rendement d'opportunité]
-Généralisez l'évaluation d'un contrat Forward à un actif physique. 
-Soit $S_0$ le prix Spot. Détenir l'actif physique engendre un coût de stockage continu $u$ (proportionnel à la valeur de l'actif). De plus, posséder physiquement l'actif confère un avantage industriel appelé "rendement d'opportunité" (convenience yield), noté $c$, versé continuellement.
-Démontrez, en détaillant minutieusement les flux d'un portefeuille de réplication à $t=0$ et $t=T$, que le prix d'équilibre du contrat Forward est :
-\begin{equation*}
-    F = S_0 e^{(r + u - c)T}
-\end{equation*}
+\navToCorr{fsec2_ex4}
 \end{exercicebox}

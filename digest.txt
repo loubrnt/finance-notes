@@ -99,6 +99,22 @@ FILE: main.tex
 % --- GESTION DES LIENS HYPERTEXTE ---
 \usepackage[colorlinks=true, linkcolor=black, urlcolor=blue]{hyperref}
 
+% ==================================================================
+% --- BOUTONS DE NAVIGATION EXERCICES / CORRIGÉS ---
+% ==================================================================
+
+% 1. CIBLES INVISIBLES (À placer JUSTE AVANT l'environnement \begin)
+\newcommand{\targetExo}[1]{\hypertarget{exo_#1}{}}
+\newcommand{\targetCorr}[1]{\hypertarget{corr_#1}{}}
+
+% 2. BOUTONS CLIQUABLES (À placer JUSTE AVANT le \end de l'environnement)
+\newcommand{\navToCorr}[1]{%
+    \par\vspace{1mm}\noindent\hfill\hyperlink{corr_#1}{\scriptsize\sffamily\color{vscodeBlue}[$\rightarrow$ Voir le corrigé]}%
+}
+\newcommand{\navToExo}[1]{%
+    \par\vspace{1mm}\noindent\hfill\hyperlink{exo_#1}{\scriptsize\sffamily\color{vscodeBlue}[$\leftarrow$ Retour à l'énoncé]}%
+}
+
 % --- SOULIGNER LES TITRES ET SOUS-TITRES ---
 \sectionfont{\underline}
 \subsectionfont{\underline}
@@ -458,112 +474,153 @@ Le statut d'une option décrit si elle a une valeur intrinsèque immédiate (si 
 ================================================
 FILE: finance/fsec1/exercises.tex
 ================================================
-%to be written\subsection{Exercices}
+\subsection{Exercices}
 
+\targetExo{fsec1_ex1}
 \begin{exercicebox}[Exercice 1 : Capitalisation continue]
 Vous placez la somme de $10 000$ € sur un compte offrant un taux d'intérêt sans risque composé en continu de $4\%$ par an. 
 Quelle sera la valeur exacte de votre capital dans 3 ans ?
+\navToCorr{fsec1_ex1}
 \end{exercicebox}
 
+\targetExo{fsec1_ex2}
 \begin{exercicebox}[Exercice 2 : Actualisation continue]
 Vous êtes certain de recevoir un flux de $5 000$ € dans 6 mois (soit $0,5$ année). Le taux d'intérêt continu sur le marché est de $3\%$ par an. 
 Quelle est la valeur actuelle (la valeur aujourd'hui) de ce flux financier ?
+\navToCorr{fsec1_ex2}
 \end{exercicebox}
 
+\targetExo{fsec1_ex3}
 \begin{exercicebox}[Exercice 3 : Taux annuel effectif et taux continu]
 Une banque vous propose un placement avec un rendement garanti de $5,127\%$ par an (taux annuel effectif). 
 Quel est le taux d'intérêt composé en continu $r$ qui correspond exactement à ce taux effectif ?
+\navToCorr{fsec1_ex3}
 \end{exercicebox}
 
+\targetExo{fsec1_ex4}
 \begin{exercicebox}[Exercice 4 : Payoff d'un Call]
 Vous possédez une option d'achat (Call) de prix d'exercice $K = 120$ €. À l'échéance, le prix de l'action sous-jacente est $S_T = 135$ €. 
 Quel est le flux final (Payoff) généré par cette option ? Allez-vous l'exercer ?
+\navToCorr{fsec1_ex4}
 \end{exercicebox}
 
+\targetExo{fsec1_ex5}
 \begin{exercicebox}[Exercice 5 : Payoff d'un Put]
 Vous détenez une option de vente (Put) avec un Strike $K = 80$ €. À l'expiration, l'action cote $S_T = 85$ €. 
 Quel est le Payoff de ce Put ? L'option est-elle exercée ?
+\navToCorr{fsec1_ex5}
 \end{exercicebox}
 
+\targetExo{fsec1_ex6}
 \begin{exercicebox}[Exercice 6 : Profit d'une position Long Call]
 Vous avez acheté un Call de Strike $100$ € pour une prime de $5$ €. À l'échéance, le sous-jacent vaut $112$ €. 
 Calculez votre Payoff, puis déduisez-en votre profit net (en ignorant la valeur temporelle de la prime).
+\navToCorr{fsec1_ex6}
 \end{exercicebox}
 
+\targetExo{fsec1_ex7}
 \begin{exercicebox}[Exercice 7 : Profit d'une position Short Call]
-En reprenant les données de l'exercice 6, placez-vous du côté du \textit{vendeur} de cette option (Short Call). Le vendeur a encaissé la prime de $5$ € au départ. À l'échéance, l'action vaut $112$ €. 
+En reprenant les données de l'exercice 6, placez-vous du côté du vendeur de cette option (Short Call). Le vendeur a encaissé la prime de $5$ € au départ. À l'échéance, l'action vaut $112$ €. 
 Calculez le flux final que le vendeur doit payer, puis son profit net global.
+\navToCorr{fsec1_ex7}
 \end{exercicebox}
 
+\targetExo{fsec1_ex8}
 \begin{exercicebox}[Exercice 8 : Profit d'une position Long Put]
 Vous achetez un Put de Strike $K = 50$ € pour une prime de $4$ €. Le jour de l'échéance, la société annonce de mauvais résultats et l'action s'effondre à $30$ €. 
 Calculez votre profit net sur cette opération.
+\navToCorr{fsec1_ex8}
 \end{exercicebox}
 
+\targetExo{fsec1_ex9}
 \begin{exercicebox}[Exercice 9 : Profit d'une position Short Put]
 Vous vendez un Put de Strike $K = 200$ € et encaissez immédiatement une prime de $10$ €. À l'échéance, l'action cote $185$ €. 
 L'acheteur exerce-t-il son option contre vous ? Quel est votre profit (ou perte) net ?
+\navToCorr{fsec1_ex9}
 \end{exercicebox}
 
+\targetExo{fsec1_ex10}
 \begin{exercicebox}[Exercice 10 : Statut d'un Call (Moneyness)]
 L'action Apple cote actuellement $175$ \$. Vous observez trois Calls européens sur le marché avec des Strikes différents : $K_1 = 160$ \$, $K_2 = 175$ \$, et $K_3 = 190$ \$. 
 Déterminez le statut (ITM, OTM, ou ATM) de chacune de ces trois options aujourd'hui.
+\navToCorr{fsec1_ex10}
 \end{exercicebox}
 
+\targetExo{fsec1_ex11}
 \begin{exercicebox}[Exercice 11 : Statut d'un Put (Moneyness)]
 L'action LVMH cote aujourd'hui $800$ €. Vous analysez trois Puts de Strikes respectifs : $K_A = 750$ €, $K_B = 800$ €, et $K_C = 850$ €. 
 Indiquez pour chacun s'il est Dans la monnaie (ITM), À la monnaie (ATM) ou Hors de la monnaie (OTM).
+\navToCorr{fsec1_ex11}
 \end{exercicebox}
 
+\targetExo{fsec1_ex12}
 \begin{exercicebox}[Exercice 12 : Point mort (Break-even) d'un Call]
 Vous achetez un Call de Strike $K = 60$ € pour une prime de $3,50$ €. 
 À quel prix exact doit se trouver l'action à l'échéance pour que votre profit net soit exactement de $0$ € (votre "point mort") ?
+\navToCorr{fsec1_ex12}
 \end{exercicebox}
 
+\targetExo{fsec1_ex13}
 \begin{exercicebox}[Exercice 13 : Point mort (Break-even) d'un Put]
 Vous achetez un Put de Strike $K = 45$ € pour une prime de $2$ €. 
 Déterminez le prix du sous-jacent à l'échéance qui vous permet de rembourser exactement votre investissement initial.
+\navToCorr{fsec1_ex13}
 \end{exercicebox}
 
+\targetExo{fsec1_ex14}
 \begin{exercicebox}[Exercice 14 : Profil de perte maximale (Acheteur)]
 Vous achetez $10$ Calls de Strike $K = 100$ €. La prime unitaire est de $6$ €. 
 Quel est le montant maximum que vous pouvez perdre sur cette stratégie, quelle que soit l'évolution du marché ?
+\navToCorr{fsec1_ex14}
 \end{exercicebox}
 
+\targetExo{fsec1_ex15}
 \begin{exercicebox}[Exercice 15 : Profil de perte potentielle (Vendeur)]
 Vous vendez à découvert (Short Call) $10$ Calls de Strike $K = 100$ €. La prime unitaire encaissée est de $6$ €. 
 Si l'action, suite à une OPA exceptionnelle, monte à $250$ € à l'échéance, quelle sera votre perte nette totale ? Quelle est votre perte maximale théorique sur cette position ?
+\navToCorr{fsec1_ex15}
 \end{exercicebox}
 
+\targetExo{fsec1_ex16}
 \begin{exercicebox}[Exercice 16 : Combinaison de flux - Call Synthétique]
 Vous construisez le portefeuille suivant aujourd'hui : vous achetez 1 action à $S_0 = 100$ € et vous achetez 1 Put de Strike $K = 100$ €.
 Écrivez mathématiquement la valeur de ce portefeuille à l'échéance $T$ en fonction de $S_T$. Montrez que ce profil de flux ressemble fortement à un produit dérivé bien connu (Stratégie dite du "Protective Put").
+\navToCorr{fsec1_ex16}
 \end{exercicebox}
 
+\targetExo{fsec1_ex17}
 \begin{exercicebox}[Exercice 17 : Stratégie Straddle (Achat de volatilité)]
 Un investisseur anticipe un fort mouvement sur une action (actuellement à $100$ €), mais il ignore la direction. Il achète simultanément 1 Call de Strike $100$ (Prime = 5 €) et 1 Put de Strike $100$ (Prime = 5 €). Le coût total est donc de $10$ €.
 Calculez le Payoff global de ce portefeuille si l'action finit à $120$ €. Calculez-le si l'action finit à $80$ €.
+\navToCorr{fsec1_ex17}
 \end{exercicebox}
 
+\targetExo{fsec1_ex18}
 \begin{exercicebox}[Exercice 18 : Points morts du Straddle]
 En reprenant la stratégie de l'Exercice 17 (coût total = $10$ €, Strike commun = $100$ €), déterminez les deux points morts (les prix à l'échéance pour lesquels le profit net est de zéro).
+\navToCorr{fsec1_ex18}
 \end{exercicebox}
 
+\targetExo{fsec1_ex19}
 \begin{exercicebox}[Exercice 19 : Prime et Moneyness]
 L'action X cote $50$ €. On vous propose un Call de Strike $K = 40$ € au prix de $8$ €. 
 Démontrez de manière logique pourquoi ce prix est absurde et expliquez la notion de valeur intrinsèque (sans utiliser l'actualisation).
+\navToCorr{fsec1_ex19}
 \end{exercicebox}
 
+\targetExo{fsec1_ex20}
 \begin{exercicebox}[Exercice 20 : Style Américain vs Européen]
 Pourquoi, toutes choses égales par ailleurs (même sous-jacent, même Strike, même échéance), une option Américaine coûtera-t-elle toujours au moins aussi cher (sinon plus) qu'une option Européenne équivalente ?
+\navToCorr{fsec1_ex20}
 \end{exercicebox}
 
 
 ================================================
 FILE: finance/fsec1/solutions.tex
 ================================================
-%to be written\subsection{Corrigés des exercices}
+\subsection{Corrigés des exercices}
 
+\targetCorr{fsec1_ex1}
 \begin{correctionbox}[Corrigé de l'exercice 1 : Capitalisation continue]
 Formule de capitalisation continue : $C_T = C_0 e^{rT}$.
 Ici, $C_0 = 10 000$, $r = 0,04$ et $T = 3$.
@@ -571,8 +628,10 @@ Ici, $C_0 = 10 000$, $r = 0,04$ et $T = 3$.
     C_T = 10 000 \times e^{0,04 \times 3} = 10 000 \times e^{0,12} \approx 10 000 \times 1,12749 = 11 274,97 \text{ €}
 \end{equation*}
 Dans 3 ans, le capital sera de 11 274,97 €.
+\navToExo{fsec1_ex1}
 \end{correctionbox}
 
+\targetCorr{fsec1_ex2}
 \begin{correctionbox}[Corrigé de l'exercice 2 : Actualisation continue]
 Formule d'actualisation continue : $C_0 = C_T e^{-rT}$.
 Ici, $C_T = 5 000$, $r = 0,03$ et $T = 0,5$.
@@ -580,8 +639,10 @@ Ici, $C_T = 5 000$, $r = 0,03$ et $T = 0,5$.
     C_0 = 5 000 \times e^{-0,03 \times 0,5} = 5 000 \times e^{-0,015} \approx 5 000 \times 0,98511 = 4 925,56 \text{ €}
 \end{equation*}
 La valeur actuelle de ce flux est de 4 925,56 €.
+\navToExo{fsec1_ex2}
 \end{correctionbox}
 
+\targetCorr{fsec1_ex3}
 \begin{correctionbox}[Corrigé de l'exercice 3 : Taux équivalent]
 Soit $R$ le taux effectif annuel (ici $5,127\% = 0,05127$). Un euro investi donne $1 + R$ en un an.
 Avec le taux continu $r$, un euro investi donne $e^{r \times 1}$. 
@@ -591,8 +652,10 @@ Pour isoler $r$, on applique le logarithme népérien ($\ln$) :
     r = \ln(1 + R) = \ln(1,05127) \approx 0,05
 \end{equation*}
 Le taux continu correspondant est très exactement de $5\%$.
+\navToExo{fsec1_ex3}
 \end{correctionbox}
 
+\targetCorr{fsec1_ex4}
 \begin{correctionbox}[Corrigé de l'exercice 4 : Payoff d'un Call]
 La formule du Payoff d'un Call est $\max(S_T - K, 0)$.
 Ici, $S_T = 135$ et $K = 120$.
@@ -600,8 +663,10 @@ Ici, $S_T = 135$ et $K = 120$.
     \text{Payoff} = \max(135 - 120, 0) = \max(15, 0) = 15 \text{ €}
 \end{equation*}
 Oui, l'option est exercée car le prix du marché est supérieur au Strike. Le droit d'acheter à 120 ce qui vaut 135 a une valeur de 15 €.
+\navToExo{fsec1_ex4}
 \end{correctionbox}
 
+\targetCorr{fsec1_ex5}
 \begin{correctionbox}[Corrigé de l'exercice 5 : Payoff d'un Put]
 La formule du Payoff d'un Put est $\max(K - S_T, 0)$.
 Ici, $S_T = 85$ et $K = 80$.
@@ -609,79 +674,101 @@ Ici, $S_T = 85$ et $K = 80$.
     \text{Payoff} = \max(80 - 85, 0) = \max(-5, 0) = 0 \text{ €}
 \end{equation*}
 L'option n'est pas exercée. Il est inutile d'utiliser le droit de vendre à 80 € alors qu'on peut vendre à 85 € directement sur le marché.
+\navToExo{fsec1_ex5}
 \end{correctionbox}
 
+\targetCorr{fsec1_ex6}
 \begin{correctionbox}[Corrigé de l'exercice 6 : Profit d'un Long Call]
 1. Calcul du Payoff à l'échéance : $\max(112 - 100, 0) = 12$ €.
 2. Calcul du profit : Payoff - Prime payée.
 Profit $= 12 - 5 = 7$ €. L'opération est gagnante.
+\navToExo{fsec1_ex6}
 \end{correctionbox}
 
+\targetCorr{fsec1_ex7}
 \begin{correctionbox}[Corrigé de l'exercice 7 : Profit d'un Short Call]
 Le vendeur du Call a une position miroir par rapport à l'acheteur.
-1. L'acheteur exerce son option. Le vendeur est \textit{obligé} de lui vendre l'action à $100$ € alors qu'elle vaut $112$ € sur le marché. Le vendeur subit une sortie de trésorerie (Payoff négatif) de $-12$ €.
+1. L'acheteur exerce son option. Le vendeur est obligé de lui vendre l'action à $100$ € alors qu'elle vaut $112$ € sur le marché. Le vendeur subit une sortie de trésorerie (Payoff négatif) de $-12$ €.
 2. Profit net : Le vendeur a encaissé $5$ € au départ. Son profit est donc $5 - 12 = -7$ €.
 Il s'agit bien d'un jeu à somme nulle : ce que gagne l'acheteur (+7), le vendeur le perd (-7).
+\navToExo{fsec1_ex7}
 \end{correctionbox}
 
+\targetCorr{fsec1_ex8}
 \begin{correctionbox}[Corrigé de l'exercice 8 : Profit d'un Long Put]
 1. Calcul du Payoff : L'action s'effondrant à $30$ €, le droit de vendre à $50$ € vaut $\max(50 - 30, 0) = 20$ €.
 2. Calcul du profit : Payoff - Prime = $20 - 4 = 16$ €.
+\navToExo{fsec1_ex8}
 \end{correctionbox}
 
+\targetCorr{fsec1_ex9}
 \begin{correctionbox}[Corrigé de l'exercice 9 : Profit d'un Short Put]
 1. À l'échéance, $S_T = 185$ et $K = 200$. L'acheteur du Put a intérêt à vendre à 200. Il exerce donc l'option.
 2. Le vendeur du Put est forcé d'acheter à 200 € ce qui ne vaut que 185 €. Il subit une perte à l'exercice de $185 - 200 = -15$ €.
 3. Son profit net intègre la prime reçue initialement (+10 €) : Profit = $10 - 15 = -5$ €.
+\navToExo{fsec1_ex9}
 \end{correctionbox}
 
+\targetCorr{fsec1_ex10}
 \begin{correctionbox}[Corrigé de l'exercice 10 : Statut d'un Call (Moneyness)]
 Pour un Call, l'option est ITM si $S > K$, ATM si $S=K$, OTM si $S < K$.
 Le sous-jacent $S = 175$ \$.
 \begin{itemize}[label=$\cdot$]
-    \item $K_1 = 160$ \$ : $175 > 160 \implies$ \textbf{Dans la monnaie (ITM)}.
-    \item $K_2 = 175$ \$ : $175 = 175 \implies$ \textbf{À la monnaie (ATM)}.
-    \item $K_3 = 190$ \$ : $175 < 190 \implies$ \textbf{Hors de la monnaie (OTM)}.
+    \item $K_1 = 160$ \$ : $175 > 160 \implies$ Dans la monnaie (ITM).
+    \item $K_2 = 175$ \$ : $175 = 175 \implies$ À la monnaie (ATM).
+    \item $K_3 = 190$ \$ : $175 < 190 \implies$ Hors de la monnaie (OTM).
 \end{itemize}
+\navToExo{fsec1_ex10}
 \end{correctionbox}
 
+\targetCorr{fsec1_ex11}
 \begin{correctionbox}[Corrigé de l'exercice 11 : Statut d'un Put (Moneyness)]
 Pour un Put, c'est l'inverse : l'option est ITM si le prix de vente garanti est supérieur au marché ($K > S$).
 Le sous-jacent $S = 800$ €.
 \begin{itemize}[label=$\cdot$]
-    \item $K_A = 750$ € : $750 < 800 \implies$ \textbf{Hors de la monnaie (OTM)}.
-    \item $K_B = 800$ € : $800 = 800 \implies$ \textbf{À la monnaie (ATM)}.
-    \item $K_C = 850$ € : $850 > 800 \implies$ \textbf{Dans la monnaie (ITM)}.
+    \item $K_A = 750$ € : $750 < 800 \implies$ Hors de la monnaie (OTM).
+    \item $K_B = 800$ € : $800 = 800 \implies$ À la monnaie (ATM).
+    \item $K_C = 850$ € : $850 > 800 \implies$ Dans la monnaie (ITM).
 \end{itemize}
+\navToExo{fsec1_ex11}
 \end{correctionbox}
 
+\targetCorr{fsec1_ex12}
 \begin{correctionbox}[Corrigé de l'exercice 12 : Point mort d'un Call]
 Le profit est nul si le Payoff couvre exactement la prime payée ($3,50$ €).
 Pour un Call, on a besoin que l'action monte au-dessus du Strike. 
 Point mort $= K + \text{Prime} = 60 + 3,50 = 63,50$ €.
 Si l'action clôture à 63,50 €, le Payoff est de 3,50 €, ce qui rembourse la prime.
+\navToExo{fsec1_ex12}
 \end{correctionbox}
 
+\targetCorr{fsec1_ex13}
 \begin{correctionbox}[Corrigé de l'exercice 13 : Point mort d'un Put]
 Pour un Put, il faut que l'action baisse suffisamment en dessous du Strike pour rembourser la prime.
 Point mort $= K - \text{Prime} = 45 - 2 = 43$ €.
 Si l'action clôture à 43 €, le droit de vendre à 45 € a une valeur de 2 €, couvrant exactement le coût initial.
+\navToExo{fsec1_ex13}
 \end{correctionbox}
 
+\targetCorr{fsec1_ex14}
 \begin{correctionbox}[Corrigé de l'exercice 14 : Perte maximale d'un acheteur]
 L'acheteur d'une option (Long position) a un risque strictement limité. Au pire, l'option expire hors de la monnaie et ne vaut rien (Payoff = 0). 
 La perte maximale correspond donc à la prime totale payée aujourd'hui.
 Perte max $= 10 \times 6 \text{ €} = 60$ €.
+\navToExo{fsec1_ex14}
 \end{correctionbox}
 
+\targetCorr{fsec1_ex15}
 \begin{correctionbox}[Corrigé de l'exercice 15 : Perte potentielle d'un vendeur]
 Si l'action monte à 250 €, le Payoff unitaire du Call est $\max(250 - 100, 0) = 150$ €.
 Le vendeur doit payer 150 € par option.
 Profit unitaire = Prime reçue - Payoff = $6 - 150 = -144$ €.
 Pour 10 options, la perte nette totale est de $-1 440$ €.
-\textbf{Perte maximale théorique} : L'action peut théoriquement monter à l'infini. La perte potentielle d'un vendeur de Call "nu" (sans posséder l'action) est donc \textbf{illimitée}.
+Perte maximale théorique : L'action peut théoriquement monter à l'infini. La perte potentielle d'un vendeur de Call "nu" (sans posséder l'action) est donc illimitée.
+\navToExo{fsec1_ex15}
 \end{correctionbox}
 
+\targetCorr{fsec1_ex16}
 \begin{correctionbox}[Corrigé de l'exercice 16 : Combinaison de flux]
 Valeur finale du portefeuille = Valeur de l'action + Payoff du Put.
 $V_T = S_T + \max(100 - S_T, 0)$.
@@ -690,8 +777,10 @@ $V_T = S_T + \max(100 - S_T, 0)$.
     \item Si $S_T < 100$ : Le Put vaut $100 - S_T$. $V_T = S_T + (100 - S_T) = 100$.
 \end{itemize}
 En résumé, $V_T = \max(S_T, 100)$. Ce profil garantit un plancher à 100 tout en gardant tout le potentiel de hausse. Ce profil est équivalent à celui de l'achat d'un Call (à la constante du Strike près, justifiant la parité Call-Put).
+\navToExo{fsec1_ex16}
 \end{correctionbox}
 
+\targetCorr{fsec1_ex17}
 \begin{correctionbox}[Corrigé de l'exercice 17 : Stratégie Straddle]
 Le Payoff global est la somme du Payoff du Call et du Payoff du Put.
 \begin{itemize}[label=$\cdot$]
@@ -699,8 +788,10 @@ Le Payoff global est la somme du Payoff du Call et du Payoff du Put.
     \item Si $S_T = 80$ : Call = $0$. Put = $\max(100 - 80, 0) = 20$. Payoff total = $20$.
 \end{itemize}
 Dans les deux cas de forte volatilité, l'investisseur gagne 20, pour un coût initial de 10 (Profit net de +10).
+\navToExo{fsec1_ex17}
 \end{correctionbox}
 
+\targetCorr{fsec1_ex18}
 \begin{correctionbox}[Corrigé de l'exercice 18 : Points morts du Straddle]
 Pour rembourser la prime totale de 10 €, il faut que le Payoff du Call soit de 10, OU que le Payoff du Put soit de 10 (ils ne peuvent pas être exercés en même temps).
 \begin{itemize}[label=$\cdot$]
@@ -708,17 +799,22 @@ Pour rembourser la prime totale de 10 €, il faut que le Payoff du Call soit de
     \item Point mort à la baisse : $K - \text{Prime totale} = 100 - 10 = 90$ €.
 \end{itemize}
 Si l'action finit entre 90 et 110, la stratégie est perdante.
+\navToExo{fsec1_ex18}
 \end{correctionbox}
 
+\targetCorr{fsec1_ex19}
 \begin{correctionbox}[Corrigé de l'exercice 19 : Prime et Moneyness]
 L'action vaut aujourd'hui 50 €. Le Call de Strike 40 donne le droit d'acheter l'action à 40 €. Si l'on pouvait exercer ce droit tout de suite, il rapporterait immédiatement $50 - 40 = 10$ €.
-C'est ce qu'on appelle la \textbf{valeur intrinsèque} immédiate.
+C'est ce qu'on appelle la valeur intrinsèque immédiate.
 Si le Call est vendu à 8 €, un opérateur de marché pourrait l'acheter pour 8 €, l'exercer pour acheter l'action à 40 € et la revendre immédiatement sur le marché à 50 €. Il ferait un profit immédiat sans risque de $50 - 40 - 8 = 2$ €. Le prix de 8 € est donc une anomalie (opportunité d'arbitrage). Le prix d'une option ne peut jamais être inférieur à sa valeur intrinsèque.
+\navToExo{fsec1_ex19}
 \end{correctionbox}
 
+\targetCorr{fsec1_ex20}
 \begin{correctionbox}[Corrigé de l'exercice 20 : Style Américain vs Européen]
-Une option Américaine confère exactement les mêmes droits qu'une option Européenne (exercer le droit à la date T), mais elle y ajoute la possibilité d'exercer \textit{à n'importe quel moment avant} la date T.
+Une option Américaine confère exactement les mêmes droits qu'une option Européenne (exercer le droit à la date T), mais elle y ajoute la possibilité d'exercer à n'importe quel moment avant la date T.
 En finance, une liberté (ou un droit) supplémentaire ne peut pas avoir une valeur négative. Par conséquent, la flexibilité offerte par l'option Américaine fait qu'elle doit valoir au moins autant que l'Européenne, et potentiellement plus si l'exercice anticipé s'avère optimal (par exemple, juste avant le détachement d'un gros dividende).
+\navToExo{fsec1_ex20}
 \end{correctionbox}
 
 
@@ -733,108 +829,145 @@ FILE: finance/fsec2/exercises.tex
 ================================================
 \subsection{Exercices}
 
+\targetExo{fsec2_ex1}
 \begin{exercicebox}[Exercice 1 : Calcul de Delta simplifié]
 Une action s'échange aujourd'hui à 100 €. Vous anticipez qu'à l'échéance d'une option d'achat (Call) de prix d'exercice $K = 100$ €, le cours de l'action sera soit de 120 €, soit de 80 €.
 En appliquant la logique de variation relative, calculez le Delta ($\Delta$) de cette option.
+\navToCorr{fsec2_ex1}
 \end{exercicebox}
 
+\targetExo{fsec2_ex2}
 \begin{exercicebox}[Exercice 2 : Couverture statique et non-arbitrage]
 En reprenant les données de l'Exercice 1, vous avez vendu 1 Call. Pour vous couvrir, vous achetez une quantité $\Delta$ d'actions. Le taux d'intérêt sans risque est garanti à 5\% sur la période.
 Déterminez le coût net initial de votre portefeuille, prouvez que sa valeur finale est sans risque, et déduisez-en par la règle de l'actualisation le prix juste du Call aujourd'hui.
+\navToCorr{fsec2_ex2}
 \end{exercicebox}
 
+\targetExo{fsec2_ex3}
 \begin{exercicebox}[Exercice 3 : Prix d'un contrat Forward (sans dividendes)]
 Une action ne versant aucun dividende cote actuellement 150 €. Le taux d'intérêt sans risque, composé en continu, est de 3\% par an.
 Quel doit être le prix théorique d'un contrat Forward sur cette action, avec une échéance exacte dans 9 mois ?
+\navToCorr{fsec2_ex3}
 \end{exercicebox}
 
+\targetExo{fsec2_ex4}
 \begin{exercicebox}[Exercice 4 : Prix d'un contrat Forward (avec dividendes continus)]
 Un indice boursier cote actuellement 4 000 points. Il génère un rendement de dividendes versés en continu au taux annuel $d = 2\%$. Le taux sans risque continu est $r = 4\%$.
 Calculez le prix théorique d'un contrat Forward sur cet indice pour une échéance à 6 mois.
+\navToCorr{fsec2_ex4}
 \end{exercicebox}
 
+\targetExo{fsec2_ex5}
 \begin{exercicebox}[Exercice 5 : Application de la parité Call-Put]
 Pour une action s'échangeant à 80 €, ne versant pas de dividendes, on observe un Call européen de Strike $K = 80$ € et d'échéance 1 an qui cote 8,50 €. Le taux d'intérêt sans risque continu est de 5\% par an.
 Quel devrait être le prix exact d'un Put européen de mêmes caractéristiques (Strike 80, échéance 1 an) pour qu'il n'y ait pas d'opportunité d'arbitrage ?
+\navToCorr{fsec2_ex5}
 \end{exercicebox}
 
+\targetExo{fsec2_ex6}
 \begin{exercicebox}[Exercice 6 : Vérification des bornes d'options]
 Une action cote 100 €. Le taux sans risque est nul. Un intermédiaire financier vous propose de lui acheter un Call européen de Strike $K = 95$ € à un prix de 3 €.
 Sans développer de calculs complexes, justifiez immédiatement pourquoi cette cotation viole les lois fondamentales de la finance.
+\navToCorr{fsec2_ex6}
 \end{exercicebox}
 
+\targetExo{fsec2_ex7}
 \begin{exercicebox}[Exercice 7 : Valeur d'un contrat Forward en cours de vie]
 Il y a 6 mois, vous avez pris une position longue sur un contrat Forward à un an sur une action (ne versant pas de dividendes), avec un prix de livraison fixé à l'époque à 102 €. 
 Aujourd'hui, il reste 6 mois avant l'échéance. L'action cote 110 € et le taux sans risque continu est de 4\%. 
 Quelle est la valeur financière (en euros) de votre contrat Forward aujourd'hui ?
+\navToCorr{fsec2_ex7}
 \end{exercicebox}
 
+\targetExo{fsec2_ex8}
 \begin{exercicebox}[Exercice 8 : Stratégie de Cash-and-Carry (Forward surévalué)]
 Une action cote 200 €. Le taux sans risque est de 2\% continu. Un contrat Forward à 1 an s'échange sur le marché au prix de 210 €.
 Calculez le prix théorique du Forward, puis détaillez pas à pas la stratégie d'arbitrage (flux initiaux et flux à l'échéance) permettant de verrouiller un profit sans risque. Quel est le montant exact de ce profit à l'échéance ?
+\navToCorr{fsec2_ex8}
 \end{exercicebox}
 
+\targetExo{fsec2_ex9}
 \begin{exercicebox}[Exercice 9 : Reverse Cash-and-Carry (Forward sous-évalué)]
 Reprenez l'action de l'Exercice 8 (Spot = 200 €, $r=2\%$). Supposons que le contrat Forward à 1 an s'échange exceptionnellement à 195 €.
 Sachant que vous avez la possibilité de vendre l'action à découvert (Short-selling), détaillez la stratégie d'arbitrage "Reverse Cash-and-Carry" et démontrez mathématiquement le gain net final.
+\navToCorr{fsec2_ex9}
 \end{exercicebox}
 
+\targetExo{fsec2_ex10}
 \begin{exercicebox}[Exercice 10 : Arbitrage sur la parité Call-Put]
 Sur le marché, on observe les paramètres suivants : Spot $S_0 = 100$, Strike $K = 100$, Échéance $T = 1$ an, $r = 5\%$ (continu). Le Call cote $C = 10$ et le Put cote $P = 8$. L'action ne verse pas de dividendes.
 Montrez que ces prix violent la relation de parité. Définissez précisément le portefeuille à constituer aujourd'hui pour réaliser un profit d'arbitrage, et prouvez que le risque final est nul.
+\navToCorr{fsec2_ex10}
 \end{exercicebox}
 
+\targetExo{fsec2_ex11}
 \begin{exercicebox}[Exercice 11 : Parité Call-Put avec dividendes discrets]
 Le cours établit la parité Call-Put pour un dividende continu ou nul. Supposons maintenant qu'une action de prix $S_0$ verse un dividende discret connu d'un montant $D$ à une date $t$ ($0 < t < T$).
 En utilisant un raisonnement strict de réplication de flux (payoffs) à l'échéance, démontrez quelle doit être la nouvelle équation de la parité Call-Put européenne à l'instant initial $t=0$.
+\navToCorr{fsec2_ex11}
 \end{exercicebox}
 
+\targetExo{fsec2_ex12}
 \begin{exercicebox}[Exercice 12 : Risque de la couverture dynamique]
 Dans la théorie, le portefeuille couvert en Delta est sans risque car il est rééquilibré "en continu".
 Expliquez conceptuellement ce qui se passe si l'opérateur ne rééquilibre son portefeuille qu'une fois par semaine. D'où provient le risque résiduel ?
+\navToCorr{fsec2_ex12}
 \end{exercicebox}
 
+\targetExo{fsec2_ex13}
 \begin{exercicebox}[Exercice 13 : Borne inférieure stricte du Call Européen]
 En utilisant un portefeuille composé d'une option d'achat (Call européen), de l'action sous-jacente et d'un actif sans risque, démontrez rigoureusement que le prix du Call $C_0$ satisfait toujours l'inégalité :
 \begin{equation*}
     C_0 \geq \max(0, S_0 - K e^{-rT})
 \end{equation*}
+\navToCorr{fsec2_ex13}
 \end{exercicebox}
 
+\targetExo{fsec2_ex14}
 \begin{exercicebox}[Exercice 14 : Borne inférieure stricte du Put Européen]
 Par un raisonnement similaire à celui de l'exercice précédent, ou en utilisant la relation de parité Call-Put, démontrez rigoureusement que le prix d'un Put européen $P_0$ satisfait toujours :
 \begin{equation*}
     P_0 \geq \max(0, K e^{-rT} - S_0)
 \end{equation*}
+\navToCorr{fsec2_ex14}
 \end{exercicebox}
 
+\targetExo{fsec2_ex15}
 \begin{exercicebox}[Exercice 15 : Monotonie des Calls par rapport au Strike]
 Soit deux options d'achat européennes (Calls) portant sur le même sous-jacent, ayant la même maturité $T$, mais des prix d'exercice respectifs $K_1$ et $K_2$, avec $K_1 < K_2$.
 Démontrez de manière rigoureuse, par un argument d'absence d'arbitrage sur les payoffs à l'échéance, que :
 \begin{equation*}
     C_0(K_1) \geq C_0(K_2)
 \end{equation*}
+\navToCorr{fsec2_ex15}
 \end{exercicebox}
 
+\targetExo{fsec2_ex16}
 \begin{exercicebox}[Exercice 16 : Inégalité stricte des écarts de Strike]
 Dans la continuité de l'Exercice 15 (avec $K_1 < K_2$), démontrez, en construisant un portefeuille combinant les deux Calls (un "Bull Spread"), que la différence de prix entre ces deux options est bornée supérieurement par la différence actualisée de leurs strikes :
 \begin{equation*}
     C_0(K_1) - C_0(K_2) \leq (K_2 - K_1)e^{-rT}
 \end{equation*}
+\navToCorr{fsec2_ex16}
 \end{exercicebox}
 
+\targetExo{fsec2_ex17}
 \begin{exercicebox}[Exercice 17 : Preuve de la non-optimalité de l'exercice anticipé]
 Démontrez mathématiquement pourquoi il n'est jamais optimal d'exercer un Call américain avant l'échéance sur une action ne versant pas de dividendes. Déduisez-en la relation stricte entre $C_{américain}$ et $C_{européen}$.
+\navToCorr{fsec2_ex17}
 \end{exercicebox}
 
+\targetExo{fsec2_ex18}
 \begin{exercicebox}[Exercice 18 : Parité Call-Put pour les options américaines]
 Puisque l'exercice anticipé est possible pour les options américaines, la parité Call-Put n'est plus une égalité stricte.
 En considérant une action ne versant pas de dividendes, démontrez que la relation se transforme en la double inégalité suivante :
 \begin{equation*}
     S_0 - K \leq C_{am} - P_{am} \leq S_0 - K e^{-rT}
 \end{equation*}
+\navToCorr{fsec2_ex18}
 \end{exercicebox}
 
+\targetExo{fsec2_ex19}
 \begin{exercicebox}[Exercice 19 : Convexité du prix d'une option par rapport au Strike]
 Prouvez que la fonction donnant le prix d'un Call $C_0(K)$ en fonction de son Strike $K$ est strictement convexe.
 Mathématiquement, vous devez démontrer que pour toute constante $\lambda \in [0, 1]$ et deux strikes $K_1, K_2$ :
@@ -842,8 +975,10 @@ Mathématiquement, vous devez démontrer que pour toute constante $\lambda \in [
     C_0(\lambda K_1 + (1-\lambda)K_2) \leq \lambda C_0(K_1) + (1-\lambda)C_0(K_2)
 \end{equation*}
 \textit{Indice : Construisez un portefeuille "Butterfly Spread" et analysez son payoff à l'échéance.}
+\navToCorr{fsec2_ex19}
 \end{exercicebox}
 
+\targetExo{fsec2_ex20}
 \begin{exercicebox}[Exercice 20 : Coûts de stockage et Rendement d'opportunité]
 Généralisez l'évaluation d'un contrat Forward à un actif physique. 
 Soit $S_0$ le prix Spot. Détenir l'actif physique engendre un coût de stockage continu $u$ (proportionnel à la valeur de l'actif). De plus, posséder physiquement l'actif confère un avantage industriel appelé "rendement d'opportunité" (convenience yield), noté $c$, versé continuellement.
@@ -851,6 +986,7 @@ Démontrez, en détaillant minutieusement les flux d'un portefeuille de réplica
 \begin{equation*}
     F = S_0 e^{(r + u - c)T}
 \end{equation*}
+\navToCorr{fsec2_ex20}
 \end{exercicebox}
 
 
@@ -859,6 +995,7 @@ FILE: finance/fsec2/solutions.tex
 ================================================
 \subsection{Corrigés des exercices}
 
+\targetCorr{fsec2_ex1}
 \begin{correctionbox}[Corrigé de l'exercice 1 : Calcul de Delta simplifié]
 Le Delta ($\Delta$) représente le taux de variation du prix de l'option par rapport à la variation du prix de l'actif sous-jacent.
 \begin{itemize}[label=$\cdot$]
@@ -870,8 +1007,10 @@ La formule discrète du Delta est $\Delta = \frac{C_u - C_d}{S_u - S_d}$.
     \Delta = \frac{20 - 0}{120 - 80} = \frac{20}{40} = 0,5
 \end{equation*}
 Le Delta est de $0,5$.
+\navToExo{fsec2_ex1}
 \end{correctionbox}
 
+\targetCorr{fsec2_ex2}
 \begin{correctionbox}[Corrigé de l'exercice 2 : Couverture statique et non-arbitrage]
 1. Construction du portefeuille :\\
 Aujourd'hui, nous vendons 1 Call (prix $C_0$) et achetons $\Delta = 0,5$ action. 
@@ -890,8 +1029,10 @@ Par absence d'arbitrage, le coût initial doit égaler cette valeur :
 \begin{equation*}
     50 - C_0 = 38,10 \implies C_0 = 11,90 \text{ €}
 \end{equation*}
+\navToExo{fsec2_ex2}
 \end{correctionbox}
 
+\targetCorr{fsec2_ex3}
 \begin{correctionbox}[Corrigé de l'exercice 3 : Prix d'un Forward (sans dividendes)]
 La formule de tarification par arbitrage (Cash-and-Carry) pour un actif ne versant pas de dividende est $F = S_0 e^{rT}$.
 \begin{itemize}[label=$\cdot$]
@@ -902,8 +1043,10 @@ La formule de tarification par arbitrage (Cash-and-Carry) pour un actif ne versa
 \begin{equation*}
     F = 150 \times e^{0,03 \times 0,75} = 150 \times e^{0,0225} \approx 150 \times 1,02275 \approx 153,41 \text{ €}
 \end{equation*}
+\navToExo{fsec2_ex3}
 \end{correctionbox}
 
+\targetCorr{fsec2_ex4}
 \begin{correctionbox}[Corrigé de l'exercice 4 : Prix d'un Forward (avec dividendes)]
 La formule intègre le rendement du dividende continu $d$ : $F = S_0 e^{(r-d)T}$.
 \begin{itemize}[label=$\cdot$]
@@ -914,8 +1057,10 @@ La formule intègre le rendement du dividende continu $d$ : $F = S_0 e^{(r-d)T}$
 \begin{equation*}
     F = 4 000 \times e^{(0,04 - 0,02) \times 0,5} = 4 000 \times e^{0,01} \approx 4 040,20 \text{ points}
 \end{equation*}
+\navToExo{fsec2_ex4}
 \end{correctionbox}
 
+\targetCorr{fsec2_ex5}
 \begin{correctionbox}[Corrigé de l'exercice 5 : Parité Call-Put]
 La relation de parité Call-Put s'écrit : $C - P = S_0 - K e^{-rT}$ (car $d=0$).
 Nous cherchons $P$ :
@@ -926,15 +1071,19 @@ En remplaçant par les valeurs ($C=8,50$, $S_0=80$, $K=80$, $r=0,05$, $T=1$) :
 \begin{equation*}
     P = 8,50 - 80 + 80 e^{-0,05} \approx 8,50 - 80 + 76,10 = 4,60 \text{ €}
 \end{equation*}
+\navToExo{fsec2_ex5}
 \end{correctionbox}
 
+\targetCorr{fsec2_ex6}
 \begin{correctionbox}[Corrigé de l'exercice 6 : Vérification des bornes]
 La valeur intrinsèque du Call aujourd'hui est $S_0 - K = 100 - 95 = 5$ €.
 L'option cote 3 €. Cela signifie qu'elle est vendue en dessous de sa valeur immédiate.
 Un arbitrageur achèterait l'option à 3 €, achèterait virtuellement l'action à 95 € grâce au Call, et la revendrait immédiatement à 100 € sur le marché.
 Gain : $100 - 95 - 3 = 2$ € de profit immédiat sans risque. C'est une violation de la borne inférieure stricte $C_0 \ge \max(0, S_0 - K e^{-rT})$.
+\navToExo{fsec2_ex6}
 \end{correctionbox}
 
+\targetCorr{fsec2_ex7}
 \begin{correctionbox}[Corrigé de l'exercice 7 : Valeur d'un contrat en cours]
 La valeur $V$ d'une position longue sur un Forward dont le prix d'exercice historique est $K$ s'obtient par la formule :
 $V = S_t - K e^{-rT_{restant}}$
@@ -947,8 +1096,10 @@ $V = S_t - K e^{-rT_{restant}}$
     V = 110 - 102 \times e^{-0,04 \times 0,5} = 110 - 102 \times e^{-0,02} \approx 110 - 99,98 = 10,02 \text{ €}
 \end{equation*}
 La valeur du contrat est de 10,02 €.
+\navToExo{fsec2_ex7}
 \end{correctionbox}
 
+\targetCorr{fsec2_ex8}
 \begin{correctionbox}[Corrigé de l'exercice 8 : Cash-and-Carry]
 1. Prix théorique :\\
 $F_{th} = 200 \times e^{0,02 \times 1} \approx 204,04$ €. Le marché cote 210 €, le Forward est donc surévalué.
@@ -965,8 +1116,10 @@ $F_{th} = 200 \times e^{0,02 \times 1} \approx 204,04$ €. Le marché cote 210 
     \item Rembourser la dette et ses intérêts : $200 \times e^{0,02} = 204,04$ €.
     \item Profit net sans risque : $210 - 204,04 = 5,96$ €.
 \end{itemize}
+\navToExo{fsec2_ex8}
 \end{correctionbox}
 
+\targetCorr{fsec2_ex9}
 \begin{correctionbox}[Corrigé de l'exercice 9 : Reverse Cash-and-Carry]
 Le marché cote $F = 195$ €, ce qui est inférieur au prix théorique (204,04 €). Le contrat est sous-évalué.
 
@@ -983,8 +1136,10 @@ Stratégie à t=0 :
     \item Rendre l'action au prêteur initial pour boucler la vente à découvert.
     \item Profit net sans risque : $204,04 - 195 = 9,04$ €.
 \end{itemize}
+\navToExo{fsec2_ex9}
 \end{correctionbox}
 
+\targetCorr{fsec2_ex10}
 \begin{correctionbox}[Corrigé de l'exercice 10 : Arbitrage Parité Call-Put]
 Calcul de la relation théorique : $C - P = 10 - 8 = 2$.
 Calcul de $S_0 - K e^{-rT} = 100 - 100 \times e^{-0,05} \approx 100 - 95,12 = 4,88$.
@@ -1003,8 +1158,10 @@ Si $S_T > 100$, on exerce le Call : on achète l'action à 100 pour la rendre. C
 Si $S_T \le 100$, l'acheteur exerce le Put : on doit lui acheter l'action à 100. Coût : -100 €.
 Dans les deux cas, le coût final est de 100 €.
 Profit net : $103,02 - 100 = 3,02$ € (strictement sans risque).
+\navToExo{fsec2_ex10}
 \end{correctionbox}
 
+\targetCorr{fsec2_ex11}
 \begin{correctionbox}[Corrigé de l'exercice 11 : Parité avec dividende discret]
 Construisons deux portefeuilles :
 Portefeuille A : Un Call + du cash équivalent à la valeur présente du Strike et du dividende ($K e^{-rT} + D e^{-rt}$).
@@ -1016,13 +1173,17 @@ Le portefeuille B voit son action détacher un dividende en $t$, réinvesti au t
 \begin{equation*}
     C_0 + K e^{-rT} + D e^{-rt} = P_0 + S_0 \implies C_0 - P_0 = S_0 - D e^{-rt} - K e^{-rT}
 \end{equation*}
+\navToExo{fsec2_ex11}
 \end{correctionbox}
 
+\targetCorr{fsec2_ex12}
 \begin{correctionbox}[Corrigé de l'exercice 12 : Risque de la couverture dynamique]
 Le Delta $\Delta$ correspond à la pente de la tangente de la courbe du prix de l'option. Or, cette courbe n'est pas linéaire (elle est convexe). Si l'on ne rééquilibre qu'une fois par semaine, le cours de l'action va s'éloigner du point de tangence initial. La variation réelle du prix de l'option ne correspondra plus à l'approximation linéaire fournie par le Delta.
 Ce risque lié à la courbure s'appelle le Gamma. Le portefeuille subit une erreur de discrétisation (coût de rééquilibrage non permanent) qui introduit un risque directionnel temporaire.
+\navToExo{fsec2_ex12}
 \end{correctionbox}
 
+\targetCorr{fsec2_ex13}
 \begin{correctionbox}[Corrigé de l'exercice 13 : Borne inférieure du Call]
 Considérons deux portefeuilles :
 Portefeuille A : 1 Call européen + $K e^{-rT}$ investis au taux sans risque.
@@ -1033,24 +1194,30 @@ Valeur à l'échéance $T$ : $S_T$.
 Puisque $\max(S_T, K) \geq S_T$ pour tout $S_T$, le Portefeuille A vaudra toujours au moins autant que le Portefeuille B à l'échéance. Par absence d'arbitrage, cette inégalité doit tenir à $t=0$ :
 $C_0 + K e^{-rT} \geq S_0 \implies C_0 \geq S_0 - K e^{-rT}$
 Comme un Call ne peut avoir un prix négatif, on a bien $C_0 \geq \max(0, S_0 - K e^{-rT})$.
+\navToExo{fsec2_ex13}
 \end{correctionbox}
 
+\targetCorr{fsec2_ex14}
 \begin{correctionbox}[Corrigé de l'exercice 14 : Borne inférieure du Put]
 Par la parité Call-Put : $P_0 = C_0 - S_0 + K e^{-rT}$.
 Puisque le prix d'un Call est toujours positif ou nul ($C_0 \ge 0$), nous avons :
 $P_0 \ge 0 - S_0 + K e^{-rT} \implies P_0 \ge K e^{-rT} - S_0$.
 Comme une option a une responsabilité limitée, son prix est toujours non négatif. 
 On obtient : $P_0 \ge \max(0, K e^{-rT} - S_0)$.
+\navToExo{fsec2_ex14}
 \end{correctionbox}
 
+\targetCorr{fsec2_ex15}
 \begin{correctionbox}[Corrigé de l'exercice 15 : Monotonie des Calls]
 Soit $K_1 < K_2$. À l'échéance $T$, le payoff du premier Call est $\max(S_T - K_1, 0)$ et celui du second est $\max(S_T - K_2, 0)$.
 Puisque $K_1 < K_2$, la quantité $(S_T - K_1)$ est toujours strictement supérieure à $(S_T - K_2)$.
 Par conséquent, $\max(S_T - K_1, 0) \ge \max(S_T - K_2, 0)$ dans tous les scénarios possibles.
 Puisque le Call $K_1$ paie toujours une somme supérieure ou égale au Call $K_2$, son prix initial doit être supérieur ou égal pour éviter un arbitrage :
 $C_0(K_1) \ge C_0(K_2)$.
+\navToExo{fsec2_ex15}
 \end{correctionbox}
 
+\targetCorr{fsec2_ex16}
 \begin{correctionbox}[Corrigé de l'exercice 16 : Inégalité des écarts de Strike]
 Construisons un Bull Spread : achetons le Call $K_1$ et vendons le Call $K_2$.
 Le coût initial est $C_0(K_1) - C_0(K_2)$.
@@ -1063,16 +1230,20 @@ Le coût initial est $C_0(K_1) - C_0(K_2)$.
 Le gain maximal de ce portefeuille à l'échéance est strictement plafonné à $(K_2 - K_1)$.
 Par absence d'arbitrage, le prix de ce portefeuille aujourd'hui ne peut pas excéder la valeur actualisée de son gain maximal garanti :
 $C_0(K_1) - C_0(K_2) \le (K_2 - K_1)e^{-rT}$.
+\navToExo{fsec2_ex16}
 \end{correctionbox}
 
+\targetCorr{fsec2_ex17}
 \begin{correctionbox}[Corrigé de l'exercice 17 : Non-optimalité de l'exercice anticipé]
 Nous savons (Exercice 13) que $C_{européen} \ge S_0 - K e^{-rT}$.
 Puisque $r > 0$, l'escompte fait que $K e^{-rT} < K$. Par conséquent :
 $C_{européen} > S_0 - K$.
 Si l'on exerce un Call américain par anticipation, le flux reçu est exactement $S_0 - K$ (la valeur intrinsèque). 
 Or, en vendant le Call sur le marché, on récupère au minimum la valeur d'un Call européen, soit une somme strictement supérieure à $S_0 - K$. Il est donc mathématiquement toujours plus rentable de revendre l'option que de l'exercer par anticipation. L'option de pouvoir l'exercer avant $T$ n'ayant aucune valeur pratique, on en déduit que $C_{américain} = C_{européen}$.
+\navToExo{fsec2_ex17}
 \end{correctionbox}
 
+\targetCorr{fsec2_ex18}
 \begin{correctionbox}[Corrigé de l'exercice 18 : Parité Call-Put Américaine]
 Puisqu'il n'y a pas de dividendes, $C_{am} = C_{eu}$.
 De plus, $P_{am} \ge P_{eu}$ car le Put américain offre le droit supplémentaire d'être exercé.
@@ -1084,8 +1255,10 @@ Portefeuille A : 1 Call américain + Cash $K$. Valeur $\ge C_{am} + K$.
 Portefeuille B : 1 Put américain + Action. Valeur = $P_{am} + S_0$.
 Si, à tout instant, le Put est exercé par son détenteur, B vaut $K - S + S = K$. Le Portefeuille A vaudra toujours au moins $K$ (car $C_{am} \ge 0$). Donc A $\ge$ B.
 $C_{am} + K \ge P_{am} + S_0 \implies C_{am} - P_{am} \ge S_0 - K$.
+\navToExo{fsec2_ex18}
 \end{correctionbox}
 
+\targetCorr{fsec2_ex19}
 \begin{correctionbox}[Corrigé de l'exercice 19 : Convexité]
 Posons un troisième Strike $K_3 = \lambda K_1 + (1-\lambda) K_2$.
 Construisons un portefeuille en achetant $\lambda$ Call $K_1$, $(1-\lambda)$ Call $K_2$, et en vendant 1 Call $K_3$.
@@ -1095,8 +1268,10 @@ $\lambda \max(S_T - K_1, 0) + (1-\lambda) \max(S_T - K_2, 0) \ge \max(S_T - K_3,
 Le payoff de notre portefeuille est donc toujours positif ou nul à l'échéance, quel que soit $S_T$.
 Pour éviter un arbitrage, sa valeur initiale doit être positive ou nulle :
 $\lambda C_0(K_1) + (1-\lambda) C_0(K_2) - C_0(K_3) \ge 0$, ce qui prouve la convexité.
+\navToExo{fsec2_ex19}
 \end{correctionbox}
 
+\targetCorr{fsec2_ex20}
 \begin{correctionbox}[Corrigé de l'exercice 20 : Coûts et Rendement d'opportunité]
 L'arbitrage de "Cash-and-Carry" s'adapte aux spécificités physiques :
 À t=0 :
@@ -1108,6 +1283,7 @@ L'actif engendre un coût de stockage continu $u$, mais rapporte un rendement d'
 La dette totale accumulée auprès de la banque (capital initial + intérêts + coûts de stockage financés - rendements réinvestis) s'élève mathématiquement à $S_0 e^{(r + u - c)T}$.
 On livre l'actif, on reçoit $F$. Pour éviter l'arbitrage, $F$ doit effacer exactement cette dette :
 $F = S_0 e^{(r + u - c)T}$.
+\navToExo{fsec2_ex20}
 \end{correctionbox}
 
 

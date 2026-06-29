@@ -67,6 +67,22 @@
 % --- GESTION DES LIENS HYPERTEXTE ---
 \usepackage[colorlinks=true, linkcolor=black, urlcolor=blue]{hyperref}
 
+% ==================================================================
+% --- BOUTONS DE NAVIGATION EXERCICES / CORRIGÉS ---
+% ==================================================================
+
+% 1. CIBLES INVISIBLES (À placer JUSTE AVANT l'environnement \begin)
+\newcommand{\targetExo}[1]{\hypertarget{exo_#1}{}}
+\newcommand{\targetCorr}[1]{\hypertarget{corr_#1}{}}
+
+% 2. BOUTONS CLIQUABLES (À placer JUSTE AVANT le \end de l'environnement)
+\newcommand{\navToCorr}[1]{%
+    \par\vspace{1mm}\noindent\hfill\hyperlink{corr_#1}{\scriptsize\sffamily\color{vscodeBlue}[$\rightarrow$ Voir le corrigé]}%
+}
+\newcommand{\navToExo}[1]{%
+    \par\vspace{1mm}\noindent\hfill\hyperlink{exo_#1}{\scriptsize\sffamily\color{vscodeBlue}[$\leftarrow$ Retour à l'énoncé]}%
+}
+
 % --- SOULIGNER LES TITRES ET SOUS-TITRES ---
 \sectionfont{\underline}
 \subsectionfont{\underline}

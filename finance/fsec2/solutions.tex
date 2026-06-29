@@ -1,138 +1,13 @@
 \subsection{Corrigés des exercices}
 
-\begin{correctionbox}[Corrigé de l'exercice 1 : Calcul de Delta simplifié]
-Le Delta ($\Delta$) représente le taux de variation du prix de l'option par rapport à la variation du prix de l'actif sous-jacent.
-\begin{itemize}[label=$\cdot$]
-    \item Si l'action monte à $S_u = 120$ €, le Call vaut $C_u = \max(120 - 100, 0) = 20$ €.
-    \item Si l'action baisse à $S_d = 80$ €, le Call vaut $C_d = \max(80 - 100, 0) = 0$ €.
-\end{itemize}
-La formule discrète du Delta est $\Delta = \frac{C_u - C_d}{S_u - S_d}$.
-\begin{equation*}
-    \Delta = \frac{20 - 0}{120 - 80} = \frac{20}{40} = 0,5
-\end{equation*}
-Le Delta est de $0,5$.
-\end{correctionbox}
-
-\begin{correctionbox}[Corrigé de l'exercice 2 : Couverture statique et non-arbitrage]
-1. Construction du portefeuille :\\
-Aujourd'hui, nous vendons 1 Call (prix $C_0$) et achetons $\Delta = 0,5$ action. 
-Coût initial : $0,5 \times 100 - C_0 = 50 - C_0$.
-
-2. Valeur à l'échéance :\\
-\begin{itemize}[label=$\cdot$]
-    \item Si $S_T = 120$ : Nos 0,5 actions valent 60 €. Le Call est exercé, nous devons 20 €. Net = $60 - 20 = 40$ €.
-    \item Si $S_T = 80$ : Nos 0,5 actions valent 40 €. Le Call vaut 0 €. Net = $40 - 0 = 40$ €.
-\end{itemize}
-Le portefeuille vaut 40 € de manière certaine, il est sans risque.
-
-3. Évaluation par actualisation :\\
-Puisque le taux sans risque est de 5\% sur la période, la valeur actuelle de ces 40 € garantis est $40 / 1,05 \approx 38,10$ €.
-Par absence d'arbitrage, le coût initial doit égaler cette valeur :
-\begin{equation*}
-    50 - C_0 = 38,10 \implies C_0 = 11,90 \text{ €}
-\end{equation*}
-\end{correctionbox}
-
-\begin{correctionbox}[Corrigé de l'exercice 3 : Prix d'un Forward (sans dividendes)]
-La formule de tarification par arbitrage (Cash-and-Carry) pour un actif ne versant pas de dividende est $F = S_0 e^{rT}$.
-\begin{itemize}[label=$\cdot$]
-    \item $S_0 = 150$
-    \item $r = 0,03$
-    \item $T = 9/12 = 0,75$ an
-\end{itemize}
-\begin{equation*}
-    F = 150 \times e^{0,03 \times 0,75} = 150 \times e^{0,0225} \approx 150 \times 1,02275 \approx 153,41 \text{ €}
-\end{equation*}
-\end{correctionbox}
-
-\begin{correctionbox}[Corrigé de l'exercice 4 : Prix d'un Forward (avec dividendes)]
-La formule intègre le rendement du dividende continu $d$ : $F = S_0 e^{(r-d)T}$.
-\begin{itemize}[label=$\cdot$]
-    \item $S_0 = 4 000$
-    \item $r = 0,04$ et $d = 0,02$
-    \item $T = 6/12 = 0,5$ an
-\end{itemize}
-\begin{equation*}
-    F = 4 000 \times e^{(0,04 - 0,02) \times 0,5} = 4 000 \times e^{0,01} \approx 4 040,20 \text{ points}
-\end{equation*}
-\end{correctionbox}
-
-\begin{correctionbox}[Corrigé de l'exercice 5 : Parité Call-Put]
-La relation de parité Call-Put s'écrit : $C - P = S_0 - K e^{-rT}$ (car $d=0$).
-Nous cherchons $P$ :
-\begin{equation*}
-    P = C - S_0 + K e^{-rT}
-\end{equation*}
-En remplaçant par les valeurs ($C=8,50$, $S_0=80$, $K=80$, $r=0,05$, $T=1$) :
-\begin{equation*}
-    P = 8,50 - 80 + 80 e^{-0,05} \approx 8,50 - 80 + 76,10 = 4,60 \text{ €}
-\end{equation*}
-\end{correctionbox}
-
-\begin{correctionbox}[Corrigé de l'exercice 6 : Vérification des bornes]
-La valeur intrinsèque du Call aujourd'hui est $S_0 - K = 100 - 95 = 5$ €.
-L'option cote 3 €. Cela signifie qu'elle est vendue en dessous de sa valeur immédiate.
-Un arbitrageur achèterait l'option à 3 €, achèterait virtuellement l'action à 95 € grâce au Call, et la revendrait immédiatement à 100 € sur le marché.
-Gain : $100 - 95 - 3 = 2$ € de profit immédiat sans risque. C'est une violation de la borne inférieure stricte $C_0 \ge \max(0, S_0 - K e^{-rT})$.
-\end{correctionbox}
-
-\begin{correctionbox}[Corrigé de l'exercice 7 : Valeur d'un contrat en cours]
-La valeur $V$ d'une position longue sur un Forward dont le prix d'exercice historique est $K$ s'obtient par la formule :
-$V = S_t - K e^{-rT_{restant}}$
-\begin{itemize}[label=$\cdot$]
-    \item $S_t = 110$
-    \item $K = 102$
-    \item $r = 0,04$ et $T_{restant} = 0,5$ an
-\end{itemize}
-\begin{equation*}
-    V = 110 - 102 \times e^{-0,04 \times 0,5} = 110 - 102 \times e^{-0,02} \approx 110 - 99,98 = 10,02 \text{ €}
-\end{equation*}
-La valeur du contrat est de 10,02 €.
-\end{correctionbox}
-
-\begin{correctionbox}[Corrigé de l'exercice 8 : Cash-and-Carry]
-1. Prix théorique :\\
-$F_{th} = 200 \times e^{0,02 \times 1} \approx 204,04$ €. Le marché cote 210 €, le Forward est donc surévalué.
-
-2. Stratégie (Cash-and-Carry) à t=0 :\\
-\begin{itemize}[label=$\cdot$]
-    \item Vendre le Forward à 210 € (flux nul).
-    \item Emprunter 200 € à 2\% (flux : +200 €).
-    \item Acheter l'action à 200 € (flux : -200 €). Flux net initial = 0.
-\end{itemize}
-3. À l'échéance T=1 :\\
-\begin{itemize}[label=$\cdot$]
-    \item Livrer l'action et recevoir 210 €.
-    \item Rembourser la dette et ses intérêts : $200 \times e^{0,02} = 204,04$ €.
-    \item Profit net sans risque : $210 - 204,04 = 5,96$ €.
-\end{itemize}
-\end{correctionbox}
-
-\begin{correctionbox}[Corrigé de l'exercice 9 : Reverse Cash-and-Carry]
-Le marché cote $F = 195$ €, ce qui est inférieur au prix théorique (204,04 €). Le contrat est sous-évalué.
-
-Stratégie à t=0 :
-\begin{itemize}[label=$\cdot$]
-    \item Acheter le contrat Forward à 195 € (flux nul).
-    \item Vendre l'action à découvert sur le marché spot (flux : +200 €).
-    \item Placer ces 200 € à la banque au taux sans risque de 2\% (flux : -200 €). Flux net = 0.
-\end{itemize}
-À l'échéance T=1 :
-\begin{itemize}[label=$\cdot$]
-    \item Récupérer le placement avec intérêts : $200 \times e^{0,02} = 204,04$ €.
-    \item Payer 195 € pour acheter l'action (en vertu du Forward).
-    \item Rendre l'action au prêteur initial pour boucler la vente à découvert.
-    \item Profit net sans risque : $204,04 - 195 = 9,04$ €.
-\end{itemize}
-\end{correctionbox}
-
-\begin{correctionbox}[Corrigé de l'exercice 10 : Arbitrage Parité Call-Put]
+\targetCorr{fsec2_ex1}
+\begin{correctionbox}[Corrigé de l'exercice 1 : Arbitrage Parité Call-Put]
 Calcul de la relation théorique : $C - P = 10 - 8 = 2$.
 Calcul de $S_0 - K e^{-rT} = 100 - 100 \times e^{-0,05} \approx 100 - 95,12 = 4,88$.
 Puisque $2 < 4,88$, la relation n'est pas respectée. Le côté gauche (les options) est sous-évalué par rapport au côté droit.
 
 Portefeuille d'arbitrage à t=0 :
-On achète ce qui est "pas cher" ($C - P$) et on vend ce qui est "cher" ($S_0 - K e^{-rT}$) :
+On achète ce qui est moins cher ($C - P$) et on vend ce qui est plus cher ($S_0 - K e^{-rT}$) :
 \begin{itemize}[label=$\cdot$]
     \item Acheter le Call (-10 €) et vendre le Put (+8 €).
     \item Vendre l'action à découvert (+100 €) et prêter la différence au taux sans risque.
@@ -143,28 +18,12 @@ Le placement rapporte $98 \times e^{0,05} \approx 103,02$ €.
 Si $S_T > 100$, on exerce le Call : on achète l'action à 100 pour la rendre. Coût : -100 €.
 Si $S_T \le 100$, l'acheteur exerce le Put : on doit lui acheter l'action à 100. Coût : -100 €.
 Dans les deux cas, le coût final est de 100 €.
-Profit net : $103,02 - 100 = 3,02$ € (strictement sans risque).
+Profit net : $103,02 - 100 = 3,02$ € (sans risque).
+\navToExo{fsec2_ex1}
 \end{correctionbox}
 
-\begin{correctionbox}[Corrigé de l'exercice 11 : Parité avec dividende discret]
-Construisons deux portefeuilles :
-Portefeuille A : Un Call + du cash équivalent à la valeur présente du Strike et du dividende ($K e^{-rT} + D e^{-rt}$).
-Portefeuille B : Un Put + l'action sous-jacente.
-
-Regardons les valeurs à l'échéance $T$ :
-Le portefeuille B voit son action détacher un dividende en $t$, réinvesti au taux sans risque jusqu'en $T$, générant $D e^{r(T-t)}$. À $T$, la valeur de l'action est $S_T$.
-À l'échéance, la réplication des flux impose que ces deux portefeuilles aient la même valeur. Ainsi, à $t=0$, la relation devient :
-\begin{equation*}
-    C_0 + K e^{-rT} + D e^{-rt} = P_0 + S_0 \implies C_0 - P_0 = S_0 - D e^{-rt} - K e^{-rT}
-\end{equation*}
-\end{correctionbox}
-
-\begin{correctionbox}[Corrigé de l'exercice 12 : Risque de la couverture dynamique]
-Le Delta $\Delta$ correspond à la pente de la tangente de la courbe du prix de l'option. Or, cette courbe n'est pas linéaire (elle est convexe). Si l'on ne rééquilibre qu'une fois par semaine, le cours de l'action va s'éloigner du point de tangence initial. La variation réelle du prix de l'option ne correspondra plus à l'approximation linéaire fournie par le Delta.
-Ce risque lié à la courbure s'appelle le Gamma. Le portefeuille subit une erreur de discrétisation (coût de rééquilibrage non permanent) qui introduit un risque directionnel temporaire.
-\end{correctionbox}
-
-\begin{correctionbox}[Corrigé de l'exercice 13 : Borne inférieure du Call]
+\targetCorr{fsec2_ex2}
+\begin{correctionbox}[Corrigé de l'exercice 2 : Borne inférieure du Call]
 Considérons deux portefeuilles :
 Portefeuille A : 1 Call européen + $K e^{-rT}$ investis au taux sans risque.
 Valeur à l'échéance $T$ : $\max(S_T - K, 0) + K = \max(S_T, K)$.
@@ -172,81 +31,33 @@ Portefeuille B : 1 Action $S$.
 Valeur à l'échéance $T$ : $S_T$.
 
 Puisque $\max(S_T, K) \geq S_T$ pour tout $S_T$, le Portefeuille A vaudra toujours au moins autant que le Portefeuille B à l'échéance. Par absence d'arbitrage, cette inégalité doit tenir à $t=0$ :
-$C_0 + K e^{-rT} \geq S_0 \implies C_0 \geq S_0 - K e^{-rT}$
+$C_0 + K e^{-rT} \geq S_0 \implies C_0 \geq S_0 - K e^{-rT}$.
 Comme un Call ne peut avoir un prix négatif, on a bien $C_0 \geq \max(0, S_0 - K e^{-rT})$.
+\navToExo{fsec2_ex2}
 \end{correctionbox}
 
-\begin{correctionbox}[Corrigé de l'exercice 14 : Borne inférieure du Put]
+\targetCorr{fsec2_ex3}
+\begin{correctionbox}[Corrigé de l'exercice 3 : Borne inférieure du Put]
 Par la parité Call-Put : $P_0 = C_0 - S_0 + K e^{-rT}$.
 Puisque le prix d'un Call est toujours positif ou nul ($C_0 \ge 0$), nous avons :
 $P_0 \ge 0 - S_0 + K e^{-rT} \implies P_0 \ge K e^{-rT} - S_0$.
 Comme une option a une responsabilité limitée, son prix est toujours non négatif. 
 On obtient : $P_0 \ge \max(0, K e^{-rT} - S_0)$.
+\navToExo{fsec2_ex3}
 \end{correctionbox}
 
-\begin{correctionbox}[Corrigé de l'exercice 15 : Monotonie des Calls]
-Soit $K_1 < K_2$. À l'échéance $T$, le payoff du premier Call est $\max(S_T - K_1, 0)$ et celui du second est $\max(S_T - K_2, 0)$.
-Puisque $K_1 < K_2$, la quantité $(S_T - K_1)$ est toujours strictement supérieure à $(S_T - K_2)$.
-Par conséquent, $\max(S_T - K_1, 0) \ge \max(S_T - K_2, 0)$ dans tous les scénarios possibles.
-Puisque le Call $K_1$ paie toujours une somme supérieure ou égale au Call $K_2$, son prix initial doit être supérieur ou égal pour éviter un arbitrage :
-$C_0(K_1) \ge C_0(K_2)$.
-\end{correctionbox}
-
-\begin{correctionbox}[Corrigé de l'exercice 16 : Inégalité des écarts de Strike]
+\targetCorr{fsec2_ex4}
+\begin{correctionbox}[Corrigé de l'exercice 4 : Inégalité des écarts de Strike]
 Construisons un Bull Spread : achetons le Call $K_1$ et vendons le Call $K_2$.
 Le coût initial est $C_0(K_1) - C_0(K_2)$.
 À l'échéance, le payoff de ce portefeuille est :
 \begin{itemize}[label=$\cdot$]
     \item Si $S_T \le K_1$ : $0 - 0 = 0$.
-    \item Si $K_1 < S_T \le K_2$ : $S_T - K_1 - 0 = S_T - K_1$ (max est $K_2 - K_1$).
+    \item Si $K_1 < S_T \le K_2$ : $S_T - K_1 - 0 = S_T - K_1$ (le maximum est $K_2 - K_1$).
     \item Si $S_T > K_2$ : $(S_T - K_1) - (S_T - K_2) = K_2 - K_1$.
 \end{itemize}
-Le gain maximal de ce portefeuille à l'échéance est strictement plafonné à $(K_2 - K_1)$.
+Le gain maximal de ce portefeuille à l'échéance est plafonné à $(K_2 - K_1)$.
 Par absence d'arbitrage, le prix de ce portefeuille aujourd'hui ne peut pas excéder la valeur actualisée de son gain maximal garanti :
 $C_0(K_1) - C_0(K_2) \le (K_2 - K_1)e^{-rT}$.
-\end{correctionbox}
-
-\begin{correctionbox}[Corrigé de l'exercice 17 : Non-optimalité de l'exercice anticipé]
-Nous savons (Exercice 13) que $C_{européen} \ge S_0 - K e^{-rT}$.
-Puisque $r > 0$, l'escompte fait que $K e^{-rT} < K$. Par conséquent :
-$C_{européen} > S_0 - K$.
-Si l'on exerce un Call américain par anticipation, le flux reçu est exactement $S_0 - K$ (la valeur intrinsèque). 
-Or, en vendant le Call sur le marché, on récupère au minimum la valeur d'un Call européen, soit une somme strictement supérieure à $S_0 - K$. Il est donc mathématiquement toujours plus rentable de revendre l'option que de l'exercer par anticipation. L'option de pouvoir l'exercer avant $T$ n'ayant aucune valeur pratique, on en déduit que $C_{américain} = C_{européen}$.
-\end{correctionbox}
-
-\begin{correctionbox}[Corrigé de l'exercice 18 : Parité Call-Put Américaine]
-Puisqu'il n'y a pas de dividendes, $C_{am} = C_{eu}$.
-De plus, $P_{am} \ge P_{eu}$ car le Put américain offre le droit supplémentaire d'être exercé.
-En partant de la parité européenne $C_{eu} - P_{eu} = S_0 - K e^{-rT}$, on a :
-$C_{am} - P_{am} \le C_{eu} - P_{eu} \implies C_{am} - P_{am} \le S_0 - K e^{-rT}$ (Borne supérieure).
-
-Pour la borne inférieure, comparons deux portefeuilles :
-Portefeuille A : 1 Call américain + Cash $K$. Valeur $\ge C_{am} + K$.
-Portefeuille B : 1 Put américain + Action. Valeur = $P_{am} + S_0$.
-Si, à tout instant, le Put est exercé par son détenteur, B vaut $K - S + S = K$. Le Portefeuille A vaudra toujours au moins $K$ (car $C_{am} \ge 0$). Donc A $\ge$ B.
-$C_{am} + K \ge P_{am} + S_0 \implies C_{am} - P_{am} \ge S_0 - K$.
-\end{correctionbox}
-
-\begin{correctionbox}[Corrigé de l'exercice 19 : Convexité]
-Posons un troisième Strike $K_3 = \lambda K_1 + (1-\lambda) K_2$.
-Construisons un portefeuille en achetant $\lambda$ Call $K_1$, $(1-\lambda)$ Call $K_2$, et en vendant 1 Call $K_3$.
-Analysons la fonction de payoff $f(K) = \max(S - K, 0)$ à l'échéance. Cette fonction "max" est mathématiquement convexe par rapport à la variable $K$.
-Par définition de la convexité d'une fonction :
-$\lambda \max(S_T - K_1, 0) + (1-\lambda) \max(S_T - K_2, 0) \ge \max(S_T - K_3, 0)$.
-Le payoff de notre portefeuille est donc toujours positif ou nul à l'échéance, quel que soit $S_T$.
-Pour éviter un arbitrage, sa valeur initiale doit être positive ou nulle :
-$\lambda C_0(K_1) + (1-\lambda) C_0(K_2) - C_0(K_3) \ge 0$, ce qui prouve la convexité.
-\end{correctionbox}
-
-\begin{correctionbox}[Corrigé de l'exercice 20 : Coûts et Rendement d'opportunité]
-L'arbitrage de "Cash-and-Carry" s'adapte aux spécificités physiques :
-À t=0 :
-1. Vendre le Forward au prix $F$.
-2. Emprunter $S_0$ pour acheter l'actif physique.
-Pendant la période $[0, T]$ :
-L'actif engendre un coût de stockage continu $u$, mais rapporte un rendement d'opportunité $c$. Le flux net de détention à financer est $(u - c)$. Combiné au coût du financement initial $r$, le coût total du portage continu est de $(r + u - c)$.
-À t=T :
-La dette totale accumulée auprès de la banque (capital initial + intérêts + coûts de stockage financés - rendements réinvestis) s'élève mathématiquement à $S_0 e^{(r + u - c)T}$.
-On livre l'actif, on reçoit $F$. Pour éviter l'arbitrage, $F$ doit effacer exactement cette dette :
-$F = S_0 e^{(r + u - c)T}$.
+\navToExo{fsec2_ex4}
 \end{correctionbox}
