@@ -1,9 +1,8 @@
-
 \section{Fondements et Introduction aux Options}
 
 \subsection{L'Environnement Financier de Base}
 
-Un principe fondamental en finance stipule qu'un euro aujourd'hui vaut plus qu'un euro demain. Ce postulat repose sur le fait que l'argent disponible aujourd'hui peut être investi pour générer un rendement. Pour comparer des flux financiers se produisant à des dates différentes, nous devons utiliser un taux d'intérêt pour "déplacer" ces montants dans le temps.
+Un principe fondamental en finance stipule qu'un euro aujourd'hui vaut plus qu'un euro demain. Ce postulat repose sur le fait que l'argent disponible aujourd'hui peut être investi pour générer un rendement. Pour comparer des flux financiers se produisant à des dates différentes, nous devons utiliser un taux d'intérêt pour déplacer ces montants dans le temps.
 
 \begin{definitionbox}[Le Taux Sans Risque]
 Le taux sans risque (noté $r$) est le taux de rendement d'un investissement pour lequel il n'y a absolument aucun risque de défaut (généralement modélisé par les obligations d'États très solides). 
@@ -19,6 +18,22 @@ En finance de marché moderne, on utilise systématiquement la composition conti
     \label{eq:fsec1-actualisation}
     C_0 = C_T e^{-rT}
 \end{equation}
+
+\vspace{0.5cm}
+\begin{center}
+\begin{tikzpicture}[>=stealth, scale=0.9]
+    \draw[->, thick] (0,0) -- (6,0) node[right, font=\footnotesize] {Temps};
+    \node[below, font=\footnotesize] at (1,0) {$t=0$};
+    \node[below, font=\footnotesize] at (5,0) {$t=T$};
+    \draw (1,-0.1) -- (1,0.1);
+    \draw (5,-0.1) -- (5,0.1);
+    
+    \draw[->, vscodeBlue, thick, bend left=30] (1,0.3) to node[above, font=\footnotesize] {Capitalisation ($C_T = C_0 e^{rT}$)} (5,0.3);
+    
+    \draw[->, vscodeOrange, thick, bend left=30] (5,-0.5) to node[below, font=\footnotesize] {Actualisation ($C_0 = C_T e^{-rT}$)} (1,-0.5);
+\end{tikzpicture}
+\end{center}
+\vspace{0.5cm}
 
 \begin{definitionbox}[L'Actif Sous-jacent]
 Un produit dérivé est un instrument financier dont la valeur dépend (dérive) du prix d'un autre actif, appelé actif sous-jacent (noté $S$). Il peut s'agir d'une action, d'un indice boursier, d'une devise ou d'une matière première. 
@@ -40,7 +55,7 @@ Les caractéristiques fondamentales sont :
 \end{definitionbox}
 
 \begin{remarquebox}[Options Européennes vs Américaines]
-Il existe deux grands "styles" d'options qui définissent quand l'acheteur peut exercer son droit :
+Il existe deux grands styles d'options qui définissent quand l'acheteur peut exercer son droit :
 \begin{itemize}[label=$\cdot$]
     \item Option Européenne : L'exercice ne peut se faire \textit{qu'à la date d'échéance} exacte $T$.
     \item Option Américaine : L'exercice peut se faire \textit{à tout moment} entre aujourd'hui et la date d'échéance $T$.
@@ -72,10 +87,31 @@ Le Profit net de l'investisseur prend en compte le coût initial de l'option (la
 \end{equation}
 \textit{(Note : Pour simplifier, nous ignorons ici la capitalisation de la prime jusqu'en T).}
 
+\vspace{0.5cm}
+\begin{center}
+\begin{tikzpicture}[>=stealth, scale=0.85]
+    \draw[->] (0,0) -- (6,0) node[right, font=\footnotesize] {$S_T$};
+    \draw[->] (0,-1.5) -- (0,3.5) node[above, font=\footnotesize] {Résultat};
+    
+    \def\K{2.5}
+    \def\P{0.8}
+    \def\MaxS{5}
+    
+    \draw[dashed, gray] (\K,0) node[above, font=\footnotesize] {$K$} -- (\K,-\P);
+    \draw[dashed, gray] (0,-\P) node[left, font=\footnotesize] {$-C_0$} -- (\K,-\P);
+    
+    \draw[thick, vscodeGray] (0,0) -- (\K,0) -- (\MaxS, \MaxS-\K) node[right, font=\footnotesize] {Payoff};
+    \draw[thick, vscodeBlue] (0,-\P) -- (\K,-\P) -- (\MaxS, \MaxS-\K-\P) node[right, font=\footnotesize] {Profit};
+    
+    \filldraw (\K+\P,0) circle (2pt) node[below right, font=\footnotesize] {Point mort};
+\end{tikzpicture}
+\end{center}
+\vspace{0.5cm}
+
 \begin{examplebox}[Mécanique du Call]
 Vous achetez un Call sur l'action Total avec un Strike $K = 50$ €, pour une prime de $3$ €.
 \begin{itemize}[label=$\cdot$]
-    \item Cas 1 : L'action monte à $60$ €. Vous exercez le droit d'acheter à $50$ €. Vous gagnez $10$ € (Payoff). Votre profit net est $10 - 3 = 7$ €.
+    \item Cas 1 : L'action monte à $60$ €. Vous exercez le droit d'acheter à $50$ €. Vous gagnez $10$ € (selon l'équation \ref{eq:fsec1-payoff_call}). Votre profit net est $10 - 3 = 7$ €.
     \item Cas 2 : L'action stagne à $40$ €. Vous n'exercez pas le droit d'acheter à $50$ € (vous l'achèteriez à $40$ € sur le marché). Payoff = $0$ €. Vous perdez votre prime, profit net = $-3$ €.
 \end{itemize}
 \end{examplebox}
@@ -103,6 +139,26 @@ Le profit net, en tenant compte de la prime payée $P_0$, est :
     \text{Profit} = \max(K - S_T, 0) - P_0
 \end{equation}
 
+\vspace{0.5cm}
+\begin{center}
+\begin{tikzpicture}[>=stealth, scale=0.85]
+    \draw[->] (0,0) -- (6,0) node[right, font=\footnotesize] {$S_T$};
+    \draw[->] (0,-1.5) -- (0,3.5) node[above, font=\footnotesize] {Résultat};
+    
+    \def\K{3.5}
+    \def\P{0.8}
+    
+    \draw[dashed, gray] (\K,0) node[above right, font=\footnotesize] {$K$} -- (\K,-\P);
+    \draw[dashed, gray] (0,-\P) node[left, font=\footnotesize] {$-P_0$} -- (\K,-\P);
+    
+    \draw[thick, vscodeGray] (0,\K) -- (\K,0) -- (5.5,0) node[above, font=\footnotesize] {Payoff};
+    \draw[thick, vscodeOrange] (0,\K-\P) -- (\K,-\P) -- (5.5,-\P) node[right, font=\footnotesize] {Profit};
+    
+    \filldraw (\K-\P,0) circle (2pt) node[below left, font=\footnotesize] {Point mort};
+\end{tikzpicture}
+\end{center}
+\vspace{0.5cm}
+
 \subsection{Positions et Asymétrie des Risques}
 
 Les marchés d'options sont un jeu à somme nulle. Pour qu'une personne puisse acheter un Call (Position Longue), une autre personne doit lui vendre ce Call (Position Courte). Le profil de gain de l'acheteur est exactement l'inverse (le miroir) du profil de perte du vendeur.
@@ -111,11 +167,59 @@ Les marchés d'options sont un jeu à somme nulle. Pour qu'une personne puisse a
 Sur le marché des options, un acteur peut prendre 4 positions distinctes :
 \begin{enumerate}
     \item Long Call (Achat de Call) : Parie à la hausse. Gain potentiel illimité, perte maximale limitée à la prime payée.
-    \item Short Call (Vente de Call) : Parie à la stagnation/baisse. Gain maximal limité à la prime reçue, perte potentielle \textit{illimitée} (très risqué).
+    \item Short Call (Vente de Call) : Parie à la stagnation/baisse. Gain maximal limité à la prime reçue, perte potentielle illimitée (très risqué).
     \item Long Put (Achat de Put) : Parie à la baisse. Gain potentiel très important (jusqu'à ce que l'action vaille 0), perte maximale limitée à la prime.
     \item Short Put (Vente de Put) : Parie à la stagnation/hausse. Gain maximal limité à la prime, perte potentielle très importante (si l'action chute à 0).
 \end{enumerate}
 \end{definitionbox}
+
+\vspace{0.5cm}
+\begin{center}
+\begin{tikzpicture}[>=stealth, scale=0.85]
+    % Paramètres globaux pour les 4 graphiques
+    \def\K{1.5}
+    \def\P{0.5}
+    \def\MaxS{3.2}
+    
+    % Limites Y pour garantir un alignement horizontal parfait
+    \def\Ymin{-1.8}
+    \def\Ymax{1.8}
+    \def\Xshift{4.4} % Espacement horizontal
+    
+    % ----------------- LONG CALL -----------------
+    \begin{scope}[shift={(0,0)}]
+        \draw[->] (0,0) -- (\MaxS,0) node[right, font=\footnotesize] {$S_T$};
+        \draw[->] (0,\Ymin) -- (0,\Ymax) node[above, font=\footnotesize] {Long Call};
+        \draw[thick, vscodeBlue] (0,-\P) -- (\K,-\P) -- (\MaxS, \MaxS-\K-\P);
+        \draw[dashed] (\K,0) node[above, font=\footnotesize] {$K$} -- (\K,-\P);
+    \end{scope}
+    
+    % ----------------- SHORT CALL -----------------
+    \begin{scope}[shift={(1*\Xshift,0)}]
+        \draw[->] (0,0) -- (\MaxS,0) node[right, font=\footnotesize] {$S_T$};
+        \draw[->] (0,\Ymin) -- (0,\Ymax) node[above, font=\footnotesize] {Short Call};
+        \draw[thick, vscodeBlue] (0,\P) -- (\K,\P) -- (\MaxS, -\MaxS+\K+\P);
+        \draw[dashed] (\K,0) node[below, font=\footnotesize] {$K$} -- (\K,\P);
+    \end{scope}
+    
+    % ----------------- LONG PUT -----------------
+    \begin{scope}[shift={(2*\Xshift,0)}]
+        \draw[->] (0,0) -- (\MaxS,0) node[right, font=\footnotesize] {$S_T$};
+        \draw[->] (0,\Ymin) -- (0,\Ymax) node[above, font=\footnotesize] {Long Put};
+        \draw[thick, vscodeOrange] (0,\K-\P) -- (\K,-\P) -- (\MaxS, -\P);
+        \draw[dashed] (\K,0) node[above, font=\footnotesize] {$K$} -- (\K,-\P);
+    \end{scope}
+    
+    % ----------------- SHORT PUT -----------------
+    \begin{scope}[shift={(3*\Xshift,0)}]
+        \draw[->] (0,0) -- (\MaxS,0) node[right, font=\footnotesize] {$S_T$};
+        \draw[->] (0,\Ymin) -- (0,\Ymax) node[above, font=\footnotesize] {Short Put};
+        \draw[thick, vscodeOrange] (0,-\K+\P) -- (\K,\P) -- (\MaxS, \P);
+        \draw[dashed] (\K,0) node[below, font=\footnotesize] {$K$} -- (\K,\P);
+    \end{scope}
+\end{tikzpicture}
+\end{center}
+\vspace{0.5cm}
 
 \begin{definitionbox}[Le statut (Moneyness) de l'option]
 Le statut d'une option décrit si elle a une valeur intrinsèque immédiate (si on l'exerçait tout de suite) par rapport au prix actuel du sous-jacent $S$ :
@@ -127,3 +231,25 @@ Le statut d'une option décrit si elle a une valeur intrinsèque immédiate (si 
     \item À la monnaie (At The Money, ATM) : Le prix de l'actif est exactement égal au strike ($S = K$).
 \end{itemize}
 \end{definitionbox}
+
+\vspace{0.5cm}
+\begin{center}
+\begin{tikzpicture}[>=stealth, scale=0.85]
+    \draw[->] (0,0) -- (6,0) node[right, font=\footnotesize] {$S_T$};
+    \draw[->] (0,-0.8) -- (0,3.5) node[above, font=\footnotesize] {Payoff du Call};
+    
+    \def\K{3}
+    
+    % Rectangles
+    \fill[vscodeOrange, opacity=0.1] (0,0) rectangle (\K,3.3);
+    \node[vscodeOrange, align=center, text width=3cm, font=\footnotesize] at (\K/2, 2.8) {Hors de la\\monnaie (OTM)};
+    
+    \fill[vscodeGreen, opacity=0.1] (\K,0) rectangle (5.5,3.3);
+    \node[vscodeGreen, align=center, text width=3cm, font=\footnotesize] at (\K + 1.25, 2.8) {Dans la\\monnaie (ITM)};
+    
+    \draw[thick, vscodeBlue] (0,0) -- (\K,0) -- (5.5, 5.5-\K);
+    
+    \draw[thick] (\K, -0.1) -- (\K, 0.1) node[below=0.2cm, font=\footnotesize] {Strike $K$ (ATM)};
+\end{tikzpicture}
+\end{center}
+\vspace{0.5cm}
