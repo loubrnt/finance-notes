@@ -1,139 +1,36 @@
 \subsection{Exercices}
 
 \targetExo{fsec1_ex1}
-\begin{exercicebox}[Exercice 1 : Capitalisation continue]
-Vous placez la somme de $10 000$ € sur un compte offrant un taux d'intérêt sans risque composé en continu de $4\%$ par an. 
-Quelle sera la valeur exacte de votre capital dans 3 ans ?
+\begin{exercicebox}[Exercice 1 : Profit d'une position Long Call]
+Vous avez acheté un Call de Strike $100$ € pour une prime de $5$ €. À l'échéance, le sous-jacent vaut $112$ €. 
+Calculez votre Payoff, puis déduisez-en votre profit net (en ignorant la valeur temporelle de la prime).
 \navToCorr{fsec1_ex1}
 \end{exercicebox}
 
 \targetExo{fsec1_ex2}
-\begin{exercicebox}[Exercice 2 : Actualisation continue]
-Vous êtes certain de recevoir un flux de $5 000$ € dans 6 mois (soit $0,5$ année). Le taux d'intérêt continu sur le marché est de $3\%$ par an. 
-Quelle est la valeur actuelle (la valeur aujourd'hui) de ce flux financier ?
+\begin{exercicebox}[Exercice 2 : Profit d'une position Short Put]
+Vous vendez un Put de Strike $K = 200$ € et encaissez immédiatement une prime de $10$ €. À l'échéance, l'action cote $185$ €. 
+L'acheteur exerce-t-il son option contre vous ? Quel est votre profit (ou perte) net ?
 \navToCorr{fsec1_ex2}
 \end{exercicebox}
 
 \targetExo{fsec1_ex3}
-\begin{exercicebox}[Exercice 3 : Taux annuel effectif et taux continu]
-Une banque vous propose un placement avec un rendement garanti de $5,127\%$ par an (taux annuel effectif). 
-Quel est le taux d'intérêt composé en continu $r$ qui correspond exactement à ce taux effectif ?
+\begin{exercicebox}[Exercice 3 : Statut d'un Call (Moneyness)]
+L'action Apple cote actuellement $175$ \$. Vous observez trois Calls européens sur le marché avec des Strikes différents : $K_1 = 160$ \$, $K_2 = 175$ \$, et $K_3 = 190$ \$. 
+Déterminez le statut (ITM, OTM, ou ATM) de chacune de ces trois options aujourd'hui.
 \navToCorr{fsec1_ex3}
 \end{exercicebox}
 
 \targetExo{fsec1_ex4}
-\begin{exercicebox}[Exercice 4 : Payoff d'un Call]
-Vous possédez une option d'achat (Call) de prix d'exercice $K = 120$ €. À l'échéance, le prix de l'action sous-jacente est $S_T = 135$ €. 
-Quel est le flux final (Payoff) généré par cette option ? Allez-vous l'exercer ?
+\begin{exercicebox}[Exercice 4 : Combinaison de flux]
+Vous construisez le portefeuille suivant aujourd'hui : vous achetez 1 action à $S_0 = 100$ € et vous achetez 1 Put de Strike $K = 100$ €.
+Écrivez mathématiquement la valeur de ce portefeuille à l'échéance $T$ en fonction de $S_T$. Montrez que ce profil de flux ressemble fortement à un produit dérivé bien connu (Stratégie dite du Protective Put).
 \navToCorr{fsec1_ex4}
 \end{exercicebox}
 
 \targetExo{fsec1_ex5}
-\begin{exercicebox}[Exercice 5 : Payoff d'un Put]
-Vous détenez une option de vente (Put) avec un Strike $K = 80$ €. À l'expiration, l'action cote $S_T = 85$ €. 
-Quel est le Payoff de ce Put ? L'option est-elle exercée ?
-\navToCorr{fsec1_ex5}
-\end{exercicebox}
-
-\targetExo{fsec1_ex6}
-\begin{exercicebox}[Exercice 6 : Profit d'une position Long Call]
-Vous avez acheté un Call de Strike $100$ € pour une prime de $5$ €. À l'échéance, le sous-jacent vaut $112$ €. 
-Calculez votre Payoff, puis déduisez-en votre profit net (en ignorant la valeur temporelle de la prime).
-\navToCorr{fsec1_ex6}
-\end{exercicebox}
-
-\targetExo{fsec1_ex7}
-\begin{exercicebox}[Exercice 7 : Profit d'une position Short Call]
-En reprenant les données de l'exercice 6, placez-vous du côté du vendeur de cette option (Short Call). Le vendeur a encaissé la prime de $5$ € au départ. À l'échéance, l'action vaut $112$ €. 
-Calculez le flux final que le vendeur doit payer, puis son profit net global.
-\navToCorr{fsec1_ex7}
-\end{exercicebox}
-
-\targetExo{fsec1_ex8}
-\begin{exercicebox}[Exercice 8 : Profit d'une position Long Put]
-Vous achetez un Put de Strike $K = 50$ € pour une prime de $4$ €. Le jour de l'échéance, la société annonce de mauvais résultats et l'action s'effondre à $30$ €. 
-Calculez votre profit net sur cette opération.
-\navToCorr{fsec1_ex8}
-\end{exercicebox}
-
-\targetExo{fsec1_ex9}
-\begin{exercicebox}[Exercice 9 : Profit d'une position Short Put]
-Vous vendez un Put de Strike $K = 200$ € et encaissez immédiatement une prime de $10$ €. À l'échéance, l'action cote $185$ €. 
-L'acheteur exerce-t-il son option contre vous ? Quel est votre profit (ou perte) net ?
-\navToCorr{fsec1_ex9}
-\end{exercicebox}
-
-\targetExo{fsec1_ex10}
-\begin{exercicebox}[Exercice 10 : Statut d'un Call (Moneyness)]
-L'action Apple cote actuellement $175$ \$. Vous observez trois Calls européens sur le marché avec des Strikes différents : $K_1 = 160$ \$, $K_2 = 175$ \$, et $K_3 = 190$ \$. 
-Déterminez le statut (ITM, OTM, ou ATM) de chacune de ces trois options aujourd'hui.
-\navToCorr{fsec1_ex10}
-\end{exercicebox}
-
-\targetExo{fsec1_ex11}
-\begin{exercicebox}[Exercice 11 : Statut d'un Put (Moneyness)]
-L'action LVMH cote aujourd'hui $800$ €. Vous analysez trois Puts de Strikes respectifs : $K_A = 750$ €, $K_B = 800$ €, et $K_C = 850$ €. 
-Indiquez pour chacun s'il est Dans la monnaie (ITM), À la monnaie (ATM) ou Hors de la monnaie (OTM).
-\navToCorr{fsec1_ex11}
-\end{exercicebox}
-
-\targetExo{fsec1_ex12}
-\begin{exercicebox}[Exercice 12 : Point mort (Break-even) d'un Call]
-Vous achetez un Call de Strike $K = 60$ € pour une prime de $3,50$ €. 
-À quel prix exact doit se trouver l'action à l'échéance pour que votre profit net soit exactement de $0$ € (votre "point mort") ?
-\navToCorr{fsec1_ex12}
-\end{exercicebox}
-
-\targetExo{fsec1_ex13}
-\begin{exercicebox}[Exercice 13 : Point mort (Break-even) d'un Put]
-Vous achetez un Put de Strike $K = 45$ € pour une prime de $2$ €. 
-Déterminez le prix du sous-jacent à l'échéance qui vous permet de rembourser exactement votre investissement initial.
-\navToCorr{fsec1_ex13}
-\end{exercicebox}
-
-\targetExo{fsec1_ex14}
-\begin{exercicebox}[Exercice 14 : Profil de perte maximale (Acheteur)]
-Vous achetez $10$ Calls de Strike $K = 100$ €. La prime unitaire est de $6$ €. 
-Quel est le montant maximum que vous pouvez perdre sur cette stratégie, quelle que soit l'évolution du marché ?
-\navToCorr{fsec1_ex14}
-\end{exercicebox}
-
-\targetExo{fsec1_ex15}
-\begin{exercicebox}[Exercice 15 : Profil de perte potentielle (Vendeur)]
-Vous vendez à découvert (Short Call) $10$ Calls de Strike $K = 100$ €. La prime unitaire encaissée est de $6$ €. 
-Si l'action, suite à une OPA exceptionnelle, monte à $250$ € à l'échéance, quelle sera votre perte nette totale ? Quelle est votre perte maximale théorique sur cette position ?
-\navToCorr{fsec1_ex15}
-\end{exercicebox}
-
-\targetExo{fsec1_ex16}
-\begin{exercicebox}[Exercice 16 : Combinaison de flux - Call Synthétique]
-Vous construisez le portefeuille suivant aujourd'hui : vous achetez 1 action à $S_0 = 100$ € et vous achetez 1 Put de Strike $K = 100$ €.
-Écrivez mathématiquement la valeur de ce portefeuille à l'échéance $T$ en fonction de $S_T$. Montrez que ce profil de flux ressemble fortement à un produit dérivé bien connu (Stratégie dite du "Protective Put").
-\navToCorr{fsec1_ex16}
-\end{exercicebox}
-
-\targetExo{fsec1_ex17}
-\begin{exercicebox}[Exercice 17 : Stratégie Straddle (Achat de volatilité)]
+\begin{exercicebox}[Exercice 5 : Stratégie Straddle (Achat de volatilité)]
 Un investisseur anticipe un fort mouvement sur une action (actuellement à $100$ €), mais il ignore la direction. Il achète simultanément 1 Call de Strike $100$ (Prime = 5 €) et 1 Put de Strike $100$ (Prime = 5 €). Le coût total est donc de $10$ €.
 Calculez le Payoff global de ce portefeuille si l'action finit à $120$ €. Calculez-le si l'action finit à $80$ €.
-\navToCorr{fsec1_ex17}
-\end{exercicebox}
-
-\targetExo{fsec1_ex18}
-\begin{exercicebox}[Exercice 18 : Points morts du Straddle]
-En reprenant la stratégie de l'Exercice 17 (coût total = $10$ €, Strike commun = $100$ €), déterminez les deux points morts (les prix à l'échéance pour lesquels le profit net est de zéro).
-\navToCorr{fsec1_ex18}
-\end{exercicebox}
-
-\targetExo{fsec1_ex19}
-\begin{exercicebox}[Exercice 19 : Prime et Moneyness]
-L'action X cote $50$ €. On vous propose un Call de Strike $K = 40$ € au prix de $8$ €. 
-Démontrez de manière logique pourquoi ce prix est absurde et expliquez la notion de valeur intrinsèque (sans utiliser l'actualisation).
-\navToCorr{fsec1_ex19}
-\end{exercicebox}
-
-\targetExo{fsec1_ex20}
-\begin{exercicebox}[Exercice 20 : Style Américain vs Européen]
-Pourquoi, toutes choses égales par ailleurs (même sous-jacent, même Strike, même échéance), une option Américaine coûtera-t-elle toujours au moins aussi cher (sinon plus) qu'une option Européenne équivalente ?
-\navToCorr{fsec1_ex20}
+\navToCorr{fsec1_ex5}
 \end{exercicebox}

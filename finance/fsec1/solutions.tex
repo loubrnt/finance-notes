@@ -1,96 +1,26 @@
 \subsection{Corrigés des exercices}
 
 \targetCorr{fsec1_ex1}
-\begin{correctionbox}[Corrigé de l'exercice 1 : Capitalisation continue]
-Formule de capitalisation continue : $C_T = C_0 e^{rT}$.
-Ici, $C_0 = 10 000$, $r = 0,04$ et $T = 3$.
-\begin{equation*}
-    C_T = 10 000 \times e^{0,04 \times 3} = 10 000 \times e^{0,12} \approx 10 000 \times 1,12749 = 11 274,97 \text{ €}
-\end{equation*}
-Dans 3 ans, le capital sera de 11 274,97 €.
+\begin{correctionbox}[Corrigé de l'exercice 1 : Profit d'un Long Call]
+1. Calcul du Payoff à l'échéance : $\max(112 - 100, 0) = 12$ €.
+
+2. Calcul du profit : Le profit correspond au Payoff moins la prime payée.
+Profit $= 12 - 5 = 7$ €. L'opération est gagnante.
 \navToExo{fsec1_ex1}
 \end{correctionbox}
 
 \targetCorr{fsec1_ex2}
-\begin{correctionbox}[Corrigé de l'exercice 2 : Actualisation continue]
-Formule d'actualisation continue : $C_0 = C_T e^{-rT}$.
-Ici, $C_T = 5 000$, $r = 0,03$ et $T = 0,5$.
-\begin{equation*}
-    C_0 = 5 000 \times e^{-0,03 \times 0,5} = 5 000 \times e^{-0,015} \approx 5 000 \times 0,98511 = 4 925,56 \text{ €}
-\end{equation*}
-La valeur actuelle de ce flux est de 4 925,56 €.
+\begin{correctionbox}[Corrigé de l'exercice 2 : Profit d'un Short Put]
+1. À l'échéance, $S_T = 185$ et $K = 200$. L'acheteur du Put a intérêt à vendre à 200. Il exerce donc l'option.
+
+2. Le vendeur du Put est forcé d'acheter à 200 € ce qui ne vaut que 185 €. Il subit une perte à l'exercice de $185 - 200 = -15$ €.
+
+3. Son profit net intègre la prime reçue initialement (+10 €) : Profit $= 10 - 15 = -5$ €.
 \navToExo{fsec1_ex2}
 \end{correctionbox}
 
 \targetCorr{fsec1_ex3}
-\begin{correctionbox}[Corrigé de l'exercice 3 : Taux équivalent]
-Soit $R$ le taux effectif annuel (ici $5,127\% = 0,05127$). Un euro investi donne $1 + R$ en un an.
-Avec le taux continu $r$, un euro investi donne $e^{r \times 1}$. 
-On pose l'égalité : $e^r = 1 + R$.
-Pour isoler $r$, on applique le logarithme népérien ($\ln$) :
-\begin{equation*}
-    r = \ln(1 + R) = \ln(1,05127) \approx 0,05
-\end{equation*}
-Le taux continu correspondant est très exactement de $5\%$.
-\navToExo{fsec1_ex3}
-\end{correctionbox}
-
-\targetCorr{fsec1_ex4}
-\begin{correctionbox}[Corrigé de l'exercice 4 : Payoff d'un Call]
-La formule du Payoff d'un Call est $\max(S_T - K, 0)$.
-Ici, $S_T = 135$ et $K = 120$.
-\begin{equation*}
-    \text{Payoff} = \max(135 - 120, 0) = \max(15, 0) = 15 \text{ €}
-\end{equation*}
-Oui, l'option est exercée car le prix du marché est supérieur au Strike. Le droit d'acheter à 120 ce qui vaut 135 a une valeur de 15 €.
-\navToExo{fsec1_ex4}
-\end{correctionbox}
-
-\targetCorr{fsec1_ex5}
-\begin{correctionbox}[Corrigé de l'exercice 5 : Payoff d'un Put]
-La formule du Payoff d'un Put est $\max(K - S_T, 0)$.
-Ici, $S_T = 85$ et $K = 80$.
-\begin{equation*}
-    \text{Payoff} = \max(80 - 85, 0) = \max(-5, 0) = 0 \text{ €}
-\end{equation*}
-L'option n'est pas exercée. Il est inutile d'utiliser le droit de vendre à 80 € alors qu'on peut vendre à 85 € directement sur le marché.
-\navToExo{fsec1_ex5}
-\end{correctionbox}
-
-\targetCorr{fsec1_ex6}
-\begin{correctionbox}[Corrigé de l'exercice 6 : Profit d'un Long Call]
-1. Calcul du Payoff à l'échéance : $\max(112 - 100, 0) = 12$ €.
-2. Calcul du profit : Payoff - Prime payée.
-Profit $= 12 - 5 = 7$ €. L'opération est gagnante.
-\navToExo{fsec1_ex6}
-\end{correctionbox}
-
-\targetCorr{fsec1_ex7}
-\begin{correctionbox}[Corrigé de l'exercice 7 : Profit d'un Short Call]
-Le vendeur du Call a une position miroir par rapport à l'acheteur.
-1. L'acheteur exerce son option. Le vendeur est obligé de lui vendre l'action à $100$ € alors qu'elle vaut $112$ € sur le marché. Le vendeur subit une sortie de trésorerie (Payoff négatif) de $-12$ €.
-2. Profit net : Le vendeur a encaissé $5$ € au départ. Son profit est donc $5 - 12 = -7$ €.
-Il s'agit bien d'un jeu à somme nulle : ce que gagne l'acheteur (+7), le vendeur le perd (-7).
-\navToExo{fsec1_ex7}
-\end{correctionbox}
-
-\targetCorr{fsec1_ex8}
-\begin{correctionbox}[Corrigé de l'exercice 8 : Profit d'un Long Put]
-1. Calcul du Payoff : L'action s'effondrant à $30$ €, le droit de vendre à $50$ € vaut $\max(50 - 30, 0) = 20$ €.
-2. Calcul du profit : Payoff - Prime = $20 - 4 = 16$ €.
-\navToExo{fsec1_ex8}
-\end{correctionbox}
-
-\targetCorr{fsec1_ex9}
-\begin{correctionbox}[Corrigé de l'exercice 9 : Profit d'un Short Put]
-1. À l'échéance, $S_T = 185$ et $K = 200$. L'acheteur du Put a intérêt à vendre à 200. Il exerce donc l'option.
-2. Le vendeur du Put est forcé d'acheter à 200 € ce qui ne vaut que 185 €. Il subit une perte à l'exercice de $185 - 200 = -15$ €.
-3. Son profit net intègre la prime reçue initialement (+10 €) : Profit = $10 - 15 = -5$ €.
-\navToExo{fsec1_ex9}
-\end{correctionbox}
-
-\targetCorr{fsec1_ex10}
-\begin{correctionbox}[Corrigé de l'exercice 10 : Statut d'un Call (Moneyness)]
+\begin{correctionbox}[Corrigé de l'exercice 3 : Statut d'un Call (Moneyness)]
 Pour un Call, l'option est ITM si $S > K$, ATM si $S=K$, OTM si $S < K$.
 Le sous-jacent $S = 175$ \$.
 \begin{itemize}[label=$\cdot$]
@@ -98,101 +28,28 @@ Le sous-jacent $S = 175$ \$.
     \item $K_2 = 175$ \$ : $175 = 175 \implies$ À la monnaie (ATM).
     \item $K_3 = 190$ \$ : $175 < 190 \implies$ Hors de la monnaie (OTM).
 \end{itemize}
-\navToExo{fsec1_ex10}
+\navToExo{fsec1_ex3}
 \end{correctionbox}
 
-\targetCorr{fsec1_ex11}
-\begin{correctionbox}[Corrigé de l'exercice 11 : Statut d'un Put (Moneyness)]
-Pour un Put, c'est l'inverse : l'option est ITM si le prix de vente garanti est supérieur au marché ($K > S$).
-Le sous-jacent $S = 800$ €.
-\begin{itemize}[label=$\cdot$]
-    \item $K_A = 750$ € : $750 < 800 \implies$ Hors de la monnaie (OTM).
-    \item $K_B = 800$ € : $800 = 800 \implies$ À la monnaie (ATM).
-    \item $K_C = 850$ € : $850 > 800 \implies$ Dans la monnaie (ITM).
-\end{itemize}
-\navToExo{fsec1_ex11}
-\end{correctionbox}
-
-\targetCorr{fsec1_ex12}
-\begin{correctionbox}[Corrigé de l'exercice 12 : Point mort d'un Call]
-Le profit est nul si le Payoff couvre exactement la prime payée ($3,50$ €).
-Pour un Call, on a besoin que l'action monte au-dessus du Strike. 
-Point mort $= K + \text{Prime} = 60 + 3,50 = 63,50$ €.
-Si l'action clôture à 63,50 €, le Payoff est de 3,50 €, ce qui rembourse la prime.
-\navToExo{fsec1_ex12}
-\end{correctionbox}
-
-\targetCorr{fsec1_ex13}
-\begin{correctionbox}[Corrigé de l'exercice 13 : Point mort d'un Put]
-Pour un Put, il faut que l'action baisse suffisamment en dessous du Strike pour rembourser la prime.
-Point mort $= K - \text{Prime} = 45 - 2 = 43$ €.
-Si l'action clôture à 43 €, le droit de vendre à 45 € a une valeur de 2 €, couvrant exactement le coût initial.
-\navToExo{fsec1_ex13}
-\end{correctionbox}
-
-\targetCorr{fsec1_ex14}
-\begin{correctionbox}[Corrigé de l'exercice 14 : Perte maximale d'un acheteur]
-L'acheteur d'une option (Long position) a un risque strictement limité. Au pire, l'option expire hors de la monnaie et ne vaut rien (Payoff = 0). 
-La perte maximale correspond donc à la prime totale payée aujourd'hui.
-Perte max $= 10 \times 6 \text{ €} = 60$ €.
-\navToExo{fsec1_ex14}
-\end{correctionbox}
-
-\targetCorr{fsec1_ex15}
-\begin{correctionbox}[Corrigé de l'exercice 15 : Perte potentielle d'un vendeur]
-Si l'action monte à 250 €, le Payoff unitaire du Call est $\max(250 - 100, 0) = 150$ €.
-Le vendeur doit payer 150 € par option.
-Profit unitaire = Prime reçue - Payoff = $6 - 150 = -144$ €.
-Pour 10 options, la perte nette totale est de $-1 440$ €.
-Perte maximale théorique : L'action peut théoriquement monter à l'infini. La perte potentielle d'un vendeur de Call "nu" (sans posséder l'action) est donc illimitée.
-\navToExo{fsec1_ex15}
-\end{correctionbox}
-
-\targetCorr{fsec1_ex16}
-\begin{correctionbox}[Corrigé de l'exercice 16 : Combinaison de flux]
+\targetCorr{fsec1_ex4}
+\begin{correctionbox}[Corrigé de l'exercice 4 : Combinaison de flux]
 Valeur finale du portefeuille = Valeur de l'action + Payoff du Put.
 $V_T = S_T + \max(100 - S_T, 0)$.
 \begin{itemize}[label=$\cdot$]
     \item Si $S_T \geq 100$ : Le Put vaut $0$. $V_T = S_T$.
     \item Si $S_T < 100$ : Le Put vaut $100 - S_T$. $V_T = S_T + (100 - S_T) = 100$.
 \end{itemize}
-En résumé, $V_T = \max(S_T, 100)$. Ce profil garantit un plancher à 100 tout en gardant tout le potentiel de hausse. Ce profil est équivalent à celui de l'achat d'un Call (à la constante du Strike près, justifiant la parité Call-Put).
-\navToExo{fsec1_ex16}
+En résumé, $V_T = \max(S_T, 100)$. Ce profil garantit un plancher à 100 tout en gardant tout le potentiel de hausse. Ce profil est équivalent à celui de l'achat d'un Call (à la constante du Strike près, justifiant la parité entre le Call et le Put).
+\navToExo{fsec1_ex4}
 \end{correctionbox}
 
-\targetCorr{fsec1_ex17}
-\begin{correctionbox}[Corrigé de l'exercice 17 : Stratégie Straddle]
+\targetCorr{fsec1_ex5}
+\begin{correctionbox}[Corrigé de l'exercice 5 : Stratégie Straddle]
 Le Payoff global est la somme du Payoff du Call et du Payoff du Put.
 \begin{itemize}[label=$\cdot$]
     \item Si $S_T = 120$ : Call = $\max(120 - 100, 0) = 20$. Put = $\max(100 - 120, 0) = 0$. Payoff total = $20$.
     \item Si $S_T = 80$ : Call = $0$. Put = $\max(100 - 80, 0) = 20$. Payoff total = $20$.
 \end{itemize}
 Dans les deux cas de forte volatilité, l'investisseur gagne 20, pour un coût initial de 10 (Profit net de +10).
-\navToExo{fsec1_ex17}
-\end{correctionbox}
-
-\targetCorr{fsec1_ex18}
-\begin{correctionbox}[Corrigé de l'exercice 18 : Points morts du Straddle]
-Pour rembourser la prime totale de 10 €, il faut que le Payoff du Call soit de 10, OU que le Payoff du Put soit de 10 (ils ne peuvent pas être exercés en même temps).
-\begin{itemize}[label=$\cdot$]
-    \item Point mort à la hausse : $K + \text{Prime totale} = 100 + 10 = 110$ €.
-    \item Point mort à la baisse : $K - \text{Prime totale} = 100 - 10 = 90$ €.
-\end{itemize}
-Si l'action finit entre 90 et 110, la stratégie est perdante.
-\navToExo{fsec1_ex18}
-\end{correctionbox}
-
-\targetCorr{fsec1_ex19}
-\begin{correctionbox}[Corrigé de l'exercice 19 : Prime et Moneyness]
-L'action vaut aujourd'hui 50 €. Le Call de Strike 40 donne le droit d'acheter l'action à 40 €. Si l'on pouvait exercer ce droit tout de suite, il rapporterait immédiatement $50 - 40 = 10$ €.
-C'est ce qu'on appelle la valeur intrinsèque immédiate.
-Si le Call est vendu à 8 €, un opérateur de marché pourrait l'acheter pour 8 €, l'exercer pour acheter l'action à 40 € et la revendre immédiatement sur le marché à 50 €. Il ferait un profit immédiat sans risque de $50 - 40 - 8 = 2$ €. Le prix de 8 € est donc une anomalie (opportunité d'arbitrage). Le prix d'une option ne peut jamais être inférieur à sa valeur intrinsèque.
-\navToExo{fsec1_ex19}
-\end{correctionbox}
-
-\targetCorr{fsec1_ex20}
-\begin{correctionbox}[Corrigé de l'exercice 20 : Style Américain vs Européen]
-Une option Américaine confère exactement les mêmes droits qu'une option Européenne (exercer le droit à la date T), mais elle y ajoute la possibilité d'exercer à n'importe quel moment avant la date T.
-En finance, une liberté (ou un droit) supplémentaire ne peut pas avoir une valeur négative. Par conséquent, la flexibilité offerte par l'option Américaine fait qu'elle doit valoir au moins autant que l'Européenne, et potentiellement plus si l'exercice anticipé s'avère optimal (par exemple, juste avant le détachement d'un gros dividende).
-\navToExo{fsec1_ex20}
+\navToExo{fsec1_ex5}
 \end{correctionbox}
